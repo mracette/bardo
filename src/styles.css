@@ -4,6 +4,9 @@ body {
 
 canvas {
   border: 1px solid white;
+  position: absolute;
+  top: auto;
+  left: auto;
 }
 
 #root {

@@ -8,11 +8,13 @@ const BASE_STYLES: Canvas2DStyles = {
 };
 
 export const CANVAS_ELEMENTS = {
-  map: document.getElementById('canvas-main') as HTMLCanvasElement
+  map: document.getElementById('canvas-map') as HTMLCanvasElement,
+  player: document.getElementById('canvas-player') as HTMLCanvasElement
 };
 
 export const CANVAS_CONTEXTS = {
-  map: CANVAS_ELEMENTS.map.getContext('2d')
+  map: CANVAS_ELEMENTS.map.getContext('2d'),
+  player: CANVAS_ELEMENTS.player.getContext('2d')
 };
 
 export const COORDS = {
@@ -32,11 +34,11 @@ export const GRAPHICS = {
     useNormalCoordinates: true,
     scalarNormalization: 'width'
   }),
-  player: new Canvas2DGraphicsRough(CANVAS_CONTEXTS.map, {
+  player: new Canvas2DGraphicsRough(CANVAS_CONTEXTS.player, {
     coords: COORDS.map,
     styles: { ...BASE_STYLES, lineWidth: (coords) => coords.width(0.00175) },
     stroke: true,
-    roughness: 0.07,
+    roughness: 0.1,
     useNormalCoordinates: true,
     scalarNormalization: 'width'
   })
