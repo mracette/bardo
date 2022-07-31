@@ -14,11 +14,13 @@
     "start": "webpack serve",
     "start:visuals": "export DESIGN_MODE='visuals' && webpack serve",
     "start:audio": "export DESIGN_MODE='audio' && webpack serve",
-    "zip": "node ./scripts/zip.js"
+    "zip": "node ./scripts/zip.js",
+    "lint": "eslint ./src --fix"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@mracette/eslint-config": "^0.0.14",
     "@typescript-eslint/eslint-plugin": "^4.29.1",
     "@typescript-eslint/parser": "^4.29.1",
     "@webpack-cli/generators": "^2.2.0",
@@ -30,6 +32,7 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.24.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-tsdoc": "^0.2.16",
     "html-webpack-plugin": "^5.3.2",
     "htmlmin": "0.0.7",
     "husky": "^7.0.2",
@@ -45,7 +48,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "crco-utils": "2.0.0-r18",
+    "crco-utils": "2.0.0-r20",
     "stats.js": "^0.17.0"
   }
 }

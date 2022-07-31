@@ -1,4 +1,4 @@
-import { CANVAS_ELEMENTS } from "./globals/dom";
+import { CANVAS_ELEMENTS } from './globals/dom';
 
 export enum Trigger {
   CanvasResize
@@ -11,19 +11,21 @@ const EVENTS: Record<Trigger, EventCallback[]> = {
 };
 
 export const registerEvent = (
-  callback: EventCallback,
   trigger: Trigger,
+  callback: EventCallback,
   initialize = true
 ) => {
   EVENTS[trigger].push(callback);
   initialize && callback();
 };
 
-const canvasResizeObserver = new ResizeObserver(() => {
-  const events = EVENTS[Trigger.CanvasResize];
+export const triggerEvents = (trigger: Trigger) => {
+  const events = EVENTS[trigger];
   for (let i = 0; i < events.length; i++) {
     events[i]();
   }
-});
+};
 
-canvasResizeObserver.observe(CANVAS_ELEMENTS.map);
+new ResizeObserver(() => {
+  triggerEvents(Trigger.CanvasResize);
+}).observe(CANVAS_ELEMENTS.map);
