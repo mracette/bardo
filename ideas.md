@@ -1,0 +1,1 @@
+- event / subscribe framework (e.g. onresize, ontick, onmousemove, etc)
