@@ -3,7 +3,7 @@ import { Canvas2DGraphics, Canvas2DGraphicsRough, CanvasCoordinates } from 'crco
 export const makeSprites = (
   graphics: Canvas2DGraphics | Canvas2DGraphicsRough,
   spriteSize: number,
-  drawSprite: (graphics: Canvas2DGraphics | Canvas2DGraphicsRough) => void,
+  render: (graphics: Canvas2DGraphics | Canvas2DGraphicsRough) => void,
   spriteCount = 4
 ): HTMLCanvasElement[] => {
   const sprites = [];
@@ -21,7 +21,7 @@ export const makeSprites = (
     });
     canvas.width = spriteSize;
     canvas.height = spriteSize;
-    drawSprite(spriteGraphics);
+    render(spriteGraphics);
     sprites.push(canvas);
   }
   return sprites;

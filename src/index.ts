@@ -6,6 +6,7 @@ import { MAP_DIMENSIONS, STATE } from './globals/game';
 import { registerEvent, Trigger, triggerEvents } from './registerEvent';
 import { setAllCanvasDimensions } from './util/setCanvasDimensions';
 import './styles.css';
+import { WEAPON } from './entities/weapon';
 
 let previousTime = 0;
 
@@ -31,6 +32,7 @@ const setup = () => {
   registerEvent(
     Trigger.CanvasResize,
     () => {
+      WEAPON.makeSprites();
       PLAYER.makeSprites();
     },
     true
@@ -41,7 +43,9 @@ const setup = () => {
    */
   registerEvent(Trigger.Tick, (time: number, elapsed: number) => {
     PLAYER.updatePosition(elapsed);
+    PLAYER.graphics.clear();
     PLAYER.drawSprite(time);
+    WEAPON.drawSprite(time);
   });
 
   /**

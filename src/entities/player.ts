@@ -23,7 +23,7 @@ export class Player {
     this.position = new Vector2(MAP_DIMENSIONS.x / 2, MAP_DIMENSIONS.y / 2);
     this.size = TILE_WIDTH / 2;
     this.spriteCount = 4;
-    this.spriteCycleTime = 1500;
+    this.spriteCycleTime = 1550;
     this.speed = 0.005;
   }
 
@@ -73,9 +73,8 @@ export class Player {
 
   drawSprite(time: number) {
     const spriteIndex = Math.floor(
-      ((time / this.spriteCycleTime) % 1) * this.spriteCount
+      ((time / this.spriteCycleTime) % 1) * this.sprites.length
     );
-    this.graphics.clear();
     for (let i = 0; i < this.sprites.length; i++) {
       this.graphics.drawImage(
         this.sprites[spriteIndex],

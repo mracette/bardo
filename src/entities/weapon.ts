@@ -2,85 +2,49 @@ import {
   Canvas2DGraphics,
   Canvas2DGraphicsRough,
   CanvasCoordinates,
+  TAU,
   Vector2
 } from 'crco-utils';
 import { GRAPHICS } from '../globals/dom';
 import { MAP_DIMENSIONS, STATE, TILE_WIDTH } from '../globals/game';
 import { SQRT_2_2 } from '../globals/math';
 import { makeSprites } from '../util/makeSprites';
+import { PLAYER } from './player';
 
-export class Player {
+export class Weapon {
   graphics: Canvas2DGraphicsRough;
-  position: Vector2;
   size: number;
   speed: number;
-  spriteCount: number;
+  radius: number;
   sprites: HTMLCanvasElement[];
   spriteCycleTime: number;
 
   constructor(graphics) {
     this.graphics = graphics;
-    this.position = new Vector2(MAP_DIMENSIONS.x / 2, MAP_DIMENSIONS.y / 2);
     this.size = TILE_WIDTH / 2;
-    this.spriteCount = 4;
-    this.spriteCycleTime = 1500;
-    this.speed = 0.005;
-  }
-
-  updatePosition(elapsed: number) {
-    const moveAmount = SQRT_2_2 * elapsed * this.speed;
-    if (STATE.move.left && STATE.move.up) {
-      this.position.x -= moveAmount;
-      this.position.y -= moveAmount;
-      return;
-    }
-    if (STATE.move.left && STATE.move.down) {
-      this.position.x -= moveAmount;
-      this.position.y += moveAmount;
-      return;
-    }
-    if (STATE.move.right && STATE.move.up) {
-      this.position.x += moveAmount;
-      this.position.y -= moveAmount;
-      return;
-    }
-    if (STATE.move.right && STATE.move.down) {
-      this.position.x += moveAmount;
-      this.position.y += moveAmount;
-      return;
-    }
-    if (STATE.move.up) {
-      this.position.y -= moveAmount;
-      return;
-    }
-    if (STATE.move.down) {
-      this.position.y += moveAmount;
-      return;
-    }
-    if (STATE.move.left) {
-      this.position.x -= moveAmount;
-      return;
-    }
-    if (STATE.move.right) {
-      this.position.x += moveAmount;
-      return;
-    }
+    this.spriteCycleTime = 1550;
+    this.radius = 1.5;
+    this.speed = 0.0009;
   }
 
   draw(graphics: Canvas2DGraphics | Canvas2DGraphicsRough) {
-    graphics.star(0, 0, 0.5, 5);
+    // graphics.lineSegments([
+    //   [0.25, 0],
+    //   [0.75, 0]
+    // ]);
+    graphics.circle(0, 0, 0.125);
   }
 
   drawSprite(time: number) {
     const spriteIndex = Math.floor(
-      ((time / this.spriteCycleTime) % 1) * this.spriteCount
+      ((time / this.spriteCycleTime) % 1) * this.sprites.length
     );
-    this.graphics.clear();
+    const angle = TAU * time * this.speed;
     for (let i = 0; i < this.sprites.length; i++) {
       this.graphics.drawImage(
         this.sprites[spriteIndex],
-        this.position.x,
-        this.position.y
+        PLAYER.position.x + Math.cos(angle) * this.radius,
+        PLAYER.position.y + Math.sin(angle) * this.radius
       );
     }
   }
@@ -94,4 +58,4 @@ export class Player {
   }
 }
 
-export const PLAYER = new Player(GRAPHICS.player);
+export const WEAPON = new Weapon(GRAPHICS.player);
