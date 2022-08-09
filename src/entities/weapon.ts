@@ -35,11 +35,11 @@ export class Weapon {
     graphics.circle(0, 0, 0.125);
   }
 
-  drawSprite(time: number) {
+  drawSprite(elapsed: number) {
     const spriteIndex = Math.floor(
-      ((time / this.spriteCycleTime) % 1) * this.sprites.length
+      ((elapsed / this.spriteCycleTime) % 1) * this.sprites.length
     );
-    const angle = TAU * time * this.speed;
+    const angle = TAU * elapsed * this.speed;
     for (let i = 0; i < this.sprites.length; i++) {
       this.graphics.drawImage(
         this.sprites[spriteIndex],

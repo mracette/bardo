@@ -1,18 +1,22 @@
-import { aspectRatioResize } from 'crco-utils';
+import { aspectRatioResize, Vector2 } from 'crco-utils';
+import { handleKeyDown, handleKeyUp } from './events/keyboard';
 import { drawTiles } from './drawing/drawTiles';
 import { PLAYER } from './entities/player';
+import { WEAPON } from './entities/weapon';
 import { CANVAS_ELEMENTS, GRAPHICS } from './globals/dom';
 import { MAP_DIMENSIONS, STATE } from './globals/game';
 import { registerEvent, Trigger, triggerEvents } from './registerEvent';
 import { setAllCanvasDimensions } from './util/setCanvasDimensions';
 import './styles.css';
-import { WEAPON } from './entities/weapon';
+import { Enemy } from './entities/enemy';
+import { spawnEnemy } from './events/spawn';
 
 let previousTime = 0;
 
-const render = (time: number) => {
-  triggerEvents(Trigger.Tick, time, time - previousTime);
-  previousTime = time;
+const render = (elapsed: number) => {
+  console.log({ elapsed, delta: elapsed - previousTime });
+  triggerEvents(Trigger.Tick, elapsed, elapsed - previousTime);
+  previousTime = elapsed;
   window.requestAnimationFrame(render);
 };
 
@@ -27,11 +31,12 @@ const setup = () => {
   registerEvent(Trigger.CanvasResize, () => drawTiles(GRAPHICS.map), true);
 
   /**
-   * generate player sprites when the canvas resizes
+   * generate sprites when the canvas resizes
    */
   registerEvent(
     Trigger.CanvasResize,
     () => {
+      STATE.enemies.forEach((enemy) => enemy.makeSprites()); // TODO: make these shared sprites
       WEAPON.makeSprites();
       PLAYER.makeSprites();
     },
@@ -39,50 +44,30 @@ const setup = () => {
   );
 
   /**
-   * draw the player on every tick
+   * spawn new enemies
    */
-  registerEvent(Trigger.Tick, (time: number, elapsed: number) => {
-    PLAYER.updatePosition(elapsed);
+  registerEvent(Trigger.Tick, (elapsed: number, delta: number) => spawnEnemy(elapsed));
+
+  /**
+   * calculate new positions
+   */
+  registerEvent(Trigger.Tick, (elapsed: number, delta: number) => {
+    PLAYER.updatePosition(delta);
+    STATE.enemies.forEach((enemy) => enemy.updatePosition(delta));
+  });
+
+  /**
+   * redraw the canvas
+   */
+  registerEvent(Trigger.Tick, (elapsed: number, delta: number) => {
     PLAYER.graphics.clear();
-    PLAYER.drawSprite(time);
-    WEAPON.drawSprite(time);
+    STATE.enemies.forEach((enemy) => enemy.drawSprite(elapsed));
+    PLAYER.drawSprite(elapsed);
+    WEAPON.drawSprite(elapsed);
   });
 
-  /**
-   * update the players position on keydown
-   */
-  registerEvent(Trigger.KeyDown, (key: string) => {
-    if (key === 'ArrowLeft' || key === 'a') {
-      STATE.move.left = true;
-    }
-    if (key === 'ArrowRight' || key === 'd') {
-      STATE.move.right = true;
-    }
-    if (key === 'ArrowUp' || key === 'w') {
-      STATE.move.up = true;
-    }
-    if (key === 'ArrowDown' || key === 's') {
-      STATE.move.down = true;
-    }
-  });
-
-  /**
-   * update the players position on keydown
-   */
-  registerEvent(Trigger.KeyUp, (key: string) => {
-    if (key === 'ArrowLeft' || key === 'a') {
-      STATE.move.left = false;
-    }
-    if (key === 'ArrowRight' || key === 'd') {
-      STATE.move.right = false;
-    }
-    if (key === 'ArrowUp' || key === 'w') {
-      STATE.move.up = false;
-    }
-    if (key === 'ArrowDown' || key === 's') {
-      STATE.move.down = false;
-    }
-  });
+  registerEvent(Trigger.KeyDown, handleKeyDown);
+  registerEvent(Trigger.KeyUp, handleKeyUp);
 
   window.requestAnimationFrame(render);
 };

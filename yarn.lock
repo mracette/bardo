@@ -1420,10 +1420,10 @@ core-util-is@~1.0.0:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
-crco-utils@2.0.0-r25:
-  version "2.0.0-r25"
-  resolved "https://registry.yarnpkg.com/crco-utils/-/crco-utils-2.0.0-r25.tgz#886bec77709ec1c50c17d2016c4c767cc1e1408b"
-  integrity sha512-y06WUQzYWEMX95/r7BKGIB8uud08aFGgqcWkdqHO8kmiQ/MnS9r2KyCp6iO8cWgpfCtOMJ6ilzBcOlBAwng0fA==
+crco-utils@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/crco-utils/-/crco-utils-2.0.1.tgz#6de36bf2f38a1fd1bf0f9870b0c0aefdae6acda2"
+  integrity sha512-9Q79S5MwUNCWAjW7QJCzG80riG5VP8FijJ5NsRLo7e1lsySqyqAmR0IqV05/LZ6o+47LkjDdLhl9NLQHbFHeVA==
 
 create-error-class@^3.0.0:
   version "3.0.2"

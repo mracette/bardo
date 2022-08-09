@@ -9,5 +9,9 @@ export const STATE = {
     down: false,
     left: false,
     right: false
+  },
+  enemies: [],
+  timestamp: {
+    lastEnemyGenerated: 0
   }
 };

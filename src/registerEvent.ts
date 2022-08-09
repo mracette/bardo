@@ -7,25 +7,36 @@ export enum Trigger {
   KeyUp
 }
 
-type EventCallback = (...args: any[]) => void;
+interface EventCallbackArgs extends Record<Trigger, any> {
+  [Trigger.CanvasResize]: [];
+  [Trigger.Tick]: [number, number];
+  [Trigger.KeyDown]: [string];
+  [Trigger.KeyUp]: [string];
+}
 
-const EVENTS: Record<Trigger, EventCallback[]> = {
+type EventCallback<T extends Trigger> = (...args: EventCallbackArgs[T]) => void;
+
+const EVENTS: Record<Trigger, EventCallback<Trigger>[]> = {
   [Trigger.CanvasResize]: [],
   [Trigger.Tick]: [],
   [Trigger.KeyDown]: [],
   [Trigger.KeyUp]: []
 };
 
-export const registerEvent = (
-  trigger: Trigger,
-  callback: EventCallback,
+export const registerEvent = <T extends Trigger>(
+  trigger: T,
+  callback: EventCallback<T>,
   initialize = false
 ) => {
   EVENTS[trigger].push(callback);
+  // @ts-ignore
   initialize && callback();
 };
 
-export const triggerEvents = (trigger: Trigger, ...args: any[]) => {
+export const triggerEvents = <T extends Trigger>(
+  trigger: T,
+  ...args: EventCallbackArgs[T]
+) => {
   const events = EVENTS[trigger];
   for (let i = 0; i < events.length; i++) {
     events[i](...args);
