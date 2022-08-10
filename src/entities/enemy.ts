@@ -3,29 +3,30 @@ import { GRAPHICS } from '../globals/dom';
 import { MAP_DIMENSIONS, STATE, TILE_WIDTH } from '../globals/game';
 import { SQRT_2_2 } from '../globals/math';
 import { makeSprites } from '../util/makeSprites';
+import { addAttraction } from './behaviors/attraction';
+import { Behaviors } from './behaviors/behaviors';
 import { PLAYER } from './player';
 
-export class Enemy {
-  attraction: number;
+export abstract class Enemy<T extends Partial<Behaviors>> {
   graphics: Canvas2DGraphicsRough;
   position: Vector2;
-  size: number;
-  speed: number;
   spriteCount: number;
-  sprites: HTMLCanvasElement[];
   spriteCycleTime: number;
+
+  abstract size: number;
+  abstract speed: number;
+  abstract sprites: HTMLCanvasElement[];
+  abstract behaviors: T;
 
   constructor(graphics: Canvas2DGraphicsRough, position: Vector2) {
     this.graphics = graphics;
     this.position = position;
-    this.size = 0.5;
     this.spriteCount = 4;
     this.spriteCycleTime = 1550;
-    this.speed = 0.002;
-    this.attraction = 1;
     this.makeSprites();
   }
 
+  // TODO: add to crco-utils
   collides(
     x: number,
     y: number,
@@ -36,11 +37,10 @@ export class Enemy {
   }
 
   updatePosition(elapsed: number) {
-    const movement = elapsed * this.speed * this.attraction;
-    const vector = Vector2.from(PLAYER.position, this.position);
-    const unit = vector.toUnitVector();
-    this.position.x += unit.x * movement;
-    this.position.y += unit.y * movement;
+    const movement = elapsed * this.speed;
+    if (this.behaviors.attraction) {
+      addAttraction(this.position, movement, this.behaviors.attraction);
+    }
   }
 
   draw = (graphics: Canvas2DGraphics | Canvas2DGraphicsRough) => {

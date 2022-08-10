@@ -10,7 +10,7 @@ export const makeSprites = (
   graphics.applyStyles(graphics.options.styles);
   for (let i = 0; i < spriteCount; i++) {
     const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
+    const context = canvas.getContext('2d')!;
     const spriteGraphics = new Canvas2DGraphicsRough(context, {
       ...graphics.options,
       styles: {

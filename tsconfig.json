@@ -5,7 +5,8 @@
     "module": "es6",
     "target": "ES2020",
     "allowJs": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "strict": true
   },
   "files": ["src/index.ts", "./declarations.d.ts"],
   "include": ["src/**/*"],
