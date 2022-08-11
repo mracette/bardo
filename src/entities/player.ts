@@ -1,37 +1,21 @@
 import { Canvas2DGraphics, Canvas2DGraphicsRough, clamp, Vector2 } from 'crco-utils';
-import { GRAPHICS } from '../globals/dom';
-import { MAP_DIMENSIONS, STATE, TILE_WIDTH } from '../globals/game';
+import { MAP_DIMENSIONS, STATE } from '../globals/game';
 import { SQRT_2_2 } from '../globals/math';
-import { makeSprites } from '../util/makeSprites';
+import { CachedEntity } from './entity';
 
-export class Player {
-  graphics: Canvas2DGraphicsRough;
-  position: Vector2;
-  size: number;
-  speed: number;
-  spriteCount: number;
-  sprites: HTMLCanvasElement[];
-  spriteCycleTime: number;
+export class Player extends CachedEntity {
+  size = 0.5;
+  speed = 0.005;
 
-  constructor(graphics: Canvas2DGraphicsRough) {
-    this.graphics = graphics;
-    this.position = new Vector2(MAP_DIMENSIONS.x / 2, MAP_DIMENSIONS.y / 2);
-    this.size = 0.5;
-    this.spriteCount = 4;
-    this.spriteCycleTime = 1550;
-    this.speed = 0.005;
+  constructor(graphics: Canvas2DGraphicsRough, position: Vector2) {
+    super(graphics, new Vector2(0, 0));
   }
 
-  collides(
-    x: number,
-    y: number,
-    positionX: number = this.position.x,
-    positionY: number = this.position.y
-  ) {
-    return (positionX - x) ** 2 + (positionY - y) ** 2 <= this.size ** 2;
-  }
+  draw = (graphics: Canvas2DGraphics | Canvas2DGraphicsRough) => {
+    graphics.star(0, 0, this.size, 5);
+  };
 
-  updatePosition(delta: number) {
+  updatePosition = (delta: number) => {
     const moveAmount = delta * this.speed;
     const diagonalAmount = SQRT_2_2 * moveAmount;
 
@@ -62,32 +46,14 @@ export class Player {
 
     this.position.x = clamp(this.position.x + deltaX, 0, MAP_DIMENSIONS.x - 1);
     this.position.y = clamp(this.position.y + deltaY, 0, MAP_DIMENSIONS.y - 1);
-  }
-
-  draw = (graphics: Canvas2DGraphics | Canvas2DGraphicsRough) => {
-    graphics.star(0, 0, this.size, 5);
   };
 
-  drawSprite(time: number) {
-    const spriteIndex = Math.floor(
-      ((time / this.spriteCycleTime) % 1) * this.sprites.length
-    );
-    for (let i = 0; i < this.sprites.length; i++) {
-      this.graphics.drawImage(
-        this.sprites[spriteIndex],
-        this.position.x,
-        this.position.y
-      );
-    }
-  }
-
-  makeSprites() {
-    this.sprites = makeSprites(
-      this.graphics,
-      this.graphics.coords.width(TILE_WIDTH),
-      this.draw
-    );
-  }
+  collides = (
+    x: number,
+    y: number,
+    positionX: number = this.position.x,
+    positionY: number = this.position.y
+  ) => {
+    return (positionX - x) ** 2 + (positionY - y) ** 2 <= this.size ** 2;
+  };
 }
-
-export const PLAYER = new Player(GRAPHICS.player);

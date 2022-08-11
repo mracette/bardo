@@ -1,6 +1,5 @@
 import { Vector2 } from 'crco-utils';
-import { PLAYER } from '../player';
-
+import { PLAYER } from '../..';
 export interface Attraction {
   attraction: number;
 }

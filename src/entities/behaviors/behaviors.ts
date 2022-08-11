@@ -1,3 +1,3 @@
-export interface Behaviors {
-  attraction: number;
-}
+import { Attraction } from './attraction';
+
+export type Behaviors = Attraction;

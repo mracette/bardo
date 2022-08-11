@@ -4,39 +4,25 @@ export enum Trigger {
   CanvasResize,
   Tick,
   KeyDown,
-  KeyUp
+  KeyUp,
+  Init
 }
 
-interface EventCallbackArgs extends Record<Trigger, any> {
-  [Trigger.CanvasResize]: [];
-  [Trigger.Tick]: [number, number];
-  [Trigger.KeyDown]: [string];
-  [Trigger.KeyUp]: [string];
-}
+type EventCallback = (...args: any[]) => void;
 
-type EventCallback<T extends Trigger> = (...args: EventCallbackArgs[T]) => void;
-
-const EVENTS: Record<Trigger, EventCallback<Trigger>[]> = {
+const EVENTS: Record<Trigger, EventCallback[]> = {
   [Trigger.CanvasResize]: [],
   [Trigger.Tick]: [],
   [Trigger.KeyDown]: [],
-  [Trigger.KeyUp]: []
+  [Trigger.KeyUp]: [],
+  [Trigger.Init]: []
 };
 
-export const registerEvent = <T extends Trigger>(
-  trigger: T,
-  callback: EventCallback<T>,
-  initialize = false
-) => {
+export const registerEvent = <T extends Trigger>(trigger: T, callback: EventCallback) => {
   EVENTS[trigger].push(callback);
-  // @ts-ignore
-  initialize && callback();
 };
 
-export const triggerEvents = <T extends Trigger>(
-  trigger: T,
-  ...args: EventCallbackArgs[T]
-) => {
+export const triggerEvent = <T extends Trigger>(trigger: T, ...args: any[]) => {
   const events = EVENTS[trigger];
   for (let i = 0; i < events.length; i++) {
     events[i](...args);
@@ -44,13 +30,13 @@ export const triggerEvents = <T extends Trigger>(
 };
 
 new ResizeObserver(() => {
-  triggerEvents(Trigger.CanvasResize);
+  triggerEvent(Trigger.CanvasResize);
 }).observe(CANVAS_ELEMENTS.map);
 
 window.addEventListener('keydown', (event) => {
-  triggerEvents(Trigger.KeyDown, event.key);
+  triggerEvent(Trigger.KeyDown, event.key);
 });
 
 window.addEventListener('keyup', (event) => {
-  triggerEvents(Trigger.KeyUp, event.key);
+  triggerEvent(Trigger.KeyUp, event.key);
 });
