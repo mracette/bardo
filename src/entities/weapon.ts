@@ -1,61 +1,23 @@
-import {
-  Canvas2DGraphics,
-  Canvas2DGraphicsRough,
-  CanvasCoordinates,
-  TAU,
-  Vector2
-} from 'crco-utils';
-import { GRAPHICS } from '../globals/dom';
-import { MAP_DIMENSIONS, STATE, TILE_WIDTH } from '../globals/game';
-import { SQRT_2_2 } from '../globals/math';
-import { makeSprites } from '../util/makeSprites';
-import { PLAYER } from './player';
+import { Canvas2DGraphicsRough, TAU, Vector2 } from 'crco-utils';
+import { PLAYER } from '..';
+import { CachedEntity } from './entity';
 
-export class Weapon {
-  graphics: Canvas2DGraphicsRough;
-  size: number;
-  speed: number;
-  radius: number;
-  sprites: HTMLCanvasElement[];
-  spriteCycleTime: number;
+export class Weapon extends CachedEntity {
+  size = 0.25;
+  speed = 0.0009;
+  radius = 1.5;
 
-  constructor(graphics) {
-    this.graphics = graphics;
-    this.size = TILE_WIDTH / 2;
-    this.spriteCycleTime = 1550;
-    this.radius = 1.5;
-    this.speed = 0.0009;
+  constructor(graphics: Canvas2DGraphicsRough, position: Vector2) {
+    super(graphics, position);
   }
 
-  draw(graphics: Canvas2DGraphics | Canvas2DGraphicsRough) {
-    // graphics.lineSegments([
-    //   [0.25, 0],
-    //   [0.75, 0]
-    // ]);
+  draw = (graphics: Canvas2DGraphicsRough) => {
     graphics.circle(0, 0, 0.125);
-  }
+  };
 
-  drawSprite(elapsed: number) {
-    const spriteIndex = Math.floor(
-      ((elapsed / this.spriteCycleTime) % 1) * this.sprites.length
-    );
+  updatePosition(elapsed: number) {
     const angle = TAU * elapsed * this.speed;
-    for (let i = 0; i < this.sprites.length; i++) {
-      this.graphics.drawImage(
-        this.sprites[spriteIndex],
-        PLAYER.position.x + Math.cos(angle) * this.radius,
-        PLAYER.position.y + Math.sin(angle) * this.radius
-      );
-    }
-  }
-
-  makeSprites() {
-    this.sprites = makeSprites(
-      this.graphics,
-      this.graphics.coords.width(TILE_WIDTH),
-      this.draw
-    );
+    this.position.x = PLAYER.position.x + Math.cos(angle) * this.radius;
+    this.position.y = PLAYER.position.y + Math.sin(angle) * this.radius;
   }
 }
-
-export const WEAPON = new Weapon(GRAPHICS.player);

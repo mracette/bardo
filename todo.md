@@ -1,2 +1,3 @@
 - [ ] set max DPR
-- [ ]
+- [ ] use spacebar for pause
+- [ ] investigate music libs / use of midi

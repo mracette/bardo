@@ -13,8 +13,8 @@ export const CANVAS_ELEMENTS = {
 };
 
 export const CANVAS_CONTEXTS = {
-  map: CANVAS_ELEMENTS.map.getContext('2d'),
-  player: CANVAS_ELEMENTS.player.getContext('2d')
+  map: CANVAS_ELEMENTS.map.getContext('2d')!,
+  player: CANVAS_ELEMENTS.player.getContext('2d')!
 };
 
 export const COORDS = {
