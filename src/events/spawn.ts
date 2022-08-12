@@ -12,8 +12,8 @@ export const spawnEnemy = (elapsed: number) => {
     const position = new Vector2(x, y);
     const enemy =
       Math.random() > 0.5
-        ? new BasicAttracting(graphics.player, position)
-        : new BasicNonAttracting(graphics.player, position);
+        ? new BasicAttracting(graphics.gameplay, position)
+        : new BasicNonAttracting(graphics.gameplay, position);
     enemy.generateSprites();
     state.enemies.push(enemy);
   }

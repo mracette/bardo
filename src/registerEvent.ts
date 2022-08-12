@@ -5,7 +5,8 @@ export enum Trigger {
   Tick,
   KeyDown,
   KeyUp,
-  Init
+  Init,
+  StateChange
 }
 
 type EventCallback = (...args: any[]) => void;
@@ -15,7 +16,8 @@ const EVENTS: Record<Trigger, EventCallback[]> = {
   [Trigger.Tick]: [],
   [Trigger.KeyDown]: [],
   [Trigger.KeyUp]: [],
-  [Trigger.Init]: []
+  [Trigger.Init]: [],
+  [Trigger.StateChange]: []
 };
 
 export const registerEvent = <T extends Trigger>(trigger: T, callback: EventCallback) => {

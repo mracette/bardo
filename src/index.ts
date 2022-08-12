@@ -1,12 +1,11 @@
-import { aspectRatioResize, DPR, sleep, Vector2 } from 'crco-utils';
+import { aspectRatioResize } from 'crco-utils';
 import Stats from 'stats.js';
-import { drawTiles } from './drawing/drawTiles';
-import { Player } from './entities/player';
 import { handleKeyDown, handleKeyUp } from './events/keyboard';
 import { handleResize } from './events/resize';
 import { spawnEnemy } from './events/spawn';
+import { handleStateChange } from './events/stateChange';
 import { canvasElements } from './globals/dom';
-import { debug, mapCenter, mapDimensions, state } from './globals/game';
+import { GameState, mapDimensions, state } from './globals/game';
 import { graphics } from './globals/graphics';
 import { player } from './globals/player';
 import { registerEvent, Trigger, triggerEvent } from './registerEvent';
@@ -26,7 +25,8 @@ let accumulator = 0;
 
 const main = (clockTime = 0) => {
   stats.begin();
-  const deltaTimeClock = clockTime - clockTimePrevious;
+  const isPaused = state.gameState !== GameState.Gameplay;
+  const deltaTimeClock = isPaused ? 0 : clockTime - clockTimePrevious;
   clockTimePrevious = clockTime;
 
   // clamp for extra long frames
@@ -56,7 +56,7 @@ const update = () => {
 };
 
 const render = (alpha: number) => {
-  graphics.player.clear();
+  graphics.gameplay.clear();
   player.draw(alpha);
   for (let i = 0; i < state.weapons.length; i++) {
     state.weapons[i].draw(alpha);
@@ -68,9 +68,13 @@ const render = (alpha: number) => {
 
 aspectRatioResize(canvasElements.map, mapDimensions);
 aspectRatioResize(canvasElements.player, mapDimensions);
+aspectRatioResize(canvasElements.ui, mapDimensions);
 
 registerEvent(Trigger.KeyDown, handleKeyDown);
 registerEvent(Trigger.KeyUp, handleKeyUp);
 registerEvent(Trigger.CanvasResize, handleResize);
+registerEvent(Trigger.StateChange, handleStateChange);
+
+triggerEvent(Trigger.StateChange, GameState.Upgrade);
 
 window.requestAnimationFrame(main);

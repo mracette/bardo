@@ -3,7 +3,7 @@ body {
   padding: 5%;
 }
 
-canvas#player,canvas#map {
+canvas#player,canvas#map, canvas#ui {
   border: 1px solid white;
   position: absolute;
   top: auto;

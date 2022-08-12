@@ -3,6 +3,6 @@ import { Weapon } from '../entities/weapon';
 import { mapCenter, state } from './game';
 import { graphics } from './graphics';
 
-export const player = new Player(graphics.player, mapCenter.clone());
-const weapon = new Weapon(graphics.player, mapCenter.clone());
+export const player = new Player(graphics.gameplay, mapCenter.clone());
+const weapon = new Weapon(graphics.gameplay, mapCenter.clone());
 state.weapons.push(weapon);

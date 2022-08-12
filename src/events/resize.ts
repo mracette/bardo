@@ -1,5 +1,6 @@
 import { drawTiles } from '../drawing/drawTiles';
-import { state } from '../globals/game';
+import { drawUi } from '../drawing/drawUi';
+import { GameState, state } from '../globals/game';
 import { graphics } from '../globals/graphics';
 import { player } from '../globals/player';
 
@@ -8,5 +9,7 @@ export const handleResize = () => {
   player.generateSprites();
   state.weapons.forEach((weapon) => weapon.generateSprites());
   state.enemies.forEach((enemy) => enemy.generateSprites());
-  // weapon
+  if (state.gameState === GameState.Upgrade) {
+    drawUi();
+  }
 };
