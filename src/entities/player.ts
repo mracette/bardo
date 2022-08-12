@@ -1,5 +1,5 @@
 import { Canvas2DGraphics, Canvas2DGraphicsRough, clamp, Vector2 } from 'crco-utils';
-import { MAP_DIMENSIONS, STATE } from '../globals/game';
+import { MAP_CENTER, MAP_DIMENSIONS, STATE } from '../globals/game';
 import { SQRT_2_2 } from '../globals/math';
 import { CachedEntity } from './entity';
 
@@ -18,40 +18,39 @@ export class Player extends CachedEntity {
 
   update = (elapsed: number, delta: number) => {
     super.update(elapsed, delta);
-    this.updatePosition(delta);
+    this.updatePosition(elapsed, delta);
   };
 
-  updatePosition = (delta: number) => {
-    const moveAmount = delta * this.speed;
-    const diagonalAmount = SQRT_2_2 * moveAmount;
-
-    let deltaX = 0;
-    let deltaY = 0;
-
-    if (STATE.move.left && STATE.move.up) {
-      deltaX = -diagonalAmount;
-      deltaY = -diagonalAmount;
-    } else if (STATE.move.left && STATE.move.down) {
-      deltaX = -diagonalAmount;
-      deltaY = diagonalAmount;
-    } else if (STATE.move.right && STATE.move.up) {
-      deltaX = diagonalAmount;
-      deltaY = -diagonalAmount;
-    } else if (STATE.move.right && STATE.move.down) {
-      deltaX = diagonalAmount;
-      deltaY = diagonalAmount;
-    } else if (STATE.move.up) {
-      deltaY = -moveAmount;
-    } else if (STATE.move.down) {
-      deltaY = moveAmount;
-    } else if (STATE.move.left) {
-      deltaX = -moveAmount;
-    } else if (STATE.move.right) {
-      deltaX = moveAmount;
-    }
-
-    this.position.x = clamp(this.position.x + deltaX, 0, MAP_DIMENSIONS.x - 1);
-    this.position.y = clamp(this.position.y + deltaY, 0, MAP_DIMENSIONS.y - 1);
+  updatePosition = (elapsed: number, delta: number) => {
+    this.position.x = MAP_CENTER.x + 1 * Math.cos(elapsed / 500);
+    this.position.y = MAP_CENTER.y + 1 * Math.sin(elapsed / 500);
+    // const moveAmount = delta * this.speed;
+    // const diagonalAmount = SQRT_2_2 * moveAmount;
+    // let deltaX = 0;
+    // let deltaY = 0;
+    // if (STATE.move.left && STATE.move.up) {
+    //   deltaX = -diagonalAmount;
+    //   deltaY = -diagonalAmount;
+    // } else if (STATE.move.left && STATE.move.down) {
+    //   deltaX = -diagonalAmount;
+    //   deltaY = diagonalAmount;
+    // } else if (STATE.move.right && STATE.move.up) {
+    //   deltaX = diagonalAmount;
+    //   deltaY = -diagonalAmount;
+    // } else if (STATE.move.right && STATE.move.down) {
+    //   deltaX = diagonalAmount;
+    //   deltaY = diagonalAmount;
+    // } else if (STATE.move.up) {
+    //   deltaY = -moveAmount;
+    // } else if (STATE.move.down) {
+    //   deltaY = moveAmount;
+    // } else if (STATE.move.left) {
+    //   deltaX = -moveAmount;
+    // } else if (STATE.move.right) {
+    //   deltaX = moveAmount;
+    // }
+    // this.position.x = clamp(this.position.x + deltaX, 0, MAP_DIMENSIONS.x - 1);
+    // this.position.y = clamp(this.position.y + deltaY, 0, MAP_DIMENSIONS.y - 1);
   };
 
   collides = (

@@ -1420,10 +1420,10 @@ core-util-is@~1.0.0:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
-crco-utils@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/crco-utils/-/crco-utils-2.0.1.tgz#6de36bf2f38a1fd1bf0f9870b0c0aefdae6acda2"
-  integrity sha512-9Q79S5MwUNCWAjW7QJCzG80riG5VP8FijJ5NsRLo7e1lsySqyqAmR0IqV05/LZ6o+47LkjDdLhl9NLQHbFHeVA==
+crco-utils@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/crco-utils/-/crco-utils-2.0.2.tgz#e2c58b58601f47ca47b51935398ff92c705a70bd"
+  integrity sha512-DFmsLhrSjOg4Kse6xgxk2EpHrYMYp4ls8sULWH74MtQJW7ARkbGi5YKxYZI0rRXox4iEAaKO/TV7o1EXIedG2A==
 
 create-error-class@^3.0.0:
   version "3.0.2"
@@ -6348,7 +6348,7 @@ static-extend@^0.1.1:
 stats.js@^0.17.0:
   version "0.17.0"
   resolved "https://registry.yarnpkg.com/stats.js/-/stats.js-0.17.0.tgz#b1c3dc46d94498b578b7fd3985b81ace7131cc7d"
-  integrity sha1-scPcRtlEmLV4t/05hbgaznExzH0=
+  integrity sha512-hNKz8phvYLPEcRkeG1rsGmV5ChMjKDAWU7/OJJdDErPBNChQXxCo3WZurGpnWc6gZhAzEPFad1aVgyOANH1sMw==
 
 "statuses@>= 1.4.0 < 2", "statuses@>= 1.5.0 < 2", statuses@~1.5.0:
   version "1.5.0"
