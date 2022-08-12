@@ -22,7 +22,7 @@ export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
     return (positionX - x) ** 2 + (positionY - y) ** 2 <= this.size ** 2;
   }
 
-  draw = (graphics: Canvas2DGraphicsRough) => {
+  drawSprite = (graphics: Canvas2DGraphicsRough) => {
     graphics.star(0, 0, this.size, 5);
   };
 

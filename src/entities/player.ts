@@ -8,11 +8,17 @@ export class Player extends CachedEntity {
   speed = 0.005;
 
   constructor(graphics: Canvas2DGraphicsRough, position: Vector2) {
-    super(graphics, new Vector2(0, 0));
+    super(graphics, position);
+    this.generateSprites();
   }
 
-  draw = (graphics: Canvas2DGraphics | Canvas2DGraphicsRough) => {
+  drawSprite = (graphics: Canvas2DGraphics | Canvas2DGraphicsRough) => {
     graphics.star(0, 0, this.size, 5);
+  };
+
+  update = (elapsed: number, delta: number) => {
+    super.update(elapsed, delta);
+    this.updatePosition(delta);
   };
 
   updatePosition = (delta: number) => {
