@@ -1,9 +1,10 @@
-import { Canvas2DGraphicsRough, Vector2 } from 'crco-utils';
-import { TILE_WIDTH } from '../globals/game';
+import { Canvas2DGraphicsRough, lerp, Vector2 } from 'crco-utils';
+import { tileWidth } from '../globals/game';
 import { makeSprites } from '../util/makeSprites';
 
 export abstract class CachedEntity {
   graphics: Canvas2DGraphicsRough;
+  positionPrevious: Vector2;
   position: Vector2;
   sprites: HTMLCanvasElement[] = [];
   spriteCount: number;
@@ -13,6 +14,7 @@ export abstract class CachedEntity {
   constructor(graphics: Canvas2DGraphicsRough, position: Vector2) {
     this.graphics = graphics;
     this.position = position;
+    this.positionPrevious = position.clone();
     this.spriteCount = 4;
     this.spriteCycleTime = 1550;
     this.spriteIndex = 0;
@@ -20,14 +22,12 @@ export abstract class CachedEntity {
 
   abstract drawSprite: (graphics: Canvas2DGraphicsRough) => void;
 
-  draw = () => {
-    for (let i = 0; i < this.sprites.length; i++) {
-      this.graphics.drawImage(
-        this.sprites[this.spriteIndex],
-        this.position.x,
-        this.position.y
-      );
-    }
+  draw = (alpha: number) => {
+    this.graphics.drawImage(
+      this.sprites[this.spriteIndex],
+      lerp(alpha, this.positionPrevious.x, this.position.x),
+      lerp(alpha, this.positionPrevious.y, this.position.y)
+    );
   };
 
   update(elapsed: number, delta: number) {
@@ -39,7 +39,7 @@ export abstract class CachedEntity {
   generateSprites = () => {
     this.sprites = makeSprites(
       this.graphics,
-      this.graphics.coords.width(TILE_WIDTH),
+      this.graphics.coords.width(tileWidth),
       this.drawSprite,
       this.spriteCount
     );

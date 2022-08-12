@@ -1,4 +1,4 @@
-import { CANVAS_ELEMENTS } from './globals/dom';
+import { canvasElements } from './globals/dom';
 
 export enum Trigger {
   CanvasResize,
@@ -31,7 +31,7 @@ export const triggerEvent = <T extends Trigger>(trigger: T, ...args: any[]) => {
 
 new ResizeObserver(() => {
   triggerEvent(Trigger.CanvasResize);
-}).observe(CANVAS_ELEMENTS.map);
+}).observe(canvasElements.map);
 
 window.addEventListener('keydown', (event) => {
   triggerEvent(Trigger.KeyDown, event.key);

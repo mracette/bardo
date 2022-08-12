@@ -6,6 +6,7 @@ export class BasicAttracting extends Enemy<Attraction> {
   behaviors = {
     attraction: 1
   };
+  radius = 0.5;
   size = 0.5;
   speed = 0.002;
   sprites = [];

@@ -1,31 +1,31 @@
-import { STATE } from '../globals/game';
+import { state } from '../globals/game';
 
 export const handleKeyDown = (key: string) => {
   if (key === 'ArrowLeft' || key === 'a') {
-    STATE.move.left = true;
+    state.move.left = true;
   }
   if (key === 'ArrowRight' || key === 'd') {
-    STATE.move.right = true;
+    state.move.right = true;
   }
   if (key === 'ArrowUp' || key === 'w') {
-    STATE.move.up = true;
+    state.move.up = true;
   }
   if (key === 'ArrowDown' || key === 's') {
-    STATE.move.down = true;
+    state.move.down = true;
   }
 };
 
 export const handleKeyUp = (key: string) => {
   if (key === 'ArrowLeft' || key === 'a') {
-    STATE.move.left = false;
+    state.move.left = false;
   }
   if (key === 'ArrowRight' || key === 'd') {
-    STATE.move.right = false;
+    state.move.right = false;
   }
   if (key === 'ArrowUp' || key === 'w') {
-    STATE.move.up = false;
+    state.move.up = false;
   }
   if (key === 'ArrowDown' || key === 's') {
-    STATE.move.down = false;
+    state.move.down = false;
   }
 };

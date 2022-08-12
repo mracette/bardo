@@ -1,9 +1,9 @@
-import { Canvas2DGraphics, Canvas2DGraphicsRough, CanvasCoordinates } from 'crco-utils';
+import { Canvas2DGraphicsRough, CanvasCoordinates } from 'crco-utils';
 
 export const makeSprites = (
-  graphics: Canvas2DGraphics | Canvas2DGraphicsRough,
+  graphics: Canvas2DGraphicsRough,
   spriteSize: number,
-  draw: (graphics: Canvas2DGraphics | Canvas2DGraphicsRough) => void,
+  draw: (graphics: Canvas2DGraphicsRough) => void,
   spriteCount = 4
 ): HTMLCanvasElement[] => {
   const sprites = [];
@@ -11,7 +11,7 @@ export const makeSprites = (
   for (let i = 0; i < spriteCount; i++) {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d')!;
-    const spriteGraphics = new Canvas2DGraphicsRough(context, {
+    const spritegraphics = new Canvas2DGraphicsRough(context, {
       ...graphics.options,
       styles: {
         ...graphics.options.styles,
@@ -21,7 +21,7 @@ export const makeSprites = (
     });
     canvas.width = spriteSize;
     canvas.height = spriteSize;
-    draw(spriteGraphics);
+    draw(spritegraphics);
     sprites.push(canvas);
   }
   return sprites;

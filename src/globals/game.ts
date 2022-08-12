@@ -1,12 +1,14 @@
 import { Vector2 } from 'crco-utils';
 import { Enemy } from '../entities/enemy';
+import { Weapon } from '../entities/weapon';
+import { graphics } from './graphics';
+import { player } from './player';
 
-export const MAP_DIMENSIONS = new Vector2(32, 18);
-export const MAP_CENTER = new Vector2(MAP_DIMENSIONS.x / 2 - 1, MAP_DIMENSIONS.y / 2 - 1);
-export const TILE_WIDTH = 1 / MAP_DIMENSIONS.x;
-export const ROUGH = true;
-export const DEBUG = true;
-export const STATE = {
+export const mapDimensions = new Vector2(32, 18);
+export const mapCenter = new Vector2(mapDimensions.x / 2 - 1, mapDimensions.y / 2 - 1);
+export const tileWidth = 1 / mapDimensions.x;
+export const debug = true;
+export const state = {
   move: {
     up: false,
     down: false,
@@ -16,5 +18,6 @@ export const STATE = {
   enemies: [] as Enemy<any>[],
   timestamp: {
     lastEnemyGenerated: 0
-  }
+  },
+  weapons: [] as Weapon[]
 };

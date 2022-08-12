@@ -1,5 +1,5 @@
 import { DPR } from 'crco-utils';
-import { CANVAS_ELEMENTS } from '../globals/dom';
+import { canvasElements } from '../globals/dom';
 
 export const setCanvasDimensions = (canvas: HTMLCanvasElement) => {
   canvas.width = canvas.clientWidth * DPR;
@@ -7,5 +7,5 @@ export const setCanvasDimensions = (canvas: HTMLCanvasElement) => {
 };
 
 export const setAllCanvasDimensions = () => {
-  Object.values(CANVAS_ELEMENTS).forEach(setCanvasDimensions);
+  Object.values(canvasElements).forEach(setCanvasDimensions);
 };
