@@ -9,15 +9,6 @@ const {
   COMMIT_LOG_PATH
 } = require('./constants');
 
-function getFolderSize(path) {
-  const stout = execSync(`ls -l ${path} | awk '{sum+=$5} END {printf sum}'`, {
-    encoding: 'utf8'
-  });
-  const bytes = parseInt(stout);
-  const kbs = (bytes / 1024).toFixed(2);
-  return [bytes, kbs];
-}
-
 function getFileSize(path) {
   const stout = execSync(`stat -f '%z' ${path}`, {
     encoding: 'utf8'
@@ -41,16 +32,9 @@ function appendCommitLog() {
   LOG_MESSAGE += `| Measure | Size (kb) | Size (bytes) | Reduction |\n`;
   LOG_MESSAGE += `| --- | --- | --- | --- |\n`;
 
-  // source
-  const [kb0, bytes0] = getFolderSize(SOURCE_FOLDER);
-  LOG_MESSAGE += `| Raw Source Code | ${kb0} kb | ${bytes0} | NA |\n`;
-
   // build
   const [kb1, bytes1] = getFileSize(BUILD_FILE);
-  LOG_MESSAGE += `| Build | ${kb1} kb | ${bytes1} | ${getPercentageChange(
-    bytes1,
-    bytes0
-  )} |\n`;
+  LOG_MESSAGE += `| Build | ${kb1} kb | ${bytes1} | NA |\n`;
 
   // build compressed
   const [kb2, bytes2] = getFileSize(BUILD_FILE_COMPRESSED);
