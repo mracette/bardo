@@ -47,7 +47,7 @@
     "webpack-dev-server": "^4.10.0"
   },
   "dependencies": {
-    "crco-utils": "^2.0.9",
+    "crco-utils": "^2.0.10",
     "stats.js": "^0.17.0"
   }
 }

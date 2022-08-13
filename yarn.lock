@@ -1976,10 +1976,10 @@ cosmiconfig@^6.0.0:
     path-type "^4.0.0"
     yaml "^1.7.2"
 
-crco-utils@^2.0.9:
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/crco-utils/-/crco-utils-2.0.9.tgz#f88058c084d7c134d3b60bebb8c23b75d72f4041"
-  integrity sha512-NNyVh+iNmW4GELzvnD9YDZhbqwFoBIN76V8rnJQGQqAV0i1eP7yarUKD1OCZWpogPSUcqI1WqfYFvGDW7eqEfg==
+crco-utils@^2.0.10:
+  version "2.0.10"
+  resolved "https://registry.yarnpkg.com/crco-utils/-/crco-utils-2.0.10.tgz#c3b7fd5ee69a1e7542b843813fba852c1c837d80"
+  integrity sha512-BGXpQqCO7jSZKTRul/Cmvd+5mfzDkNnEu+v6gaGf4L9olvT5j8mCs446scWFMBnz6BBvjfJdyF4FvkIaGlLxRA==
 
 create-error-class@^3.0.0:
   version "3.0.2"

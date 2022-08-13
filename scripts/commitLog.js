@@ -1,5 +1,6 @@
 const { execSync } = require('child_process');
-const fs = require('fs');
+const { prepend } = require('./prepend')
+
 const {
   SOURCE_FOLDER,
   BUILD_FILE,
@@ -66,11 +67,7 @@ function appendCommitLog() {
   )} |\n`;
 
   // update the log
-  fs.open(COMMIT_LOG_PATH, 'a+', (_, fd) => {
-    fs.writeSync(fd, LOG_MESSAGE, null, (err) => {
-      if (err) throw err;
-    });
-  });
+  prepend(COMMIT_LOG_PATH, LOG_MESSAGE)
 }
 
 appendCommitLog();
