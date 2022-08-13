@@ -9,7 +9,7 @@ import { GameState, mapDimensions, state } from './globals/game';
 import { graphics } from './globals/graphics';
 import { player } from './globals/player';
 import { registerEvent, Trigger, triggerEvent } from './util/eventRegister';
-import './styles.css';
+import './dom/styles.css';
 
 const stats = new Stats();
 const updateStats = stats.addPanel(new Stats.Panel('phys', '#0ff', '#002'));
@@ -67,7 +67,7 @@ const render = (alpha: number) => {
 };
 
 aspectRatioResize(canvasElements.map, mapDimensions);
-aspectRatioResize(canvasElements.player, mapDimensions);
+aspectRatioResize(canvasElements.gameplay, mapDimensions);
 aspectRatioResize(canvasElements.ui, mapDimensions);
 
 registerEvent(Trigger.KeyDown, handleKeyDown);

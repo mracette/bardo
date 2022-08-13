@@ -8,18 +8,18 @@ import { CanvasCoordinates } from 'crco-utils';
 import { canvasContexts, canvasElements } from './dom';
 import { mapDimensions } from './game';
 
-const sharedStyles: Canvas2DStyles = {
+export const sharedStyles: Canvas2DStyles = {
   strokeStyle: 'white',
   fillStyle: 'white',
   lineWidth: (coords) => coords.width(0.001)
 };
 
-const sharedOptions: Canvas2DGraphicsOptions = {
+export const sharedOptions: Canvas2DGraphicsOptions = {
   useNormalCoordinates: true,
   scalarNormalization: 'width'
 };
 
-const coordinates = {
+export const coordinates = {
   map: new CanvasCoordinates({
     canvas: canvasElements.map,
     nxRange: [0, mapDimensions.x],
@@ -56,11 +56,4 @@ export const graphics = {
       textAlign: 'center'
     }
   }),
-  debug: new Canvas2DGraphics(canvasContexts.debug, {
-    ...sharedOptions,
-    styles: {
-      ...sharedStyles,
-      fontSize: (coords) => coords.height(0.5)
-    }
-  })
 };

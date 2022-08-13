@@ -13,19 +13,14 @@ const designMode = process.env.DESIGN_MODE;
 let entry, template;
 
 switch (designMode) {
-  case "audio": {
-    entry = "./editor-audio/index.ts";
-    template = "./editor-audio/template.html";
-    break;
-  }
-  case "visuals": {
-    entry = "./editor-visuals/index.ts";
-    template = "./editor-visuals/template.html";
+  case "studio": {
+    entry = "./studio/index.ts";
+    template = "./studio/index.html";
     break;
   }
   default: {
     entry = "./src/index.ts";
-    template = "./src/index.html";
+    template = "./src/dom/index.html";
     break;
   }
 }
@@ -39,7 +34,6 @@ const config = {
   devServer: {
     open: true,
     host: "127.0.0.1",
-    disableHostCheck: true
   },
   plugins: [
     new CleanWebpackPlugin({
@@ -74,7 +68,7 @@ const config = {
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
-    modules: [path.resolve("./node_modules"), path.resolve("./src")]
+    modules: [path.resolve("./node_modules"), path.resolve("./src"), path.resolve("./studio")]
   }
 };
 
@@ -96,16 +90,7 @@ module.exports = () => {
               toplevel: true,
               properties: {
                 debug: !isProduction,
-                reserved: [
-                  "baseVolume",
-                  "baseReverb",
-                  "lpFrequency",
-                  "lpQ",
-                  "lpEnvQ",
-                  "hpFrequency",
-                  "hpQ",
-                  "hpEnvQ"
-                ]
+                reserved: []
               }
             }
           }
