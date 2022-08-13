@@ -10,6 +10,8 @@ import { graphics } from './globals/graphics';
 import { player } from './globals/player';
 import { registerEvent, Trigger, triggerEvent } from './util/eventRegister';
 import './dom/styles.css';
+import { palette } from './globals/palette';
+import { initialize } from './events/initialize';
 
 const stats = new Stats();
 const updateStats = stats.addPanel(new Stats.Panel('phys', '#0ff', '#002'));
@@ -74,7 +76,9 @@ registerEvent(Trigger.KeyDown, handleKeyDown);
 registerEvent(Trigger.KeyUp, handleKeyUp);
 registerEvent(Trigger.CanvasResize, handleResize);
 registerEvent(Trigger.StateChange, handleStateChange);
+registerEvent(Trigger.Initialize, initialize);
 
+triggerEvent(Trigger.Initialize,);
 triggerEvent(Trigger.StateChange, GameState.Upgrade);
 
 window.requestAnimationFrame(main);

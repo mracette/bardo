@@ -1,6 +1,7 @@
 import { canvasElements } from '../globals/dom';
 
 export enum Trigger {
+  Initialize,
   CanvasResize,
   Tick,
   KeyDown,
@@ -12,6 +13,7 @@ export enum Trigger {
 type EventCallback = (...args: any[]) => void;
 
 const EVENTS: Record<Trigger, EventCallback[]> = {
+  [Trigger.Initialize]: [],
   [Trigger.CanvasResize]: [],
   [Trigger.Tick]: [],
   [Trigger.KeyDown]: [],
