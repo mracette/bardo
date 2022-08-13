@@ -2,7 +2,6 @@ const { execSync } = require('child_process');
 const { prepend } = require('./prepend')
 
 const {
-  SOURCE_FOLDER,
   BUILD_FILE,
   BUILD_FILE_COMPRESSED,
   BUILD_FILE_ADV_COMPRESSED,
@@ -48,7 +47,7 @@ function appendCommitLog() {
   LOG_MESSAGE += `| Compressed Build (Adv Zip) | ${kb3} kb | ${bytes3} | ${getPercentageChange(
     bytes3,
     bytes2
-  )} |\n`;
+  )} |\n\n`;
 
   // update the log
   prepend(COMMIT_LOG_PATH, LOG_MESSAGE)

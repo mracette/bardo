@@ -4,4 +4,4 @@
 yarn build:prod
 yarn commit-log
 git add build
-git add commit-log.md
+git add markdown/commit-log.md

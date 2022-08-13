@@ -16,5 +16,5 @@ module.exports = {
     BUILD_FOLDER,
     BUILD_FILE_NAME_ADV_COMPRESSED
   ),
-  COMMIT_LOG_PATH: path.join(ROOT_FOLDER, 'commit-log.md')
+  COMMIT_LOG_PATH: path.join(ROOT_FOLDER, 'markdown', 'commit-log.md')
 };

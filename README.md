@@ -1,15 +1,30 @@
+## updates to commit log
+
+Sat, 13 Aug 2022 22:46:06 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 22.26 kb | 22793 | NA |
+| Compressed Build | 7.78 kb | 7962 | -65% |
+| Compressed Build (Adv Zip) | 7.49 kb | 7673 | -4% |
+
+## add initialize event
+
 Sat, 13 Aug 2022 22:40:20 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |
 | Build | 22.26 kb | 22793 | NA |
 | Compressed Build | 7.78 kb | 7962 | -65% |
 | Compressed Build (Adv Zip) | 7.49 kb | 7673 | -4% |
+
+## remove source stats from commit log
+
 Sat, 13 Aug 2022 22:06:45 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |
 | Build | 22.15 kb | 22681 | NA |
 | Compressed Build | 7.73 kb | 7913 | -65% |
 | Compressed Build (Adv Zip) | 7.44 kb | 7622 | -4% |
+
 ## commit log prepend and begin moving in code for svg paths
 
 Sat, 13 Aug 2022 21:40:13 GMT
