@@ -52,7 +52,7 @@ export const graphics = {
       ...sharedStyles,
       lineWidth: (coords) => coords.width(0.01),
       fontSize: (coords) => coords.width(0.1),
-      fontFamily: 'Comic Sans MS, cursive',
+      fontFamily: 'Comic Sans MS, Chalkboard, cursive',
       textAlign: 'center'
     }
   }),
