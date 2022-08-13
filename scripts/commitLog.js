@@ -1,16 +1,16 @@
+const { execSync } = require('child_process');
+const fs = require('fs');
 const {
   SOURCE_FOLDER,
   BUILD_FILE,
   BUILD_FILE_COMPRESSED,
   BUILD_FILE_ADV_COMPRESSED,
   COMMIT_LOG_PATH
-} = require("./constants");
-const { execSync } = require("child_process");
-const fs = require("fs");
+} = require('./constants');
 
 function getFolderSize(path) {
   const stout = execSync(`ls -l ${path} | awk '{sum+=$5} END {printf sum}'`, {
-    encoding: "utf8"
+    encoding: 'utf8'
   });
   const bytes = parseInt(stout);
   const kbs = (bytes / 1024).toFixed(2);
@@ -19,7 +19,7 @@ function getFolderSize(path) {
 
 function getFileSize(path) {
   const stout = execSync(`stat -f '%z' ${path}`, {
-    encoding: "utf8"
+    encoding: 'utf8'
   });
   const bytes = parseInt(stout);
   const kbs = (bytes / 1024).toFixed(2);
@@ -27,14 +27,14 @@ function getFileSize(path) {
 }
 
 function getPercentageChange(a, b) {
-  return `${a < b ? "-" : "+"}${Math.abs(Math.round((100 * (b - a)) / b))}%`;
+  return `${a < b ? '-' : '+'}${Math.abs(Math.round((100 * (b - a)) / b))}%`;
 }
 
-function calculate() {
-  let LOG_MESSAGE = "";
+function appendCommitLog() {
+  let LOG_MESSAGE = '';
 
   // add the current date
-  LOG_MESSAGE += `*${new Date().toUTCString()}*\n`;
+  LOG_MESSAGE += `${new Date().toUTCString()}\n`;
 
   // add table header
   LOG_MESSAGE += `| Measure | Size (kb) | Size (bytes) | Reduction |\n`;
@@ -65,15 +65,12 @@ function calculate() {
     bytes2
   )} |\n`;
 
-  // breaks for the next entry:
-  LOG_MESSAGE += "\n\n";
-
   // update the log
-  fs.open(COMMIT_LOG_PATH, "a+", (_, fd) => {
-    fs.write(fd, LOG_MESSAGE, null, (err) => {
+  fs.open(COMMIT_LOG_PATH, 'a+', (_, fd) => {
+    fs.writeSync(fd, LOG_MESSAGE, null, (err) => {
       if (err) throw err;
     });
   });
 }
 
-calculate();
+appendCommitLog();

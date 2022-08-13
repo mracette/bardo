@@ -1,4 +1,4 @@
-import { canvasElements } from './globals/dom';
+import { canvasElements } from '../globals/dom';
 
 export enum Trigger {
   CanvasResize,

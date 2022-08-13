@@ -8,7 +8,7 @@
     "moduleResolution": "node",
     "strict": true
   },
-  "files": ["src/index.ts", "./declarations.d.ts"],
+  "files": ["src/index.ts", "src/declarations.d.ts"],
   "include": ["src/**/*"],
   "exclude": ["node_modules", "build", "build-min"]
 }

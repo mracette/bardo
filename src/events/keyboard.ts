@@ -1,7 +1,7 @@
 import { mod } from 'crco-utils';
 import { drawUi } from '../drawing/drawUi';
 import { GameState, state } from '../globals/game';
-import { Trigger, triggerEvent } from '../registerEvent';
+import { Trigger, triggerEvent } from '../util/eventRegister';
 
 export const handleKeyDown = (key: string) => {
   if (key === 'ArrowLeft' || key === 'a') {

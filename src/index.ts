@@ -8,7 +8,7 @@ import { canvasElements } from './globals/dom';
 import { GameState, mapDimensions, state } from './globals/game';
 import { graphics } from './globals/graphics';
 import { player } from './globals/player';
-import { registerEvent, Trigger, triggerEvent } from './registerEvent';
+import { registerEvent, Trigger, triggerEvent } from './util/eventRegister';
 import './styles.css';
 
 const stats = new Stats();
