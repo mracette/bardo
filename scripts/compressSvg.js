@@ -12,15 +12,10 @@ export const compressSvg = (path) => {
   const file = readFileSync(path, { encoding: 'utf-8' });
   const lines = file.split('\n');
   const pathsCombined = lines
-    .filter((line) => {
-      return line.startsWith('<path');
-    })
-    .map((line) => {
-      return line.replace(decimalRegex, '');
-    })
-    .map((line) => {
-      return pathRegex.exec(line)[0];
-    })
+    .map((line) => line.trim())
+    .filter((line) => line.startsWith('<path'))
+    .map((line) => line.replace(decimalRegex, ''))
+    .map((line) => pathRegex.exec(line)[0])
     .join(' ');
 
   const pathToWrite = path.replace(fileName, '') + fileNameOnly + '.ts';
