@@ -20,7 +20,8 @@ export const compressSvg = (path) => {
 
   const pathToWrite = path.replace(fileName, '') + fileNameOnly + '.ts';
   const contentToWrite = `export const ${fileNameOnly} = ${JSON.stringify(
-    parsePath(pathsCombined)
+    // parsePath(pathsCombined)
+    pathsCombined
   )};`;
   writeFileSync(pathToWrite, contentToWrite);
 };

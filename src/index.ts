@@ -1,5 +1,8 @@
 import { aspectRatioResize } from 'crco-utils';
 import Stats from 'stats.js';
+import { goat } from '../svg/goat';
+import { moon } from '../svg/moon';
+import { test } from '../svg/test';
 import { initialize } from './events/initialize';
 import { handleKeyDown, handleKeyUp } from './events/keyboard';
 import { handleResize } from './events/resize';
@@ -12,6 +15,8 @@ import { palette } from './globals/palette';
 import { player } from './globals/player';
 import { registerEvent, Trigger, triggerEvent } from './util/eventRegister';
 import './dom/styles.css';
+
+const data = [test, goat, moon];
 
 const stats = new Stats();
 const updateStats = stats.addPanel(new Stats.Panel('phys', '#0ff', '#002'));
@@ -26,6 +31,7 @@ let clockTimePrevious = 0;
 let accumulator = 0;
 
 const main = (clockTime = 0) => {
+  data.forEach((data) => null);
   stats.begin();
   const isPaused = state.gameState !== GameState.Gameplay;
   const deltaTimeClock = isPaused ? 0 : clockTime - clockTimePrevious;
