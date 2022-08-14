@@ -1,9 +1,10 @@
-Sun, 14 Aug 2022 21:37:21 GMT
+Sun, 14 Aug 2022 21:59:12 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |
-| Build | 51.68 kb | 52924 | NA |
-| Compressed Build | 10.21 kb | 10458 | -80% |
-| Compressed Build (Adv Zip) | 9.39 kb | 9612 | -8% |
+| Build | 52.88 kb | 54146 | NA |
+| Compressed Build | 10.48 kb | 10735 | -80% |
+| Compressed Build (Adv Zip) | 9.60 kb | 9830 | -8% |
+
 
 ## importing svg data to measure impact
 
@@ -13,7 +14,6 @@ Sun, 14 Aug 2022 21:35:08 GMT
 | Build | 108.00 kb | 110597 | NA |
 | Compressed Build | 11.25 kb | 11525 | -90% |
 | Compressed Build (Adv Zip) | 9.75 kb | 9988 | -13% |
-
 
 ## update compression and add test from blender
 

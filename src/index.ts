@@ -1,8 +1,8 @@
 import { aspectRatioResize } from 'crco-utils';
 import Stats from 'stats.js';
-import { goat } from '../svg/goat';
-import { moon } from '../svg/moon';
-import { test } from '../svg/test';
+import { goat } from '../svg/goat.min';
+import { moon } from '../svg/moon.min';
+import { test } from '../svg/test.min';
 import { initialize } from './events/initialize';
 import { handleKeyDown, handleKeyUp } from './events/keyboard';
 import { handleResize } from './events/resize';
