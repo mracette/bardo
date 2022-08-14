@@ -1,3 +1,12 @@
+## svg pipeline
+
+Sun, 14 Aug 2022 02:18:58 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 22.27 kb | 22805 | NA |
+| Compressed Build | 7.78 kb | 7962 | -65% |
+| Compressed Build (Adv Zip) | 7.49 kb | 7674 | -4% |
+
 ## updates to commit log
 
 Sat, 13 Aug 2022 22:46:06 GMT

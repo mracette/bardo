@@ -68,7 +68,7 @@ const config = {
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
-    modules: [path.resolve("./node_modules"), path.resolve("./src"), path.resolve("./studio")]
+    modules: [path.resolve("./node_modules"), path.resolve("./src"), path.resolve("./studio"), path.resolve("./svg")]
   }
 };
 

@@ -4,11 +4,12 @@
     "allowSyntheticDefaultImports": true,
     "module": "es6",
     "target": "ES2020",
-    "allowJs": true,
+    "allowJs": false,
     "moduleResolution": "node",
-    "strict": true
+    "strict": true,
+    "types": ["node"],
   },
-  "files": ["src/index.ts", "studio/index.ts", "src/types/declarations.d.ts"],
-  "include": ["src/**/*", "studio"],
+  // "files": ["src/index.ts", "studio/index.ts", "src/types/declarations.d.ts"],
+  "include": ["src/**/*", "scripts/**/*", "svg/**/*", "studio/**/*"],
   "exclude": ["node_modules", "build", "build-min"]
 }

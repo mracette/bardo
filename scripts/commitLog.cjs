@@ -1,12 +1,12 @@
 const { execSync } = require('child_process');
-const { prepend } = require('./prepend')
+const { prepend } = require('./prepend.cjs')
 
 const {
   BUILD_FILE,
   BUILD_FILE_COMPRESSED,
   BUILD_FILE_ADV_COMPRESSED,
   COMMIT_LOG_PATH
-} = require('./constants');
+} = require('./constants.cjs');
 
 function getFileSize(path) {
   const stout = execSync(`stat -f '%z' ${path}`, {

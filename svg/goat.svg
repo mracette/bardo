@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 100 100" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs/>
+<g id="Layer-1" vectornator:layerName="Layer 1">
+<g opacity="1">
+<path d="M22.9687 38.7623L35.4209 84.5687C35.8657 89.0159 39.8682 92.129 44.3154 92.129L55.4334 92.129C59.8807 92.129 63.4384 89.0159 64.3279 84.5687L76.3354 38.7623C76.3354 38.7623 65.6621 20.9734 49.652 20.9734C33.642 20.9734 22.9687 38.7623 22.9687 38.7623ZM31.4184 52.104L45.2048 55.217C45.2048 55.217 43.8707 61.8878 40.3129 61.8878C33.1973 61.8878 31.4184 52.104 31.4184 52.104ZM58.9912 61.8878C55.4334 61.8878 54.0993 55.217 54.0993 55.217L67.8857 52.1039C67.8857 52.104 66.1068 61.8878 58.9912 61.8878Z" fill="#000000" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M58.5465 25.4206C58.5465 15.6367 66.5515 7.63171 76.3354 7.63171C86.1193 7.63171 94.1243 15.6367 94.1243 25.4206C94.1243 32.0914 89.6771 38.7623 89.6771 38.7623" fill="none" opacity="1" stroke="#000000" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="2"/>
+<path d="M74.1118 35.6492L89.6771 52.9934C89.6771 52.9934 85.6746 58.3301 79.8932 55.6617C74.5565 53.4381 71.4434 41.4306 74.1118 35.6492Z" fill="#000000" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M40.7576 25.4206C40.7576 15.6367 32.7526 7.63171 22.9687 7.63171C13.1848 7.63171 5.17981 15.6367 5.17981 25.4206C5.17981 32.0914 9.62703 38.7623 9.62703 38.7623" fill="none" opacity="1" stroke="#000000" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="2"/>
+<path d="M25.1923 35.6492L9.62703 52.9934C9.62703 52.9934 13.6295 58.3301 19.4109 55.6617C24.7476 53.4381 27.8606 41.4306 25.1923 35.6492Z" fill="#000000" fill-rule="nonzero" opacity="1" stroke="none"/>
+</g>
+</g>
+</svg>

@@ -1,6 +1,6 @@
 const fs = require('fs');
-const { COMMIT_LOG_PATH } = require('./constants');
-const { prepend } = require('./prepend')
+const { COMMIT_LOG_PATH } = require('./constants.cjs');
+const { prepend } = require('./prepend.cjs')
 
 /**
  * Adds the commit message to the commit log

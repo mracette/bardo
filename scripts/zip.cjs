@@ -3,7 +3,7 @@ const {
   BUILD_FOLDER,
   BUILD_FILE_NAME_COMPRESSED,
   BUILD_FILE_COMPRESSED
-} = require('./constants');
+} = require('./constants.cjs');
 
 execSync(`cd ${BUILD_FOLDER}; zip -r -j ${BUILD_FILE_NAME_COMPRESSED} ./*`);
 

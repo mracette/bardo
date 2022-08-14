@@ -79,6 +79,6 @@ registerEvent(Trigger.StateChange, handleStateChange);
 registerEvent(Trigger.Initialize, initialize);
 
 triggerEvent(Trigger.Initialize,);
-triggerEvent(Trigger.StateChange, GameState.Upgrade);
+triggerEvent(Trigger.StateChange, GameState.Gameplay);
 
 window.requestAnimationFrame(main);
