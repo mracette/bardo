@@ -1,7 +1,7 @@
-const { execFile } = require('child_process');
-const fs = require('fs');
-const advzip = require('advzip-bin');
-const { BUILD_FILE_COMPRESSED, BUILD_FILE_ADV_COMPRESSED } = require('./constants.cjs');
+import { execFile } from 'child_process';
+import fs from 'fs';
+import advzip from 'advzip-bin';
+import { BUILD_FILE_COMPRESSED, BUILD_FILE_ADV_COMPRESSED } from './constants.js';
 
 const main = () => {
   fs.copyFileSync(BUILD_FILE_COMPRESSED, BUILD_FILE_ADV_COMPRESSED);

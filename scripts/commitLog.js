@@ -1,12 +1,11 @@
-const { execSync } = require('child_process');
-const { prepend } = require('./prepend.cjs')
-
-const {
+import { execSync } from 'child_process';
+import {
   BUILD_FILE,
   BUILD_FILE_COMPRESSED,
   BUILD_FILE_ADV_COMPRESSED,
   COMMIT_LOG_PATH
-} = require('./constants.cjs');
+} from './constants.js';
+import { prepend } from './prepend.js';
 
 function getFileSize(path) {
   const stout = execSync(`stat -f '%z' ${path}`, {
@@ -50,7 +49,7 @@ function appendCommitLog() {
   )} |\n\n`;
 
   // update the log
-  prepend(COMMIT_LOG_PATH, LOG_MESSAGE)
+  prepend(COMMIT_LOG_PATH, LOG_MESSAGE);
 }
 
 appendCommitLog();

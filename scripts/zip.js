@@ -1,10 +1,10 @@
-const { execSync } = require('child_process');
-const {
+import { execSync } from 'child_process';
+import {
   BUILD_FOLDER,
   BUILD_FILE_NAME_COMPRESSED,
   BUILD_FILE_COMPRESSED
-} = require('./constants.cjs');
+} from './constants.js';
 
 execSync(`cd ${BUILD_FOLDER}; zip -r -j ${BUILD_FILE_NAME_COMPRESSED} ./*`);
 
-console.log('zip complete: ' + BUILD_FILE_COMPRESSED);
+console.info('zip complete: ' + BUILD_FILE_COMPRESSED);

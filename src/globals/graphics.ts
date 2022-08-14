@@ -55,5 +55,5 @@ export const graphics = {
       fontFamily: 'Comic Sans MS, Chalkboard, cursive',
       textAlign: 'center'
     }
-  }),
+  })
 };

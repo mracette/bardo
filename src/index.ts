@@ -1,5 +1,6 @@
 import { aspectRatioResize } from 'crco-utils';
 import Stats from 'stats.js';
+import { initialize } from './events/initialize';
 import { handleKeyDown, handleKeyUp } from './events/keyboard';
 import { handleResize } from './events/resize';
 import { spawnEnemy } from './events/spawn';
@@ -7,11 +8,10 @@ import { handleStateChange } from './events/stateChange';
 import { canvasElements } from './globals/dom';
 import { GameState, mapDimensions, state } from './globals/game';
 import { graphics } from './globals/graphics';
+import { palette } from './globals/palette';
 import { player } from './globals/player';
 import { registerEvent, Trigger, triggerEvent } from './util/eventRegister';
 import './dom/styles.css';
-import { palette } from './globals/palette';
-import { initialize } from './events/initialize';
 
 const stats = new Stats();
 const updateStats = stats.addPanel(new Stats.Panel('phys', '#0ff', '#002'));
@@ -78,7 +78,7 @@ registerEvent(Trigger.CanvasResize, handleResize);
 registerEvent(Trigger.StateChange, handleStateChange);
 registerEvent(Trigger.Initialize, initialize);
 
-triggerEvent(Trigger.Initialize,);
+triggerEvent(Trigger.Initialize);
 triggerEvent(Trigger.StateChange, GameState.Gameplay);
 
 window.requestAnimationFrame(main);

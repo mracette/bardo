@@ -1,5 +1,5 @@
-import { palette } from "../globals/palette";
+import { palette } from '../globals/palette';
 
 export const initialize = () => {
-    document.body.style.backgroundColor = palette.background;
-}
+  document.body.style.backgroundColor = palette.background;
+};

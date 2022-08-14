@@ -20,7 +20,6 @@ export abstract class Enemy<T extends Partial<Behaviors>>
   }
 
   destroy(index: number) {
-    console.log('destroyed ' + index);
     state.enemies.splice(index, 1);
   }
 
