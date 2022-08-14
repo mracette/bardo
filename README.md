@@ -1,3 +1,12 @@
+## testing further compressed svg version
+
+Sun, 14 Aug 2022 21:59:12 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 52.88 kb | 54146 | NA |
+| Compressed Build | 10.48 kb | 10735 | -80% |
+| Compressed Build (Adv Zip) | 9.60 kb | 9830 | -8% |
+
 
 ## importing svg data to measure impact
 

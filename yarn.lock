@@ -168,10 +168,10 @@
   resolved "https://registry.yarnpkg.com/@microsoft/tsdoc/-/tsdoc-0.14.1.tgz#155ef21065427901994e765da8a0ba0eaae8b8bd"
   integrity sha512-6Wci+Tp3CgPt/B9B0a3J4s3yMgLNSku6w5TV6mN+61C71UqsRBv2FUibBf3tPGlNxebgPHMEUzKpb1ggE8KCKw==
 
-"@mracette/eslint-config@^0.0.16":
-  version "0.0.16"
-  resolved "https://registry.yarnpkg.com/@mracette/eslint-config/-/eslint-config-0.0.16.tgz#a3b7359a7ac0c8d5890a82ab96867334ee83a158"
-  integrity sha512-cDKsAJILwgzYSTyC8UW2okXfg8g6EaFuyWpRTzYTtzh0eypSr99OVcXPywDB+7vn+adlfEM2QMSKekdQ7+PSSA==
+"@mracette/eslint-config@^0.0.18":
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/@mracette/eslint-config/-/eslint-config-0.0.18.tgz#98f3fce625d8d722be30d37e10ca04cc6faf3e4d"
+  integrity sha512-wat8RSxWCZxMcDW/SgFh0qK6H+UFfYq54F3QZurkOU+mxqwy/BSEynQCA4zugW+9/JyCGXmU1J6WMGiSXl0jmg==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"

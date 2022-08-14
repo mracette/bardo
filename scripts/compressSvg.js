@@ -19,18 +19,11 @@ export const compressSvg = (path) => {
     .map((line) => pathRegex.exec(line)[0])
     .join(' ');
 
-  // a non-compressed representation of the svg
-  const pathToWriteMin = path.replace(fileName, '') + fileNameOnly + '.min.ts';
-  const contentToWrite = `export const ${fileNameOnly} = ${JSON.stringify(
-    parsePath(pathsCombined)
-  )};`;
-
   // the most compressed representation of the svg
-  const pathToWrite = path.replace(fileName, '') + fileNameOnly + '.ts';
+  const pathToWriteMin = path.replace(fileName, '') + fileNameOnly + '.min.ts';
   const contentToWriteMin = `export const ${fileNameOnly} = ${JSON.stringify(
-    pointsOnPath(pathsCombined).map((points) => points.map((a) => [~~a[0], ~~a[1]]))
+    pointsOnPath(pathsCombined, 5, 1).map((points) => points.map((a) => [~~a[0], ~~a[1]]))
   )};`;
 
-  writeFileSync(pathToWrite, contentToWrite);
   writeFileSync(pathToWriteMin, contentToWriteMin);
 };

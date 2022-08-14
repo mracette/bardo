@@ -12,7 +12,7 @@
     "commit-log": "node ./scripts/commitLog.js",
     "commit-log:append": "node ./scripts/commitLogAppend.js",
     "deploy": "git push origin `git subtree split --prefix build master`:gh-pages --force",
-    "lint": "eslint . --fix",
+    "lint": "eslint {src,svg,scripts,studio}/**/* --fix",
     "start": "webpack serve",
     "start:studio": "export DESIGN_MODE=studio && webpack serve",
     "zip": "node ./scripts/zip.js"
@@ -21,7 +21,7 @@
   "type": "module",
   "license": "ISC",
   "devDependencies": {
-    "@mracette/eslint-config": "^0.0.16",
+    "@mracette/eslint-config": "^0.0.18",
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
     "@webpack-cli/generators": "^2.5.0",

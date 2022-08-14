@@ -1,3 +1,12 @@
+Sun, 14 Aug 2022 22:16:54 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 24.01 kb | 24589 | NA |
+| Compressed Build | 8.46 kb | 8663 | -65% |
+| Compressed Build (Adv Zip) | 8.09 kb | 8287 | -4% |
+
+## testing further compressed svg version
+
 Sun, 14 Aug 2022 21:59:12 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |

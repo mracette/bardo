@@ -1,18 +1,18 @@
 import { Canvas2DGraphicsRough } from 'crco-utils';
 import { goat } from '../../svg/goat';
-import { test } from '../../svg/test';
+import { test } from '../../svg/test.min';
 import { pointsOnPath } from '../util/pointsOnPath';
 
 export const drawThirdEye = (graphics: Canvas2DGraphicsRough) => {
-  const points = pointsOnPath(test, 5, 1) as [number, number][][];
-  console.log(points);
-  points.forEach((pointsArray, i) => {
+  test.forEach((pointsArray, i) => {
     // graphics.lineSegments(pointsArray, { roughness: 50 });
-    if (i === 3) {
-      // eye shape top
-      graphics.lineSegments(pointsArray, { fill: true });
-    } else {
-      graphics.lineSegments(pointsArray);
-    }
+    // if (i === 3) {
+    // eye shape top
+    //   graphics.lineSegments(pointsArray, { fill: true });
+    // } else {
+    graphics.lineSegments(pointsArray);
+    pointsArray.forEach((point) => graphics.circle(point[0], point[1], 0.0));
+
+    // }
   });
 };
