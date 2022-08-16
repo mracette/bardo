@@ -1,3 +1,12 @@
+## third eye drawing for landing screen
+
+Tue, 16 Aug 2022 01:42:36 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 22.27 kb | 22804 | NA |
+| Compressed Build | 7.77 kb | 7961 | -65% |
+| Compressed Build (Adv Zip) | 7.50 kb | 7685 | -3% |
+
 ## testing truly compressed versions
 
 Sun, 14 Aug 2022 22:16:54 GMT

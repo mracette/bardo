@@ -1,3 +1,7 @@
 import { Attraction } from './attraction';
+import { Guarding } from './guarding';
 
-export type Behaviors = Attraction;
+export interface Behaviors {
+  attraction: Attraction;
+  guarding: Guarding;
+}

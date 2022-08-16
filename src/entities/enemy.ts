@@ -2,6 +2,7 @@ import { Canvas2DGraphicsRough, Vector2 } from 'crco-utils';
 import { state } from '../globals/game';
 import { addAttraction } from './behaviors/attraction';
 import { Behaviors } from './behaviors/behaviors';
+import { addGuarding } from './behaviors/guarding';
 import { CircularBounding } from './bounding/circlular';
 import { CachedEntity } from './entity';
 
@@ -12,10 +13,12 @@ export abstract class Enemy<T extends Partial<Behaviors>>
   abstract radius: number;
   abstract size: number;
   abstract speed: number;
-  abstract behaviors: T;
 
-  constructor(graphics: Canvas2DGraphicsRough, position: Vector2) {
+  behaviors: T;
+
+  constructor(graphics: Canvas2DGraphicsRough, position: Vector2, behaviors: T) {
     super(graphics, position);
+    this.behaviors = behaviors;
     this.generateSprites();
   }
 
@@ -34,9 +37,11 @@ export abstract class Enemy<T extends Partial<Behaviors>>
   }
 
   updatePosition(elapsed: number, delta: number) {
-    const movement = delta * this.speed;
     if (this.behaviors.attraction) {
-      addAttraction(this.position, movement, this.behaviors.attraction);
+      addAttraction(this.position, delta, this.behaviors.attraction);
+    }
+    if (this.behaviors.guarding) {
+      addGuarding(this.position, delta, this.behaviors.guarding);
     }
   }
 }

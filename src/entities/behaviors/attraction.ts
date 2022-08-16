@@ -1,17 +1,14 @@
 import { Vector2 } from 'crco-utils';
 import { player } from '../../globals/player';
+
 export interface Attraction {
-  attraction: number;
+  amount: number;
 }
 
-export const addAttraction = (
-  position: Vector2,
-  movement: number,
-  attraction: Attraction['attraction']
-) => {
+export const addAttraction = (position: Vector2, delta: number, behavior: Attraction) => {
   const vector = Vector2.from(player.position, position)
     .normalize()
-    .multiply(movement * attraction);
+    .multiply(delta * behavior.amount);
   position.x += vector.x;
   position.y += vector.y;
 };
