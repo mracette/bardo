@@ -20,7 +20,7 @@ export const compressSvg = (path) => {
     .join(' ');
 
   // the most compressed representation of the svg
-  const pathToWriteMin = path.replace(fileName, '') + fileNameOnly + '.min.ts';
+  const pathToWriteMin = path.replace(fileName, '') + fileNameOnly + '.ts';
   const contentToWriteMin = `export const ${fileNameOnly} = ${JSON.stringify(
     pointsOnPath(pathsCombined, 5, 1).map((points) => points.map((a) => [~~a[0], ~~a[1]]))
   )};`;

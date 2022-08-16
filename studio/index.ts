@@ -17,7 +17,8 @@ const studioGraphics = new Canvas2DGraphicsRough(canvasContexts.gameplay, {
   ...sharedOptions,
   styles: {
     ...sharedStyles,
-    lineWidth: (coords) => coords.width(0.0075)
+    lineWidth: (coords) => coords.width(0.0075),
+    fontSize: (coords) => coords.width(0.1)
   },
   roughness: 0.05,
   stroke: true,
@@ -34,6 +35,5 @@ aspectRatioResize(canvasElements.gameplay, mapDimensions);
 aspectRatioResize(canvasElements.ui, mapDimensions);
 
 registerEvent(Trigger.CanvasResize, () => {
-  drawTiles(graphics.map);
   drawThirdEye(studioGraphics);
 });

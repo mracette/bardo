@@ -8,10 +8,14 @@ import { CanvasCoordinates } from 'crco-utils';
 import { canvasContexts, canvasElements } from './dom';
 import { mapDimensions } from './game';
 
+export const fontFamily = 'Comic Sans MS, Chalkboard, cursive';
+
 export const sharedStyles: Canvas2DStyles = {
   strokeStyle: 'white',
   fillStyle: 'white',
-  lineWidth: (coords) => coords.width(0.001)
+  lineWidth: (coords) => coords.width(0.001),
+  textAlign: 'center',
+  fontFamily
 };
 
 export const sharedOptions: Canvas2DGraphicsOptions = {
@@ -52,8 +56,7 @@ export const graphics = {
       ...sharedStyles,
       lineWidth: (coords) => coords.width(0.01),
       fontSize: (coords) => coords.width(0.1),
-      fontFamily: 'Comic Sans MS, Chalkboard, cursive',
-      textAlign: 'center'
+      fontFamily
     }
   })
 };
