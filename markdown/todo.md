@@ -7,3 +7,4 @@ crco
 
 - [x] vector2 .clone
 - [x] vector2 .normalize
+- [ ] combine 2d graphics with roughness

@@ -9,6 +9,7 @@ export class Weapon extends CachedEntity implements CircularBounding {
   speed = 0.0005;
   spinRadius = 1.5;
   radius = 0.25;
+  spriteCoordinateBounds = [-1, 1];
 
   constructor(graphics: Canvas2DGraphicsRough, position: Vector2) {
     super(graphics, position);

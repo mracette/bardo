@@ -12,7 +12,7 @@
     "commit-log": "node ./scripts/commitLog.js",
     "commit-log:append": "node ./scripts/commitLogAppend.js",
     "deploy": "git push origin `git subtree split --prefix build master`:gh-pages --force",
-    "lint": "eslint {src,svg,scripts,studio}/**/*.{js,ts} --fix",
+    "lint": "eslint {src,svg,studio}/**/*.ts scripts/**/*.js --fix",
     "start": "webpack serve",
     "start:studio": "export DESIGN_MODE=studio && webpack serve",
     "zip": "node ./scripts/zip.js"
@@ -52,7 +52,7 @@
     "webpack-dev-server": "^4.10.0"
   },
   "dependencies": {
-    "crco-utils": "^2.0.13",
+    "crco-utils": "^2.0.14",
     "stats.js": "^0.17.0"
   }
 }

@@ -6,7 +6,6 @@ export enum Trigger {
   Tick,
   KeyDown,
   KeyUp,
-  Init,
   StateChange
 }
 
@@ -18,7 +17,6 @@ const EVENTS: Record<Trigger, EventCallback[]> = {
   [Trigger.Tick]: [],
   [Trigger.KeyDown]: [],
   [Trigger.KeyUp]: [],
-  [Trigger.Init]: [],
   [Trigger.StateChange]: []
 };
 

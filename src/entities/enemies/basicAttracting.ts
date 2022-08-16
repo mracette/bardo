@@ -12,5 +12,6 @@ export class BasicAttracting extends Enemy<Pick<Behaviors, 'attraction'>> {
     super(graphics, position, {
       attraction: { amount: 0.002 }
     });
+    this.generateSprites();
   }
 }

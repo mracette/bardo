@@ -7,16 +7,16 @@ export abstract class CachedEntity {
   positionPrevious: Vector2;
   position: Vector2;
   sprites: HTMLCanvasElement[] = [];
-  spriteCount: number;
-  spriteCycleTime: number;
   spriteIndex: number;
+  spriteCount = 1;
+  spriteCycleTime = 1550;
+
+  abstract spriteCoordinateBounds: number[];
 
   constructor(graphics: Canvas2DGraphicsRough, position: Vector2) {
     this.graphics = graphics;
     this.position = position;
     this.positionPrevious = position.clone();
-    this.spriteCount = 4;
-    this.spriteCycleTime = 1550;
     this.spriteIndex = 0;
   }
 
@@ -39,9 +39,10 @@ export abstract class CachedEntity {
   generateSprites = () => {
     this.sprites = makeSprites(
       this.graphics,
-      this.graphics.coords.width(tileWidth),
       this.drawSprite,
-      this.spriteCount
+      this.graphics.coords.width(tileWidth),
+      this.spriteCount,
+      this.spriteCoordinateBounds as [number, number]
     );
   };
 }

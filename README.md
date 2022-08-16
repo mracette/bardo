@@ -1,3 +1,21 @@
+## sprite coordinate normalization
+
+Tue, 16 Aug 2022 12:52:55 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 23.31 kb | 23867 | NA |
+| Compressed Build | 8.21 kb | 8409 | -65% |
+| Compressed Build (Adv Zip) | 7.93 kb | 8118 | -3% |
+
+## guarding behavior
+
+Tue, 16 Aug 2022 02:21:51 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 22.52 kb | 23057 | NA |
+| Compressed Build | 7.88 kb | 8070 | -65% |
+| Compressed Build (Adv Zip) | 7.61 kb | 7789 | -3% |
+
 ## third eye drawing for landing screen
 
 Tue, 16 Aug 2022 01:42:36 GMT

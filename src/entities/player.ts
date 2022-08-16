@@ -1,11 +1,12 @@
 import { Canvas2DGraphics, Canvas2DGraphicsRough, clamp, Vector2 } from 'crco-utils';
-import { mapCenter, mapDimensions, state } from '../globals/game';
+import { mapCenter, mapDimensions, state, tileWidth } from '../globals/game';
 import { SQRT_2_2 } from '../globals/math';
 import { CachedEntity } from './entity';
 
 export class Player extends CachedEntity {
   size = 0.5;
   speed = 0.005;
+  spriteCoordinateBounds = [-1, 1];
 
   constructor(graphics: Canvas2DGraphicsRough, position: Vector2) {
     super(graphics, position);

@@ -1,4 +1,5 @@
 import { Canvas2DGraphicsRough, Vector2 } from 'crco-utils';
+import { goat } from '../../svg/goat';
 import { state } from '../globals/game';
 import { addAttraction } from './behaviors/attraction';
 import { Behaviors } from './behaviors/behaviors';
@@ -16,10 +17,11 @@ export abstract class Enemy<T extends Partial<Behaviors>>
 
   behaviors: T;
 
+  spriteCoordinateBounds = [0, 100];
+
   constructor(graphics: Canvas2DGraphicsRough, position: Vector2, behaviors: T) {
     super(graphics, position);
     this.behaviors = behaviors;
-    this.generateSprites();
   }
 
   destroy(index: number) {
@@ -27,7 +29,8 @@ export abstract class Enemy<T extends Partial<Behaviors>>
   }
 
   drawSprite = (graphics: Canvas2DGraphicsRough) => {
-    graphics.star(0, 0, this.size, 5);
+    // graphics.star(0, 0, this.size, 5);
+    goat.forEach((points) => graphics.lineSegments(points));
   };
 
   update(elapsed: number, delta: number) {

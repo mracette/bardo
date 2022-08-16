@@ -15,7 +15,7 @@ export const addGuarding = (position: Vector2, delta: number, behavior: Guarding
     position.y += positionDelta.y;
   } else if (position.equals(behavior.guardPosition)) {
     return;
-  } else if (position.distanceTo(behavior.guardPosition) < 0.01) {
+  } else if (position.distanceTo(behavior.guardPosition) < 0.1) {
     position.set(behavior.guardPosition);
   } else {
     const positionDelta = Vector2.from(behavior.guardPosition, position)

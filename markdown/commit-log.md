@@ -1,3 +1,14 @@
+## sprite coordinate normalization
+
+Tue, 16 Aug 2022 12:52:55 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 23.31 kb | 23867 | NA |
+| Compressed Build | 8.21 kb | 8409 | -65% |
+| Compressed Build (Adv Zip) | 7.93 kb | 8118 | -3% |
+
+## guarding behavior
+
 Tue, 16 Aug 2022 02:21:51 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |
