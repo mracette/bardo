@@ -23,7 +23,6 @@ export class Player extends CachedEntity {
   };
 
   updatePosition = (elapsed: number, delta: number) => {
-    this.positionPrevious.set(this.position);
     const moveAmount = delta * this.speed;
     const diagonalAmount = SQRT_2_2 * moveAmount;
     let deltaX = 0;

@@ -1,7 +1,5 @@
 import { readFileSync, writeFileSync } from 'fs';
-import { parsePath } from 'path-data-parser';
 import { pointsOnPath } from 'points-on-path';
-// import * as parser from "path-data-parser";
 
 // precision: who needs it?
 const decimalRegex = new RegExp(/\.\d*(?=[\s\D])/, 'gm');

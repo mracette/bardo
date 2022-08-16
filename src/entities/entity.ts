@@ -7,9 +7,14 @@ export abstract class CachedEntity {
   positionPrevious: Vector2;
   position: Vector2;
   sprites: HTMLCanvasElement[] = [];
-  spriteIndex: number;
+  spriteIndex = 0;
   spriteCount = 1;
   spriteCycleTime = 1550;
+
+  /**
+   * Size as a multiple of the tile width
+   */
+  spriteSize = 1;
 
   abstract spriteCoordinateBounds: number[];
 
@@ -17,7 +22,6 @@ export abstract class CachedEntity {
     this.graphics = graphics;
     this.position = position;
     this.positionPrevious = position.clone();
-    this.spriteIndex = 0;
   }
 
   abstract drawSprite: (graphics: Canvas2DGraphicsRough) => void;
@@ -31,6 +35,7 @@ export abstract class CachedEntity {
   };
 
   update(elapsed: number, delta: number) {
+    this.positionPrevious.set(this.position);
     this.spriteIndex = Math.floor(
       ((elapsed / this.spriteCycleTime) % 1) * this.sprites.length
     );
@@ -40,7 +45,7 @@ export abstract class CachedEntity {
     this.sprites = makeSprites(
       this.graphics,
       this.drawSprite,
-      this.graphics.coords.width(tileWidth),
+      this.graphics.coords.width(tileWidth * this.spriteSize),
       this.spriteCount,
       this.spriteCoordinateBounds as [number, number]
     );

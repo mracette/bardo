@@ -1,6 +1,7 @@
 import { Vector2 } from 'crco-utils';
 import { BasicAttracting } from '../entities/enemies/basicAttracting';
 import { BasicGuarding } from '../entities/enemies/basicGuarding';
+import { MaskedEnemy } from '../entities/enemies/maskedEnemy';
 import { debug, mapDimensions, state } from '../globals/game';
 import { graphics } from '../globals/graphics';
 import { registerEvent, Trigger } from '../util/eventRegister';
@@ -13,7 +14,7 @@ export const spawnBatch = (number = 1) => {
     const x = Math.random() * mapDimensions.x;
     const y = Math.random() * mapDimensions.y;
     const position = new Vector2(x, y);
-    const enemy = new BasicGuarding(graphics.gameplay, position);
+    const enemy = new MaskedEnemy(graphics.gameplay, position);
     state.enemies.push(enemy);
   }
 };

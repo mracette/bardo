@@ -1,3 +1,10 @@
+Tue, 16 Aug 2022 14:11:01 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 23.45 kb | 24011 | NA |
+| Compressed Build | 8.29 kb | 8485 | -65% |
+| Compressed Build (Adv Zip) | 7.99 kb | 8186 | -4% |
+
 ## sprite coordinate normalization
 
 Tue, 16 Aug 2022 12:52:55 GMT

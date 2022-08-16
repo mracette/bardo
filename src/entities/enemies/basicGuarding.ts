@@ -1,7 +1,6 @@
 import { Canvas2DGraphicsRough, Vector2 } from 'crco-utils';
 import { Behaviors } from '../behaviors/behaviors';
-import { Enemy } from '../enemy';
-import { ExternalSprite } from '../externalSprite';
+import { Enemy } from './enemy';
 
 export class BasicGuarding extends Enemy<Pick<Behaviors, 'guarding'>> {
   radius = 0.5;

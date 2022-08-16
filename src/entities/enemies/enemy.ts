@@ -1,16 +1,20 @@
 import { Canvas2DGraphicsRough, Vector2 } from 'crco-utils';
-import { goat } from '../../svg/goat';
-import { state } from '../globals/game';
-import { addAttraction } from './behaviors/attraction';
-import { Behaviors } from './behaviors/behaviors';
-import { addGuarding } from './behaviors/guarding';
-import { CircularBounding } from './bounding/circlular';
-import { CachedEntity } from './entity';
+import { goat } from '../../../svg/goat';
+import { mask } from '../../../svg/mask';
+import { state } from '../../globals/game';
+import { addAttraction } from '../behaviors/attraction';
+import { Behaviors } from '../behaviors/behaviors';
+import { addGuarding } from '../behaviors/guarding';
+import { CircularBounding } from '../bounding/circular';
+import { CachedEntity } from '../entity';
 
 export abstract class Enemy<T extends Partial<Behaviors>>
   extends CachedEntity
   implements CircularBounding
 {
+  /**
+   * Required for circular collision detection
+   */
   abstract radius: number;
   abstract size: number;
   abstract speed: number;
@@ -29,12 +33,10 @@ export abstract class Enemy<T extends Partial<Behaviors>>
   }
 
   drawSprite = (graphics: Canvas2DGraphicsRough) => {
-    // graphics.star(0, 0, this.size, 5);
-    goat.forEach((points) => graphics.lineSegments(points));
+    graphics.star(0, 0, this.size, 5);
   };
 
   update(elapsed: number, delta: number) {
-    this.positionPrevious.set(this.position);
     super.update(elapsed, delta);
     this.updatePosition(elapsed, delta);
   }

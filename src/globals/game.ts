@@ -1,6 +1,6 @@
 import { Vector2 } from 'crco-utils';
-import { Enemy } from '../entities/enemy';
-import { Weapon } from '../entities/weapon';
+import { Enemy } from '../entities/enemies/enemy';
+import { Weapon } from '../entities/weapons/weapon';
 
 export enum GameState {
   Gameplay = 'gameplay',
