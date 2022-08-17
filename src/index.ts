@@ -1,5 +1,21 @@
 import { aspectRatioResize } from 'crco-utils';
 import Stats from 'stats.js';
+import { player } from './globals/player';
+import './dom/styles.css';
+import { anger } from '../svg/anger';
+import { goat } from '../svg/goat';
+import { heart } from '../svg/heart';
+import { mask } from '../svg/mask';
+import { meditator } from '../svg/meditator';
+import { mind } from '../svg/mind';
+import { moon } from '../svg/moon';
+import { mushroom } from '../svg/mushroom';
+import { pinhead } from '../svg/pinhead';
+import { reaper } from '../svg/reaper';
+import { thirdEye } from '../svg/thirdEye';
+import { thirdEyeDark } from '../svg/thirdEyeDark';
+import { thirdEyeLight } from '../svg/thirdEyeLight';
+import { treasure } from '../svg/treasure';
 import { initialize } from './events/initialize';
 import { handleKeyDown, handleKeyUp } from './events/keyboard';
 import { handleResize } from './events/resize';
@@ -9,9 +25,7 @@ import { canvasElements } from './globals/dom';
 import { GameState, mapDimensions, state } from './globals/game';
 import { graphics } from './globals/graphics';
 import { palette } from './globals/palette';
-import { player } from './globals/player';
 import { registerEvent, Trigger, triggerEvent } from './util/eventRegister';
-import './dom/styles.css';
 
 const stats = new Stats();
 const updateStats = stats.addPanel(new Stats.Panel('phys', '#0ff', '#002'));
@@ -30,6 +44,23 @@ const main = (clockTime = 0) => {
   const isPaused = state.gameState !== GameState.Gameplay;
   const deltaTimeClock = isPaused ? 0 : clockTime - clockTimePrevious;
   clockTimePrevious = clockTime;
+
+  [
+    anger,
+    goat,
+    heart,
+    mask,
+    meditator,
+    mind,
+    moon,
+    mushroom,
+    pinhead,
+    reaper,
+    thirdEye,
+    thirdEyeDark,
+    thirdEyeLight,
+    treasure
+  ].forEach(() => null);
 
   // clamp for extra long frames
   accumulator += Math.min(deltaTimeClock, 50);
