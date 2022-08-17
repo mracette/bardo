@@ -1,3 +1,12 @@
+## add all sprites to build to check size
+
+Wed, 17 Aug 2022 02:47:35 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 33.92 kb | 34731 | NA |
+| Compressed Build | 11.89 kb | 12173 | -65% |
+| Compressed Build (Adv Zip) | 11.00 kb | 11266 | -7% |
+
 ## fixing some script issues and adding enemy sizes
 
 Tue, 16 Aug 2022 14:11:01 GMT

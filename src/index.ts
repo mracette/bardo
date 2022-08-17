@@ -1,6 +1,5 @@
 import { aspectRatioResize } from 'crco-utils';
 import Stats from 'stats.js';
-import { player } from './globals/player';
 import './dom/styles.css';
 import { anger } from '../svg/anger';
 import { goat } from '../svg/goat';
@@ -8,7 +7,6 @@ import { heart } from '../svg/heart';
 import { mask } from '../svg/mask';
 import { meditator } from '../svg/meditator';
 import { mind } from '../svg/mind';
-import { moon } from '../svg/moon';
 import { mushroom } from '../svg/mushroom';
 import { pinhead } from '../svg/pinhead';
 import { reaper } from '../svg/reaper';
@@ -24,7 +22,7 @@ import { handleStateChange } from './events/stateChange';
 import { canvasElements } from './globals/dom';
 import { GameState, mapDimensions, state } from './globals/game';
 import { graphics } from './globals/graphics';
-import { palette } from './globals/palette';
+import { player } from './globals/player';
 import { registerEvent, Trigger, triggerEvent } from './util/eventRegister';
 
 const stats = new Stats();
@@ -52,7 +50,6 @@ const main = (clockTime = 0) => {
     mask,
     meditator,
     mind,
-    moon,
     mushroom,
     pinhead,
     reaper,

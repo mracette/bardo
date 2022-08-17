@@ -17,8 +17,8 @@ export const drawThirdEye = (graphics: Canvas2DGraphicsRough) => {
       styles: { fillStyle: palette.background }
     });
   });
-  graphics.text('BARDO', 50, 88);
-  graphics.text('press any key to start', 50, 95, {
-    styles: { fontSize: (coords) => coords.width(0.04) }
-  });
+  // graphics.text('BARDO', 50, 55);
+  // graphics.text('the intermediate existence between two lives on earth', 50, 95, {
+  //   styles: { fontSize: (coords) => coords.width(0.04) }
+  // });
 };
