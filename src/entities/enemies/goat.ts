@@ -3,7 +3,7 @@ import { goat } from '../../../svg/goat';
 import { Behaviors } from '../behaviors/behaviors';
 import { Enemy } from './enemy';
 
-export class BasicGuarding extends Enemy<Pick<Behaviors, 'guarding'>> {
+export class Goat extends Enemy<Pick<Behaviors, 'guarding'>> {
   radius = 0.5;
   size = 0.5;
   speed = 0.002;
@@ -22,6 +22,6 @@ export class BasicGuarding extends Enemy<Pick<Behaviors, 'guarding'>> {
   }
 
   drawSprite = (graphics: Canvas2DGraphicsRough) => {
-    goat.forEach((lines) => graphics.lineSegments(lines));
+    goat.forEach((lines) => graphics.lineSegments(lines, this.options));
   };
 }

@@ -1,6 +1,7 @@
 import { Canvas2DGraphicsRough, CanvasCoordinates } from 'crco-utils';
-import { mapDimensions, state } from '../globals/game';
+import { state } from '../globals/game';
 import { graphics } from '../globals/graphics';
+import { mapDimensions } from '../globals/map';
 
 export const drawUi = () => {
   graphics.ui.clear();

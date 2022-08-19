@@ -3,6 +3,13 @@
 - [ ] investigate music libs / use of midi
 - [x] event / subscribe framework (e.g. onresize, ontick, onmousemove, etc)
 - [ ] shared sprites
+- [ ] items spring back and then attract towards you
+- [ ] health bar on bottom
+- [ ] bosses are outlined in blue
+- [ ] info on pause screen
+- [ ] treasure animation
+- [ ] powerups (mushroom)
+- [ ] add weighted random mechanism for spawning
 
 crco
 

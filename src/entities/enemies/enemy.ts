@@ -1,13 +1,20 @@
-import { Canvas2DGraphicsRough, Vector2 } from 'crco-utils';
+import {
+  Canvas2DGraphicsOptions,
+  Canvas2DGraphicsRough,
+  random,
+  Vector2
+} from 'crco-utils';
 import { goat } from '../../../svg/goat';
 import { mask } from '../../../svg/mask';
 import { state } from '../../globals/game';
+import { graphics } from '../../globals/graphics';
+import { palette } from '../../globals/palette';
 import { addAttraction } from '../behaviors/attraction';
 import { Behaviors } from '../behaviors/behaviors';
 import { addGuarding } from '../behaviors/guarding';
 import { CircularBounding } from '../bounding/circular';
 import { CachedEntity } from '../entity';
-import { Star } from '../items/star';
+import { Star, StarSmall } from '../items/stars';
 
 export abstract class Enemy<T extends Partial<Behaviors>>
   extends CachedEntity
@@ -26,8 +33,8 @@ export abstract class Enemy<T extends Partial<Behaviors>>
    */
   abstract speed: number;
 
+  options: Canvas2DGraphicsOptions = { styles: { fillStyle: palette.black }, fill: true };
   behaviors: T;
-
   spriteCoordinateBounds = [-1, 1];
 
   constructor(graphics: Canvas2DGraphicsRough, position: Vector2, behaviors: T) {
@@ -35,7 +42,7 @@ export abstract class Enemy<T extends Partial<Behaviors>>
     this.behaviors = behaviors;
   }
 
-  center() {
+  get center() {
     return new Vector2(
       this.position.x + this.radius / 2,
       this.position.y + this.radius / 2
@@ -44,7 +51,8 @@ export abstract class Enemy<T extends Partial<Behaviors>>
 
   destroy(index: number) {
     state.enemies.splice(index, 1);
-    state.items.push(new Star(this.graphics, this.center().clone()));
+    const Star = random(state.starFactory);
+    state.items.push(new Star(graphics.gameplay, this.center.clone()));
   }
 
   update(elapsed: number, delta: number) {

@@ -9,12 +9,11 @@ import {
 import { drawThirdEye } from '../src/drawing/drawThirdEye';
 import { drawTiles } from '../src/drawing/drawTiles';
 import { canvasContexts, canvasElements } from '../src/globals/dom';
-import { mapDimensions } from '../src/globals/game';
 import { graphics, sharedOptions, sharedStyles } from '../src/globals/graphics';
+import { mapDimensions } from '../src/globals/map';
 import { palette } from '../src/globals/palette';
 import { registerEvent, Trigger } from '../src/util/eventRegister';
 import { pointsOnPath } from '../src/util/pointsOnPath';
-import { anger } from '../svg/anger';
 import { goat } from '../svg/goat';
 import { heart } from '../svg/heart';
 import { mask } from '../svg/mask';
@@ -27,6 +26,7 @@ import { thirdEye } from '../svg/thirdEye';
 import { thirdEyeDark } from '../svg/thirdEyeDark';
 import { thirdEyeLight } from '../svg/thirdEyeLight';
 import { treasure } from '../svg/treasure';
+import { wrestler } from '../svg/wrestler';
 
 document.body.style.backgroundColor = palette.background;
 
@@ -37,7 +37,7 @@ const studioGraphics = new Canvas2DGraphicsRough(canvasContexts.gameplay, {
     lineWidth: (coords) => coords.width(0.015),
     fontSize: (coords) => coords.width(0.1)
   },
-  roughness: 1.25,
+  roughness: 0.1,
   stroke: true,
   coords: new CanvasCoordinates({
     canvas: canvasElements.gameplay,
@@ -59,7 +59,7 @@ const size = 0.1;
 
 registerEvent(Trigger.CanvasResize, () => {
   [
-    anger,
+    wrestler,
     goat,
     heart,
     mask,

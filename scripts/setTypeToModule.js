@@ -5,7 +5,13 @@ import path from 'path';
  * in order to import these libs for use with node scripts
  * "type" must be set to "module" in package.json
  */
-const libsToModify = ['points-on-path', 'points-on-curve', 'path-data-parser'];
+// const libsToModify = ['points-on-path', 'points-on-curve', 'path-data-parser'];
+const libsToModify = [
+  'points-on-path',
+  'path-data-parser',
+  // 'points-on-path/node_modules/points-on-curve'
+  'points-on-curve'
+];
 
 const setTypeToModule = (packageName) => {
   const fullPath = path.join('node_modules', packageName, 'package.json');
@@ -20,3 +26,7 @@ const setTypeToModule = (packageName) => {
 libsToModify.forEach((lib) => {
   setTypeToModule(lib);
 });
+
+/**
+ * points
+ */

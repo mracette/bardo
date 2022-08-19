@@ -27,7 +27,6 @@ export const makeSprites = (
         nyRange: spriteCoordinateBounds
       })
     });
-
     drawSprite(spriteGraphics);
     if (debug) {
       spriteGraphics.context.save();

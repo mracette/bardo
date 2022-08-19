@@ -1,6 +1,9 @@
-import { Vector2 } from 'crco-utils';
 import { Enemy } from '../entities/enemies/enemy';
+import { Goat } from '../entities/enemies/goat';
+import { Tragedy } from '../entities/enemies/tragedy';
+import { Wrestler } from '../entities/enemies/wrestler';
 import { Item } from '../entities/items/item';
+import { StarLarge, StarMedium, StarSmall } from '../entities/items/stars';
 import { Weapon } from '../entities/weapons/weapon';
 
 export enum GameState {
@@ -10,10 +13,7 @@ export enum GameState {
   Upgrade = 'upgrade'
 }
 
-export const mapDimensions = new Vector2(32, 18);
-export const mapCenter = new Vector2(mapDimensions.x / 2 - 1, mapDimensions.y / 2 - 1);
-export const tileWidth = 1 / mapDimensions.x;
-export const debug = true;
+export const debug = false;
 export const state = {
   move: {
     up: false,
@@ -26,8 +26,10 @@ export const state = {
     lastEnemyGenerated: 0
   },
   weapons: [] as Weapon[],
-  items: [] as Item[],
+  items: [] as Item<any>[],
   gameState: GameState.Intro,
   upgradeOptionCount: 4,
-  upgradeSelected: 0
+  upgradeSelected: 0,
+  starFactory: [StarSmall, StarMedium, StarLarge],
+  enemyFactory: [Tragedy, Goat, Wrestler]
 };

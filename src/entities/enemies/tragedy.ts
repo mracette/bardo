@@ -3,9 +3,9 @@ import { mask } from '../../../svg/mask';
 import { Behaviors } from '../behaviors/behaviors';
 import { Enemy } from './enemy';
 
-export class MaskedEnemy extends Enemy<Pick<Behaviors, 'attraction'>> {
+export class Tragedy extends Enemy<Pick<Behaviors, 'attraction'>> {
   radius = 1;
-  size = 1;
+  size = 1; // is this used?
   speed = 0.002;
   spriteSize = 2;
   spriteCoordinateBounds = [0, 100];
@@ -18,6 +18,6 @@ export class MaskedEnemy extends Enemy<Pick<Behaviors, 'attraction'>> {
   }
 
   drawSprite = (graphics: Canvas2DGraphicsRough) => {
-    mask.forEach((lines) => graphics.lineSegments(lines));
+    mask.forEach((lines) => graphics.lineSegments(lines, this.options));
   };
 }

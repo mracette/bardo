@@ -1,7 +1,6 @@
 import { aspectRatioResize } from 'crco-utils';
 import Stats from 'stats.js';
 import './dom/styles.css';
-import { anger } from '../svg/anger';
 import { goat } from '../svg/goat';
 import { heart } from '../svg/heart';
 import { mask } from '../svg/mask';
@@ -14,14 +13,16 @@ import { thirdEye } from '../svg/thirdEye';
 import { thirdEyeDark } from '../svg/thirdEyeDark';
 import { thirdEyeLight } from '../svg/thirdEyeLight';
 import { treasure } from '../svg/treasure';
+import { wrestler } from '../svg/wrestler';
 import { initialize } from './events/initialize';
 import { handleKeyDown, handleKeyUp } from './events/keyboard';
 import { handleResize } from './events/resize';
-import { spawnEnemy } from './events/spawn';
+import { spawnBatch, spawnEnemy } from './events/spawn';
 import { handleStateChange } from './events/stateChange';
 import { canvasElements } from './globals/dom';
-import { GameState, mapDimensions, state } from './globals/game';
+import { GameState, state } from './globals/game';
 import { graphics } from './globals/graphics';
+import { mapDimensions } from './globals/map';
 import { player } from './globals/player';
 import { registerEvent, Trigger, triggerEvent } from './util/eventRegister';
 
@@ -44,7 +45,7 @@ const main = (clockTime = 0) => {
   clockTimePrevious = clockTime;
 
   [
-    anger,
+    wrestler,
     goat,
     heart,
     mask,
@@ -83,7 +84,7 @@ const update = () => {
     state.enemies[i].update(elapsedTime, deltaTimeFixed);
   }
   for (let i = 0; i < state.items.length; i++) {
-    state.items[i].update(elapsedTime, deltaTimeFixed);
+    state.items[i].update(elapsedTime, deltaTimeFixed, i);
   }
   spawnEnemy(elapsedTime);
 };
@@ -106,11 +107,15 @@ aspectRatioResize(canvasElements.map, mapDimensions);
 aspectRatioResize(canvasElements.gameplay, mapDimensions);
 aspectRatioResize(canvasElements.ui, mapDimensions);
 
+// handlers
 registerEvent(Trigger.KeyDown, handleKeyDown);
 registerEvent(Trigger.KeyUp, handleKeyUp);
 registerEvent(Trigger.CanvasResize, handleResize);
 registerEvent(Trigger.StateChange, handleStateChange);
+
+// initialize
 registerEvent(Trigger.Initialize, initialize);
+registerEvent(Trigger.Initialize, spawnBatch);
 
 triggerEvent(Trigger.Initialize);
 triggerEvent(Trigger.StateChange, GameState.Gameplay);

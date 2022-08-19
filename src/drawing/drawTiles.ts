@@ -1,5 +1,5 @@
 import { Canvas2DGraphics, Canvas2DGraphicsRough } from 'crco-utils';
-import { mapDimensions } from '../globals/game';
+import { mapDimensions } from '../globals/map';
 
 export const drawTiles = (graphics: Canvas2DGraphics) => {
   for (let i = 0; i < mapDimensions.x; i++) {

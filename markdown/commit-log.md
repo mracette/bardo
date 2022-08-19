@@ -1,3 +1,14 @@
+## collectibles
+
+Fri, 19 Aug 2022 17:02:59 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 34.48 kb | 35303 | NA |
+| Compressed Build | 11.94 kb | 12222 | -65% |
+| Compressed Build (Adv Zip) | 11.14 kb | 11408 | -7% |
+
+## items and update sprites for various enemies
+
 Fri, 19 Aug 2022 04:28:41 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |

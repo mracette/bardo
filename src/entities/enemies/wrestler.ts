@@ -1,9 +1,9 @@
 import { Canvas2DGraphicsRough, Vector2 } from 'crco-utils';
-import { anger } from '../../../svg/anger';
+import { wrestler } from '../../../svg/wrestler';
 import { Behaviors } from '../behaviors/behaviors';
 import { Enemy } from './enemy';
 
-export class BasicAttracting extends Enemy<Pick<Behaviors, 'attraction'>> {
+export class Wrestler extends Enemy<Pick<Behaviors, 'attraction'>> {
   radius = 0.5;
   size = 0.5;
   speed = 0.002;
@@ -17,6 +17,6 @@ export class BasicAttracting extends Enemy<Pick<Behaviors, 'attraction'>> {
   }
 
   drawSprite = (graphics: Canvas2DGraphicsRough) => {
-    anger.forEach((lines) => graphics.lineSegments(lines));
+    wrestler.forEach((lines) => graphics.lineSegments(lines, this.options));
   };
 }

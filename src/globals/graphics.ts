@@ -6,9 +6,9 @@ import {
 } from 'crco-utils';
 import { CanvasCoordinates } from 'crco-utils';
 import { canvasContexts, canvasElements } from './dom';
-import { mapDimensions } from './game';
+import { mapDimensions } from './map';
 
-export const fontFamily = 'Comic Sans MS, Chalkboard, cursive';
+export const fontFamily = 'Arial, sans-serif';
 
 export const sharedStyles: Canvas2DStyles = {
   strokeStyle: 'white',
@@ -47,7 +47,7 @@ export const graphics = {
     coords: coordinates.map,
     styles: { ...sharedStyles, lineWidth: (coords) => coords.width(0.00175) },
     stroke: true,
-    roughness: 1.25
+    roughness: 0.1
   }),
   ui: new Canvas2DGraphicsRough(canvasContexts.ui, {
     ...sharedOptions,

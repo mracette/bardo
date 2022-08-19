@@ -38,8 +38,6 @@
     "htmlmin": "0.0.7",
     "husky": "^8.0.1",
     "mini-css-extract-plugin": "^2.6.1",
-    "path-data-parser": "^0.1.0",
-    "points-on-curve": "^1.0.0",
     "points-on-path": "^0.2.1",
     "prettier": "^2.7.1",
     "react-dev-utils": "^12.0.1",
@@ -53,7 +51,7 @@
     "webpack-dev-server": "^4.10.0"
   },
   "dependencies": {
-    "crco-utils": "2.0.15",
+    "crco-utils": "^2.0.18",
     "stats.js": "^0.17.0"
   }
 }

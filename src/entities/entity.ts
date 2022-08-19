@@ -1,5 +1,5 @@
 import { Canvas2DGraphicsRough, lerp, Vector2 } from 'crco-utils';
-import { tileWidth } from '../globals/game';
+import { tileWidth } from '../globals/map';
 import { makeSprites } from '../util/makeSprites';
 
 export abstract class CachedEntity {
@@ -34,7 +34,7 @@ export abstract class CachedEntity {
     );
   };
 
-  update(elapsed: number, delta: number) {
+  update(elapsed: number, delta: number, index?: number) {
     this.positionPrevious.set(this.position);
     this.spriteIndex = Math.floor(
       ((elapsed / this.spriteCycleTime) % 1) * this.sprites.length

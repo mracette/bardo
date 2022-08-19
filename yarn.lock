@@ -2021,10 +2021,10 @@ cosmiconfig@^6.0.0:
     path-type "^4.0.0"
     yaml "^1.7.2"
 
-crco-utils@2.0.15:
-  version "2.0.15"
-  resolved "https://registry.yarnpkg.com/crco-utils/-/crco-utils-2.0.15.tgz#5c687cc44d1f02dd421c7867f611efc316d644d0"
-  integrity sha512-YLd11TiLvH8TxsIcVneZT+Ny+z24nVRphMHTFZSbf7JNV7eSQfUrISwqNuArdgguvxDArm/yUChS1Ofg4GSrpQ==
+crco-utils@^2.0.18:
+  version "2.0.18"
+  resolved "https://registry.yarnpkg.com/crco-utils/-/crco-utils-2.0.18.tgz#08d855f79fc2933f8091469fe34f48e90dbfffac"
+  integrity sha512-Hlgt34l6tyBUt84qsoyQoNT69hlV6XbpIBhWmoc9fmzxB93vcVEixNnNb3eHXuI0DE2jR69FsKZaVKUUllfuZA==
 
 create-error-class@^3.0.0:
   version "3.0.2"
@@ -6177,7 +6177,7 @@ pascalcase@^0.1.1:
   resolved "https://registry.yarnpkg.com/pascalcase/-/pascalcase-0.1.1.tgz#b363e55e8006ca6fe21784d2db22bd15d7917f14"
   integrity sha1-s2PlXoAGym/iF4TS2yK9FdeRfxQ=
 
-path-data-parser@0.1.0, path-data-parser@^0.1.0:
+path-data-parser@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/path-data-parser/-/path-data-parser-0.1.0.tgz#8f5ba5cc70fc7becb3dcefaea08e2659aba60b8c"
   integrity sha512-NOnmBpt5Y2RWbuv0LMzsayp3lVylAHLPUTut412ZA3l+C4uw4ZVkQbjShYCQ8TCpUMdPapr4YjUqLYD6v68j+w==
@@ -6320,11 +6320,6 @@ points-on-curve@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/points-on-curve/-/points-on-curve-0.2.0.tgz#7dbb98c43791859434284761330fa893cb81b4d1"
   integrity sha512-0mYKnYYe9ZcqMCWhUjItv/oHjvgEsfKvnUTg8sAtnHr3GVy7rGkXCb6d5cSyqrWqL4k81b9CPg3urd+T7aop3A==
-
-points-on-curve@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/points-on-curve/-/points-on-curve-1.0.0.tgz#ed9c86c72dca03e6539dc63c53f876e33d462dfa"
-  integrity sha512-5RXAghb/GI+u96jzhXzHflA2qYgC/mXNsjUGXSlcPSQZHNe+xJSo32L3Kb7XD7tPrmYZOTed5F/7UaWNjY6lwg==
 
 points-on-path@^0.2.1:
   version "0.2.1"

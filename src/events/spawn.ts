@@ -1,12 +1,10 @@
-import { Vector2 } from 'crco-utils';
-import { BasicAttracting } from '../entities/enemies/basicAttracting';
-import { BasicGuarding } from '../entities/enemies/basicGuarding';
-import { MaskedEnemy } from '../entities/enemies/maskedEnemy';
-import { debug, mapDimensions, state } from '../globals/game';
+import { random, Vector2 } from 'crco-utils';
+import { Tragedy } from '../entities/enemies/tragedy';
+import { debug, state } from '../globals/game';
 import { graphics } from '../globals/graphics';
-import { registerEvent, Trigger } from '../util/eventRegister';
+import { mapDimensions } from '../globals/map';
 
-const MAX_SPAWN = 5;
+const MAX_SPAWN = Infinity;
 let SPAWNED = 0;
 
 export const spawnBatch = (number = 1) => {
@@ -14,12 +12,10 @@ export const spawnBatch = (number = 1) => {
     const x = Math.random() * mapDimensions.x;
     const y = Math.random() * mapDimensions.y;
     const position = new Vector2(x, y);
-    const enemy = new MaskedEnemy(graphics.gameplay, position);
+    const enemy = new Tragedy(graphics.gameplay, position);
     state.enemies.push(enemy);
   }
 };
-
-registerEvent(Trigger.Initialize, spawnBatch);
 
 export const spawnEnemy = (elapsed: number) => {
   if (
@@ -30,12 +26,8 @@ export const spawnEnemy = (elapsed: number) => {
     const x = Math.random() * mapDimensions.x;
     const y = Math.random() * mapDimensions.y;
     const position = new Vector2(x, y);
-    // const enemy =
-    //   Math.random() > 0.5
-    //     ? new BasicAttracting(graphics.gameplay, position)
-    //     : new BasicGuarding(graphics.gameplay, position);
-    const enemy = new BasicGuarding(graphics.gameplay, position);
-    state.enemies.push(enemy);
+    const Enemy = random(state.enemyFactory);
+    state.enemies.push(new Enemy(graphics.gameplay, position));
     SPAWNED++;
   }
 };
