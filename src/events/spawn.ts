@@ -6,7 +6,7 @@ import { debug, mapDimensions, state } from '../globals/game';
 import { graphics } from '../globals/graphics';
 import { registerEvent, Trigger } from '../util/eventRegister';
 
-const MAX_SPAWN = 0;
+const MAX_SPAWN = 5;
 let SPAWNED = 0;
 
 export const spawnBatch = (number = 1) => {

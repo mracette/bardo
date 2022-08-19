@@ -1,4 +1,5 @@
 import { Canvas2DGraphicsRough, Vector2 } from 'crco-utils';
+import { goat } from '../../../svg/goat';
 import { Behaviors } from '../behaviors/behaviors';
 import { Enemy } from './enemy';
 
@@ -7,6 +8,8 @@ export class BasicGuarding extends Enemy<Pick<Behaviors, 'guarding'>> {
   size = 0.5;
   speed = 0.002;
   sprites = [];
+  spriteCoordinateBounds = [0, 100];
+
   constructor(graphics: Canvas2DGraphicsRough, position: Vector2) {
     super(graphics, position, {
       guarding: {
@@ -17,4 +20,8 @@ export class BasicGuarding extends Enemy<Pick<Behaviors, 'guarding'>> {
     });
     this.generateSprites();
   }
+
+  drawSprite = (graphics: Canvas2DGraphicsRough) => {
+    goat.forEach((lines) => graphics.lineSegments(lines));
+  };
 }

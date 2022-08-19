@@ -1,5 +1,6 @@
 import { Vector2 } from 'crco-utils';
 import { Enemy } from '../entities/enemies/enemy';
+import { Item } from '../entities/items/item';
 import { Weapon } from '../entities/weapons/weapon';
 
 export enum GameState {
@@ -25,6 +26,7 @@ export const state = {
     lastEnemyGenerated: 0
   },
   weapons: [] as Weapon[],
+  items: [] as Item[],
   gameState: GameState.Intro,
   upgradeOptionCount: 4,
   upgradeSelected: 0

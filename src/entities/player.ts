@@ -1,4 +1,5 @@
 import { Canvas2DGraphics, Canvas2DGraphicsRough, clamp, Vector2 } from 'crco-utils';
+import { meditator } from '../../svg/meditator';
 import { mapCenter, mapDimensions, state, tileWidth } from '../globals/game';
 import { SQRT_2_2 } from '../globals/math';
 import { CachedEntity } from './entity';
@@ -6,7 +7,7 @@ import { CachedEntity } from './entity';
 export class Player extends CachedEntity {
   size = 0.5;
   speed = 0.005;
-  spriteCoordinateBounds = [-1, 1];
+  spriteCoordinateBounds = [0, 100];
 
   constructor(graphics: Canvas2DGraphicsRough, position: Vector2) {
     super(graphics, position);
@@ -14,7 +15,9 @@ export class Player extends CachedEntity {
   }
 
   drawSprite = (graphics: Canvas2DGraphics | Canvas2DGraphicsRough) => {
-    graphics.star(0, 0, this.size, 5);
+    meditator.forEach((lines) => {
+      graphics.lineSegments(lines);
+    });
   };
 
   update = (elapsed: number, delta: number) => {

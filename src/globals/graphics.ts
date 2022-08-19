@@ -47,7 +47,7 @@ export const graphics = {
     coords: coordinates.map,
     styles: { ...sharedStyles, lineWidth: (coords) => coords.width(0.00175) },
     stroke: true,
-    roughness: 0.1
+    roughness: 1.25
   }),
   ui: new Canvas2DGraphicsRough(canvasContexts.ui, {
     ...sharedOptions,

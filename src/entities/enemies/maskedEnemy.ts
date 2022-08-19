@@ -8,6 +8,7 @@ export class MaskedEnemy extends Enemy<Pick<Behaviors, 'attraction'>> {
   size = 1;
   speed = 0.002;
   spriteSize = 2;
+  spriteCoordinateBounds = [0, 100];
 
   constructor(graphics: Canvas2DGraphicsRough, position: Vector2) {
     super(graphics, position, {

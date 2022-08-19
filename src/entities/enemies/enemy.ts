@@ -7,6 +7,7 @@ import { Behaviors } from '../behaviors/behaviors';
 import { addGuarding } from '../behaviors/guarding';
 import { CircularBounding } from '../bounding/circular';
 import { CachedEntity } from '../entity';
+import { Star } from '../items/star';
 
 export abstract class Enemy<T extends Partial<Behaviors>>
   extends CachedEntity
@@ -16,25 +17,35 @@ export abstract class Enemy<T extends Partial<Behaviors>>
    * Required for circular collision detection
    */
   abstract radius: number;
+  /**
+   * The base size, used by the drawSprite function
+   */
   abstract size: number;
+  /**
+   * The base speed, used by updatePosition
+   */
   abstract speed: number;
 
   behaviors: T;
 
-  spriteCoordinateBounds = [0, 100];
+  spriteCoordinateBounds = [-1, 1];
 
   constructor(graphics: Canvas2DGraphicsRough, position: Vector2, behaviors: T) {
     super(graphics, position);
     this.behaviors = behaviors;
   }
 
-  destroy(index: number) {
-    state.enemies.splice(index, 1);
+  center() {
+    return new Vector2(
+      this.position.x + this.radius / 2,
+      this.position.y + this.radius / 2
+    );
   }
 
-  drawSprite = (graphics: Canvas2DGraphicsRough) => {
-    graphics.star(0, 0, this.size, 5);
-  };
+  destroy(index: number) {
+    state.enemies.splice(index, 1);
+    state.items.push(new Star(this.graphics, this.center().clone()));
+  }
 
   update(elapsed: number, delta: number) {
     super.update(elapsed, delta);

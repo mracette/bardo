@@ -7,8 +7,9 @@ import { player } from '../globals/player';
 export const handleResize = () => {
   drawTiles(graphics.map);
   player.generateSprites();
-  state.weapons.forEach((weapon) => weapon.generateSprites());
-  state.enemies.forEach((enemy) => enemy.generateSprites());
+  [...state.weapons, ...state.enemies, ...state.items].forEach((entity) =>
+    entity.generateSprites()
+  );
   if (state.gameState === GameState.Upgrade) {
     drawUi();
   }

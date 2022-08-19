@@ -8,7 +8,7 @@ export abstract class CachedEntity {
   position: Vector2;
   sprites: HTMLCanvasElement[] = [];
   spriteIndex = 0;
-  spriteCount = 1;
+  spriteCount = 4;
   spriteCycleTime = 1550;
 
   /**

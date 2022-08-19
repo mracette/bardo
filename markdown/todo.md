@@ -2,6 +2,7 @@
 - [x] use escape for pause
 - [ ] investigate music libs / use of midi
 - [x] event / subscribe framework (e.g. onresize, ontick, onmousemove, etc)
+- [ ] shared sprites
 
 crco
 

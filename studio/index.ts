@@ -34,10 +34,10 @@ const studioGraphics = new Canvas2DGraphicsRough(canvasContexts.gameplay, {
   ...sharedOptions,
   styles: {
     ...sharedStyles,
-    lineWidth: (coords) => coords.width(0.0075),
+    lineWidth: (coords) => coords.width(0.015),
     fontSize: (coords) => coords.width(0.1)
   },
-  roughness: 0.05,
+  roughness: 1.25,
   stroke: true,
   coords: new CanvasCoordinates({
     canvas: canvasElements.gameplay,

@@ -1,3 +1,12 @@
+## checking in after a little simplification
+
+Wed, 17 Aug 2022 03:45:36 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 31.31 kb | 32060 | NA |
+| Compressed Build | 11.06 kb | 11322 | -65% |
+| Compressed Build (Adv Zip) | 10.28 kb | 10523 | -7% |
+
 ## add all sprites to build to check size
 
 Wed, 17 Aug 2022 02:47:35 GMT

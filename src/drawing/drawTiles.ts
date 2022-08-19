@@ -1,7 +1,7 @@
-import { Canvas2DGraphicsRough } from 'crco-utils';
+import { Canvas2DGraphics, Canvas2DGraphicsRough } from 'crco-utils';
 import { mapDimensions } from '../globals/game';
 
-export const drawTiles = (graphics: Canvas2DGraphicsRough) => {
+export const drawTiles = (graphics: Canvas2DGraphics) => {
   for (let i = 0; i < mapDimensions.x; i++) {
     for (let j = 0; j < mapDimensions.y; j++) {
       graphics.rect(i, j, 1 / mapDimensions.x, 1 / mapDimensions.x, {

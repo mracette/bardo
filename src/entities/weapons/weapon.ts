@@ -31,8 +31,8 @@ export abstract class Weapon extends CachedEntity implements CircularBounding {
           this.position.x,
           this.position.y,
           this.radius,
-          enemy.position.x,
-          enemy.position.y,
+          enemy.position.x + enemy.radius / 2,
+          enemy.position.y + enemy.radius / 2,
           enemy.radius
         )
       ) {
