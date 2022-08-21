@@ -90,6 +90,7 @@ const update = () => {
 };
 
 const render = (alpha: number) => {
+  state.spriteIndex = Math.floor(((elapsedTime / 1550) % 1) * 4);
   graphics.gameplay.clear();
   player.draw(alpha);
   for (let i = 0; i < state.weapons.length; i++) {

@@ -26,6 +26,7 @@
     "@typescript-eslint/parser": "^5.33.0",
     "@webpack-cli/generators": "^2.5.0",
     "advzip-bin": "^2.0.0",
+    "circular-dependency-plugin": "^5.2.2",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^4.0.0",

@@ -9,7 +9,6 @@ export abstract class Weapon extends CachedEntity implements CircularBounding {
   speed = 0.0005;
   spriteCoordinateBounds = [-1, 1];
 
-  abstract radius: number; // required for circular collision checks
   abstract updatePosition: (elapsed: number, delta: number) => void;
 
   constructor(graphics: Canvas2DGraphicsRough) {

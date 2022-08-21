@@ -20,7 +20,6 @@ export abstract class Item<T extends Partial<Pick<Behaviors, 'collectible'>>>
 
   destroy = (index: number) => {
     state.items.splice(index, 1);
-    console.log('destroyed ', index, state.items);
   };
 
   update(elapsed: number, delta: number, index: number) {

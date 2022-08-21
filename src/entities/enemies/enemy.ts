@@ -14,7 +14,7 @@ import { Behaviors } from '../behaviors/behaviors';
 import { addGuarding } from '../behaviors/guarding';
 import { CircularBounding } from '../bounding/circular';
 import { CachedEntity } from '../entity';
-import { Star, StarSmall } from '../items/stars';
+import { Star, StarLarge, StarMedium, StarSmall } from '../items/stars';
 
 export abstract class Enemy<T extends Partial<Behaviors>>
   extends CachedEntity
@@ -24,10 +24,6 @@ export abstract class Enemy<T extends Partial<Behaviors>>
    * Required for circular collision detection
    */
   abstract radius: number;
-  /**
-   * The base size, used by the drawSprite function
-   */
-  abstract size: number;
   /**
    * The base speed, used by updatePosition
    */
@@ -51,7 +47,7 @@ export abstract class Enemy<T extends Partial<Behaviors>>
 
   destroy(index: number) {
     state.enemies.splice(index, 1);
-    const Star = random(state.starFactory);
+    const Star = random([StarSmall, StarMedium, StarLarge]);
     state.items.push(new Star(graphics.gameplay, this.center.clone()));
   }
 

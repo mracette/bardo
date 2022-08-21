@@ -11,12 +11,13 @@ import { mapCenter, mapDimensions, tileWidth } from '../globals/map';
 import { SQRT_2_2 } from '../globals/math';
 import { palette } from '../globals/palette';
 import { CachedEntity } from './entity';
+import { spriteCoordinateSystem } from './sprites';
 
 export class Player extends CachedEntity {
-  size = 0.75;
+  radius = 0.75;
   spriteSize = 1.5;
   speed = 0.005;
-  spriteCoordinateBounds = [0, 100];
+  coordinateSystem = spriteCoordinateSystem.external;
   options: Canvas2DGraphicsOptions = {
     styles: { fillStyle: palette.violet },
     fill: true
@@ -24,7 +25,6 @@ export class Player extends CachedEntity {
 
   constructor(graphics: Canvas2DGraphicsRough, position: Vector2) {
     super(graphics, position);
-    this.generateSprites();
   }
 
   drawSprite = (graphics: Canvas2DGraphics | Canvas2DGraphicsRough) => {
@@ -74,6 +74,6 @@ export class Player extends CachedEntity {
     positionX: number = this.position.x,
     positionY: number = this.position.y
   ) => {
-    return (positionX - x) ** 2 + (positionY - y) ** 2 <= this.size ** 2;
+    return (positionX - x) ** 2 + (positionY - y) ** 2 <= this.radius ** 2;
   };
 }

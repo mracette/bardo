@@ -1,5 +1,5 @@
 import { Canvas2DGraphicsRough, CanvasCoordinates } from 'crco-utils';
-import { debug } from '../globals/game';
+import { debug } from '../globals/debug';
 
 export const makeSprites = (
   graphics: Canvas2DGraphicsRough,

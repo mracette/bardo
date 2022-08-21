@@ -1,11 +1,13 @@
 import { Canvas2DGraphicsRough, Vector2 } from 'crco-utils';
 import { wrestler } from '../../../svg/wrestler';
 import { Behaviors } from '../behaviors/behaviors';
+import { spriteCoordinateSystem } from '../sprites';
 import { Enemy } from './enemy';
 
 export class Wrestler extends Enemy<Pick<Behaviors, 'attraction'>> {
+  coordinateSystem = spriteCoordinateSystem.external;
+  spriteSize = 1;
   radius = 0.5;
-  size = 0.5;
   speed = 0.002;
   spriteCoordinateBounds = [0, 100];
 
@@ -13,7 +15,6 @@ export class Wrestler extends Enemy<Pick<Behaviors, 'attraction'>> {
     super(graphics, position, {
       attraction: { amount: 0.002 }
     });
-    this.generateSprites();
   }
 
   drawSprite = (graphics: Canvas2DGraphicsRough) => {

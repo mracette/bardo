@@ -13,7 +13,6 @@ export enum GameState {
   Upgrade = 'upgrade'
 }
 
-export const debug = false;
 export const state = {
   move: {
     up: false,
@@ -30,6 +29,5 @@ export const state = {
   gameState: GameState.Intro,
   upgradeOptionCount: 4,
   upgradeSelected: 0,
-  starFactory: [StarSmall, StarMedium, StarLarge],
-  enemyFactory: [Tragedy, Goat, Wrestler]
+  spriteIndex: 0
 };

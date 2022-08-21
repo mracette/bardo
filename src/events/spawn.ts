@@ -1,6 +1,9 @@
 import { random, Vector2 } from 'crco-utils';
+import { Goat } from '../entities/enemies/goat';
 import { Tragedy } from '../entities/enemies/tragedy';
-import { debug, state } from '../globals/game';
+import { Wrestler } from '../entities/enemies/wrestler';
+import { debug } from '../globals/debug';
+import { state } from '../globals/game';
 import { graphics } from '../globals/graphics';
 import { mapDimensions } from '../globals/map';
 
@@ -26,7 +29,7 @@ export const spawnEnemy = (elapsed: number) => {
     const x = Math.random() * mapDimensions.x;
     const y = Math.random() * mapDimensions.y;
     const position = new Vector2(x, y);
-    const Enemy = random(state.enemyFactory);
+    const Enemy = random([Goat, Tragedy, Wrestler]);
     state.enemies.push(new Enemy(graphics.gameplay, position));
     SPAWNED++;
   }
