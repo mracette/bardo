@@ -11,12 +11,13 @@ import { mapDimensions } from '../globals/map';
 import { SQRT_2_2 } from '../globals/math';
 import { palette } from '../globals/palette';
 import { CachedEntity } from './entity';
-import { spriteCoordinateSystem, SpriteKey } from './sprites';
+import { EntityType } from './entityType';
+import { spriteCoordinateSystem } from './sprites';
 
 export class Player extends CachedEntity {
   radius = 0.75;
   spriteSize = 1.5;
-  spriteKey = SpriteKey.Player;
+  spriteKey = EntityType.Player;
   speed = 0.005;
   coordinateSystem = spriteCoordinateSystem.external;
   options: Canvas2DGraphicsOptions = {

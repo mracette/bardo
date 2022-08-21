@@ -1,14 +1,15 @@
 import { Canvas2DGraphicsOptions, Canvas2DGraphicsRough, Vector2 } from 'crco-utils';
 import { palette } from '../../globals/palette';
 import { Behaviors } from '../behaviors/behaviors';
-import { spriteCoordinateSystem, SpriteKey } from '../sprites';
+import { EntityType } from '../entityType';
+import { spriteCoordinateSystem } from '../sprites';
 import { Item } from './item';
 
 export abstract class Star extends Item<Pick<Behaviors, 'collectible'>> {
   coordinateSystem = spriteCoordinateSystem.internal;
   spriteSize = 1;
   radius = 0.25;
-  spriteKey = SpriteKey.Star;
+  spriteKey = EntityType.Star;
 
   abstract options: Canvas2DGraphicsOptions;
   abstract points: number;

@@ -1,14 +1,15 @@
 import { Canvas2DGraphicsRough, circleCircleCollision, lerp, TAU } from 'crco-utils';
 import { state } from '../../globals/game';
 import { player } from '../../globals/player';
-import { spriteCoordinateSystem, SpriteKey } from '../sprites';
+import { stats } from '../../globals/stats';
+import { EntityType } from '../entityType';
+import { spriteCoordinateSystem } from '../sprites';
 import { Weapon, WeaponInstance } from './weapon';
 
 export class OrbInstance extends WeaponInstance<Orb> {
   coordinateSystem = spriteCoordinateSystem.internal;
   spriteSize = 1;
-  spriteKey = SpriteKey.Orb;
-  spinRadius = 1.5;
+  spriteKey = EntityType.Orb;
   radius = 0.25;
   offset = 0;
   options = undefined;
@@ -42,10 +43,12 @@ export class OrbInstance extends WeaponInstance<Orb> {
   updatePosition = (elapsed: number, delta: number) => {
     this.positionPrevious.set(this.position);
     const angle = this.offset + TAU * elapsed * this.speed;
-    const x = player.center.x + Math.cos(angle) * this.spinRadius - this.spriteSize / 2;
-    const y = player.center.y + Math.sin(angle) * this.spinRadius - this.spriteSize / 2;
-    this.position.x = lerp(1 - this.parent.drag, this.positionPrevious.x, x);
-    this.position.y = lerp(1 - this.parent.drag, this.positionPrevious.y, y);
+    const x =
+      player.center.x + Math.cos(angle) * this.parent.stats.orbit - this.spriteSize / 2;
+    const y =
+      player.center.y + Math.sin(angle) * this.parent.stats.orbit - this.spriteSize / 2;
+    this.position.x = lerp(1 - this.parent.stats.drag, this.positionPrevious.x, x);
+    this.position.y = lerp(1 - this.parent.stats.drag, this.positionPrevious.y, y);
   };
 }
 
@@ -56,6 +59,14 @@ export class Orb extends Weapon<OrbInstance> {
   constructor() {
     super();
     this.instances.push(new OrbInstance(this));
+  }
+
+  get canUpgrade() {
+    return stats[EntityType.Orb].length > this.level;
+  }
+
+  get stats() {
+    return stats[EntityType.Orb][this.level - 1];
   }
 
   upgrade = () => {

@@ -1,13 +1,14 @@
 import { Canvas2DGraphicsRough, Vector2 } from 'crco-utils';
 import { wrestler } from '../../../svg/wrestler';
 import { Behaviors } from '../behaviors/behaviors';
-import { spriteCoordinateSystem, SpriteKey } from '../sprites';
+import { EntityType } from '../entityType';
+import { spriteCoordinateSystem } from '../sprites';
 import { Enemy } from './enemy';
 
 export class Wrestler extends Enemy<Pick<Behaviors, 'attraction'>> {
   coordinateSystem = spriteCoordinateSystem.external;
   spriteSize = 1;
-  spriteKey = SpriteKey.Wrestler;
+  spriteKey = EntityType.Wrestler;
   radius = 0.5;
   speed = 0.002;
 

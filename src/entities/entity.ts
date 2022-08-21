@@ -9,7 +9,8 @@ import { state } from '../globals/game';
 import { graphics } from '../globals/graphics';
 import { tileWidth } from '../globals/map';
 import { makeSprites } from '../util/makeSprites';
-import { cache, spriteCoordinateSystem, SpriteKey } from './sprites';
+import { EntityType } from './entityType';
+import { cache, spriteCoordinateSystem } from './sprites';
 
 export abstract class CachedEntity {
   positionPrevious: Vector2;
@@ -18,7 +19,7 @@ export abstract class CachedEntity {
 
   abstract spriteSize: number;
   abstract radius: number;
-  abstract spriteKey: SpriteKey;
+  abstract spriteKey: EntityType;
 
   abstract coordinateSystem: typeof spriteCoordinateSystem[keyof typeof spriteCoordinateSystem];
   abstract options?: Canvas2DGraphicsOptions;

@@ -1,13 +1,5 @@
 import { Player } from './player';
 
-export const enum SpriteKey {
-  Player,
-  Goat,
-  Tragedy,
-  Wrestler,
-  Orb,
-  Star
-}
 interface Cache {
   sprites: {
     [key: string]: HTMLCanvasElement[];
