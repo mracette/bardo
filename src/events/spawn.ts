@@ -15,7 +15,7 @@ export const spawnBatch = (number = 1) => {
     const x = Math.random() * mapDimensions.x;
     const y = Math.random() * mapDimensions.y;
     const position = new Vector2(x, y);
-    const enemy = new Tragedy(graphics.gameplay, position);
+    const enemy = new Tragedy(position);
     state.enemies.push(enemy);
   }
 };
@@ -30,7 +30,7 @@ export const spawnEnemy = (elapsed: number) => {
     const y = Math.random() * mapDimensions.y;
     const position = new Vector2(x, y);
     const Enemy = random([Goat, Tragedy, Wrestler]);
-    state.enemies.push(new Enemy(graphics.gameplay, position));
+    state.enemies.push(new Enemy(position));
     SPAWNED++;
   }
 };

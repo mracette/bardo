@@ -7,15 +7,16 @@ import {
 } from 'crco-utils';
 import { meditator } from '../../svg/meditator';
 import { state } from '../globals/game';
-import { mapCenter, mapDimensions, tileWidth } from '../globals/map';
+import { mapDimensions } from '../globals/map';
 import { SQRT_2_2 } from '../globals/math';
 import { palette } from '../globals/palette';
 import { CachedEntity } from './entity';
-import { spriteCoordinateSystem } from './sprites';
+import { spriteCoordinateSystem, SpriteKey } from './sprites';
 
 export class Player extends CachedEntity {
   radius = 0.75;
   spriteSize = 1.5;
+  spriteKey = SpriteKey.Player;
   speed = 0.005;
   coordinateSystem = spriteCoordinateSystem.external;
   options: Canvas2DGraphicsOptions = {
@@ -23,8 +24,8 @@ export class Player extends CachedEntity {
     fill: true
   };
 
-  constructor(graphics: Canvas2DGraphicsRough, position: Vector2) {
-    super(graphics, position);
+  constructor(position: Vector2) {
+    super(position);
   }
 
   drawSprite = (graphics: Canvas2DGraphics | Canvas2DGraphicsRough) => {
@@ -66,14 +67,5 @@ export class Player extends CachedEntity {
     }
     this.position.x = clamp(this.position.x + deltaX, 0, mapDimensions.x - 1);
     this.position.y = clamp(this.position.y + deltaY, 0, mapDimensions.y - 1);
-  };
-
-  collides = (
-    x: number,
-    y: number,
-    positionX: number = this.position.x,
-    positionY: number = this.position.y
-  ) => {
-    return (positionX - x) ** 2 + (positionY - y) ** 2 <= this.radius ** 2;
   };
 }

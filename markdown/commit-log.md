@@ -1,3 +1,12 @@
+## refactor complete
+
+Sun, 21 Aug 2022 19:15:25 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 34.88 kb | 35721 | NA |
+| Compressed Build | 12.09 kb | 12378 | -65% |
+| Compressed Build (Adv Zip) | 11.29 kb | 11562 | -7% |
+
 Sun, 21 Aug 2022 17:02:32 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |

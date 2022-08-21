@@ -1,9 +1,13 @@
 import { mod } from 'crco-utils';
 import { drawUi } from '../drawing/drawUi';
+import { debug } from '../globals/debug';
 import { GameState, state } from '../globals/game';
 import { Trigger, triggerEvent } from '../util/eventRegister';
 
 export const handleKeyDown = (key: string) => {
+  if (key === 'Enter' && debug) {
+    state.weapons.forEach((weapon) => weapon.upgrade());
+  }
   if (key === 'ArrowLeft' || key === 'a') {
     if (state.gameState === GameState.Gameplay) {
       state.move.left = true;

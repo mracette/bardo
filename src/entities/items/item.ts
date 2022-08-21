@@ -1,20 +1,18 @@
-import { Canvas2DGraphicsRough, Vector2 } from 'crco-utils';
+import { Vector2 } from 'crco-utils';
 import { state } from '../../globals/game';
 import { Behaviors } from '../behaviors/behaviors';
 import { addCollectible } from '../behaviors/collectible';
-import { CircularBounding } from '../bounding/circular';
 import { CachedEntity } from '../entity';
 
-export abstract class Item<T extends Partial<Pick<Behaviors, 'collectible'>>>
-  extends CachedEntity
-  implements CircularBounding
-{
+export abstract class Item<
+  T extends Partial<Pick<Behaviors, 'collectible'>>
+> extends CachedEntity {
   abstract radius: number;
 
   behaviors: T;
 
-  constructor(graphics: Canvas2DGraphicsRough, position: Vector2, behaviors: T) {
-    super(graphics, position);
+  constructor(position: Vector2, behaviors: T) {
+    super(position);
     this.behaviors = behaviors;
   }
 

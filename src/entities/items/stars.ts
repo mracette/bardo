@@ -1,21 +1,20 @@
 import { Canvas2DGraphicsOptions, Canvas2DGraphicsRough, Vector2 } from 'crco-utils';
 import { palette } from '../../globals/palette';
 import { Behaviors } from '../behaviors/behaviors';
-import { Collectible } from '../behaviors/collectible';
-import { CircularBounding } from '../bounding/circular';
-import { spriteCoordinateSystem } from '../sprites';
+import { spriteCoordinateSystem, SpriteKey } from '../sprites';
 import { Item } from './item';
 
 export abstract class Star extends Item<Pick<Behaviors, 'collectible'>> {
   coordinateSystem = spriteCoordinateSystem.internal;
   spriteSize = 1;
   radius = 0.25;
+  spriteKey = SpriteKey.Star;
 
   abstract options: Canvas2DGraphicsOptions;
   abstract points: number;
 
-  constructor(graphics: Canvas2DGraphicsRough, position: Vector2) {
-    super(graphics, position, {
+  constructor(position: Vector2) {
+    super(position, {
       collectible: {
         distance: 3,
         initialPosition: position.clone(),
@@ -37,8 +36,8 @@ export class StarSmall extends Star {
     styles: { fillStyle: palette.yellow, strokeStyle: palette.yellow },
     fill: true
   };
-  constructor(graphics: Canvas2DGraphicsRough, position: Vector2) {
-    super(graphics, position);
+  constructor(position: Vector2) {
+    super(position);
   }
 }
 
@@ -48,8 +47,8 @@ export class StarMedium extends Star {
     styles: { fillStyle: palette.teal, strokeStyle: palette.teal },
     fill: true
   };
-  constructor(graphics: Canvas2DGraphicsRough, position: Vector2) {
-    super(graphics, position);
+  constructor(position: Vector2) {
+    super(position);
   }
 }
 
@@ -59,7 +58,7 @@ export class StarLarge extends Star {
     styles: { fillStyle: palette.violet, strokeStyle: palette.violet },
     fill: true
   };
-  constructor(graphics: Canvas2DGraphicsRough, position: Vector2) {
-    super(graphics, position);
+  constructor(position: Vector2) {
+    super(position);
   }
 }

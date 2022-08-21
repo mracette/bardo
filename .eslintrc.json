@@ -1,5 +1,6 @@
 {
   "extends": [
       "@mracette"
-  ]
+  ],
+  "rules": {"prefer-const": "off"}
 }

@@ -1,7 +1,17 @@
 import { Player } from './player';
 
-interface Sprites {
-  [key: string]: HTMLCanvasElement[];
+export const enum SpriteKey {
+  Player,
+  Goat,
+  Tragedy,
+  Wrestler,
+  Orb,
+  Star
+}
+interface Cache {
+  sprites: {
+    [key: string]: HTMLCanvasElement[];
+  };
 }
 
 export const spriteCoordinateSystem = {
@@ -9,4 +19,6 @@ export const spriteCoordinateSystem = {
   internal: [-1, 1] as [number, number]
 };
 
-export const cachedSprites: Sprites = {};
+export const cache: Cache = {
+  sprites: {}
+};
