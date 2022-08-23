@@ -7,7 +7,7 @@ export const enum EntityType {
   Orb,
   Hesitation,
   Arrow,
-  Spikes,
+  MagicCircle,
   // items
   Star
 }

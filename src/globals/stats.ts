@@ -14,7 +14,7 @@ export const stats = {
     damage: [6, 6.5, 7.5, 9, 11, 13.5, 17],
     frequency: [1, 1.5, 2, 3, 4, 6, 8]
   },
-  [EntityType.Spikes]: {
+  [EntityType.MagicCircle]: {
     damage: [3, 4, 6, 9, 13, 18, 24],
     area: [1.5, 1.7, 2, 2.4, 2.9, 3.5, 4.2]
   }

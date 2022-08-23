@@ -7,6 +7,12 @@ weapons:
 - mines
   - butterfingers (you drop mines 1.5x as quickly)
 
+- magic circle
+  - standing in the circle heals you
+
+- arrow
+  - your arrow pierces up to <x> enemies
+
 spawning hints:
 
 - red x for enemies
