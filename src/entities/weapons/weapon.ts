@@ -1,3 +1,4 @@
+import { Vector2 } from 'crco-utils';
 import { state } from '../../globals/game';
 import { player } from '../../globals/player';
 import { CachedEntity } from '../entity';
@@ -11,7 +12,7 @@ export abstract class WeaponInstance<T extends Weapon<any>> extends CachedEntity
   parent: T;
 
   constructor(parent: T) {
-    super(player.position.clone());
+    super(player.center.clone());
     this.parent = parent;
   }
 

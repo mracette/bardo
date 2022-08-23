@@ -29,10 +29,11 @@ export class MagicCircleInstance extends WeaponInstance<MagicCircle> {
     this.scaleOptions = {
       styles: { scale: new Vector2(this.parent.area, this.parent.area) }
     };
+    this.positionPrevious.add(-this.radius, -this.radius);
+    this.position.add(-this.radius, -this.radius);
   }
 
   get radius() {
-    console.log(this.parent.area);
     return this.parent.area;
   }
 
@@ -58,27 +59,20 @@ export class MagicCircleInstance extends WeaponInstance<MagicCircle> {
     }
   };
 
-  // draw(alpha: number) {
-  //   super.draw(alpha, this.scaleOptions);
-  // }
-
   drawSprite = (graphics: Canvas2DGraphicsRough) => {
     graphics.circle(0, 0, 0.5, {
-      styles: { fillStyle: palette.violet, alpha: 0.2 },
+      styles: { fillStyle: palette.violet, alpha: 0.1 },
       fill: true
     });
     graphics.circle(0, 0, 0.5, {
       styles: { strokeStyle: palette.violet }
     });
     graphics.circle(0, 0, 0.4, { styles: { strokeStyle: palette.violet } });
-    graphics.star(0, 0, 0.5, 5, 0.4, { styles: { strokeStyle: palette.violet } });
-    // graphics.rect(-0.5, -0.5, 0.5, 0.5, { styles: { strokeStyle: palette.violet } });
-    // graphics.rect(-0.5, -0.5, 0.5, 0.5, {
-    //   styles: {
-    //     rotation: { origin: new Vector2(0, 0), rotation: PI / 4 },
-    //     strokeStyle: palette.violet
-    //   }
-    // });
+    for (let i = 0; i < 5; i++) {
+      const x = 0.3 * Math.cos((TAU * i) / 5);
+      const y = 0.3 * Math.sin((TAU * i) / 5);
+      graphics.circle(x, y, 0.2, { styles: { strokeStyle: palette.violet } });
+    }
   };
 
   updatePosition = (elapsed: number, delta: number) => {
@@ -91,7 +85,7 @@ export class MagicCircle extends Weapon<MagicCircleInstance> {
   range = 5;
   speed = 0.1;
   lastFired = 0;
-  frequency = 2500;
+  frequency = 1500;
   duration = 1500;
 
   constructor() {
@@ -105,10 +99,6 @@ export class MagicCircle extends Weapon<MagicCircleInstance> {
   get area() {
     return this.stats.area[this.level - 1];
   }
-
-  // get damage() {
-  //   return this.stats.damage[this.level - 1];
-  // }
 
   update(elapsed: number, delta: number): void {
     super.update(elapsed, delta);

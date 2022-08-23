@@ -1,9 +1,7 @@
 import { Arrow } from '../entities/weapons/arrow';
-import { MagicCircle } from '../entities/weapons/MagicCircle';
+import { MagicCircle } from '../entities/weapons/circle';
 import { Orb, OrbInstance } from '../entities/weapons/orb';
 import { canvasElements } from '../globals/dom';
-import { state } from '../globals/game';
-import { graphics } from '../globals/graphics';
 import { palette } from '../globals/palette';
 
 export const initialize = () => {

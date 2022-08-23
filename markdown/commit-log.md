@@ -1,3 +1,12 @@
+Tue, 23 Aug 2022 14:15:05 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 35.50 kb | 36351 | NA |
+| Compressed Build | 12.36 kb | 12661 | -65% |
+| Compressed Build (Adv Zip) | 11.56 kb | 11838 | -7% |
+
+## wip magic
+
 Tue, 23 Aug 2022 13:52:35 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |
