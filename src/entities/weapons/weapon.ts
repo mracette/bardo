@@ -4,10 +4,9 @@ import { CachedEntity } from '../entity';
 
 export abstract class WeaponInstance<T extends Weapon<any>> extends CachedEntity {
   size = 0.25;
-  speed = 0.0005;
 
-  abstract updatePosition: (elapsed: number, delta: number) => void;
-  abstract handleCollisions: () => void;
+  abstract updatePosition: (elapsed: number, delta: number, index: number) => void;
+  abstract handleCollisions: (index: number) => void;
 
   parent: T;
 
@@ -16,10 +15,10 @@ export abstract class WeaponInstance<T extends Weapon<any>> extends CachedEntity
     this.parent = parent;
   }
 
-  update(elapsed: number, delta: number) {
+  update(elapsed: number, delta: number, index: number) {
     super.update(elapsed, delta);
-    this.updatePosition(elapsed, delta);
-    this.handleCollisions();
+    this.updatePosition(elapsed, delta, index);
+    this.handleCollisions(index);
   }
 }
 
@@ -27,9 +26,14 @@ export abstract class Weapon<T extends WeaponInstance<any>> {
   instances: T[] = [];
 
   abstract upgrade: () => void;
+  abstract level: number;
 
   constructor() {
     state.weapons.push(this);
+  }
+
+  canUpgrade() {
+    return this.level < 7;
   }
 
   draw(alpha: number) {
@@ -40,7 +44,7 @@ export abstract class Weapon<T extends WeaponInstance<any>> {
 
   update(elapsed: number, delta: number) {
     for (let i = 0; i < this.instances.length; i++) {
-      this.instances[i].update(elapsed, delta);
+      this.instances[i].update(elapsed, delta, i);
     }
   }
 }

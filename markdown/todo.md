@@ -11,6 +11,7 @@
 - [ ] powerups (mushroom)
 - [ ] add weighted random mechanism for spawning
 - [ ] improve hitboxes
+- [ ] experiment with different enemy sizes
 
 crco
 

@@ -5,7 +5,8 @@ import { GameState, state } from '../globals/game';
 import { Trigger, triggerEvent } from '../util/eventRegister';
 
 export const handleKeyDown = (key: string) => {
-  if (key === 'Enter' && debug) {
+  if (key === 'Enter') {
+    console.log(state.weapons);
     state.weapons.forEach((weapon) => weapon.upgrade());
   }
   if (key === 'ArrowLeft' || key === 'a') {

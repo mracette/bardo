@@ -36,7 +36,7 @@ export abstract class CachedEntity {
     return String(this.spriteKey) + String(this.radius) + JSON.stringify(this.options);
   }
 
-  draw = (alpha: number) => {
+  draw(alpha: number, options?: Canvas2DGraphicsOptions) {
     const key = this.key;
     const cached = key in cache.sprites && cache.sprites[key].length;
 
@@ -58,7 +58,8 @@ export abstract class CachedEntity {
     graphics.gameplay.drawImage(
       sprite,
       lerp(alpha, this.positionPrevious.x, this.position.x),
-      lerp(alpha, this.positionPrevious.y, this.position.y)
+      lerp(alpha, this.positionPrevious.y, this.position.y),
+      options
     );
 
     if (debug) {
@@ -66,7 +67,7 @@ export abstract class CachedEntity {
         styles: { strokeStyle: 'red' }
       });
     }
-  };
+  }
 
   update(elapsed: number, delta: number, index?: number) {
     this.positionPrevious.set(this.position);
