@@ -11,8 +11,8 @@ export abstract class WeaponInstance<T extends Weapon<any>> extends CachedEntity
 
   parent: T;
 
-  constructor(parent: T) {
-    super(player.center.clone());
+  constructor(parent: T, position = player.center.clone()) {
+    super(position);
     this.parent = parent;
   }
 

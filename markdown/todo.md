@@ -11,6 +11,9 @@
 - [ ] powerups (mushroom)
 - [ ] add weighted random mechanism for spawning
 - [ ] improve hitboxes
+  - [ ] arrow hit box shouldn't really be at center
+  - [ ] tragedy hit box should be 2 circles
+- [ ] make circles actually sketchy
 - [ ] experiment with different enemy sizes
 
 crco

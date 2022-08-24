@@ -1,5 +1,8 @@
 weapons:
 
+- axe
+  -
+
 - orb
   - homer (your orb is attracted to nearby enemies)
   - juggler (you gain additional orbs)
@@ -9,6 +12,7 @@ weapons:
 
 - magic circle
   - standing in the circle heals you
+  - the circle gains a gravitational effect, pulling enemies in
 
 - arrow
   - your arrow pierces up to <x> enemies

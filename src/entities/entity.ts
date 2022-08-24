@@ -12,10 +12,14 @@ import { makeSprites } from '../util/makeSprites';
 import { EntityType } from './entityType';
 import { cache, spriteCoordinateSystem } from './sprites';
 
+interface InstanceCache {
+  key?: string;
+  center?: Vector2;
+}
 export abstract class CachedEntity {
   positionPrevious: Vector2;
   position: Vector2;
-  center: Vector2;
+  cache: InstanceCache = {};
 
   abstract spriteSize: number;
   abstract radius: number;
@@ -28,12 +32,25 @@ export abstract class CachedEntity {
   constructor(position: Vector2) {
     this.position = position;
     this.positionPrevious = position.clone();
-    this.center = position.clone();
+  }
+
+  get center() {
+    if ('center' in this.cache) {
+      return this.cache.center!;
+    }
+    const center = this.position.clone().add(this.spriteSize / 2, this.spriteSize / 2);
+    this.cache.center = center;
+    return center;
   }
 
   get key() {
-    // TODO: cache this?
-    return String(this.spriteKey) + String(this.radius) + JSON.stringify(this.options);
+    if ('key' in this.cache) {
+      return this.cache.key!;
+    }
+    const key =
+      String(this.spriteKey) + String(this.radius) + JSON.stringify(this.options);
+    this.cache.key = key;
+    return key;
   }
 
   draw(alpha: number, options?: Canvas2DGraphicsOptions) {

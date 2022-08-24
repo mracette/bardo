@@ -27,8 +27,8 @@ export class ArrowInstance extends WeaponInstance<Arrow> {
   rotationOptions: Canvas2DGraphicsOptions;
 
   constructor(parent: Arrow, target: Vector2) {
-    super(parent);
-    this.targetNormalized = Vector2.from(target, player.center).normalize();
+    super(parent, player.position.clone());
+    this.targetNormalized = Vector2.from(target, this.center).normalize();
     this.targetAngle = this.targetNormalized.angle() + PI;
     this.rotationOptions = {
       styles: { rotation: { origin: this.center, rotation: this.targetAngle } }
@@ -100,8 +100,6 @@ export class Arrow extends Weapon<ArrowInstance> {
 
   update(elapsed: number, delta: number): void {
     super.update(elapsed, delta);
-
-    console.log(this.frequency);
 
     if (elapsed - this.lastFired > this.frequency) {
       this.lastFired = elapsed;

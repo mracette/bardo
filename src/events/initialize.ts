@@ -9,5 +9,5 @@ export const initialize = () => {
   canvasElements.map.style.zIndex = '-1';
   // new Orb();
   // new Arrow();
-  new MagicCircle();
+  // new MagicCircle();
 };

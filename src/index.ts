@@ -92,16 +92,16 @@ const update = () => {
 const render = (alpha: number) => {
   state.spriteIndex = Math.floor(((elapsedTime / 1550) % 1) * 4);
   graphics.gameplay.clear();
-  player.draw(alpha);
-  for (let i = 0; i < state.weapons.length; i++) {
-    state.weapons[i].draw(alpha);
-  }
   for (let i = 0; i < state.enemies.length; i++) {
     state.enemies[i].draw(alpha);
+  }
+  for (let i = 0; i < state.weapons.length; i++) {
+    state.weapons[i].draw(alpha);
   }
   for (let i = 0; i < state.items.length; i++) {
     state.items[i].draw(alpha);
   }
+  player.draw(alpha);
 };
 
 aspectRatioResize(canvasElements.map, mapDimensions);
