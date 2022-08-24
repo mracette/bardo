@@ -8,6 +8,7 @@ export const enum EntityType {
   Hesitation,
   Arrow,
   MagicCircle,
+  Axe,
   // items
   Star
 }

@@ -1,4 +1,5 @@
 import { Arrow } from '../entities/weapons/arrow';
+import { Axe } from '../entities/weapons/axe';
 import { MagicCircle } from '../entities/weapons/circle';
 import { Orb, OrbInstance } from '../entities/weapons/orb';
 import { canvasElements } from '../globals/dom';
@@ -10,4 +11,5 @@ export const initialize = () => {
   // new Orb();
   // new Arrow();
   // new MagicCircle();
+  new Axe();
 };

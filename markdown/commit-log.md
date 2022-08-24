@@ -1,3 +1,12 @@
+Wed, 24 Aug 2022 14:14:33 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 36.21 kb | 37078 | NA |
+| Compressed Build | 12.63 kb | 12928 | -65% |
+| Compressed Build (Adv Zip) | 11.81 kb | 12089 | -6% |
+
+## various weapon improvements
+
 Wed, 24 Aug 2022 03:07:52 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |

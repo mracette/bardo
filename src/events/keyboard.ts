@@ -2,16 +2,17 @@ import { mod } from 'crco-utils';
 import { drawUi } from '../drawing/drawUi';
 import { debug } from '../globals/debug';
 import { GameState, state } from '../globals/game';
+import { player } from '../globals/player';
 import { Trigger, triggerEvent } from '../util/eventRegister';
 
 export const handleKeyDown = (key: string) => {
   if (key === 'Enter') {
-    console.log(state.weapons);
     state.weapons.forEach((weapon) => weapon.upgrade());
   }
   if (key === 'ArrowLeft' || key === 'a') {
     if (state.gameState === GameState.Gameplay) {
       state.move.left = true;
+      player.forwardDirection = 'left';
     }
     if (state.gameState === GameState.Upgrade) {
       state.upgradeSelected = mod(state.upgradeSelected - 1, state.upgradeOptionCount);
@@ -21,6 +22,7 @@ export const handleKeyDown = (key: string) => {
   if (key === 'ArrowRight' || key === 'd') {
     if (state.gameState === GameState.Gameplay) {
       state.move.right = true;
+      player.forwardDirection = 'right';
     }
     if (state.gameState === GameState.Upgrade) {
       state.upgradeSelected = mod(state.upgradeSelected + 1, state.upgradeOptionCount);

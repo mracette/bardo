@@ -20,6 +20,12 @@ export class Player extends CachedEntity {
   spriteKey = EntityType.Player;
   speed = 0.005;
   coordinateSystem = spriteCoordinateSystem.external;
+  forwardDirection: 'left' | 'right' = 'right';
+  mirrorImageOptions: Canvas2DGraphicsOptions = {
+    styles: {
+      scale: { origin: this.center, scale: new Vector2(-1, 1) }
+    }
+  };
   options: Canvas2DGraphicsOptions = {
     styles: { fillStyle: palette.violet },
     fill: true
@@ -27,6 +33,13 @@ export class Player extends CachedEntity {
 
   constructor(position: Vector2) {
     super(position);
+  }
+
+  draw(alpha: number) {
+    super.draw(
+      alpha,
+      this.forwardDirection === 'left' ? this.mirrorImageOptions : undefined
+    );
   }
 
   drawSprite = (graphics: Canvas2DGraphics | Canvas2DGraphicsRough) => {
