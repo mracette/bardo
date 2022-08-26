@@ -86,6 +86,9 @@ const update = () => {
   for (let i = 0; i < state.items.length; i++) {
     state.items[i].update(elapsedTime, deltaTimeFixed, i);
   }
+  for (let i = 0; i < state.overlays.length; i++) {
+    state.overlays[i].update(elapsedTime, i);
+  }
   spawnEnemy(elapsedTime);
 };
 
@@ -100,6 +103,9 @@ const render = (alpha: number) => {
   }
   for (let i = 0; i < state.items.length; i++) {
     state.items[i].draw(alpha);
+  }
+  for (let i = 0; i < state.overlays.length; i++) {
+    state.overlays[i].draw(alpha);
   }
   player.draw(alpha);
 };

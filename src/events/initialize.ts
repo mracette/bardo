@@ -10,6 +10,6 @@ export const initialize = () => {
   canvasElements.map.style.zIndex = '-1';
   // new Orb();
   // new Arrow();
-  // new MagicCircle();
-  new Axe();
+  new MagicCircle();
+  // new Axe();
 };

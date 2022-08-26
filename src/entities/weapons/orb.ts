@@ -19,24 +19,6 @@ export class OrbInstance extends WeaponInstance<Orb> {
     super(parent);
   }
 
-  handleCollisions = () => {
-    for (let i = 0; i < state.enemies.length; i++) {
-      const enemy = state.enemies[i];
-      if (
-        circleCircleCollision(
-          this.center.x,
-          this.center.y,
-          this.radius,
-          enemy.center.x,
-          enemy.center.y,
-          enemy.radius
-        )
-      ) {
-        enemy.destroy(i);
-      }
-    }
-  };
-
   drawSprite = (graphics: Canvas2DGraphicsRough) => {
     graphics.circle(0, 0, this.radius, {
       styles: { fillStyle: palette.violet },

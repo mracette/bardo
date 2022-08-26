@@ -1,13 +1,13 @@
-import { Vector2 } from 'crco-utils';
+import { circleCircleCollision, Vector2 } from 'crco-utils';
 import { state } from '../../globals/game';
 import { player } from '../../globals/player';
 import { CachedEntity } from '../entity';
+import { EntityType } from '../entityType';
 
 export abstract class WeaponInstance<T extends Weapon<any>> extends CachedEntity {
   size = 0.25;
 
   abstract updatePosition: (elapsed: number, delta: number, index: number) => void;
-  abstract handleCollisions: (index: number) => void;
 
   parent: T;
 
@@ -16,10 +16,28 @@ export abstract class WeaponInstance<T extends Weapon<any>> extends CachedEntity
     this.parent = parent;
   }
 
+  handleCollisions = (damage: number, index: number, elapsed: number) => {
+    for (let i = 0; i < state.enemies.length; i++) {
+      const enemy = state.enemies[i];
+      if (
+        circleCircleCollision(
+          this.center.x,
+          this.center.y,
+          this.radius,
+          enemy.center.x,
+          enemy.center.y,
+          enemy.radius
+        )
+      ) {
+        enemy.damage(damage, index, elapsed, this.spriteKey as EntityType);
+      }
+    }
+  };
+
   update(elapsed: number, delta: number, index: number) {
     super.update(elapsed, delta);
     this.updatePosition(elapsed, delta, index);
-    this.handleCollisions(index);
+    this.handleCollisions(this.parent.damage, index, elapsed);
   }
 }
 
@@ -28,6 +46,7 @@ export abstract class Weapon<T extends WeaponInstance<any>> {
 
   abstract upgrade: () => void;
   abstract level: number;
+  abstract damage: number;
 
   constructor() {
     state.weapons.push(this);

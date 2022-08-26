@@ -14,8 +14,10 @@ export const sharedStyles: Canvas2DStyles = {
   strokeStyle: 'white',
   fillStyle: 'white',
   lineWidth: (coords) => coords.width(0.001),
+  fontFamily,
   textAlign: 'center',
-  fontFamily
+  textBaseline: 'middle',
+  fontSize: (coords) => coords.width(0.1)
 };
 
 export const sharedOptions: Canvas2DGraphicsOptions = {

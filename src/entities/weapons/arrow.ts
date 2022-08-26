@@ -1,15 +1,5 @@
-import {
-  Canvas2DGraphicsRough,
-  circleCircleCollision,
-  lerp,
-  TAU,
-  distance,
-  Vector2,
-  Canvas2DGraphicsOptions,
-  PI
-} from 'crco-utils';
+import { Canvas2DGraphicsRough, Vector2, Canvas2DGraphicsOptions, PI } from 'crco-utils';
 import { state } from '../../globals/game';
-import { palette } from '../../globals/palette';
 import { player } from '../../globals/player';
 import { stats } from '../../globals/stats';
 import { EntityType } from '../entityType';
@@ -34,24 +24,6 @@ export class ArrowInstance extends WeaponInstance<Arrow> {
       styles: { rotation: { origin: this.center, rotation: this.targetAngle } }
     };
   }
-
-  handleCollisions = () => {
-    for (let i = 0; i < state.enemies.length; i++) {
-      const enemy = state.enemies[i];
-      if (
-        circleCircleCollision(
-          this.center.x,
-          this.center.y,
-          this.radius,
-          enemy.center.x,
-          enemy.center.y,
-          enemy.radius
-        )
-      ) {
-        enemy.destroy(i);
-      }
-    }
-  };
 
   draw(alpha: number) {
     super.draw(alpha, this.rotationOptions);
@@ -94,9 +66,9 @@ export class Arrow extends Weapon<ArrowInstance> {
     return 1000 / this.stats.frequency[this.level - 1];
   }
 
-  // get damage() {
-  //   return this.stats.damage[this.level - 1];
-  // }
+  get damage() {
+    return this.stats.damage[this.level - 1];
+  }
 
   update(elapsed: number, delta: number): void {
     super.update(elapsed, delta);

@@ -41,24 +41,6 @@ export class MagicCircleInstance extends WeaponInstance<MagicCircle> {
     return this.radius * 2;
   }
 
-  handleCollisions = () => {
-    for (let i = 0; i < state.enemies.length; i++) {
-      const enemy = state.enemies[i];
-      if (
-        circleCircleCollision(
-          this.center.x,
-          this.center.y,
-          this.radius,
-          enemy.center.x,
-          enemy.center.y,
-          enemy.radius
-        )
-      ) {
-        enemy.destroy(i);
-      }
-    }
-  };
-
   drawSprite = (graphics: Canvas2DGraphicsRough) => {
     graphics.circle(0, 0, 0.5, {
       styles: { fillStyle: palette.violet, alpha: 0.1 },
@@ -98,6 +80,10 @@ export class MagicCircle extends Weapon<MagicCircleInstance> {
 
   get area() {
     return this.stats.area[this.level - 1];
+  }
+
+  get damage() {
+    return this.stats.damage[this.level - 1];
   }
 
   update(elapsed: number, delta: number): void {

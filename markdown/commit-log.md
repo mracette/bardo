@@ -1,3 +1,12 @@
+Fri, 26 Aug 2022 19:29:13 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 36.90 kb | 37788 | NA |
+| Compressed Build | 12.80 kb | 13107 | -65% |
+| Compressed Build (Adv Zip) | 11.98 kb | 12268 | -6% |
+
+## axe
+
 Wed, 24 Aug 2022 14:14:33 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |

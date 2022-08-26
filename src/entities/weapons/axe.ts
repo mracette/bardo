@@ -48,24 +48,6 @@ export class AxeInstance extends WeaponInstance<Axe> {
     };
   }
 
-  handleCollisions = () => {
-    for (let i = 0; i < state.enemies.length; i++) {
-      const enemy = state.enemies[i];
-      if (
-        circleCircleCollision(
-          this.center.x,
-          this.center.y,
-          this.radius,
-          enemy.center.x,
-          enemy.center.y,
-          enemy.radius
-        )
-      ) {
-        enemy.destroy(i);
-      }
-    }
-  };
-
   draw(alpha: number) {
     super.draw(alpha, this.rotationOptions);
   }
@@ -124,9 +106,9 @@ export class Axe extends Weapon<AxeInstance> {
     position.y = player.center.y + direction * Math.sin(direction * angle) * this.range;
   }
 
-  // get damage() {
-  //   return this.stats.damage[this.level - 1];
-  // }
+  get damage() {
+    return this.stats.damage[this.level - 1];
+  }
 
   update(elapsed: number, delta: number): void {
     super.update(elapsed, delta);

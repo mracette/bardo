@@ -15,6 +15,7 @@
   - [ ] tragedy hit box should be 2 circles
 - [ ] make circles actually sketchy
 - [ ] experiment with different enemy sizes
+- [ ] stop animation
 
 crco
 

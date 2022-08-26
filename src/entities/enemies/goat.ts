@@ -11,6 +11,7 @@ export class Goat extends Enemy<Pick<Behaviors, 'guarding'>> {
   spriteKey = EntityType.Goat;
   radius = 0.5;
   speed = 0.002;
+  health = 100;
 
   constructor(position: Vector2) {
     super(position, {

@@ -17,8 +17,16 @@ weapons:
 - arrow
   - your arrow pierces up to <x> enemies
 
-spawning hints:
+spawning:
 
-- red x for enemies
-- blue ? for events
-- yellow ! for boons
+- hints:
+  - red x for enemies
+  - blue ? for events
+  - yellow ! for boons
+- spawn from just beyond edges (only for following enemies, not guarding)
+- scale with level or scale with time?
+  - level makes sense, because then you can get better/faster and the game doesn't get easier
+- levels are probably too complex, but there can still be waves
+- waves
+  - set # of enemies
+  - small pause between waves

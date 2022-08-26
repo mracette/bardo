@@ -4,6 +4,7 @@ import { Tragedy } from '../entities/enemies/tragedy';
 import { Wrestler } from '../entities/enemies/wrestler';
 import { Item } from '../entities/items/item';
 import { StarLarge, StarMedium, StarSmall } from '../entities/items/stars';
+import { Overlay } from '../entities/overlays/overlay';
 import { Weapon, WeaponInstance } from '../entities/weapons/weapon';
 
 export enum GameState {
@@ -26,6 +27,7 @@ export const state = {
   enemies: [] as Enemy<any>[],
   weapons: [] as Weapon<any>[],
   items: [] as Item<any>[],
+  overlays: [] as Overlay[],
   gameState: GameState.Intro,
   upgradeOptionCount: 4,
   upgradeSelected: 0,

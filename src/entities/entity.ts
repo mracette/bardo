@@ -19,11 +19,11 @@ interface InstanceCache {
 export abstract class CachedEntity {
   positionPrevious: Vector2;
   position: Vector2;
+  spriteKey: EntityType | string = '';
   cache: InstanceCache = {};
 
   abstract spriteSize: number;
   abstract radius: number;
-  abstract spriteKey: EntityType;
 
   abstract coordinateSystem: typeof spriteCoordinateSystem[keyof typeof spriteCoordinateSystem];
   abstract options?: Canvas2DGraphicsOptions;
@@ -59,7 +59,7 @@ export abstract class CachedEntity {
 
     if (!cached) {
       if (debug) {
-        console.info('Cached sprite not found. Regenerating.');
+        console.info('Cached sprite not found. Regenerating. Key: ' + key);
       }
       cache.sprites[this.key] = makeSprites(
         graphics.gameplay,
