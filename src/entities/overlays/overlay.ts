@@ -1,10 +1,19 @@
-import { Canvas2DGraphicsRough, star, Vector2 } from 'crco-utils';
+import { boundedSine } from 'bounded-sine';
+import {
+  Canvas2DGraphicsOptions,
+  Canvas2DGraphicsRough,
+  star,
+  Vector2
+} from 'crco-utils';
 import { state } from '../../globals/game';
 import { coordinates } from '../../globals/graphics';
+import { origin } from '../../globals/map';
 import { palette } from '../../globals/palette';
 import { Enemy } from '../enemies/enemy';
 import { CachedEntity } from '../entity';
 import { spriteCoordinateSystem } from '../sprites';
+
+const sine = boundedSine({ yStart: 0.5, yMax: 1, yMin: 0.2, period: 2 });
 
 export class Overlay extends CachedEntity {
   start: number;
@@ -14,6 +23,14 @@ export class Overlay extends CachedEntity {
   radius = 0.5;
   spriteSize = 1;
   duration = 500;
+  scaleOptions: Canvas2DGraphicsOptions = {
+    styles: {
+      scale: {
+        origin: origin,
+        scale: new Vector2(1, 1)
+      }
+    }
+  };
 
   options = undefined;
   coordinateSystem = spriteCoordinateSystem.internal;
@@ -32,6 +49,10 @@ export class Overlay extends CachedEntity {
     return position;
   }
 
+  draw = (alpha: number) => {
+    super.draw(alpha, this.scaleOptions);
+  };
+
   drawSprite = (graphics: Canvas2DGraphicsRough) => {
     graphics.text(this.text, 0, 0, {
       fill: true,
@@ -45,14 +66,16 @@ export class Overlay extends CachedEntity {
 
   update(elapsed: number, index: number) {
     super.update(elapsed, 0, index);
-    // TODO: check if target was destroyed
-    if (elapsed - this.start >= this.duration) {
-      this.destroy(index);
-    }
+    const amount = sine((elapsed - this.start) / this.duration);
+    // @ts-ignore
+    this.scaleOptions.styles.scale.origin = this.center;
+    // @ts-ignore
+    this.scaleOptions.styles.scale.scale.x = amount;
+    // @ts-ignore
+    this.scaleOptions.styles.scale.scale.y = amount;
     Overlay.setPositionFromTarget(this.position, this.target);
-  }
-
-  destroy(index: number) {
-    state.overlays.splice(index);
+    if (elapsed - this.start >= this.duration) {
+      this.shouldDestroy = true;
+    }
   }
 }

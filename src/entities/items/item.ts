@@ -17,7 +17,7 @@ export abstract class Item<
   }
 
   destroy = (index: number) => {
-    state.items.splice(index, 1);
+    this.shouldDestroy = true;
   };
 
   update(elapsed: number, delta: number, index: number) {

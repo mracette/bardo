@@ -20,7 +20,7 @@ import { mask } from '../svg/mask';
 import { meditator } from '../svg/meditator';
 import { mind } from '../svg/mind';
 import { mushroom } from '../svg/mushroom';
-import { pinhead } from '../svg/pinhead';
+import { prisoner } from '../svg/prisoner';
 import { reaper } from '../svg/reaper';
 import { thirdEye } from '../svg/thirdEye';
 import { thirdEyeDark } from '../svg/thirdEyeDark';
@@ -66,7 +66,7 @@ registerEvent(Trigger.CanvasResize, () => {
     meditator,
     mind,
     mushroom,
-    pinhead,
+    prisoner,
     reaper,
     // thirdEye,
     // thirdEyeDark,

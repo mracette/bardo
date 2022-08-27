@@ -1,3 +1,12 @@
+Sat, 27 Aug 2022 20:29:23 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 39.42 kb | 40362 | NA |
+| Compressed Build | 13.58 kb | 13903 | -66% |
+| Compressed Build (Adv Zip) | 12.71 kb | 13011 | -6% |
+
+## overlays and damage
+
 Fri, 26 Aug 2022 19:29:13 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |

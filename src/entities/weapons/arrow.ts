@@ -85,7 +85,7 @@ export class Arrow extends Weapon<ArrowInstance> {
       const arrow = this.instances[i];
       arrow.update(elapsed, delta, i);
       if (arrow.center.distanceTo(player.center) > this.range) {
-        this.instances.splice(i, 1);
+        arrow.shouldDestroy = true;
       }
     }
   }

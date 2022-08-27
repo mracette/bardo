@@ -64,7 +64,11 @@ export abstract class Weapon<T extends WeaponInstance<any>> {
 
   update(elapsed: number, delta: number) {
     for (let i = 0; i < this.instances.length; i++) {
-      this.instances[i].update(elapsed, delta, i);
+      if (this.instances[i].shouldDestroy) {
+        this.instances.splice(i, 1);
+      } else {
+        this.instances[i].update(elapsed, delta, i);
+      }
     }
   }
 }

@@ -12,17 +12,18 @@ import { Overlay } from '../overlays/overlay';
 
 export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
   abstract radius: number;
-  abstract speed: number;
-  abstract health: number;
 
+  health: number;
+  speed = 0.00175;
   cooldownPeriod = 1000;
   cooldowns: Partial<Record<EntityType, number>> = {};
   options: Canvas2DGraphicsOptions = { styles: { fillStyle: palette.black }, fill: true };
   behaviors: T;
 
-  constructor(position: Vector2, behaviors: T) {
+  constructor(position: Vector2, behaviors: T, health: number) {
     super(position);
     this.behaviors = behaviors;
+    this.health = health;
   }
 
   drawDamage(amount: number) {
@@ -39,15 +40,17 @@ export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
     this.health -= amount;
     state.overlays.push(new Overlay(this, String(amount), elapsed));
     if (this.health <= 0) {
-      this.destroy(index);
+      this.destroy();
     }
     this.cooldowns[type] = elapsed;
   }
 
-  destroy(index: number) {
-    state.enemies.splice(index, 1);
+  destroy() {
     const Star = random([StarSmall, StarMedium, StarLarge]);
-    state.items.push(new Star(this.center.clone()));
+    const star = new Star(this.center.clone());
+    star.position.add(-star.spriteSize / 2, -star.spriteSize / 2);
+    state.items.push(star);
+    this.shouldDestroy = true;
   }
 
   update(elapsed: number, delta: number) {

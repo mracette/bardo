@@ -1,8 +1,11 @@
 export const enum EntityType {
+  // enemies
   Player,
   Goat,
   Tragedy,
   Wrestler,
+  Prisoner,
+  Reaper,
   // weapons
   Orb,
   Hesitation,
@@ -10,5 +13,7 @@ export const enum EntityType {
   MagicCircle,
   Axe,
   // items
-  Star
+  Star,
+  // overlays
+  EnemyHint
 }

@@ -21,6 +21,7 @@ export abstract class CachedEntity {
   position: Vector2;
   spriteKey: EntityType | string = '';
   cache: InstanceCache = {};
+  shouldDestroy = false;
 
   abstract spriteSize: number;
   abstract radius: number;

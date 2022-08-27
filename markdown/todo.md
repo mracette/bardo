@@ -3,7 +3,7 @@
 - [ ] investigate music libs / use of midi
 - [x] event / subscribe framework (e.g. onresize, ontick, onmousemove, etc)
 - [x] shared sprites
-- [x] items spring back and then attract towards you
+- [x] items spring back and then attract towards  you
 - [ ] health bar on bottom
 - [ ] bosses are outlined in blue
 - [ ] info on pause screen
@@ -16,6 +16,8 @@
 - [ ] make circles actually sketchy
 - [ ] experiment with different enemy sizes
 - [ ] stop animation
+- [ ] add road roller
+- [ ] tear out crco
 
 crco
 

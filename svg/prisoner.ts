@@ -1,4 +1,4 @@
-export const pinhead = [
+export const prisoner = [
   [
     [87, 35],
     [83, 21],

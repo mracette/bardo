@@ -10,17 +10,19 @@ export class Goat extends Enemy<Pick<Behaviors, 'guarding'>> {
   spriteSize = 1;
   spriteKey = EntityType.Goat;
   radius = 0.5;
-  speed = 0.002;
-  health = 100;
 
-  constructor(position: Vector2) {
-    super(position, {
-      guarding: {
-        attraction: 0.002,
-        distance: 3,
-        guardPosition: position.clone()
-      }
-    });
+  constructor(position: Vector2, health: number) {
+    super(
+      position,
+      {
+        guarding: {
+          attraction: 0.002,
+          distance: 3,
+          guardPosition: position.clone()
+        }
+      },
+      health
+    );
   }
 
   drawSprite = (graphics: Canvas2DGraphicsRough) => {

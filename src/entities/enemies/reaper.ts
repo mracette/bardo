@@ -1,15 +1,15 @@
 import { Canvas2DGraphicsRough, Vector2 } from 'crco-utils';
-import { mask } from '../../../svg/mask';
+import { reaper } from '../../../svg/reaper';
 import { Behaviors } from '../behaviors/behaviors';
 import { EntityType } from '../entityType';
 import { spriteCoordinateSystem } from '../sprites';
 import { Enemy } from './enemy';
 
-export class Tragedy extends Enemy<Pick<Behaviors, 'attraction'>> {
+export class Reaper extends Enemy<Pick<Behaviors, 'attraction'>> {
   coordinateSystem = spriteCoordinateSystem.external;
-  spriteSize = 2;
-  spriteKey = EntityType.Tragedy;
-  radius = 1;
+  spriteSize = 1;
+  spriteKey = EntityType.Reaper;
+  radius = 0.5;
 
   constructor(position: Vector2, health: number) {
     super(
@@ -22,6 +22,6 @@ export class Tragedy extends Enemy<Pick<Behaviors, 'attraction'>> {
   }
 
   drawSprite = (graphics: Canvas2DGraphicsRough) => {
-    mask.forEach((lines) => graphics.lineSegments(lines, this.options));
+    reaper.forEach((lines) => graphics.lineSegments(lines, this.options));
   };
 }

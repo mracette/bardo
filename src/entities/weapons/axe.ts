@@ -125,7 +125,7 @@ export class Axe extends Weapon<AxeInstance> {
       const instance = this.instances[i];
       instance.update(elapsed, delta, i);
       if (elapsed - instance.start > this.duration) {
-        this.instances.splice(i, 1);
+        instance.shouldDestroy = true;
       }
     }
   }

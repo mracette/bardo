@@ -1,15 +1,16 @@
 import { Canvas2DGraphicsRough, Vector2 } from 'crco-utils';
-import { mask } from '../../../svg/mask';
+import { prisoner } from '../../../svg/prisoner';
 import { Behaviors } from '../behaviors/behaviors';
 import { EntityType } from '../entityType';
 import { spriteCoordinateSystem } from '../sprites';
 import { Enemy } from './enemy';
 
-export class Tragedy extends Enemy<Pick<Behaviors, 'attraction'>> {
+export class Prisoner extends Enemy<Pick<Behaviors, 'attraction'>> {
   coordinateSystem = spriteCoordinateSystem.external;
-  spriteSize = 2;
-  spriteKey = EntityType.Tragedy;
-  radius = 1;
+  spriteSize = 1;
+  spriteKey = EntityType.Prisoner;
+  radius = 0.5;
+  speed = 0.002;
 
   constructor(position: Vector2, health: number) {
     super(
@@ -22,6 +23,6 @@ export class Tragedy extends Enemy<Pick<Behaviors, 'attraction'>> {
   }
 
   drawSprite = (graphics: Canvas2DGraphicsRough) => {
-    mask.forEach((lines) => graphics.lineSegments(lines, this.options));
+    prisoner.forEach((lines) => graphics.lineSegments(lines, this.options));
   };
 }

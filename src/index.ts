@@ -7,7 +7,7 @@ import { mask } from '../svg/mask';
 import { meditator } from '../svg/meditator';
 import { mind } from '../svg/mind';
 import { mushroom } from '../svg/mushroom';
-import { pinhead } from '../svg/pinhead';
+import { prisoner } from '../svg/prisoner';
 import { reaper } from '../svg/reaper';
 import { thirdEye } from '../svg/thirdEye';
 import { thirdEyeDark } from '../svg/thirdEyeDark';
@@ -17,7 +17,7 @@ import { wrestler } from '../svg/wrestler';
 import { initialize } from './events/initialize';
 import { handleKeyDown, handleKeyUp } from './events/keyboard';
 import { handleResize } from './events/resize';
-import { spawnBatch, spawnEnemy } from './events/spawn';
+import { spawn } from './events/spawn';
 import { handleStateChange } from './events/stateChange';
 import { canvasElements } from './globals/dom';
 import { GameState, state } from './globals/game';
@@ -52,7 +52,7 @@ const main = (clockTime = 0) => {
     meditator,
     mind,
     mushroom,
-    pinhead,
+    prisoner,
     reaper,
     thirdEye,
     thirdEyeDark,
@@ -77,23 +77,35 @@ const main = (clockTime = 0) => {
 const update = () => {
   updateStats.update(deltaTimeFixed ? 1000 / deltaTimeFixed : 0, 200);
   player.update(elapsedTime, deltaTimeFixed);
-  for (let i = 0; i < state.weapons.length; i++) {
+  for (let i = state.weapons.length - 1; i >= 0; i--) {
     state.weapons[i].update(elapsedTime, deltaTimeFixed);
   }
-  for (let i = 0; i < state.enemies.length; i++) {
-    state.enemies[i].update(elapsedTime, deltaTimeFixed);
+  for (let i = state.enemies.length - 1; i >= 0; i--) {
+    if (state.enemies[i].shouldDestroy) {
+      state.enemies.splice(i, 1);
+    } else {
+      state.enemies[i].update(elapsedTime, deltaTimeFixed);
+    }
   }
-  for (let i = 0; i < state.items.length; i++) {
-    state.items[i].update(elapsedTime, deltaTimeFixed, i);
+  for (let i = state.items.length - 1; i >= 0; i--) {
+    if (state.items[i].shouldDestroy) {
+      state.items.splice(i, 1);
+    } else {
+      state.items[i].update(elapsedTime, deltaTimeFixed, i);
+    }
   }
-  for (let i = 0; i < state.overlays.length; i++) {
-    state.overlays[i].update(elapsedTime, i);
+  for (let i = state.overlays.length - 1; i >= 0; i--) {
+    if (state.overlays[i].shouldDestroy) {
+      state.overlays.splice(i, 1);
+    } else {
+      state.overlays[i].update(elapsedTime, i);
+    }
   }
-  spawnEnemy(elapsedTime);
+  spawn(elapsedTime);
 };
 
 const render = (alpha: number) => {
-  state.spriteIndex = Math.floor(((elapsedTime / 1550) % 1) * 4);
+  state.spriteIndex = Math.floor(((elapsedTime / state.spritePeriod) % 1) * 4);
   graphics.gameplay.clear();
   for (let i = 0; i < state.enemies.length; i++) {
     state.enemies[i].draw(alpha);
@@ -122,7 +134,6 @@ registerEvent(Trigger.StateChange, handleStateChange);
 
 // initialize
 registerEvent(Trigger.Initialize, initialize);
-registerEvent(Trigger.Initialize, spawnBatch);
 
 triggerEvent(Trigger.Initialize);
 triggerEvent(Trigger.StateChange, GameState.Gameplay);

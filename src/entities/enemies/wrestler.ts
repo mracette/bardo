@@ -10,13 +10,15 @@ export class Wrestler extends Enemy<Pick<Behaviors, 'attraction'>> {
   spriteSize = 1;
   spriteKey = EntityType.Wrestler;
   radius = 0.5;
-  speed = 0.002;
-  health = 100;
 
-  constructor(position: Vector2) {
-    super(position, {
-      attraction: { amount: 0.002 }
-    });
+  constructor(position: Vector2, health: number) {
+    super(
+      position,
+      {
+        attraction: { amount: 0.002 }
+      },
+      health
+    );
   }
 
   drawSprite = (graphics: Canvas2DGraphicsRough) => {
