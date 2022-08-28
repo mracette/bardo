@@ -19,6 +19,7 @@ import { handleKeyDown, handleKeyUp } from './events/keyboard';
 import { handleResize } from './events/resize';
 import { spawn } from './events/spawn';
 import { handleStateChange } from './events/stateChange';
+import { handleWindowResize } from './events/windowResize';
 import { canvasElements } from './globals/dom';
 import { GameState, state } from './globals/game';
 import { graphics } from './globals/graphics';
@@ -43,22 +44,6 @@ const main = (clockTime = 0) => {
   const isPaused = state.gameState !== GameState.Gameplay;
   const deltaTimeClock = isPaused ? 0 : clockTime - clockTimePrevious;
   clockTimePrevious = clockTime;
-
-  [
-    wrestler,
-    goat,
-    heart,
-    mask,
-    meditator,
-    mind,
-    mushroom,
-    prisoner,
-    reaper,
-    thirdEye,
-    thirdEyeDark,
-    thirdEyeLight,
-    treasure
-  ].forEach(() => null);
 
   // clamp for extra long frames
   accumulator += Math.min(deltaTimeClock, 50);
@@ -105,7 +90,6 @@ const update = () => {
 };
 
 const render = (alpha: number) => {
-  state.spriteIndex = Math.floor(((elapsedTime / state.spritePeriod) % 1) * 4);
   graphics.gameplay.clear();
   for (let i = 0; i < state.enemies.length; i++) {
     state.enemies[i].draw(alpha);
@@ -124,12 +108,13 @@ const render = (alpha: number) => {
 
 aspectRatioResize(canvasElements.map, mapDimensions);
 aspectRatioResize(canvasElements.gameplay, mapDimensions);
-aspectRatioResize(canvasElements.ui, mapDimensions);
+aspectRatioResize(canvasElements.upgrades, mapDimensions);
 
 // handlers
 registerEvent(Trigger.KeyDown, handleKeyDown);
 registerEvent(Trigger.KeyUp, handleKeyUp);
 registerEvent(Trigger.CanvasResize, handleResize);
+registerEvent(Trigger.WindowResize, handleWindowResize);
 registerEvent(Trigger.StateChange, handleStateChange);
 
 // initialize

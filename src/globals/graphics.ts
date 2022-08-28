@@ -31,9 +31,12 @@ export const coordinates = {
     nxRange: [0, mapDimensions.x],
     nyRange: [0, mapDimensions.y]
   }),
-  ui: new CanvasCoordinates({
-    canvas: canvasElements.ui,
+  upgrade: new CanvasCoordinates({
+    canvas: canvasElements.upgrades,
     padding: 0.1
+  }),
+  ui: new CanvasCoordinates({
+    canvas: canvasElements.ui
   })
 };
 
@@ -50,6 +53,16 @@ export const graphics = {
     styles: { ...sharedStyles, lineWidth: (coords) => coords.width(0.00175) },
     stroke: true,
     roughness: 0.1
+  }),
+  upgrade: new Canvas2DGraphicsRough(canvasContexts.upgrades, {
+    ...sharedOptions,
+    coords: coordinates.upgrade,
+    styles: {
+      ...sharedStyles,
+      lineWidth: (coords) => coords.width(0.01),
+      fontSize: (coords) => coords.width(0.1),
+      fontFamily
+    }
   }),
   ui: new Canvas2DGraphicsRough(canvasContexts.ui, {
     ...sharedOptions,

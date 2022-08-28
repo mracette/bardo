@@ -18,6 +18,9 @@
 - [ ] stop animation
 - [ ] add road roller
 - [ ] tear out crco
+- [ ] remove unused delta and graphics params
+- [ ] stuttering when player moves left on some screens
+- [ ] robust cross device testing
 
 crco
 

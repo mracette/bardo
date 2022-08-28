@@ -19,6 +19,7 @@ weapons:
 
 spawning:
 
+- have a target # of enemies on screen?
 - hints:
   - red x for enemies
   - blue ? for events

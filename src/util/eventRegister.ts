@@ -3,6 +3,7 @@ import { canvasElements } from '../globals/dom';
 export enum Trigger {
   Initialize,
   CanvasResize,
+  WindowResize,
   Tick,
   KeyDown,
   KeyUp,
@@ -14,6 +15,7 @@ type EventCallback = (...args: any[]) => void;
 const EVENTS: Record<Trigger, EventCallback[]> = {
   [Trigger.Initialize]: [],
   [Trigger.CanvasResize]: [],
+  [Trigger.WindowResize]: [],
   [Trigger.Tick]: [],
   [Trigger.KeyDown]: [],
   [Trigger.KeyUp]: [],
@@ -41,4 +43,8 @@ window.addEventListener('keydown', (event) => {
 
 window.addEventListener('keyup', (event) => {
   triggerEvent(Trigger.KeyUp, event.key);
+});
+
+window.addEventListener('resize', (event) => {
+  triggerEvent(Trigger.WindowResize);
 });

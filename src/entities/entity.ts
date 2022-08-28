@@ -23,6 +23,9 @@ export abstract class CachedEntity {
   cache: InstanceCache = {};
   shouldDestroy = false;
 
+  spriteCount = 4;
+  spriteIndex = 0;
+
   abstract spriteSize: number;
   abstract radius: number;
 
@@ -66,12 +69,12 @@ export abstract class CachedEntity {
         graphics.gameplay,
         this.drawSprite,
         graphics.gameplay.coords.width(tileWidth * this.spriteSize),
-        4,
+        this.spriteCount,
         this.coordinateSystem
       );
     }
 
-    const sprite = cache.sprites[key][state.spriteIndex];
+    const sprite = cache.sprites[key][this.spriteIndex];
 
     graphics.gameplay.drawImage(
       sprite,
@@ -91,5 +94,8 @@ export abstract class CachedEntity {
     this.positionPrevious.set(this.position);
     this.center.x = this.position.x + this.spriteSize / 2;
     this.center.y = this.position.y + this.spriteSize / 2;
+    this.spriteIndex = Math.floor(
+      ((elapsed / state.spritePeriod) % 1) * this.spriteCount
+    );
   }
 }

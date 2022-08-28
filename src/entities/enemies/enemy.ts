@@ -8,7 +8,7 @@ import { addGuarding } from '../behaviors/guarding';
 import { CachedEntity } from '../entity';
 import { EntityType } from '../entityType';
 import { StarLarge, StarMedium, StarSmall } from '../items/stars';
-import { Overlay } from '../overlays/overlay';
+import { DamageOverlay } from '../overlays/damage';
 
 export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
   abstract radius: number;
@@ -38,7 +38,7 @@ export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
     const cooldown = this.cooldowns[type];
     if (cooldown && elapsed - cooldown < this.cooldownPeriod) return;
     this.health -= amount;
-    state.overlays.push(new Overlay(this, String(amount), elapsed));
+    state.overlays.push(new DamageOverlay(this, String(amount), elapsed));
     if (this.health <= 0) {
       this.destroy();
     }

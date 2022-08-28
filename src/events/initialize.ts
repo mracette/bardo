@@ -3,6 +3,8 @@ import { Axe } from '../entities/weapons/axe';
 import { MagicCircle } from '../entities/weapons/circle';
 import { Orb, OrbInstance } from '../entities/weapons/orb';
 import { canvasElements } from '../globals/dom';
+import { state } from '../globals/game';
+import { origin } from '../globals/map';
 import { palette } from '../globals/palette';
 
 export const initialize = () => {

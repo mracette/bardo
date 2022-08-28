@@ -4,19 +4,19 @@ import { graphics } from '../globals/graphics';
 import { mapDimensions } from '../globals/map';
 
 export const drawUi = () => {
-  graphics.ui.clear();
+  graphics.upgrade.clear();
   for (let i = 0; i < state.upgradeOptionCount; i++) {
     const panelCoords = new CanvasCoordinates({
       offsetX:
-        graphics.ui.coords.nx(-1) +
-        graphics.ui.coords.width(i / state.upgradeOptionCount),
-      offsetY: graphics.ui.coords.ny(-1),
-      baseWidth: graphics.ui.coords.width() / state.upgradeOptionCount,
-      baseHeight: graphics.ui.coords.height(),
+        graphics.upgrade.coords.nx(-1) +
+        graphics.upgrade.coords.width(i / state.upgradeOptionCount),
+      offsetY: graphics.upgrade.coords.ny(-1),
+      baseWidth: graphics.upgrade.coords.width() / state.upgradeOptionCount,
+      baseHeight: graphics.upgrade.coords.height(),
       padding: 0.05
     });
-    const panelGraphics = new Canvas2DGraphicsRough(graphics.ui.context, {
-      ...graphics.ui.options,
+    const panelGraphics = new Canvas2DGraphicsRough(graphics.upgrade.context, {
+      ...graphics.upgrade.options,
       coords: panelCoords,
       stroke: false
     });

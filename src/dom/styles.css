@@ -2,11 +2,15 @@ body {
   padding: 5%;
 }
 
-canvas#player,canvas#map, canvas#ui {
+canvas#player,canvas#map, canvas#upgrades {
   border: 1px solid white;
   position: absolute;
   top: auto;
   left: auto;
+}
+
+canvas#ui {
+  position: absolute;
 }
 
 #root {
@@ -15,6 +19,7 @@ canvas#player,canvas#map, canvas#ui {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 #stats canvas {

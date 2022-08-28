@@ -5,8 +5,8 @@ import { Tragedy } from '../entities/enemies/tragedy';
 import { Wrestler } from '../entities/enemies/wrestler';
 import { Item } from '../entities/items/item';
 import { StarLarge, StarMedium, StarSmall } from '../entities/items/stars';
+import { DamageOverlay } from '../entities/overlays/damage';
 import { EnemyHint } from '../entities/overlays/enemyHint';
-import { Overlay } from '../entities/overlays/overlay';
 import { Weapon, WeaponInstance } from '../entities/weapons/weapon';
 import { mapCenter } from './map';
 
@@ -32,10 +32,9 @@ export const state = {
   enemies: [] as Enemy<any>[],
   weapons: [] as Weapon<any>[],
   items: [] as Item<any>[],
-  overlays: [] as (Overlay | EnemyHint)[],
+  overlays: [] as (DamageOverlay | EnemyHint)[],
   gameState: GameState.Intro,
   upgradeOptionCount: 4,
   upgradeSelected: 0,
-  spritePeriod: 1550,
-  spriteIndex: 0
+  spritePeriod: 1550
 };

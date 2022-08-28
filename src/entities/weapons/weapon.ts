@@ -6,6 +6,7 @@ import { EntityType } from '../entityType';
 
 export abstract class WeaponInstance<T extends Weapon<any>> extends CachedEntity {
   size = 0.25;
+  destroyOnCollide = false;
 
   abstract updatePosition: (elapsed: number, delta: number, index: number) => void;
 
@@ -30,6 +31,9 @@ export abstract class WeaponInstance<T extends Weapon<any>> extends CachedEntity
         )
       ) {
         enemy.damage(damage, index, elapsed, this.spriteKey as EntityType);
+        if (this.destroyOnCollide) {
+          this.shouldDestroy = true;
+        }
       }
     }
   };

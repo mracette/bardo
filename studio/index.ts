@@ -49,7 +49,7 @@ const studioGraphics = new Canvas2DGraphicsRough(canvasContexts.gameplay, {
 
 aspectRatioResize(canvasElements.map, mapDimensions);
 aspectRatioResize(canvasElements.gameplay, mapDimensions);
-aspectRatioResize(canvasElements.ui, mapDimensions);
+aspectRatioResize(canvasElements.upgrades, mapDimensions);
 
 const size = 0.1;
 

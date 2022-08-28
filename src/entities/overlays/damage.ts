@@ -15,7 +15,7 @@ import { spriteCoordinateSystem } from '../sprites';
 
 const sine = boundedSine({ yStart: 0.5, yMax: 1, yMin: 0.2, period: 2 });
 
-export class Overlay extends CachedEntity {
+export class DamageOverlay extends CachedEntity {
   start: number;
   text: string;
   target: Enemy<any>;
@@ -36,7 +36,7 @@ export class Overlay extends CachedEntity {
   coordinateSystem = spriteCoordinateSystem.internal;
 
   constructor(target: Enemy<any>, text: string, start: number) {
-    super(Overlay.setPositionFromTarget(target.center.clone(), target));
+    super(DamageOverlay.setPositionFromTarget(target.center.clone(), target));
     this.target = target;
     this.spriteKey = text;
     this.text = text;
@@ -44,8 +44,9 @@ export class Overlay extends CachedEntity {
   }
 
   static setPositionFromTarget(position: Vector2, target: CachedEntity) {
-    position.x = target.center.x - target.spriteSize / 2;
-    position.y = target.center.y - 1 - target.spriteSize / 2;
+    // hardcoded sprite size
+    position.x = target.center.x - 1 / 2;
+    position.y = target.center.y - 1.5;
     return position;
   }
 
@@ -73,7 +74,7 @@ export class Overlay extends CachedEntity {
     this.scaleOptions.styles.scale.scale.x = amount;
     // @ts-ignore
     this.scaleOptions.styles.scale.scale.y = amount;
-    Overlay.setPositionFromTarget(this.position, this.target);
+    DamageOverlay.setPositionFromTarget(this.position, this.target);
     if (elapsed - this.start >= this.duration) {
       this.shouldDestroy = true;
     }

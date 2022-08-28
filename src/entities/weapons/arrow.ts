@@ -15,6 +15,7 @@ export class ArrowInstance extends WeaponInstance<Arrow> {
   targetNormalized: Vector2;
   targetAngle: number;
   rotationOptions: Canvas2DGraphicsOptions;
+  destroyOnCollide = true;
 
   constructor(parent: Arrow, target: Vector2) {
     super(parent, player.position.clone());
