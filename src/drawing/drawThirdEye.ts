@@ -1,10 +1,10 @@
-import { Canvas2DGraphicsRough } from 'crco-utils';
+import { Canvas2DGraphics } from 'crco-utils';
 import { thirdEye } from '../../svg/thirdEye';
 import { thirdEyeDark } from '../../svg/thirdEyeDark';
 import { thirdEyeLight } from '../../svg/thirdEyeLight';
 import { palette } from '../globals/palette';
 
-export const drawThirdEye = (graphics: Canvas2DGraphicsRough) => {
+export const drawThirdEye = (graphics: Canvas2DGraphics) => {
   thirdEye.forEach((points) => {
     graphics.lineSegments(points);
   });

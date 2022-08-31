@@ -1,4 +1,4 @@
-import { Canvas2DGraphicsRough, PI, star, Vector2 } from 'crco-utils';
+import { Canvas2DGraphics, PI, star, Vector2 } from 'crco-utils';
 import { state } from '../../globals/game';
 import { origin } from '../../globals/map';
 import { palette } from '../../globals/palette';
@@ -26,7 +26,7 @@ export class EnemyHint extends CachedEntity {
 
   static duration = 2500;
 
-  drawSprite = (graphics: Canvas2DGraphicsRough) => {
+  drawSprite = (graphics: Canvas2DGraphics) => {
     graphics.rect(-0.2, -0.8, 0.2, 0.8, {
       styles: { rotation: { origin: origin, rotation: PI / 4 }, fillStyle: palette.red },
       fill: true,

@@ -1,5 +1,5 @@
 import { mod } from 'crco-utils';
-import { drawUi } from '../drawing/drawUi';
+import { drawUpgradeUi } from '../drawing/drawUpgradeUi';
 import { debug } from '../globals/debug';
 import { GameState, state } from '../globals/game';
 import { player } from '../globals/player';
@@ -9,6 +9,16 @@ export const handleKeyDown = (key: string) => {
   if (key === 'Enter') {
     state.weapons.forEach((weapon) => weapon.upgrade());
   }
+  if (key === 'Shift') {
+    console.log(key);
+    state.experience.current = state.experience.next;
+    triggerEvent(Trigger.LevelUp);
+  }
+  if (key === 'Escape') {
+    if (state.gameState === GameState.Gameplay) {
+      triggerEvent(Trigger.StateChange, GameState.Paused);
+    }
+  }
   if (key === 'ArrowLeft' || key === 'a') {
     if (state.gameState === GameState.Gameplay) {
       state.move.left = true;
@@ -16,7 +26,7 @@ export const handleKeyDown = (key: string) => {
     }
     if (state.gameState === GameState.Upgrade) {
       state.upgradeSelected = mod(state.upgradeSelected - 1, state.upgradeOptionCount);
-      drawUi();
+      drawUpgradeUi();
     }
   }
   if (key === 'ArrowRight' || key === 'd') {
@@ -26,7 +36,7 @@ export const handleKeyDown = (key: string) => {
     }
     if (state.gameState === GameState.Upgrade) {
       state.upgradeSelected = mod(state.upgradeSelected + 1, state.upgradeOptionCount);
-      drawUi();
+      drawUpgradeUi();
     }
   }
   if (key === 'ArrowUp' || key === 'w') {
@@ -34,11 +44,6 @@ export const handleKeyDown = (key: string) => {
   }
   if (key === 'ArrowDown' || key === 's') {
     state.move.down = true;
-  }
-  if (key === 'Escape') {
-    if (state.gameState === GameState.Gameplay) {
-      triggerEvent(Trigger.StateChange, GameState.Paused);
-    }
   }
 };
 

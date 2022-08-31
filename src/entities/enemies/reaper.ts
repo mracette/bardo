@@ -1,4 +1,4 @@
-import { Canvas2DGraphicsRough, Vector2 } from 'crco-utils';
+import { Canvas2DGraphics, Vector2 } from 'crco-utils';
 import { reaper } from '../../../svg/reaper';
 import { Behaviors } from '../behaviors/behaviors';
 import { EntityType } from '../entityType';
@@ -21,7 +21,7 @@ export class Reaper extends Enemy<Pick<Behaviors, 'attraction'>> {
     );
   }
 
-  drawSprite = (graphics: Canvas2DGraphicsRough) => {
+  drawSprite = (graphics: Canvas2DGraphics) => {
     reaper.forEach((lines) => graphics.lineSegments(lines, this.options));
   };
 }

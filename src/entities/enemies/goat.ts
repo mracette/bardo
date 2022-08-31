@@ -1,4 +1,4 @@
-import { Canvas2DGraphicsRough, Vector2 } from 'crco-utils';
+import { Canvas2DGraphics, Vector2 } from 'crco-utils';
 import { goat } from '../../../svg/goat';
 import { Behaviors } from '../behaviors/behaviors';
 import { EntityType } from '../entityType';
@@ -25,7 +25,7 @@ export class Goat extends Enemy<Pick<Behaviors, 'guarding'>> {
     );
   }
 
-  drawSprite = (graphics: Canvas2DGraphicsRough) => {
+  drawSprite = (graphics: Canvas2DGraphics) => {
     goat.forEach((lines) => graphics.lineSegments(lines, this.options));
   };
 }

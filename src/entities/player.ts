@@ -1,10 +1,4 @@
-import {
-  Canvas2DGraphics,
-  Canvas2DGraphicsOptions,
-  Canvas2DGraphicsRough,
-  clamp,
-  Vector2
-} from 'crco-utils';
+import { Canvas2DGraphicsOptions, Canvas2DGraphics, clamp, Vector2 } from 'crco-utils';
 import { meditator } from '../../svg/meditator';
 import { state } from '../globals/game';
 import { mapDimensions } from '../globals/map';
@@ -42,7 +36,7 @@ export class Player extends CachedEntity {
     );
   }
 
-  drawSprite = (graphics: Canvas2DGraphics | Canvas2DGraphicsRough) => {
+  drawSprite = (graphics: Canvas2DGraphics | Canvas2DGraphics) => {
     meditator.forEach((lines) => {
       graphics.lineSegments(lines, this.options);
     });

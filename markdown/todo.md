@@ -1,3 +1,5 @@
+- [ ] remove keyboard shortcuts
+- [ ] increase debounce interval for resizing
 - [ ] set max DPR
 - [x] use escape for pause
 - [ ] investigate music libs / use of midi

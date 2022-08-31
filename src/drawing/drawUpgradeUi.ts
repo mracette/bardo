@@ -1,9 +1,9 @@
-import { Canvas2DGraphicsRough, CanvasCoordinates } from 'crco-utils';
+import { Canvas2DGraphics, CanvasCoordinates } from 'crco-utils';
 import { state } from '../globals/game';
 import { graphics } from '../globals/graphics';
 import { mapDimensions } from '../globals/map';
 
-export const drawUi = () => {
+export const drawUpgradeUi = () => {
   graphics.upgrade.clear();
   for (let i = 0; i < state.upgradeOptionCount; i++) {
     const panelCoords = new CanvasCoordinates({
@@ -15,7 +15,7 @@ export const drawUi = () => {
       baseHeight: graphics.upgrade.coords.height(),
       padding: 0.05
     });
-    const panelGraphics = new Canvas2DGraphicsRough(graphics.upgrade.context, {
+    const panelGraphics = new Canvas2DGraphics(graphics.upgrade.context, {
       ...graphics.upgrade.options,
       coords: panelCoords,
       stroke: false

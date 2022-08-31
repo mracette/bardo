@@ -1,7 +1,7 @@
 import { boundedSine } from 'bounded-sine';
 import {
   Canvas2DGraphicsOptions,
-  Canvas2DGraphicsRough,
+  Canvas2DGraphics,
   star,
   Vector2
 } from 'crco-utils';
@@ -54,7 +54,7 @@ export class DamageOverlay extends CachedEntity {
     super.draw(alpha, this.scaleOptions);
   };
 
-  drawSprite = (graphics: Canvas2DGraphicsRough) => {
+  drawSprite = (graphics: Canvas2DGraphics) => {
     graphics.text(this.text, 0, 0, {
       fill: true,
       styles: {

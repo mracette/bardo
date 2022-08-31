@@ -1,4 +1,4 @@
-import { Canvas2DGraphicsRough, Vector2, Canvas2DGraphicsOptions, PI } from 'crco-utils';
+import { Canvas2DGraphics, Vector2, Canvas2DGraphicsOptions, PI } from 'crco-utils';
 import { state } from '../../globals/game';
 import { player } from '../../globals/player';
 import { stats } from '../../globals/stats';
@@ -30,7 +30,7 @@ export class ArrowInstance extends WeaponInstance<Arrow> {
     super.draw(alpha, this.rotationOptions);
   }
 
-  drawSprite = (graphics: Canvas2DGraphicsRough) => {
+  drawSprite = (graphics: Canvas2DGraphics) => {
     graphics.lineSegments([
       [-1, 0],
       [1, 0]

@@ -1,5 +1,5 @@
 import {
-  Canvas2DGraphicsRough,
+  Canvas2DGraphics,
   circleCircleCollision,
   lerp,
   TAU,
@@ -52,7 +52,7 @@ export class AxeInstance extends WeaponInstance<Axe> {
     super.draw(alpha, this.rotationOptions);
   }
 
-  drawSprite = (graphics: Canvas2DGraphicsRough) => {
+  drawSprite = (graphics: Canvas2DGraphics) => {
     const startX = -1 / 3;
     const startY = 0;
     graphics.lineSegments([

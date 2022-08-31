@@ -1,12 +1,10 @@
 import { DPR } from 'crco-utils';
 import { drawExperience } from '../drawing/drawExperience';
 import { drawTiles } from '../drawing/drawTiles';
-import { drawUi } from '../drawing/drawUi';
+import { drawUpgradeUi } from '../drawing/drawUpgradeUi';
 import { cache } from '../entities/sprites';
 import { canvasElements } from '../globals/dom';
 import { GameState, state } from '../globals/game';
-import { graphics } from '../globals/graphics';
-import { player } from '../globals/player';
 
 export const handleResize = () => {
   drawTiles();
@@ -23,6 +21,6 @@ export const handleResize = () => {
     cache.sprites[key].length = 0;
   }
   if (state.gameState === GameState.Upgrade) {
-    drawUi();
+    drawUpgradeUi();
   }
 };

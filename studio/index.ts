@@ -2,7 +2,7 @@ import '../src/dom/styles.css';
 
 import {
   aspectRatioResize,
-  Canvas2DGraphicsRough,
+  Canvas2DGraphics,
   CanvasCoordinates,
   Vector2
 } from 'crco-utils';
@@ -22,15 +22,12 @@ import { mind } from '../svg/mind';
 import { mushroom } from '../svg/mushroom';
 import { prisoner } from '../svg/prisoner';
 import { reaper } from '../svg/reaper';
-import { thirdEye } from '../svg/thirdEye';
-import { thirdEyeDark } from '../svg/thirdEyeDark';
-import { thirdEyeLight } from '../svg/thirdEyeLight';
 import { treasure } from '../svg/treasure';
 import { wrestler } from '../svg/wrestler';
 
 document.body.style.backgroundColor = palette.background;
 
-const studioGraphics = new Canvas2DGraphicsRough(canvasContexts.gameplay, {
+const studioGraphics = new Canvas2DGraphics(canvasContexts.gameplay, {
   ...sharedOptions,
   styles: {
     ...sharedStyles,

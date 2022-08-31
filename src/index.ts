@@ -1,21 +1,9 @@
 import { aspectRatioResize } from 'crco-utils';
 import Stats from 'stats.js';
 import './dom/styles.css';
-import { goat } from '../svg/goat';
-import { heart } from '../svg/heart';
-import { mask } from '../svg/mask';
-import { meditator } from '../svg/meditator';
-import { mind } from '../svg/mind';
-import { mushroom } from '../svg/mushroom';
-import { prisoner } from '../svg/prisoner';
-import { reaper } from '../svg/reaper';
-import { thirdEye } from '../svg/thirdEye';
-import { thirdEyeDark } from '../svg/thirdEyeDark';
-import { thirdEyeLight } from '../svg/thirdEyeLight';
-import { treasure } from '../svg/treasure';
-import { wrestler } from '../svg/wrestler';
-import { initialize } from './events/initialize';
+import { handleInitialize } from './events/initialize';
 import { handleKeyDown, handleKeyUp } from './events/keyboard';
+import { handleLevelUp } from './events/levelUp';
 import { handleResize } from './events/resize';
 import { spawn } from './events/spawn';
 import { handleStateChange } from './events/stateChange';
@@ -116,9 +104,10 @@ registerEvent(Trigger.KeyUp, handleKeyUp);
 registerEvent(Trigger.CanvasResize, handleResize);
 registerEvent(Trigger.WindowResize, handleWindowResize);
 registerEvent(Trigger.StateChange, handleStateChange);
+registerEvent(Trigger.LevelUp, handleLevelUp);
 
 // initialize
-registerEvent(Trigger.Initialize, initialize);
+registerEvent(Trigger.Initialize, handleInitialize);
 
 triggerEvent(Trigger.Initialize);
 triggerEvent(Trigger.StateChange, GameState.Gameplay);

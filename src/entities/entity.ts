@@ -1,6 +1,6 @@
 import {
   Canvas2DGraphicsOptions,
-  Canvas2DGraphicsRough,
+  Canvas2DGraphics,
   lerp,
   Vector2
 } from 'crco-utils';
@@ -31,7 +31,7 @@ export abstract class CachedEntity {
 
   abstract coordinateSystem: typeof spriteCoordinateSystem[keyof typeof spriteCoordinateSystem];
   abstract options?: Canvas2DGraphicsOptions;
-  abstract drawSprite: (graphics: Canvas2DGraphicsRough) => void;
+  abstract drawSprite: (graphics: Canvas2DGraphics) => void;
 
   constructor(position: Vector2) {
     this.position = position;

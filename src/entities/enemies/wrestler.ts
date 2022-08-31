@@ -1,4 +1,4 @@
-import { Canvas2DGraphicsRough, Vector2 } from 'crco-utils';
+import { Canvas2DGraphics, Vector2 } from 'crco-utils';
 import { wrestler } from '../../../svg/wrestler';
 import { Behaviors } from '../behaviors/behaviors';
 import { EntityType } from '../entityType';
@@ -21,7 +21,7 @@ export class Wrestler extends Enemy<Pick<Behaviors, 'attraction'>> {
     );
   }
 
-  drawSprite = (graphics: Canvas2DGraphicsRough) => {
+  drawSprite = (graphics: Canvas2DGraphics) => {
     wrestler.forEach((lines) => graphics.lineSegments(lines, this.options));
   };
 }

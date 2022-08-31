@@ -1,5 +1,5 @@
 import {
-  Canvas2DGraphicsRough,
+  Canvas2DGraphics,
   circleCircleCollision,
   lerp,
   TAU,
@@ -41,7 +41,7 @@ export class MagicCircleInstance extends WeaponInstance<MagicCircle> {
     return this.radius * 2;
   }
 
-  drawSprite = (graphics: Canvas2DGraphicsRough) => {
+  drawSprite = (graphics: Canvas2DGraphics) => {
     graphics.circle(0, 0, 0.5, {
       styles: { fillStyle: palette.violet, alpha: 0.1 },
       fill: true

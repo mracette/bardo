@@ -1,4 +1,4 @@
-import { Canvas2DGraphicsRough, circleCircleCollision, lerp, TAU } from 'crco-utils';
+import { Canvas2DGraphics, circleCircleCollision, lerp, TAU } from 'crco-utils';
 import { state } from '../../globals/game';
 import { palette } from '../../globals/palette';
 import { player } from '../../globals/player';
@@ -19,7 +19,7 @@ export class OrbInstance extends WeaponInstance<Orb> {
     super(parent);
   }
 
-  drawSprite = (graphics: Canvas2DGraphicsRough) => {
+  drawSprite = (graphics: Canvas2DGraphics) => {
     graphics.circle(0, 0, this.radius, {
       styles: { fillStyle: palette.violet },
       fill: true

@@ -1,9 +1,9 @@
-import { Canvas2DGraphicsRough, CanvasCoordinates } from 'crco-utils';
+import { Canvas2DGraphics, CanvasCoordinates } from 'crco-utils';
 import { debug } from '../globals/debug';
 
 export const makeSprites = (
-  graphics: Canvas2DGraphicsRough,
-  drawSprite: (graphics: Canvas2DGraphicsRough) => void,
+  graphics: Canvas2DGraphics,
+  drawSprite: (graphics: Canvas2DGraphics) => void,
   spriteSize: number,
   spriteCount: number,
   spriteCoordinateBounds: [number, number] // assumes square
@@ -15,7 +15,7 @@ export const makeSprites = (
     canvas.width = spriteSize;
     canvas.height = spriteSize;
     const context = canvas.getContext('2d')!;
-    const spriteGraphics = new Canvas2DGraphicsRough(context, {
+    const spriteGraphics = new Canvas2DGraphics(context, {
       ...graphics.options,
       styles: {
         ...graphics.options.styles,

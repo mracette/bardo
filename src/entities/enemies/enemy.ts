@@ -1,4 +1,5 @@
 import { Canvas2DGraphicsOptions, random, Vector2 } from 'crco-utils';
+import { drawExperience } from '../../drawing/drawExperience';
 import { state } from '../../globals/game';
 import { graphics } from '../../globals/graphics';
 import { palette } from '../../globals/palette';
@@ -7,12 +8,13 @@ import { Behaviors } from '../behaviors/behaviors';
 import { addGuarding } from '../behaviors/guarding';
 import { CachedEntity } from '../entity';
 import { EntityType } from '../entityType';
-import { StarLarge, StarMedium, StarSmall } from '../items/stars';
+import { Star } from '../items/stars';
 import { DamageOverlay } from '../overlays/damage';
 
 export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
   abstract radius: number;
 
+  maxHealth: number;
   health: number;
   speed = 0.00175;
   cooldownPeriod = 1000;
@@ -24,6 +26,7 @@ export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
     super(position);
     this.behaviors = behaviors;
     this.health = health;
+    this.maxHealth = health;
   }
 
   drawDamage(amount: number) {
@@ -46,8 +49,7 @@ export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
   }
 
   destroy() {
-    const Star = random([StarSmall, StarMedium, StarLarge]);
-    const star = new Star(this.center.clone());
+    const star = new Star(this.center.clone(), this.maxHealth);
     star.position.add(-star.spriteSize / 2, -star.spriteSize / 2);
     state.items.push(star);
     this.shouldDestroy = true;
