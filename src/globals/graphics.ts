@@ -3,7 +3,7 @@ import { CanvasCoordinates } from 'crco-utils';
 import { canvasContexts, canvasElements } from './dom';
 import { mapDimensions } from './map';
 
-export const fontFamily = 'Arial, sans-serif';
+const fontFamily = 'Arial, sans-serif';
 
 export const sharedStyles: Canvas2DStyles = {
   strokeStyle: 'white',

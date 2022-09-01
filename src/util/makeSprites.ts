@@ -1,5 +1,6 @@
 import { Canvas2DGraphics, CanvasCoordinates } from 'crco-utils';
 import { debug } from '../globals/debug';
+import { getSeededRandom } from './getSeededRandom';
 
 export const makeSprites = (
   graphics: Canvas2DGraphics,
@@ -9,6 +10,7 @@ export const makeSprites = (
   spriteCoordinateBounds: [number, number] // assumes square
 ): HTMLCanvasElement[] => {
   const sprites = [];
+  // apply styles so we can get the line width in raster units
   graphics.applyStyles(graphics.options.styles);
   for (let i = 0; i < spriteCount; i++) {
     const canvas = document.createElement('canvas');
@@ -19,13 +21,15 @@ export const makeSprites = (
       ...graphics.options,
       styles: {
         ...graphics.options.styles,
+        // pull the line width directly from the context and not from the options
         lineWidth: graphics.context.lineWidth
       },
       coords: new CanvasCoordinates({
         canvas,
         nxRange: spriteCoordinateBounds,
         nyRange: spriteCoordinateBounds
-      })
+      }),
+      random: getSeededRandom(i)
     });
     drawSprite(spriteGraphics);
     if (debug) {

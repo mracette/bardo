@@ -5,7 +5,6 @@ import { registerEvent, Trigger, unregisterEvent } from '../util/eventRegister';
 let uiResizeEvent: number;
 
 export const handleStateChange = (next: GameState) => {
-  console.log('state change', next);
   switch (next) {
     case GameState.Upgrade: {
       state.upgradeSelected = 0;

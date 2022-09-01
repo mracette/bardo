@@ -1,9 +1,4 @@
-import {
-  Canvas2DGraphicsOptions,
-  Canvas2DGraphics,
-  lerp,
-  Vector2
-} from 'crco-utils';
+import { Canvas2DGraphicsOptions, Canvas2DGraphics, lerp, Vector2 } from 'crco-utils';
 import { debug } from '../globals/debug';
 import { state } from '../globals/game';
 import { graphics } from '../globals/graphics';
@@ -51,8 +46,11 @@ export abstract class CachedEntity {
     if ('key' in this.cache) {
       return this.cache.key!;
     }
-    const key =
-      String(this.spriteKey) + String(this.radius) + JSON.stringify(this.options);
+    const key = [
+      String(this.spriteKey),
+      String(this.radius),
+      JSON.stringify(this.options)
+    ].join('~');
     this.cache.key = key;
     return key;
   }

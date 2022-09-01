@@ -1,4 +1,4 @@
-import { DPR } from 'crco-utils';
+import { DPR, mulberry32 } from 'crco-utils';
 import { drawExperience } from '../drawing/drawExperience';
 import { drawTiles } from '../drawing/drawTiles';
 import { drawUpgradeUi } from '../drawing/drawUpgradeUi';
@@ -7,6 +7,10 @@ import { canvasElements } from '../globals/dom';
 import { GameState, state } from '../globals/game';
 
 export const handleResize = () => {
+  // setting length = 0 will trigger garbage collection
+  for (const key in cache.sprites) {
+    cache.sprites[key].length = 0;
+  }
   drawTiles();
   const rect = canvasElements.map.getBoundingClientRect();
   canvasElements.ui.style.height = String(rect.height * 0.05);
@@ -16,10 +20,6 @@ export const handleResize = () => {
   canvasElements.ui.width = canvasElements.ui.clientWidth * DPR;
   canvasElements.ui.height = canvasElements.ui.clientHeight * DPR;
   drawExperience();
-  for (const key in cache.sprites) {
-    // setting length = 0 will trigger garbage collection
-    cache.sprites[key].length = 0;
-  }
   if (state.gameState === GameState.Upgrade) {
     drawUpgradeUi();
   }

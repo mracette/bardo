@@ -1,9 +1,10 @@
 import { Canvas2DGraphics, CanvasCoordinates } from 'crco-utils';
 import { state } from '../globals/game';
 import { graphics } from '../globals/graphics';
-import { mapDimensions } from '../globals/map';
+import { getSeededRandom } from '../util/getSeededRandom';
 
 export const drawUpgradeUi = () => {
+  graphics.upgrade.options.random = getSeededRandom(0);
   graphics.upgrade.clear();
   for (let i = 0; i < state.upgradeOptionCount; i++) {
     const panelCoords = new CanvasCoordinates({

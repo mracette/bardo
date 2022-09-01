@@ -1,4 +1,5 @@
 - [ ] remove keyboard shortcuts
+- [ ] find a good seed
 - [ ] increase debounce interval for resizing
 - [ ] set max DPR
 - [x] use escape for pause
