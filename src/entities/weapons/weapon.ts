@@ -3,6 +3,12 @@ import { state } from '../../globals/game';
 import { player } from '../../globals/player';
 import { CachedEntity } from '../entity';
 import { EntityType } from '../entityType';
+import { Arrow } from './arrow';
+import { Axe } from './axe';
+import { MagicCircle } from './circle';
+import { Orb } from './orb';
+
+export type WeaponType = typeof Orb | typeof Arrow | typeof Axe | typeof MagicCircle;
 
 export abstract class WeaponInstance<T extends Weapon<any>> extends CachedEntity {
   size = 0.25;
@@ -48,6 +54,7 @@ export abstract class WeaponInstance<T extends Weapon<any>> extends CachedEntity
 export abstract class Weapon<T extends WeaponInstance<any>> {
   instances: T[] = [];
 
+  abstract type: EntityType;
   abstract upgrade: () => void;
   abstract level: number;
   abstract damage: number;

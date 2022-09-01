@@ -54,6 +54,7 @@ export class Arrow extends Weapon<ArrowInstance> {
   range = 5;
   speed = 0.1;
   lastFired = 0;
+  type = EntityType.Arrow;
 
   constructor() {
     super();

@@ -11,6 +11,7 @@
 - [ ] bosses are outlined in blue
 - [ ] info on pause screen
 - [ ] treasure animation
+- [ ] arrow timing seems off?
 - [ ] powerups (mushroom)
 - [ ] add weighted random mechanism for spawning
 - [ ] improve hitboxes

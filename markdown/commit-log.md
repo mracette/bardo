@@ -1,3 +1,12 @@
+Thu, 01 Sep 2022 04:47:54 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 40.18 kb | 41142 | NA |
+| Compressed Build | 13.60 kb | 13924 | -66% |
+| Compressed Build (Adv Zip) | 13.04 kb | 13354 | -4% |
+
+## seed the randoms
+
 Thu, 01 Sep 2022 03:37:39 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |

@@ -52,9 +52,10 @@ export const graphics = {
     ...sharedOptions,
     coords: coordinates.upgrade,
     styles: {
-      ...sharedStyles
+      ...sharedStyles,
+      lineWidth: (coords) => coords.width(0.0175)
     },
-    roughness: 0.05
+    roughness: 0.02
   }),
   ui: new Canvas2DGraphics(canvasContexts.ui, {
     ...sharedOptions,

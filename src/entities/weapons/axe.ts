@@ -82,11 +82,11 @@ export class AxeInstance extends WeaponInstance<Axe> {
 
 export class Axe extends Weapon<AxeInstance> {
   level = 1;
-  range = 1.5;
-  speed = 0.1;
-  duration = 400;
-  // duration = 1000;
+  range = 1.7;
+  speed = 0.09;
+  duration = 500;
   lastFired = 0;
+  type = EntityType.Axe;
 
   constructor() {
     super();
@@ -97,7 +97,6 @@ export class Axe extends Weapon<AxeInstance> {
   }
 
   get frequency() {
-    // return 1000;
     return 1000 / this.stats.frequency[this.level - 1];
   }
 

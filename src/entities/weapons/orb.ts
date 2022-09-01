@@ -40,6 +40,7 @@ export class Orb extends Weapon<OrbInstance> {
   level = 1;
   drag = 0.33;
   period = 2000;
+  type = EntityType.Orb;
 
   constructor() {
     super();

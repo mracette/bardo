@@ -1,13 +1,25 @@
-import { mod } from 'crco-utils';
+import { isUndefined, mod } from 'crco-utils';
 import { drawUpgradeUi } from '../drawing/drawUpgradeUi';
 import { debug } from '../globals/debug';
 import { GameState, state } from '../globals/game';
+import { graphics } from '../globals/graphics';
 import { player } from '../globals/player';
 import { Trigger, triggerEvent } from '../util/eventRegister';
 
 export const handleKeyDown = (key: string) => {
   if (key === 'Enter') {
     state.weapons.forEach((weapon) => weapon.upgrade());
+    if (state.gameState === GameState.Upgrade) {
+      const selected = state.upgradeOptions[state.upgradeSelected];
+      if (!isUndefined(selected.Constructor)) {
+        new selected.Constructor();
+      } else {
+        selected.upgrade!();
+      }
+      state.upgradeSelected = 0;
+      graphics.upgrade.clear();
+      triggerEvent(Trigger.StateChange, GameState.Gameplay);
+    }
   }
   if (key === 'Shift') {
     console.log(key);

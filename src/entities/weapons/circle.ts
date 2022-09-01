@@ -69,6 +69,7 @@ export class MagicCircle extends Weapon<MagicCircleInstance> {
   lastFired = 0;
   frequency = 1500;
   duration = 1500;
+  type = EntityType.MagicCircle;
 
   constructor() {
     super();
