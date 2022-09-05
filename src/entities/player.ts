@@ -29,6 +29,15 @@ export class Player extends CachedEntity {
     super(position);
   }
 
+  get quadrant() {
+    const percent = 0.1;
+    if (this.position.y < mapDimensions.y * percent) return 0; // top
+    if (this.position.y > mapDimensions.y * (1 - percent)) return 1; // bottom
+    if (this.position.x < mapDimensions.x * percent) return 2; // left
+    if (this.position.x > mapDimensions.x * (1 - percent)) return 3; // right
+    return false;
+  }
+
   draw(alpha: number) {
     super.draw(
       alpha,

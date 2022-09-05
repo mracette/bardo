@@ -1,10 +1,5 @@
 import { boundedSine } from 'bounded-sine';
-import {
-  Canvas2DGraphicsOptions,
-  Canvas2DGraphics,
-  star,
-  Vector2
-} from 'crco-utils';
+import { Canvas2DGraphicsOptions, Canvas2DGraphics, star, Vector2 } from 'crco-utils';
 import { state } from '../../globals/game';
 import { coordinates } from '../../globals/graphics';
 import { origin } from '../../globals/map';
@@ -61,7 +56,7 @@ export class DamageOverlay extends CachedEntity {
         fontSize: (coords) => coords.width(0.35),
         textBaseline: 'top'
       },
-      roughness: 0.3
+      roughness: 0
     });
   };
 

@@ -11,6 +11,8 @@ export class Wrestler extends Enemy<Pick<Behaviors, 'attraction'>> {
   spriteKey = EntityType.Wrestler;
   radius = 0.5;
 
+  static baseHealth = 5;
+
   constructor(position: Vector2, health: number) {
     super(
       position,

@@ -5,10 +5,8 @@ import { getRandomUpgrade } from '../util/getRandomUpgrade';
 export const handleLevelUp = () => {
   state.experience.last = state.experience.current;
   state.experience.level++;
-  state.experience.next = state.experience.level * 50;
+  state.experience.next = Math.pow(state.experience.level, 2) * 50;
   state.upgradeOptions.length = 0;
-  for (let i = 0; i < state.upgradeOptionCount; i++) {
-    state.upgradeOptions.push(getRandomUpgrade());
-  }
+  state.upgradeOptions = getRandomUpgrade(state.upgradeOptionCount);
   triggerEvent(Trigger.StateChange, GameState.Upgrade);
 };

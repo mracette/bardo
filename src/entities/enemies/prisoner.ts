@@ -12,6 +12,8 @@ export class Prisoner extends Enemy<Pick<Behaviors, 'attraction'>> {
   radius = 0.5;
   speed = 0.002;
 
+  static baseHealth = 13;
+
   constructor(position: Vector2, health: number) {
     super(
       position,

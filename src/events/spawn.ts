@@ -1,11 +1,7 @@
 import { random, TAU, Vector2 } from 'crco-utils';
+import { EnemyEntityType, enemyTypeToClass } from '../entities/enemies/enemyTypes';
 import { Goat } from '../entities/enemies/goat';
-import { Prisoner } from '../entities/enemies/prisoner';
-import { Reaper } from '../entities/enemies/reaper';
-import { Tragedy } from '../entities/enemies/tragedy';
-import { Wrestler } from '../entities/enemies/wrestler';
 import { EnemyHint } from '../entities/overlays/enemyHint';
-import { debug } from '../globals/debug';
 import { state } from '../globals/game';
 import { mapDimensions } from '../globals/map';
 
@@ -20,16 +16,19 @@ const enum SpawnType {
 const RUN_TIME = 1000 * 60 * 15; // 15 minutes
 const BATCH_TIME = 1000 * 60 * 1; // 1 minute
 const SPAWN_POSITION = [0, 1, 2, 3];
+const ENEMY_TYPES = Object.keys(enemyTypeToClass) as unknown as EnemyEntityType[];
 
-const appearingEnemies = [Wrestler, Tragedy, Prisoner, Reaper];
-const batchEnemies = [Goat];
+const getEnemyHealth = (type: EnemyEntityType) => {
+  const Entity = enemyTypeToClass[type];
+  return Entity.baseHealth * state.experience.level * 0.5;
+};
 
 export const spawn = (elapsed: number) => {
   const seconds = Math.max(0, elapsed) / 1000;
   const spawnTime = (1000 * (RUN_TIME - seconds)) / 1000000;
   if (elapsed - state.timestamp.lastEnemySpawned >= spawnTime) {
     state.timestamp.lastEnemySpawned = elapsed;
-    const Enemy = random(appearingEnemies);
+    const type = random(ENEMY_TYPES);
     const position = random(SPAWN_POSITION);
     let x: number;
     let y: number;
@@ -53,7 +52,8 @@ export const spawn = (elapsed: number) => {
       x = 0;
       y = random(mapDimensions.y);
     }
-    state.enemies.push(new Enemy(new Vector2(x!, y!), 5));
+    const Enemy = enemyTypeToClass[type];
+    state.enemies.push(new Enemy(new Vector2(x!, y!), getEnemyHealth(type)));
   }
   if (elapsed - state.timestamp.lastBatchSpawned >= BATCH_TIME) {
     spawnBatch(elapsed);

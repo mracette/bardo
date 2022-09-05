@@ -15,58 +15,66 @@ const WEAPONS = [
 ];
 
 export interface UpgradeOption {
-  Constructor?: WeaponType;
   text: string;
-  upgrade?: () => void;
+  onChooseUpgrade: () => void;
 }
 
-export const getRandomUpgrade = () => {
-  const choice = random(WEAPONS);
-  const existing = state.weapons.find((weapon) => weapon.type === choice);
-  const level = (existing?.level ?? 0) + 1;
-  let Constructor: WeaponType | undefined;
-  let upgrade: () => void | undefined;
-  let text;
-  switch (choice) {
-    case EntityType.Arrow:
-      if (level === 1) {
-        Constructor = Arrow;
-      } else if (existing) {
-        upgrade = existing.upgrade;
-      }
-      text = `Arrow - L${level}`;
-      break;
-    case EntityType.Axe:
-      if (level === 1) {
-        Constructor = Axe;
-      } else if (existing) {
-        upgrade = existing.upgrade;
-      }
-      text = `Axe - L${level}`;
-      break;
-    case EntityType.Orb:
-      if (level === 1) {
-        Constructor = Orb;
-      } else if (existing) {
-        upgrade = existing.upgrade;
-      }
-      text = `Orb - L${level}`;
-      break;
-    case EntityType.MagicCircle:
-      if (level === 1) {
-        Constructor = MagicCircle;
-      } else if (existing) {
-        upgrade = existing.upgrade;
-      }
-      text = `Summoning Circle - L${level}`;
-      break;
-    default:
-      throw new Error();
+export const getRandomUpgrade = (count: number) => {
+  const allChoices = WEAPONS.map((type) => {
+    const existing = state.weapons.find((weapon) => weapon.type === type);
+    const level = (existing?.level ?? 0) + 1;
+    let onChooseUpgrade: () => void;
+    let text: string;
+    switch (type) {
+      case EntityType.Arrow:
+        if (level === 1) {
+          onChooseUpgrade = () => new Arrow();
+        } else if (existing) {
+          onChooseUpgrade = () => existing.upgrade();
+        }
+        text = `Arrow - L${level}`;
+        break;
+      case EntityType.Axe:
+        if (level === 1) {
+          onChooseUpgrade = () => new Axe();
+        } else if (existing) {
+          onChooseUpgrade = () => existing.upgrade();
+        }
+        text = `Axe - L${level}`;
+        break;
+      case EntityType.Orb:
+        if (level === 1) {
+          onChooseUpgrade = () => new Orb();
+        } else if (existing) {
+          onChooseUpgrade = () => existing.upgrade();
+        }
+        text = `Orb - L${level}`;
+        break;
+      case EntityType.MagicCircle:
+        if (level === 1) {
+          onChooseUpgrade = () => new MagicCircle();
+        } else if (existing) {
+          onChooseUpgrade = () => existing.upgrade();
+        }
+        text = `Summoning Circle - L${level}`;
+        break;
+      default:
+        throw new Error();
+    }
+    return {
+      text,
+      // @ts-ignore
+      onChooseUpgrade
+    };
+  });
+
+  const choices = [];
+
+  for (let i = 0; i < count; i++) {
+    const randomIndex = Math.floor(Math.random() * allChoices.length);
+    choices.push(allChoices[randomIndex]);
+    allChoices.splice(randomIndex, 1);
   }
-  return {
-    Constructor,
-    //@ts-ignore
-    upgrade,
-    text
-  };
+
+  return choices;
 };

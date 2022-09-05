@@ -10,13 +10,18 @@ import { CachedEntity } from '../entity';
 import { EntityType } from '../entityType';
 import { Star } from '../items/stars';
 import { DamageOverlay } from '../overlays/damage';
+import { Goat } from './goat';
+import { Prisoner } from './prisoner';
+import { Reaper } from './reaper';
+import { Tragedy } from './tragedy';
+import { Wrestler } from './wrestler';
 
 export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
   abstract radius: number;
 
   maxHealth: number;
   health: number;
-  speed = 0.00175;
+  speed = 0.00155;
   cooldownPeriod = 1000;
   cooldowns: Partial<Record<EntityType, number>> = {};
   options: Canvas2DGraphicsOptions = { styles: { fillStyle: palette.black }, fill: true };
@@ -33,7 +38,10 @@ export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
     graphics.gameplay.text(
       String(amount),
       this.center.x,
-      this.center.y - this.spriteSize / 2
+      this.center.y - this.spriteSize / 2,
+      {
+        roughness: 0
+      }
     );
   }
 

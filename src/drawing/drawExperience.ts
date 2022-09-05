@@ -6,7 +6,7 @@ export const drawExperience = () => {
   const progress =
     (state.experience.current - state.experience.last) /
     (state.experience.next - state.experience.last);
-  console.log('drawing', progress);
+  graphics.ui.clear();
   graphics.ui.rect(-1, -1, 1, 1, { fill: false, roughness: 0, stroke: true });
   graphics.ui.rect(-1, -1, progress, 1, {
     fill: true,

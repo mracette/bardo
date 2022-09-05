@@ -28,6 +28,7 @@ export const state = {
     lastEnemySpawned: 0,
     lastBatchSpawned: -1000 * 58
   },
+  health: 100,
   experience: {
     current: 0,
     level: 0,

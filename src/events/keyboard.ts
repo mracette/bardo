@@ -8,21 +8,15 @@ import { Trigger, triggerEvent } from '../util/eventRegister';
 
 export const handleKeyDown = (key: string) => {
   if (key === 'Enter') {
-    state.weapons.forEach((weapon) => weapon.upgrade());
     if (state.gameState === GameState.Upgrade) {
       const selected = state.upgradeOptions[state.upgradeSelected];
-      if (!isUndefined(selected.Constructor)) {
-        new selected.Constructor();
-      } else {
-        selected.upgrade!();
-      }
+      selected.onChooseUpgrade();
       state.upgradeSelected = 0;
       graphics.upgrade.clear();
       triggerEvent(Trigger.StateChange, GameState.Gameplay);
     }
   }
   if (key === 'Shift') {
-    console.log(key);
     state.experience.current = state.experience.next;
     triggerEvent(Trigger.LevelUp);
   }

@@ -35,7 +35,9 @@ export const drawUpgradeUi = () => {
       styles: {
         textBaseline: 'top',
         fillStyle: state.upgradeSelected === i ? palette.seafoam : palette.white
-      }
+      },
+      roughness: 0,
+      maxTextWidth: panelCoords.width(0.9)
     });
   }
 };

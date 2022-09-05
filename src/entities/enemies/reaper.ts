@@ -11,6 +11,8 @@ export class Reaper extends Enemy<Pick<Behaviors, 'attraction'>> {
   spriteKey = EntityType.Reaper;
   radius = 0.5;
 
+  static baseHealth = 15;
+
   constructor(position: Vector2, health: number) {
     super(
       position,

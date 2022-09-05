@@ -2,6 +2,7 @@ import { Canvas2DGraphicsOptions, Canvas2DGraphics, Vector2 } from 'crco-utils';
 import { drawExperience } from '../../drawing/drawExperience';
 import { state } from '../../globals/game';
 import { palette } from '../../globals/palette';
+import { Trigger, triggerEvent } from '../../util/eventRegister';
 import { Behaviors } from '../behaviors/behaviors';
 import { EntityType } from '../entityType';
 import { spriteCoordinateSystem } from '../sprites';
@@ -33,6 +34,9 @@ export class Star extends Item<Pick<Behaviors, 'collectible'>> {
         initialPosition: position.clone(),
         onCollected: (index: number) => {
           state.experience.current += experience;
+          if (state.experience.current > state.experience.next) {
+            triggerEvent(Trigger.LevelUp);
+          }
           drawExperience();
           this.destroy(index);
         }
