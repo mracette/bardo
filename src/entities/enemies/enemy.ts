@@ -19,6 +19,7 @@ import { Wrestler } from './wrestler';
 export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
   abstract radius: number;
 
+  damageInflicted = 5;
   maxHealth: number;
   health: number;
   speed = 0.00155;

@@ -1,14 +1,26 @@
-import { Canvas2DGraphicsOptions, Canvas2DGraphics, clamp, Vector2 } from 'crco-utils';
+import {
+  Canvas2DGraphicsOptions,
+  Canvas2DGraphics,
+  clamp,
+  Vector2,
+  circleCircleCollision,
+  lerp
+} from 'crco-utils';
 import { meditator } from '../../svg/meditator';
 import { state } from '../globals/game';
-import { mapDimensions } from '../globals/map';
+import { graphics } from '../globals/graphics';
+import { mapDimensions, tileWidth } from '../globals/map';
 import { SQRT_2_2 } from '../globals/math';
 import { palette } from '../globals/palette';
 import { CachedEntity } from './entity';
 import { EntityType } from './entityType';
 import { spriteCoordinateSystem } from './sprites';
 
+const DAMAGE_COOLDOWN = 200;
 export class Player extends CachedEntity {
+  lastDamaged = 0;
+  maxHealth = 100;
+  health = 100;
   radius = 0.75;
   spriteSize = 1.5;
   spriteKey = EntityType.Player;
@@ -17,7 +29,7 @@ export class Player extends CachedEntity {
   forwardDirection: 'left' | 'right' = 'right';
   mirrorImageOptions: Canvas2DGraphicsOptions = {
     styles: {
-      scale: { origin: this.center, scale: new Vector2(-1, 1) }
+      // scale: { origin: this.centerAlpha, scale: new Vector2(-1, 1) }
     }
   };
   options: Canvas2DGraphicsOptions = {
@@ -39,9 +51,25 @@ export class Player extends CachedEntity {
   }
 
   draw(alpha: number) {
+    this.preDraw(alpha);
     super.draw(
       alpha,
-      this.forwardDirection === 'left' ? this.mirrorImageOptions : undefined
+      this.forwardDirection === 'left' ? this.mirrorImageOptions : undefined,
+      false
+    );
+    graphics.gameplay.rect(
+      this.centerAlpha.x - 0.5,
+      this.centerAlpha.y + this.radius,
+      (tileWidth * this.health) / this.maxHealth,
+      tileWidth / 10,
+      {
+        fill: true,
+        stroke: false,
+        roughness: 0,
+        styles: {
+          fillStyle: palette.red
+        }
+      }
     );
   }
 
@@ -55,6 +83,30 @@ export class Player extends CachedEntity {
     super.update(elapsed, delta);
     this.updatePosition(elapsed, delta);
   };
+
+  checkCollisions(elapsed: number) {
+    if (elapsed < this.lastDamaged + DAMAGE_COOLDOWN) return;
+    for (let i = 0; i < state.enemies.length; i++) {
+      const enemy = state.enemies[i];
+      if (
+        circleCircleCollision(
+          this.position.x,
+          this.position.y,
+          this.radius,
+          enemy.position.x,
+          enemy.position.y,
+          enemy.radius
+        )
+      ) {
+        this.takeDamage(enemy.damageInflicted, elapsed);
+      }
+    }
+  }
+
+  takeDamage(amount: number, elapsed: number) {
+    this.lastDamaged = elapsed;
+    this.health -= amount;
+  }
 
   updatePosition = (elapsed: number, delta: number) => {
     const moveAmount = delta * this.speed;

@@ -10,6 +10,7 @@ import { cache, spriteCoordinateSystem } from './sprites';
 interface InstanceCache {
   key?: string;
   center?: Vector2;
+  centerPrevious?: Vector2;
 }
 export abstract class CachedEntity {
   positionPrevious: Vector2;
@@ -17,6 +18,10 @@ export abstract class CachedEntity {
   spriteKey: EntityType | string = '';
   cache: InstanceCache = {};
   shouldDestroy = false;
+
+  centerPrevious = new Vector2(0, 0);
+  centerAlpha = new Vector2(0, 0);
+  positionAlpha = new Vector2(0, 0);
 
   spriteCount = 4;
   spriteIndex = 0;
@@ -42,6 +47,15 @@ export abstract class CachedEntity {
     return center;
   }
 
+  // get centerPrevious() {
+  //   if ('centerPrevious' in this.cache) {
+  //     return this.cache.centerPrevious!;
+  //   }
+  //   const value = this.position.clone().add(this.spriteSize / 2, this.spriteSize / 2);
+  //   this.cache.centerPrevious = value;
+  //   return value;
+  // }
+
   get key() {
     if ('key' in this.cache) {
       return this.cache.key!;
@@ -55,9 +69,21 @@ export abstract class CachedEntity {
     return key;
   }
 
-  draw(alpha: number, options?: Canvas2DGraphicsOptions) {
+  preDraw(alpha: number) {
+    this.positionAlpha.x = lerp(alpha, this.positionPrevious.x, this.position.x);
+    this.positionAlpha.y = lerp(alpha, this.positionPrevious.y, this.position.y);
+
+    this.centerAlpha.x = lerp(alpha, this.centerPrevious.x, this.center.x);
+    this.centerAlpha.y = lerp(alpha, this.centerPrevious.y, this.center.y);
+  }
+
+  draw(alpha: number, options?: Canvas2DGraphicsOptions, preDraw = true) {
     const key = this.key;
     const cached = key in cache.sprites && cache.sprites[key].length;
+
+    if (preDraw) {
+      this.preDraw(alpha);
+    }
 
     if (!cached) {
       if (debug) {
@@ -76,20 +102,26 @@ export abstract class CachedEntity {
 
     graphics.gameplay.drawImage(
       sprite,
-      lerp(alpha, this.positionPrevious.x, this.position.x),
-      lerp(alpha, this.positionPrevious.y, this.position.y),
+      this.positionAlpha.x,
+      this.positionAlpha.y,
       options
     );
 
     if (debug) {
-      graphics.gameplay.circle(this.center.x, this.center.y, this.radius * tileWidth, {
-        styles: { strokeStyle: 'red' }
-      });
+      graphics.gameplay.circle(
+        this.centerAlpha.x,
+        this.centerAlpha.y,
+        this.radius * tileWidth,
+        {
+          styles: { strokeStyle: 'red' }
+        }
+      );
     }
   }
 
   update(elapsed: number, delta: number, index?: number) {
     this.positionPrevious.set(this.position);
+    this.centerPrevious.set(this.center);
     this.center.x = this.position.x + this.spriteSize / 2;
     this.center.y = this.position.y + this.spriteSize / 2;
     this.spriteIndex = Math.floor(
