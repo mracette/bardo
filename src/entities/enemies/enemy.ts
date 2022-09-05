@@ -22,7 +22,7 @@ export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
   damageInflicted = 5;
   maxHealth: number;
   health: number;
-  speed = 0.00155;
+  speed = 0.025;
   cooldownPeriod = 1000;
   cooldowns: Partial<Record<EntityType, number>> = {};
   options: Canvas2DGraphicsOptions = { styles: { fillStyle: palette.black }, fill: true };
@@ -67,11 +67,12 @@ export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
   update(elapsed: number, delta: number) {
     super.update(elapsed, delta);
     this.updatePosition(elapsed, delta);
+    this.updateCenterFromPosition();
   }
 
   updatePosition(elapsed: number, delta: number) {
     if (this.behaviors.attraction) {
-      addAttraction(this.position, delta, this.behaviors.attraction);
+      addAttraction(this.position, this.speed);
     }
     if (this.behaviors.guarding) {
       addGuarding(this.position, delta, this.behaviors.guarding);

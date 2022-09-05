@@ -22,12 +22,13 @@ export class ArrowInstance extends WeaponInstance<Arrow> {
     this.targetNormalized = Vector2.from(target, this.center).normalize();
     this.targetAngle = this.targetNormalized.angle() + PI;
     this.rotationOptions = {
-      styles: { rotation: { origin: this.center, rotation: this.targetAngle } }
+      styles: { rotation: { origin: this.centerAlpha, rotation: this.targetAngle } }
     };
   }
 
   draw(alpha: number) {
-    super.draw(alpha, this.rotationOptions);
+    this.preDraw(alpha);
+    super.draw(alpha, this.rotationOptions, false);
   }
 
   drawSprite = (graphics: Canvas2DGraphics) => {
@@ -43,7 +44,6 @@ export class ArrowInstance extends WeaponInstance<Arrow> {
   };
 
   updatePosition = (elapsed: number, delta: number) => {
-    this.positionPrevious.set(this.position);
     this.position.x += this.targetNormalized.x * this.parent.speed;
     this.position.y += this.targetNormalized.y * this.parent.speed;
   };

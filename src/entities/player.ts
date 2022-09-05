@@ -16,20 +16,19 @@ import { CachedEntity } from './entity';
 import { EntityType } from './entityType';
 import { spriteCoordinateSystem } from './sprites';
 
-const DAMAGE_COOLDOWN = 200;
 export class Player extends CachedEntity {
   lastDamaged = 0;
   maxHealth = 100;
   health = 100;
-  radius = 0.75;
+  radius = 0.6;
   spriteSize = 1.5;
   spriteKey = EntityType.Player;
-  speed = 0.005;
+  speed = 0.065;
   coordinateSystem = spriteCoordinateSystem.external;
   forwardDirection: 'left' | 'right' = 'right';
   mirrorImageOptions: Canvas2DGraphicsOptions = {
     styles: {
-      // scale: { origin: this.centerAlpha, scale: new Vector2(-1, 1) }
+      scale: { origin: this.centerAlpha, scale: new Vector2(-1, 1) }
     }
   };
   options: Canvas2DGraphicsOptions = {
@@ -40,6 +39,8 @@ export class Player extends CachedEntity {
   constructor(position: Vector2) {
     super(position);
   }
+
+  static damageCooldown = 200;
 
   get quadrant() {
     const percent = 0.1;
@@ -82,19 +83,24 @@ export class Player extends CachedEntity {
   update = (elapsed: number, delta: number) => {
     super.update(elapsed, delta);
     this.updatePosition(elapsed, delta);
+    this.updateCenterFromPosition();
+    this.checkCollisions(elapsed);
   };
 
   checkCollisions(elapsed: number) {
-    if (elapsed < this.lastDamaged + DAMAGE_COOLDOWN) return;
+    if (elapsed < this.lastDamaged + Player.damageCooldown) {
+      console.log('cooldown');
+      return;
+    }
     for (let i = 0; i < state.enemies.length; i++) {
       const enemy = state.enemies[i];
       if (
         circleCircleCollision(
-          this.position.x,
-          this.position.y,
+          this.center.x,
+          this.center.y,
           this.radius,
-          enemy.position.x,
-          enemy.position.y,
+          enemy.center.x,
+          enemy.center.y,
           enemy.radius
         )
       ) {
@@ -104,12 +110,13 @@ export class Player extends CachedEntity {
   }
 
   takeDamage(amount: number, elapsed: number) {
+    console.log('taking damage', amount);
     this.lastDamaged = elapsed;
     this.health -= amount;
   }
 
   updatePosition = (elapsed: number, delta: number) => {
-    const moveAmount = delta * this.speed;
+    const moveAmount = this.speed;
     const diagonalAmount = SQRT_2_2 * moveAmount;
     let deltaX = 0;
     let deltaY = 0;

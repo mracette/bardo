@@ -1,6 +1,7 @@
 import { aspectRatioResize } from 'crco-utils';
 import Stats from 'stats.js';
 import './dom/styles.css';
+import { Player } from './entities/player';
 import { handleInitialize } from './events/initialize';
 import { handleKeyDown, handleKeyUp } from './events/keyboard';
 import { handleLevelUp } from './events/levelUp';
@@ -26,6 +27,7 @@ const deltaTimeFixed = 1000 / fps;
 let elapsedTime = 0;
 let clockTimePrevious = 0;
 let accumulator = 0;
+let slowdown = 0;
 
 const main = (clockTime = 0) => {
   stats.begin();
@@ -33,8 +35,13 @@ const main = (clockTime = 0) => {
   const deltaTimeClock = isPaused ? 0 : clockTime - clockTimePrevious;
   clockTimePrevious = clockTime;
 
+  slowdown =
+    player.lastDamaged === 0
+      ? 1
+      : Math.min(1, (elapsedTime - player.lastDamaged) / Player.damageCooldown);
+
   // clamp for extra long frames
-  accumulator += Math.min(deltaTimeClock, 50);
+  accumulator += Math.min(deltaTimeClock, 50) * slowdown;
 
   while (accumulator >= deltaTimeFixed) {
     update();
@@ -79,11 +86,11 @@ const update = () => {
 
 const render = (alpha: number) => {
   graphics.gameplay.clear();
-  for (let i = 0; i < state.enemies.length; i++) {
-    state.enemies[i].draw(alpha);
-  }
   for (let i = 0; i < state.weapons.length; i++) {
     state.weapons[i].draw(alpha);
+  }
+  for (let i = 0; i < state.enemies.length; i++) {
+    state.enemies[i].draw(alpha);
   }
   for (let i = 0; i < state.items.length; i++) {
     state.items[i].draw(alpha);
@@ -91,7 +98,18 @@ const render = (alpha: number) => {
   for (let i = 0; i < state.overlays.length; i++) {
     state.overlays[i].draw(alpha);
   }
+
   player.draw(alpha);
+  if (slowdown < 1) {
+    graphics.gameplay.rect(0, 0, mapDimensions.x, mapDimensions.y, {
+      roughness: 0,
+      fill: true,
+      styles: {
+        fillStyle: 'red',
+        alpha: (1 - slowdown) * 0.33
+      }
+    });
+  }
 };
 
 aspectRatioResize(canvasElements.map, mapDimensions);

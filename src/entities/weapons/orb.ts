@@ -27,7 +27,6 @@ export class OrbInstance extends WeaponInstance<Orb> {
   };
 
   updatePosition = (elapsed: number, delta: number) => {
-    this.positionPrevious.set(this.position);
     const angle = this.offset + TAU * (elapsed / this.parent.period);
     const x = player.center.x + Math.cos(angle) * this.parent.range - this.spriteSize / 2;
     const y = player.center.y + Math.sin(angle) * this.parent.range - this.spriteSize / 2;

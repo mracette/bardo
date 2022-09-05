@@ -72,7 +72,6 @@ export class AxeInstance extends WeaponInstance<Axe> {
   };
 
   updatePosition = (elapsed: number, delta: number) => {
-    this.positionPrevious.set(this.position);
     const n = normalize(elapsed, this.start, this.start + this.parent.duration);
     const angle = -PI / 2 - n * PI;
     this.parent.setPositionFromAngle(this.position, angle, this.initialDirection);

@@ -19,7 +19,6 @@ export abstract class CachedEntity {
   cache: InstanceCache = {};
   shouldDestroy = false;
 
-  centerPrevious = new Vector2(0, 0);
   centerAlpha = new Vector2(0, 0);
   positionAlpha = new Vector2(0, 0);
 
@@ -47,14 +46,14 @@ export abstract class CachedEntity {
     return center;
   }
 
-  // get centerPrevious() {
-  //   if ('centerPrevious' in this.cache) {
-  //     return this.cache.centerPrevious!;
-  //   }
-  //   const value = this.position.clone().add(this.spriteSize / 2, this.spriteSize / 2);
-  //   this.cache.centerPrevious = value;
-  //   return value;
-  // }
+  get centerPrevious() {
+    if ('centerPrevious' in this.cache) {
+      return this.cache.centerPrevious!;
+    }
+    const value = this.position.clone().add(this.spriteSize / 2, this.spriteSize / 2);
+    this.cache.centerPrevious = value;
+    return value;
+  }
 
   get key() {
     if ('key' in this.cache) {
@@ -122,10 +121,13 @@ export abstract class CachedEntity {
   update(elapsed: number, delta: number, index?: number) {
     this.positionPrevious.set(this.position);
     this.centerPrevious.set(this.center);
-    this.center.x = this.position.x + this.spriteSize / 2;
-    this.center.y = this.position.y + this.spriteSize / 2;
     this.spriteIndex = Math.floor(
       ((elapsed / state.spritePeriod) % 1) * this.spriteCount
     );
+  }
+
+  updateCenterFromPosition() {
+    this.center.x = this.position.x + this.spriteSize / 2;
+    this.center.y = this.position.y + this.spriteSize / 2;
   }
 }

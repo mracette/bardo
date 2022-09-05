@@ -58,7 +58,7 @@ export class MagicCircleInstance extends WeaponInstance<MagicCircle> {
   };
 
   updatePosition = (elapsed: number, delta: number) => {
-    this.positionPrevious.set(this.position);
+    void 0;
   };
 }
 

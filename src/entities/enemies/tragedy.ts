@@ -9,7 +9,7 @@ export class Tragedy extends Enemy<Pick<Behaviors, 'attraction'>> {
   coordinateSystem = spriteCoordinateSystem.external;
   spriteSize = 2;
   spriteKey = EntityType.Tragedy;
-  radius = 1;
+  radius = 0.8;
 
   static baseHealth = 10;
 

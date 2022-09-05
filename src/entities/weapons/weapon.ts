@@ -47,6 +47,7 @@ export abstract class WeaponInstance<T extends Weapon<any>> extends CachedEntity
   update(elapsed: number, delta: number, index: number) {
     super.update(elapsed, delta);
     this.updatePosition(elapsed, delta, index);
+    this.updateCenterFromPosition();
     this.handleCollisions(this.parent.damage, index, elapsed);
   }
 }

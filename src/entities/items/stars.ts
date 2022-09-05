@@ -30,7 +30,7 @@ export class Star extends Item<Pick<Behaviors, 'collectible'>> {
   constructor(position: Vector2, experience: number) {
     super(position, {
       collectible: {
-        distance: 3,
+        distance: 2,
         initialPosition: position.clone(),
         onCollected: (index: number) => {
           state.experience.current += experience;

@@ -23,6 +23,7 @@ export abstract class Item<
   update(elapsed: number, delta: number, index: number) {
     super.update(elapsed, delta);
     this.updatePosition(elapsed, delta, index);
+    this.updateCenterFromPosition();
   }
 
   updatePosition(elapsed: number, delta: number, index: number) {
