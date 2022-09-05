@@ -24,7 +24,7 @@ export const addCollectible = (
     return;
   }
   // end the sequence
-  if (behavior.start && vector.magnitude < 0.5) {
+  if (behavior.start && vector.magnitude < 1) {
     behavior.onCollected(index);
     return;
   }

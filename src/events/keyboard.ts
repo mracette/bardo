@@ -7,6 +7,10 @@ import { player } from '../globals/player';
 import { Trigger, triggerEvent } from '../util/eventRegister';
 
 export const handleKeyDown = (key: string) => {
+  if (state.gameState === GameState.Intro) {
+    triggerEvent(Trigger.StateChange, GameState.Gameplay);
+    return;
+  }
   if (key === 'Enter') {
     if (state.gameState === GameState.Upgrade) {
       const selected = state.upgradeOptions[state.upgradeSelected];

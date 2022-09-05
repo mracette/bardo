@@ -1,3 +1,12 @@
+Mon, 05 Sep 2022 20:51:02 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 44.24 kb | 45298 | NA |
+| Compressed Build | 15.05 kb | 15411 | -66% |
+| Compressed Build (Adv Zip) | 14.38 kb | 14728 | -4% |
+
+## fix alpha issues and slowdown for damage
+
 Mon, 05 Sep 2022 19:26:53 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |

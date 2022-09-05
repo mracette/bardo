@@ -74,7 +74,7 @@ export class Player extends CachedEntity {
     );
   }
 
-  drawSprite = (graphics: Canvas2DGraphics | Canvas2DGraphics) => {
+  drawSprite = (graphics: Canvas2DGraphics) => {
     meditator.forEach((lines) => {
       graphics.lineSegments(lines, this.options);
     });
@@ -89,7 +89,6 @@ export class Player extends CachedEntity {
 
   checkCollisions(elapsed: number) {
     if (elapsed < this.lastDamaged + Player.damageCooldown) {
-      console.log('cooldown');
       return;
     }
     for (let i = 0; i < state.enemies.length; i++) {
@@ -110,7 +109,6 @@ export class Player extends CachedEntity {
   }
 
   takeDamage(amount: number, elapsed: number) {
-    console.log('taking damage', amount);
     this.lastDamaged = elapsed;
     this.health -= amount;
   }

@@ -1,5 +1,8 @@
+import { drawExperience } from '../drawing/drawExperience';
+import { drawTiles } from '../drawing/drawTiles';
 import { drawUpgradeUi } from '../drawing/drawUpgradeUi';
 import { GameState, state } from '../globals/game';
+import { graphics } from '../globals/graphics';
 import { registerEvent, Trigger, unregisterEvent } from '../util/eventRegister';
 
 let uiResizeEvent: number;
@@ -10,6 +13,12 @@ export const handleStateChange = (next: GameState) => {
       state.upgradeSelected = 0;
       drawUpgradeUi();
       uiResizeEvent = registerEvent(Trigger.CanvasResize, drawUpgradeUi);
+    }
+    case GameState.Gameplay: {
+      graphics.map.clear();
+      graphics.ui.clear();
+      drawTiles();
+      drawExperience();
     }
   }
   if (next !== GameState.Upgrade) {

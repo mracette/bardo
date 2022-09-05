@@ -119,6 +119,7 @@ export abstract class CachedEntity {
   }
 
   update(elapsed: number, delta: number, index?: number) {
+    console.log(this.spriteIndex);
     this.positionPrevious.set(this.position);
     this.centerPrevious.set(this.center);
     this.spriteIndex = Math.floor(

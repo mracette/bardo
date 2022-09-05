@@ -11,7 +11,8 @@ export const handleResize = () => {
   for (const key in cache.sprites) {
     cache.sprites[key].length = 0;
   }
-  drawTiles();
+
+  // style the ui canvas
   const rect = canvasElements.map.getBoundingClientRect();
   canvasElements.ui.style.height = String(rect.height * 0.05);
   canvasElements.ui.style.left = String(rect.left);
@@ -19,7 +20,11 @@ export const handleResize = () => {
   canvasElements.ui.style.width = String(rect.width);
   canvasElements.ui.width = canvasElements.ui.clientWidth * DPR;
   canvasElements.ui.height = canvasElements.ui.clientHeight * DPR;
-  drawExperience();
+
+  if (state.gameState === GameState.Gameplay) {
+    drawTiles();
+    drawExperience();
+  }
   if (state.gameState === GameState.Upgrade) {
     drawUpgradeUi();
   }
