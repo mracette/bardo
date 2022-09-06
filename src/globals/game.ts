@@ -6,7 +6,7 @@ import { Wrestler } from '../entities/enemies/wrestler';
 import { Item } from '../entities/items/item';
 import { DamageOverlay } from '../entities/overlays/damage';
 import { EnemyHint } from '../entities/overlays/enemyHint';
-import { Weapon, WeaponInstance, WeaponType } from '../entities/weapons/weapon';
+import { Weapon } from '../entities/weapons/weapon';
 import { UpgradeOption } from '../util/getRandomUpgrade';
 import { mapCenter } from './map';
 

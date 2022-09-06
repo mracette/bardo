@@ -10,7 +10,6 @@ export class Prisoner extends Enemy<Pick<Behaviors, 'attraction'>> {
   spriteSize = 1;
   spriteKey = EntityType.Prisoner;
   radius = 0.5;
-  speed = 0.002;
 
   static baseHealth = 13;
 

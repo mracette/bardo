@@ -23,7 +23,12 @@ export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
   maxHealth: number;
   health: number;
   speed = 0.025;
-  cooldownPeriod = 1000;
+  cooldownPeriod = {
+    [EntityType.Axe]: 1000,
+    [EntityType.MagicCircle]: 150,
+    [EntityType.Orb]: 1000,
+    [EntityType.Arrow]: 1
+  };
   cooldowns: Partial<Record<EntityType, number>> = {};
   options: Canvas2DGraphicsOptions = { styles: { fillStyle: palette.black }, fill: true };
   behaviors: T;
@@ -48,7 +53,9 @@ export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
 
   damage(amount: number, index: number, elapsed: number, type: EntityType) {
     const cooldown = this.cooldowns[type];
-    if (cooldown && elapsed - cooldown < this.cooldownPeriod) return;
+    // @ts-ignore
+    const cooldownPeriod = type in this.cooldownPeriod ? this.cooldownPeriod[type] : 1000;
+    if (cooldown && elapsed - cooldown < cooldownPeriod) return;
     this.health -= amount;
     state.overlays.push(new DamageOverlay(this, String(amount), elapsed));
     if (this.health <= 0) {

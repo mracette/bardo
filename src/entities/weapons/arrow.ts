@@ -26,12 +26,7 @@ export class ArrowInstance extends WeaponInstance<Arrow> {
     };
   }
 
-  draw(alpha: number) {
-    this.preDraw(alpha);
-    super.draw(alpha, this.rotationOptions, false);
-  }
-
-  drawSprite = (graphics: Canvas2DGraphics) => {
+  static staticDraw(graphics: Canvas2DGraphics) {
     graphics.lineSegments([
       [-1, 0],
       [1, 0]
@@ -41,6 +36,15 @@ export class ArrowInstance extends WeaponInstance<Arrow> {
       [-1, 0],
       [-0.75, 0.4]
     ]);
+  }
+
+  draw(alpha: number) {
+    this.preDraw(alpha);
+    super.draw(alpha, this.rotationOptions, false);
+  }
+
+  drawSprite = (graphics: Canvas2DGraphics) => {
+    ArrowInstance.staticDraw(graphics);
   };
 
   updatePosition = (elapsed: number, delta: number) => {
@@ -56,8 +60,8 @@ export class Arrow extends Weapon<ArrowInstance> {
   lastFired = 0;
   type = EntityType.Arrow;
 
-  constructor() {
-    super();
+  constructor(equipped?: boolean) {
+    super(equipped);
   }
 
   get stats() {
@@ -65,11 +69,11 @@ export class Arrow extends Weapon<ArrowInstance> {
   }
 
   get frequency() {
-    return 1000 / this.stats.frequency[this.level - 1];
+    return 1000 / this.stats['Firing Rate'][this.level - 1];
   }
 
   get damage() {
-    return this.stats.damage[this.level - 1];
+    return this.stats.Damage[this.level - 1];
   }
 
   update(elapsed: number, delta: number): void {

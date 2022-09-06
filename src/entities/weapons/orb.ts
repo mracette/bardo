@@ -19,11 +19,15 @@ export class OrbInstance extends WeaponInstance<Orb> {
     super(parent);
   }
 
-  drawSprite = (graphics: Canvas2DGraphics) => {
-    graphics.circle(0, 0, this.radius, {
+  static staticDraw(graphics: Canvas2DGraphics, radius: number) {
+    graphics.circle(0, 0, radius, {
       styles: { fillStyle: palette.violet },
       fill: true
     });
+  }
+
+  drawSprite = (graphics: Canvas2DGraphics) => {
+    OrbInstance.staticDraw(graphics, this.radius);
   };
 
   updatePosition = (elapsed: number, delta: number) => {
@@ -41,8 +45,8 @@ export class Orb extends Weapon<OrbInstance> {
   period = 2000;
   type = EntityType.Orb;
 
-  constructor() {
-    super();
+  constructor(equipped?: boolean) {
+    super(equipped);
     this.instances.push(new OrbInstance(this));
   }
 
@@ -51,15 +55,15 @@ export class Orb extends Weapon<OrbInstance> {
   }
 
   get orbs() {
-    return this.stats.orbs[this.level - 1];
+    return this.stats.Orbs[this.level - 1];
   }
 
   get range() {
-    return this.stats.range[this.level - 1];
+    return this.stats.Range[this.level - 1];
   }
 
   get damage() {
-    return this.stats.damage[this.level - 1];
+    return this.stats.Damage[this.level - 1];
   }
 
   upgrade = () => {

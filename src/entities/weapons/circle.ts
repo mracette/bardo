@@ -33,15 +33,7 @@ export class MagicCircleInstance extends WeaponInstance<MagicCircle> {
     this.position.add(-this.radius, -this.radius);
   }
 
-  get radius() {
-    return this.parent.area;
-  }
-
-  get spriteSize() {
-    return this.radius * 2;
-  }
-
-  drawSprite = (graphics: Canvas2DGraphics) => {
+  static staticDraw(graphics: Canvas2DGraphics) {
     graphics.circle(0, 0, 0.5, {
       styles: { fillStyle: palette.violet, alpha: 0.1 },
       fill: true
@@ -55,6 +47,18 @@ export class MagicCircleInstance extends WeaponInstance<MagicCircle> {
       const y = 0.3 * Math.sin((TAU * i) / 5);
       graphics.circle(x, y, 0.2, { styles: { strokeStyle: palette.violet } });
     }
+  }
+
+  get radius() {
+    return this.parent.area;
+  }
+
+  get spriteSize() {
+    return this.radius * 2;
+  }
+
+  drawSprite = (graphics: Canvas2DGraphics) => {
+    MagicCircleInstance.staticDraw(graphics);
   };
 
   updatePosition = (elapsed: number, delta: number) => {
@@ -71,8 +75,8 @@ export class MagicCircle extends Weapon<MagicCircleInstance> {
   duration = 1500;
   type = EntityType.MagicCircle;
 
-  constructor() {
-    super();
+  constructor(equipped?: boolean) {
+    super(equipped);
   }
 
   get stats() {
@@ -80,11 +84,11 @@ export class MagicCircle extends Weapon<MagicCircleInstance> {
   }
 
   get area() {
-    return this.stats.area[this.level - 1];
+    return this.stats.Area[this.level - 1];
   }
 
   get damage() {
-    return this.stats.damage[this.level - 1];
+    return this.stats.Damage[this.level - 1];
   }
 
   update(elapsed: number, delta: number): void {

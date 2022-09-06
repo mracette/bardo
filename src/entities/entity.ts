@@ -17,6 +17,7 @@ export abstract class CachedEntity {
   position: Vector2;
   spriteKey: EntityType | string = '';
   cache: InstanceCache = {};
+  drawGraphics: Canvas2DGraphics;
   shouldDestroy = false;
 
   centerAlpha = new Vector2(0, 0);
@@ -32,8 +33,9 @@ export abstract class CachedEntity {
   abstract options?: Canvas2DGraphicsOptions;
   abstract drawSprite: (graphics: Canvas2DGraphics) => void;
 
-  constructor(position: Vector2) {
+  constructor(position: Vector2, drawGraphics: Canvas2DGraphics = graphics.gameplay) {
     this.position = position;
+    this.drawGraphics = drawGraphics;
     this.positionPrevious = position.clone();
   }
 
@@ -89,9 +91,9 @@ export abstract class CachedEntity {
         console.info('Cached sprite not found. Regenerating. Key: ' + key);
       }
       cache.sprites[this.key] = makeSprites(
-        graphics.gameplay,
+        this.drawGraphics,
         this.drawSprite,
-        graphics.gameplay.coords.width(tileWidth * this.spriteSize),
+        this.drawGraphics.coords.width(tileWidth * this.spriteSize),
         this.spriteCount,
         this.coordinateSystem
       );
@@ -99,7 +101,7 @@ export abstract class CachedEntity {
 
     const sprite = cache.sprites[key][this.spriteIndex];
 
-    graphics.gameplay.drawImage(
+    this.drawGraphics.drawImage(
       sprite,
       this.positionAlpha.x,
       this.positionAlpha.y,
@@ -107,7 +109,7 @@ export abstract class CachedEntity {
     );
 
     if (debug) {
-      graphics.gameplay.circle(
+      this.drawGraphics.circle(
         this.centerAlpha.x,
         this.centerAlpha.y,
         this.radius * tileWidth,
@@ -119,7 +121,6 @@ export abstract class CachedEntity {
   }
 
   update(elapsed: number, delta: number, index?: number) {
-    console.log(this.spriteIndex);
     this.positionPrevious.set(this.position);
     this.centerPrevious.set(this.center);
     this.spriteIndex = Math.floor(

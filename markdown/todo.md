@@ -1,5 +1,5 @@
 - [ ] remove keyboard shortcuts
-- [ ] find a good seed
+- [x] find a good seed
 - [ ] increase debounce interval for resizing
 - [ ] set max DPR
 - [x] use escape for pause
@@ -7,11 +7,11 @@
 - [x] event / subscribe framework (e.g. onresize, ontick, onmousemove, etc)
 - [x] shared sprites
 - [x] items spring back and then attract towards  you
-- [ ] health bar on bottom
+- [x] health bar on bottom
 - [ ] bosses are outlined in blue
 - [ ] info on pause screen
 - [ ] treasure animation
-- [ ] arrow timing seems off?
+- [x] arrow timing seems off?
 - [ ] powerups (mushroom)
 - [ ] add weighted random mechanism for spawning
 - [ ] improve hitboxes
@@ -19,15 +19,16 @@
   - [ ] tragedy hit box should be 2 circles
 - [ ] make circles actually sketchy
 - [ ] experiment with different enemy sizes
-- [ ] stop animation
+- [x] stop animation
 - [ ] add road roller
 - [ ] tear out crco
 - [ ] remove unused delta and graphics params
-- [ ] stuttering when player moves left on some screens
+- [x] stuttering when player moves left on some screens
 - [ ] robust cross device testing
+- [ ] seconds until reincarnation timer
 
 crco
 
 - [x] vector2 .clone
 - [x] vector2 .normalize
-- [ ] combine 2d graphics with roughness
+- [x] combine 2d graphics with roughness

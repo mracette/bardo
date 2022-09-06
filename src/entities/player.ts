@@ -40,7 +40,7 @@ export class Player extends CachedEntity {
     super(position);
   }
 
-  static damageCooldown = 200;
+  static damageCooldown = 400;
 
   get quadrant() {
     const percent = 0.1;
@@ -60,7 +60,7 @@ export class Player extends CachedEntity {
     );
     graphics.gameplay.rect(
       this.centerAlpha.x - 0.5,
-      this.centerAlpha.y + this.radius,
+      this.centerAlpha.y + this.spriteSize / 2,
       (tileWidth * this.health) / this.maxHealth,
       tileWidth / 10,
       {

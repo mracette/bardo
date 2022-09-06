@@ -48,11 +48,7 @@ export class AxeInstance extends WeaponInstance<Axe> {
     };
   }
 
-  draw(alpha: number) {
-    super.draw(alpha, this.rotationOptions);
-  }
-
-  drawSprite = (graphics: Canvas2DGraphics) => {
+  static staticDraw(graphics: Canvas2DGraphics) {
     const startX = -1 / 3;
     const startY = 0;
     graphics.lineSegments([
@@ -69,6 +65,14 @@ export class AxeInstance extends WeaponInstance<Axe> {
       [startX + AXE_SEGMENT_LENGTHS[1], 0.8],
       [startX + AXE_SEGMENT_LENGTHS[1], startY + startY + AXE_SEGMENT_HEIGHTS[0] / 2]
     ]);
+  }
+
+  draw(alpha: number) {
+    super.draw(alpha, this.rotationOptions);
+  }
+
+  drawSprite = (graphics: Canvas2DGraphics) => {
+    AxeInstance.staticDraw(graphics);
   };
 
   updatePosition = (elapsed: number, delta: number) => {
@@ -87,8 +91,8 @@ export class Axe extends Weapon<AxeInstance> {
   lastFired = 0;
   type = EntityType.Axe;
 
-  constructor() {
-    super();
+  constructor(equipped?: boolean) {
+    super(equipped);
   }
 
   get stats() {
@@ -96,7 +100,7 @@ export class Axe extends Weapon<AxeInstance> {
   }
 
   get frequency() {
-    return 1000 / this.stats.frequency[this.level - 1];
+    return 1000 / this.stats['Firing Rate'][this.level - 1];
   }
 
   setPositionFromAngle(position: Vector2, angle: number, direction: number) {
@@ -105,7 +109,7 @@ export class Axe extends Weapon<AxeInstance> {
   }
 
   get damage() {
-    return this.stats.damage[this.level - 1];
+    return this.stats.Damage[this.level - 1];
   }
 
   update(elapsed: number, delta: number): void {

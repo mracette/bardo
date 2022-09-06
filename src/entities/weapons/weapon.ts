@@ -1,17 +1,10 @@
-import { circleCircleCollision, Vector2 } from 'crco-utils';
+import { Canvas2DGraphics, circleCircleCollision, Vector2 } from 'crco-utils';
 import { state } from '../../globals/game';
 import { player } from '../../globals/player';
 import { CachedEntity } from '../entity';
 import { EntityType } from '../entityType';
-import { Arrow } from './arrow';
-import { Axe } from './axe';
-import { MagicCircle } from './circle';
-import { Orb } from './orb';
-
-export type WeaponType = typeof Orb | typeof Arrow | typeof Axe | typeof MagicCircle;
 
 export abstract class WeaponInstance<T extends Weapon<any>> extends CachedEntity {
-  size = 0.25;
   destroyOnCollide = false;
 
   abstract updatePosition: (elapsed: number, delta: number, index: number) => void;
@@ -60,17 +53,19 @@ export abstract class Weapon<T extends WeaponInstance<any>> {
   abstract level: number;
   abstract damage: number;
 
-  constructor() {
-    state.weapons.push(this);
+  constructor(equipped = true) {
+    if (equipped) {
+      state.weapons.push(this);
+    }
   }
 
   canUpgrade() {
     return this.level < 7;
   }
 
-  draw(alpha: number) {
+  draw(alpha: number, graphics?: Canvas2DGraphics) {
     for (let i = 0; i < this.instances.length; i++) {
-      this.instances[i].draw(alpha);
+      this.instances[i].draw(alpha, graphics);
     }
   }
 
