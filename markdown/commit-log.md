@@ -1,3 +1,12 @@
+Wed, 07 Sep 2022 14:01:29 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 0.39 kb | 400 | NA |
+| Compressed Build | 12.04 kb | 12326 | +2981% |
+| Compressed Build (Adv Zip) | 11.64 kb | 11918 | -3% |
+
+## move crco into repo
+
 Wed, 07 Sep 2022 13:17:54 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |

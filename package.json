@@ -6,8 +6,9 @@
   "scripts": {
     "advzip": "node ./scripts/advzip.js",
     "build:dev": "webpack --mode=development",
-    "build:prod": "export OPTIMIZE='true' && webpack --mode=production --node-env=production && rm build/bundle.js && yarn zip && yarn advzip",
+    "build:prod": "export OPTIMIZE='true' && webpack --mode=production --node-env=production && yarn roadroll && yarn zip && yarn advzip",
     "build:prod:no-optimize": "export OPTIMIZE='false' && webpack --mode=production --node-env=production && yarn eslint ./build/bundle.js --fix --quiet --no-ignore",
+    "roadroll": "npx roadroller build/bundle.js -o build/bundle.js",
     "compress-svg": "node ./scripts/setTypeToModule.js && node ./scripts/compressAllSvg.js && yarn lint",
     "commit-log": "node ./scripts/commitLog.js",
     "commit-log:append": "node ./scripts/commitLogAppend.js",
@@ -42,6 +43,7 @@
     "points-on-path": "^0.2.1",
     "prettier": "^2.7.1",
     "react-dev-utils": "^12.0.1",
+    "roadroller": "^2.1.0",
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.3.4",
     "ts-loader": "^9.3.1",

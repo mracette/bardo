@@ -26,6 +26,7 @@
 - [x] stuttering when player moves left on some screens
 - [ ] robust cross device testing
 - [ ] seconds until reincarnation timer
+- [ ] star bug
 
 crco
 

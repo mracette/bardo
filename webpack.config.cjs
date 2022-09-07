@@ -89,7 +89,7 @@ const config = {
 
 module.exports = () => {
   if (isProduction && optimize) {
-    config.plugins.push(new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/.*/]));
+    // config.plugins.push(new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/.*/]));
     config.mode = 'production';
     config.optimization = {
       minimize: true,
@@ -105,7 +105,50 @@ module.exports = () => {
               toplevel: true,
               properties: {
                 debug: !isProduction,
-                reserved: []
+                reserved: [
+                  'Firing Rate',
+                  'Damage',
+                  'Range',
+                  'Orbs',
+                  'Area',
+                  // Canvas2DGraphics styles
+                  'fillStyle',
+                  'lineWidth',
+                  'lineCap',
+                  'lineJoin',
+                  'lineDashOffset',
+                  'miterLimit',
+                  'strokeStyle',
+                  'textAlign',
+                  'textBaseline',
+                  'transform',
+                  'scale',
+                  'rotation',
+                  'translation',
+                  'fontSize',
+                  'lineDash',
+                  'alpha',
+                  'lineWidthIsProportionalTo',
+                  'fontFamily',
+                  'fontStyle',
+                  'fontWeight',
+                  'fontStretch',
+                  'fontVariant',
+                  'lineHeight',
+                  // Canvas2DGraphics options
+                  'beginPath',
+                  'closePath',
+                  'closeLoop',
+                  'fill',
+                  'maxTextWidth',
+                  'saveAndRestore',
+                  'stroke',
+                  'styles',
+                  'useNormalCoordinates',
+                  'roughness',
+                  'scalarNormalization',
+                  'skipApplyStyles'
+                ]
               }
             }
           }
