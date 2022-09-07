@@ -1,3 +1,4 @@
+import { meditator } from '../../svg/meditator';
 import {
   Canvas2DGraphicsOptions,
   Canvas2DGraphics,
@@ -5,8 +6,7 @@ import {
   Vector2,
   circleCircleCollision,
   lerp
-} from 'crco-utils';
-import { meditator } from '../../svg/meditator';
+} from '../crco';
 import { state } from '../globals/game';
 import { graphics } from '../globals/graphics';
 import { mapDimensions, tileWidth } from '../globals/map';

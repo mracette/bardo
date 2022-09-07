@@ -1,4 +1,4 @@
-import { Canvas2DGraphics, CanvasCoordinates, Vector2 } from 'crco-utils';
+import { Canvas2DGraphics, CanvasCoordinates, Vector2 } from '../crco';
 import { state } from '../globals/game';
 import { graphics, sharedOptions, sharedStyles } from '../globals/graphics';
 import { origin } from '../globals/map';

@@ -1,4 +1,4 @@
-import { DPR, mulberry32 } from 'crco-utils';
+import { DPR, mulberry32 } from '../crco';
 import { drawExperience } from '../drawing/drawExperience';
 import { drawTiles } from '../drawing/drawTiles';
 import { drawUpgradeUi } from '../drawing/drawUpgradeUi';

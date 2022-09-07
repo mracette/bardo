@@ -1,4 +1,4 @@
-import { isUndefined, mod } from 'crco-utils';
+import { isUndefined, mod } from '../crco';
 import { drawUpgradeUi } from '../drawing/drawUpgradeUi';
 import { debug } from '../globals/debug';
 import { GameState, state } from '../globals/game';

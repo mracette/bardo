@@ -1,4 +1,4 @@
-import { Canvas2DGraphics, random, Vector2 } from 'crco-utils';
+import { Canvas2DGraphics, random, Vector2 } from '../crco';
 import { EntityType } from '../entities/entityType';
 import { Arrow, ArrowInstance } from '../entities/weapons/arrow';
 import { Axe, AxeInstance } from '../entities/weapons/axe';

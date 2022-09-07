@@ -1,4 +1,4 @@
-import { Vector2 } from 'crco-utils';
+import { Vector2 } from '../../crco';
 import { player } from '../../globals/player';
 
 const ACCELERATION = 0.0015;

@@ -1,4 +1,4 @@
-import { Vector2 } from 'crco-utils';
+import { Vector2 } from '../crco';
 
 export const origin = new Vector2(0, 0);
 export const mapDimensions = new Vector2(32, 18);

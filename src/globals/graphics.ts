@@ -1,5 +1,5 @@
-import { Canvas2DGraphics, Canvas2DGraphicsOptions, Canvas2DStyles } from 'crco-utils';
-import { CanvasCoordinates } from 'crco-utils';
+import { Canvas2DGraphics, Canvas2DGraphicsOptions, Canvas2DStyles } from '../crco';
+import { CanvasCoordinates } from '../crco';
 import { canvasContexts, canvasElements } from './dom';
 import { mapDimensions } from './map';
 

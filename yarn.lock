@@ -2031,11 +2031,6 @@ cosmiconfig@^6.0.0:
     path-type "^4.0.0"
     yaml "^1.7.2"
 
-crco-utils@2.0.30:
-  version "2.0.30"
-  resolved "https://registry.yarnpkg.com/crco-utils/-/crco-utils-2.0.30.tgz#54a401f91314270ef4c905f23ce4293b07548597"
-  integrity sha512-WJz+i24YBLD8Ubd3KyynPP0OB32WUlNhDBDZT11HzJJ1Z/ZByuvhZVscpbUVl0ZnNy2oTGSjLPM1/86L74ytKA==
-
 create-error-class@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/create-error-class/-/create-error-class-3.0.2.tgz#06be7abef947a3f14a30fd610671d401bca8b7b6"

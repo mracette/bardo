@@ -1,5 +1,5 @@
-import { Canvas2DGraphics, Vector2 } from 'crco-utils';
 import { reaper } from '../../../svg/reaper';
+import { Canvas2DGraphics, Vector2 } from '../../crco';
 import { Behaviors } from '../behaviors/behaviors';
 import { EntityType } from '../entityType';
 import { spriteCoordinateSystem } from '../sprites';

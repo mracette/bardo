@@ -1,4 +1,4 @@
-import { Canvas2DGraphics } from 'crco-utils';
+import { Canvas2DGraphics } from '../crco';
 import { drawThirdEye } from '../drawing/drawThirdEye';
 import { coordinates } from '../globals/graphics';
 import { mapDimensions } from '../globals/map';

@@ -1,5 +1,5 @@
-import { aspectRatioResize } from 'crco-utils';
 import Stats from 'stats.js';
+import { aspectRatioResize } from './crco';
 import './dom/styles.css';
 import { Player } from './entities/player';
 import { handleInitialize } from './events/initialize';

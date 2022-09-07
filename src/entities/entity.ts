@@ -1,4 +1,4 @@
-import { Canvas2DGraphicsOptions, Canvas2DGraphics, lerp, Vector2 } from 'crco-utils';
+import { Canvas2DGraphicsOptions, Canvas2DGraphics, lerp, Vector2 } from '../crco';
 import { debug } from '../globals/debug';
 import { state } from '../globals/game';
 import { graphics } from '../globals/graphics';

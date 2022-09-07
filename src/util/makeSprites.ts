@@ -1,4 +1,4 @@
-import { Canvas2DGraphics, CanvasCoordinates } from 'crco-utils';
+import { Canvas2DGraphics, CanvasCoordinates } from '../crco';
 import { debug } from '../globals/debug';
 import { getSeededRandom } from './getSeededRandom';
 

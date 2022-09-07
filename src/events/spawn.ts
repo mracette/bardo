@@ -1,4 +1,4 @@
-import { random, TAU, Vector2 } from 'crco-utils';
+import { random, TAU, Vector2 } from '../crco';
 import { EnemyEntityType, enemyTypeToClass } from '../entities/enemies/enemyTypes';
 import { Goat } from '../entities/enemies/goat';
 import { EnemyHint } from '../entities/overlays/enemyHint';

@@ -1,4 +1,4 @@
-import { Vector2 } from 'crco-utils';
+import { Vector2 } from '../crco';
 import { Enemy } from '../entities/enemies/enemy';
 import { Goat } from '../entities/enemies/goat';
 import { Tragedy } from '../entities/enemies/tragedy';

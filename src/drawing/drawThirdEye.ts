@@ -1,13 +1,12 @@
-import { Canvas2DGraphics } from 'crco-utils';
 import { thirdEye } from '../../svg/thirdEye';
 import { thirdEyeDark } from '../../svg/thirdEyeDark';
 import { thirdEyeDarkMoons } from '../../svg/thirdEyeDarkMoons';
 import { thirdEyeLight } from '../../svg/thirdEyeLight';
+import { Canvas2DGraphics } from '../crco';
 import { palette } from '../globals/palette';
 
-const roughness = 0.035;
+const roughness = 0.2;
 const circleRoughness = roughness * 200;
-const subtitle = 'The journey between lives on Earth';
 const startText = 'Press any key to start';
 
 export const drawThirdEye = (graphics: Canvas2DGraphics) => {
@@ -22,19 +21,19 @@ export const drawThirdEye = (graphics: Canvas2DGraphics) => {
     graphics.lineSegments(points, { roughness });
   });
   graphics.circle(50, 50, 0.09, {
-    roughness: circleRoughness
+    roughness
   });
   graphics.circle(50, 50, 0.06, {
-    roughness: circleRoughness
+    roughness
   });
   graphics.circle(50, 65, 0.01, {
-    roughness: circleRoughness
+    roughness
   });
   graphics.circle(50, 70, 0.0125, {
-    roughness: circleRoughness
+    roughness
   });
   graphics.circle(50, 75, 0.015, {
-    roughness: circleRoughness
+    roughness
   });
   thirdEyeLight.forEach((points) => {
     graphics.lineSegments(points, {

@@ -1,4 +1,4 @@
-import { Vector2 } from 'crco-utils';
+import { Vector2 } from '../../crco';
 import { state } from '../../globals/game';
 import { Behaviors } from '../behaviors/behaviors';
 import { addCollectible } from '../behaviors/collectible';

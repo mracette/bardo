@@ -5,7 +5,7 @@ import {
   Canvas2DGraphics,
   CanvasCoordinates,
   Vector2
-} from 'crco-utils';
+} from '../src/crco';
 import { drawThirdEye } from '../src/drawing/drawThirdEye';
 import { drawTiles } from '../src/drawing/drawTiles';
 import { canvasContexts, canvasElements } from '../src/globals/dom';

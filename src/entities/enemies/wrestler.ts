@@ -1,5 +1,5 @@
-import { Canvas2DGraphics, Vector2 } from 'crco-utils';
 import { wrestler } from '../../../svg/wrestler';
+import { Canvas2DGraphics, Vector2 } from '../../crco';
 import { Behaviors } from '../behaviors/behaviors';
 import { EntityType } from '../entityType';
 import { spriteCoordinateSystem } from '../sprites';

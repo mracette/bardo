@@ -1,4 +1,4 @@
-import { Canvas2DGraphics, Vector2, Canvas2DGraphicsOptions, PI } from 'crco-utils';
+import { Canvas2DGraphics, Vector2, Canvas2DGraphicsOptions, PI } from '../../crco';
 import { state } from '../../globals/game';
 import { player } from '../../globals/player';
 import { stats } from '../../globals/stats';

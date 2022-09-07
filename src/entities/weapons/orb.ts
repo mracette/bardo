@@ -1,8 +1,8 @@
-import { Canvas2DGraphics, circleCircleCollision, lerp, TAU } from 'crco-utils';
 import { state } from '../../globals/game';
 import { palette } from '../../globals/palette';
 import { player } from '../../globals/player';
 import { stats } from '../../globals/stats';
+import { Canvas2DGraphics, circleCircleCollision, lerp, TAU } from '../../crco';
 import { EntityType } from '../entityType';
 import { spriteCoordinateSystem } from '../sprites';
 import { Weapon, WeaponInstance } from './weapon';

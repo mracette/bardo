@@ -1,4 +1,4 @@
-import { Canvas2DGraphicsOptions, Canvas2DGraphics, Vector2 } from 'crco-utils';
+import { Canvas2DGraphicsOptions, Canvas2DGraphics, Vector2 } from '../../crco';
 import { drawExperience } from '../../drawing/drawExperience';
 import { state } from '../../globals/game';
 import { palette } from '../../globals/palette';
