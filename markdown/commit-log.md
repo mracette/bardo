@@ -1,3 +1,12 @@
+Thu, 08 Sep 2022 03:12:30 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 0.39 kb | 400 | NA |
+| Compressed Build | 12.02 kb | 12307 | +2977% |
+| Compressed Build (Adv Zip) | 11.62 kb | 11902 | -3% |
+
+## clamp item acceleration to address bug
+
 Thu, 08 Sep 2022 03:08:50 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |

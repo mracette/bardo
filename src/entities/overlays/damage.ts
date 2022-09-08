@@ -33,7 +33,7 @@ export class DamageOverlay extends CachedEntity {
   constructor(target: Enemy<any>, text: string, start: number) {
     super(DamageOverlay.setPositionFromTarget(target.center.clone(), target));
     this.target = target;
-    this.spriteKey = text;
+    this.spriteKey = `text:${text}`; // avoid collisions with const enum values
     this.text = text;
     this.start = start;
   }

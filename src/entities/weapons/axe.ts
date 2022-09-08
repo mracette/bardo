@@ -1,7 +1,3 @@
-import { state } from '../../globals/game';
-import { palette } from '../../globals/palette';
-import { player } from '../../globals/player';
-import { stats } from '../../globals/stats';
 import {
   Canvas2DGraphics,
   circleCircleCollision,
@@ -13,6 +9,10 @@ import {
   PI,
   normalize
 } from '../../crco';
+import { state } from '../../globals/game';
+import { palette } from '../../globals/palette';
+import { player } from '../../globals/player';
+import { stats } from '../../globals/stats';
 import { EntityType } from '../entityType';
 import { spriteCoordinateSystem } from '../sprites';
 import { Weapon, WeaponInstance } from './weapon';
@@ -22,8 +22,8 @@ const AXE_SEGMENT_LENGTHS = [0, 0.2, 0.6];
 
 export class AxeInstance extends WeaponInstance<Axe> {
   coordinateSystem = spriteCoordinateSystem.internal;
-  spriteSize = 2;
-  radius = 0.5;
+  spriteSize = 3;
+  radius = 0.75;
   spriteKey = EntityType.Axe;
   options = undefined;
   start: number;
