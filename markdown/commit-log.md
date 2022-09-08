@@ -1,3 +1,12 @@
+Thu, 08 Sep 2022 03:08:50 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 0.39 kb | 400 | NA |
+| Compressed Build | 12.09 kb | 12380 | +2995% |
+| Compressed Build (Adv Zip) | 11.69 kb | 11971 | -3% |
+
+## build preserve keywords and add roadroller
+
 Wed, 07 Sep 2022 14:01:29 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |

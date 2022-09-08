@@ -1,8 +1,9 @@
-import { Vector2 } from '../../crco';
+import { clamp, Vector2 } from '../../crco';
 import { player } from '../../globals/player';
 
 const ACCELERATION = 0.0015;
 const INITIAL_VELOCITY = -0.25;
+const MAX_ACCELERATION = 1;
 
 export interface Collectible {
   start?: number;
@@ -32,7 +33,15 @@ export const addCollectible = (
     // progress the sequence
     const delta = elapsed - behavior.start;
     vector.normalize();
-    const velocity = vector.clone().multiply(INITIAL_VELOCITY + delta * ACCELERATION);
+    const velocity = vector
+      .clone()
+      .multiply(
+        clamp(
+          INITIAL_VELOCITY + delta * ACCELERATION,
+          -MAX_ACCELERATION,
+          MAX_ACCELERATION
+        )
+      );
     position.x += velocity.x;
     position.y += velocity.y;
   }

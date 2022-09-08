@@ -4,6 +4,7 @@ import { Goat } from '../entities/enemies/goat';
 import { EnemyHint } from '../entities/overlays/enemyHint';
 import { state } from '../globals/game';
 import { mapDimensions } from '../globals/map';
+import { player } from '../globals/player';
 
 const MAX_SPAWN = Infinity;
 let SPAWNED = 0;
@@ -13,9 +14,10 @@ const enum SpawnType {
   Appear
 }
 
+const TARGET_ENEMY_COUNT = 30;
 const RUN_TIME = 1000 * 60 * 15; // 15 minutes
 const BATCH_TIME = 1000 * 60 * 1; // 1 minute
-const SPAWN_POSITION = [0, 1, 2, 3];
+const SPAWN_POSITIONS = [0, 1, 2, 3];
 const ENEMY_TYPES = Object.keys(enemyTypeToClass) as unknown as EnemyEntityType[];
 
 const getEnemyHealth = (type: EnemyEntityType) => {
@@ -29,9 +31,20 @@ export const spawn = (elapsed: number) => {
   if (elapsed - state.timestamp.lastEnemySpawned >= spawnTime) {
     state.timestamp.lastEnemySpawned = elapsed;
     const type = random(ENEMY_TYPES);
-    const position = random(SPAWN_POSITION);
+
+    let position = random(SPAWN_POSITIONS);
+    const playerQuadrant = player.quadrant;
+
+    console.log({ playerQuadrant, position });
+
+    // do not spawn on top of the player
+    if (position === playerQuadrant) {
+      position = (playerQuadrant + 1) % SPAWN_POSITIONS.length;
+    }
+
     let x: number;
     let y: number;
+
     // top
     if (position === 0) {
       x = random(mapDimensions.x);

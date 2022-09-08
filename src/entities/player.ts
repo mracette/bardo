@@ -44,10 +44,10 @@ export class Player extends CachedEntity {
 
   get quadrant() {
     const percent = 0.1;
-    if (this.position.y < mapDimensions.y * percent) return 0; // top
-    if (this.position.y > mapDimensions.y * (1 - percent)) return 1; // bottom
-    if (this.position.x < mapDimensions.x * percent) return 2; // left
-    if (this.position.x > mapDimensions.x * (1 - percent)) return 3; // right
+    if (this.center.y < mapDimensions.y * percent) return 0; // top
+    if (this.center.y > mapDimensions.y * (1 - percent)) return 1; // bottom
+    if (this.center.x < mapDimensions.x * percent) return 2; // left
+    if (this.center.x > mapDimensions.x * (1 - percent)) return 3; // right
     return false;
   }
 
