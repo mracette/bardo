@@ -1,3 +1,12 @@
+Thu, 08 Sep 2022 03:17:35 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 0.39 kb | 400 | NA |
+| Compressed Build | 12.04 kb | 12334 | +2983% |
+| Compressed Build (Adv Zip) | 11.64 kb | 11918 | -3% |
+
+## fix axe bug due to cache collision
+
 Thu, 08 Sep 2022 03:12:30 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |

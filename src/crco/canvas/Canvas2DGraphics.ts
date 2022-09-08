@@ -356,9 +356,9 @@ export class Canvas2DGraphics {
 
     const rasterRadius = this.resolveScalar(r, options);
     const roughnessAdj = clamp(
-      50 * r * roughness - rasterRadius * r * 0.05,
-      roughness * rasterRadius * 0.05,
-      roughness * rasterRadius * 0.2
+      500 * r * roughness - rasterRadius * r * 0.05,
+      roughness * rasterRadius * 0.5,
+      roughness * rasterRadius * 0.75
     );
 
     for (let n = 0; n < 2; n++) {

@@ -46,7 +46,7 @@ export const graphics = {
     ...sharedOptions,
     coords: coordinates.map,
     styles: { ...sharedStyles },
-    roughness: 0.1
+    roughness: 0.4
   }),
   upgrade: new Canvas2DGraphics(canvasContexts.upgrades, {
     ...sharedOptions,
