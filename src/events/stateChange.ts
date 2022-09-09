@@ -1,5 +1,5 @@
-import { drawExperience } from '../drawing/drawExperience';
 import { drawTiles } from '../drawing/drawTiles';
+import { drawUi } from '../drawing/drawUi';
 import { drawUpgradeUi } from '../drawing/drawUpgradeUi';
 import { GameState, state } from '../globals/game';
 import { graphics } from '../globals/graphics';
@@ -18,7 +18,7 @@ export const handleStateChange = (next: GameState) => {
       graphics.map.clear();
       graphics.ui.clear();
       drawTiles();
-      drawExperience();
+      drawUi();
     }
   }
   if (next !== GameState.Upgrade) {

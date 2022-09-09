@@ -7,6 +7,7 @@ import {
   circleCircleCollision,
   lerp
 } from '../crco';
+import { drawUi } from '../drawing/drawUi';
 import { state } from '../globals/game';
 import { graphics } from '../globals/graphics';
 import { mapDimensions, tileWidth } from '../globals/map';
@@ -19,9 +20,7 @@ import { spriteCoordinateSystem } from './sprites';
 
 export class Player extends CachedEntity {
   lastDamaged = 0;
-  maxHealth = 100;
-  health = 100;
-  radius = 0.6;
+  radius = 0.4;
   spriteSize = 1.5;
   spriteKey = EntityType.Player;
   speed = 0.065;
@@ -62,7 +61,7 @@ export class Player extends CachedEntity {
     graphics.gameplay.rect(
       this.centerAlpha.x - 0.5,
       this.centerAlpha.y + this.spriteSize / 2,
-      (tileWidth * this.health) / this.maxHealth,
+      (tileWidth * state.health) / state.maxHealth,
       tileWidth / 10,
       {
         fill: true,
@@ -112,7 +111,8 @@ export class Player extends CachedEntity {
   takeDamage(amount: number, elapsed: number) {
     zzfx(...[, , 528, 0.01, , 0.48, , 0.6, -11.6, , , , 0.32, 4.2]);
     this.lastDamaged = elapsed;
-    this.health -= amount;
+    state.health -= amount;
+    drawUi();
   }
 
   updatePosition = (elapsed: number, delta: number) => {

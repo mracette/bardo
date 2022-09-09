@@ -114,7 +114,8 @@ export abstract class CachedEntity {
         this.centerAlpha.y,
         this.radius * tileWidth,
         {
-          styles: { strokeStyle: 'red' }
+          styles: { strokeStyle: 'red' },
+          roughness: 0
         }
       );
     }

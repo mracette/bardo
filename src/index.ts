@@ -1,6 +1,7 @@
 import Stats from 'stats.js';
 import { aspectRatioResize } from './crco';
 import './dom/styles.css';
+import { drawUi } from './drawing/drawUi';
 import { Player } from './entities/player';
 import { handleInitialize } from './events/initialize';
 import { handleKeyDown, handleKeyUp } from './events/keyboard';
@@ -25,32 +26,36 @@ document.body.appendChild(stats.dom);
 const fps = 60;
 const deltaTimeFixed = 1000 / fps;
 
-let elapsedTime = 0;
-let clockTimePrevious = 0;
-let accumulator = 0;
-let slowdown = 0;
+// export const runTime = 1000 * 60 * 10; // 10 minutes
+// export let elapsedTime = 0;
+// let clockTimePrevious = 0;
+// let accumulator = 0;
+// let slowdown = 0;
 
 const main = (clockTime = 0) => {
   stats.begin();
   const isPaused = state.gameState === GameState.Paused;
-  const deltaTimeClock = isPaused ? 0 : clockTime - clockTimePrevious;
-  clockTimePrevious = clockTime;
+  const deltaTimeClock = isPaused ? 0 : clockTime - state.time.clockTimePrevious;
+  state.time.clockTimePrevious = clockTime;
 
-  slowdown =
+  state.time.slowdown =
     player.lastDamaged === 0
       ? 1
-      : Math.min(1, (elapsedTime - player.lastDamaged) / Player.damageCooldown);
+      : Math.min(
+          1,
+          (state.time.elapsedTime - player.lastDamaged) / Player.damageCooldown
+        );
 
   // clamp for extra long frames
-  accumulator += Math.min(deltaTimeClock, 50) * slowdown;
+  state.time.accumulator += Math.min(deltaTimeClock, 50) * state.time.slowdown;
 
-  while (accumulator >= deltaTimeFixed) {
+  while (state.time.accumulator >= deltaTimeFixed) {
     update();
-    accumulator -= deltaTimeFixed;
-    elapsedTime += deltaTimeFixed;
+    state.time.accumulator -= deltaTimeFixed;
+    state.time.elapsedTime += deltaTimeFixed;
   }
 
-  render(accumulator / deltaTimeFixed);
+  render(state.time.accumulator / deltaTimeFixed);
   stats.end();
   window.requestAnimationFrame(main);
 };
@@ -59,36 +64,36 @@ const update = () => {
   updateStats.update(deltaTimeFixed ? 1000 / deltaTimeFixed : 0, 200);
 
   if (state.gameState === GameState.Intro) {
-    thirdEye.update(elapsedTime, deltaTimeFixed);
+    thirdEye.update(state.time.elapsedTime, deltaTimeFixed);
   }
 
   if (state.gameState === GameState.Gameplay) {
-    player.update(elapsedTime, deltaTimeFixed);
+    player.update(state.time.elapsedTime, deltaTimeFixed);
     for (let i = state.weapons.length - 1; i >= 0; i--) {
-      state.weapons[i].update(elapsedTime, deltaTimeFixed);
+      state.weapons[i].update(state.time.elapsedTime, deltaTimeFixed);
     }
     for (let i = state.enemies.length - 1; i >= 0; i--) {
       if (state.enemies[i].shouldDestroy) {
         state.enemies.splice(i, 1);
       } else {
-        state.enemies[i].update(elapsedTime, deltaTimeFixed);
+        state.enemies[i].update(state.time.elapsedTime, deltaTimeFixed);
       }
     }
     for (let i = state.items.length - 1; i >= 0; i--) {
       if (state.items[i].shouldDestroy) {
         state.items.splice(i, 1);
       } else {
-        state.items[i].update(elapsedTime, deltaTimeFixed, i);
+        state.items[i].update(state.time.elapsedTime, deltaTimeFixed, i);
       }
     }
     for (let i = state.overlays.length - 1; i >= 0; i--) {
       if (state.overlays[i].shouldDestroy) {
         state.overlays.splice(i, 1);
       } else {
-        state.overlays[i].update(elapsedTime, i);
+        state.overlays[i].update(state.time.elapsedTime, i);
       }
     }
-    spawn(elapsedTime);
+    spawn(state.time.elapsedTime);
   }
 };
 
@@ -115,16 +120,19 @@ const render = (alpha: number) => {
 
     player.draw(alpha);
 
-    if (slowdown < 1) {
+    if (state.time.slowdown < 1) {
       graphics.gameplay.rect(0, 0, mapDimensions.x, mapDimensions.y, {
         roughness: 0,
         fill: true,
         styles: {
           fillStyle: 'red',
-          alpha: (1 - slowdown) * 0.33
+          alpha: (1 - state.time.slowdown) * 0.33
         }
       });
     }
+
+    // this could be drawn a fraction of the time
+    drawUi();
   }
 };
 

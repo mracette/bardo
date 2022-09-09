@@ -1,5 +1,5 @@
 import { Canvas2DGraphicsOptions, Canvas2DGraphics, Vector2 } from '../../crco';
-import { drawExperience } from '../../drawing/drawExperience';
+import { drawUi } from '../../drawing/drawUi';
 import { state } from '../../globals/game';
 import { palette } from '../../globals/palette';
 import { Trigger, triggerEvent } from '../../util/eventRegister';
@@ -39,7 +39,7 @@ export class Star extends Item<Pick<Behaviors, 'collectible'>> {
           if (state.experience.current > state.experience.next) {
             triggerEvent(Trigger.LevelUp);
           }
-          drawExperience();
+          drawUi();
           this.destroy(index);
         }
       }

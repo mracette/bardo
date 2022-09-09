@@ -51,7 +51,7 @@ export const getRandomUpgrade = (count: number): UpgradeOption[] => {
         } else if (existing) {
           onChooseUpgrade = () => existing.upgrade();
         }
-        text = `Arrow - L${level}`;
+        text = `Arrow`;
         subText = getSubtextForStats(type, level);
         break;
       }
@@ -62,7 +62,7 @@ export const getRandomUpgrade = (count: number): UpgradeOption[] => {
         } else if (existing) {
           onChooseUpgrade = () => existing.upgrade();
         }
-        text = `Axe - L${level}`;
+        text = `Axe`;
         subText = getSubtextForStats(type, level);
         break;
       }
@@ -73,7 +73,7 @@ export const getRandomUpgrade = (count: number): UpgradeOption[] => {
         } else if (existing) {
           onChooseUpgrade = () => existing.upgrade();
         }
-        text = `Orb - L${level}`;
+        text = `Orb`;
         subText = getSubtextForStats(type, level);
         break;
       }
@@ -84,7 +84,7 @@ export const getRandomUpgrade = (count: number): UpgradeOption[] => {
         } else if (existing) {
           onChooseUpgrade = () => existing.upgrade();
         }
-        text = `Summoning Circle - L${level}`;
+        text = `Summoning Circle`;
         subText = getSubtextForStats(type, level);
         break;
       }

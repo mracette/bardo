@@ -17,7 +17,6 @@ const enum SpawnType {
 
 const TARGET_ENEMY_COUNT = 30;
 const MIN_SPAWN_TIME = 250;
-const RUN_TIME = 1000 * 60 * 15; // 15 minutes
 const TREASURE_TIME = 1000 * 60 * 1; // 1 minute
 const SPAWN_POSITIONS = [0, 1, 2, 3];
 const ENEMY_TYPES_SPAWN = Object.keys(enemyTypeToClass).filter(
@@ -33,7 +32,7 @@ const getEnemyHealth = (type: EnemyEntityType) => {
 
 export const spawn = (elapsed: number) => {
   // const seconds = Math.max(0, elapsed) / 100;
-  const target = TARGET_ENEMY_COUNT + state.experience.level * 10;
+  const target = TARGET_ENEMY_COUNT + state.experience.level * 7;
   const completeRandom = Math.random();
   const weightedRandom = Math.random() * (1 - state.enemies.length / target);
 

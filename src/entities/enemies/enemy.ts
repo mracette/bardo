@@ -1,5 +1,5 @@
 import { Canvas2DGraphicsOptions, random, Vector2 } from '../../crco';
-import { drawExperience } from '../../drawing/drawExperience';
+import { drawUi } from '../../drawing/drawUi';
 import { state } from '../../globals/game';
 import { graphics } from '../../globals/graphics';
 import { palette } from '../../globals/palette';
@@ -23,7 +23,7 @@ export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
   damageInflicted = 5;
   maxHealth: number;
   health: number;
-  speed = 0.025;
+  speed = 0.0185;
   cooldownPeriod = {
     [EntityType.Axe]: 1000,
     [EntityType.MagicCircle]: 250,

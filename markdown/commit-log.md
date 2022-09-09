@@ -1,3 +1,12 @@
+Fri, 09 Sep 2022 04:43:44 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 0.39 kb | 400 | NA |
+| Compressed Build | 12.80 kb | 13104 | +3176% |
+| Compressed Build (Adv Zip) | 12.39 kb | 12689 | -3% |
+
+## panel ui
+
 Fri, 09 Sep 2022 03:34:57 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |

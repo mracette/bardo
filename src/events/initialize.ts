@@ -16,7 +16,7 @@ import { handleWindowResize } from './windowResize';
 export const handleInitialize = () => {
   document.body.style.backgroundColor = palette.background;
   canvasElements.map.style.zIndex = '-1';
-  handleLevelUp();
+  handleLevelUp(false);
   // new Orb();
   new Arrow();
   // new MagicCircle();

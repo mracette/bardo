@@ -30,11 +30,19 @@ export const state = {
   },
   isPaused: false,
   health: 100,
+  maxHealth: 100,
   experience: {
     current: 0,
     level: 0,
     next: 0,
     last: 0
+  },
+  time: {
+    runTime: 1000 * 60 * 10, // 10 minutes
+    elapsedTime: 0,
+    clockTimePrevious: 0,
+    accumulator: 0,
+    slowdown: 0
   },
   batchInProgress: false as EnemyHint | false,
   enemies: [] as Enemy<any>[],
