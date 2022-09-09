@@ -12,6 +12,7 @@ import { graphics } from '../globals/graphics';
 import { mapDimensions, tileWidth } from '../globals/map';
 import { SQRT_2_2 } from '../globals/math';
 import { palette } from '../globals/palette';
+import { zzfx } from '../zzfx';
 import { CachedEntity } from './entity';
 import { EntityType } from './entityType';
 import { spriteCoordinateSystem } from './sprites';
@@ -109,6 +110,7 @@ export class Player extends CachedEntity {
   }
 
   takeDamage(amount: number, elapsed: number) {
+    zzfx(...[, , 528, 0.01, , 0.48, , 0.6, -11.6, , , , 0.32, 4.2]);
     this.lastDamaged = elapsed;
     this.health -= amount;
   }

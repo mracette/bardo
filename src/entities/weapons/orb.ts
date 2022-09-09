@@ -1,8 +1,8 @@
+import { Canvas2DGraphics, circleCircleCollision, lerp, TAU } from '../../crco';
 import { state } from '../../globals/game';
 import { palette } from '../../globals/palette';
 import { player } from '../../globals/player';
 import { stats } from '../../globals/stats';
-import { Canvas2DGraphics, circleCircleCollision, lerp, TAU } from '../../crco';
 import { EntityType } from '../entityType';
 import { spriteCoordinateSystem } from '../sprites';
 import { Weapon, WeaponInstance } from './weapon';
@@ -22,7 +22,8 @@ export class OrbInstance extends WeaponInstance<Orb> {
   static staticDraw(graphics: Canvas2DGraphics, radius: number) {
     graphics.circle(0, 0, radius, {
       styles: { fillStyle: palette.violet },
-      fill: true
+      fill: true,
+      roughness: 0.05
     });
   }
 

@@ -3,6 +3,7 @@ import { drawExperience } from '../../drawing/drawExperience';
 import { state } from '../../globals/game';
 import { graphics } from '../../globals/graphics';
 import { palette } from '../../globals/palette';
+import { zzfx } from '../../zzfx';
 import { addAttraction } from '../behaviors/attraction';
 import { Behaviors } from '../behaviors/behaviors';
 import { addGuarding } from '../behaviors/guarding';
@@ -25,7 +26,7 @@ export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
   speed = 0.025;
   cooldownPeriod = {
     [EntityType.Axe]: 1000,
-    [EntityType.MagicCircle]: 150,
+    [EntityType.MagicCircle]: 250,
     [EntityType.Orb]: 1000,
     [EntityType.Arrow]: 1
   };
@@ -56,6 +57,7 @@ export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
     // @ts-ignore
     const cooldownPeriod = type in this.cooldownPeriod ? this.cooldownPeriod[type] : 1000;
     if (cooldown && elapsed - cooldown < cooldownPeriod) return;
+    zzfx(...[, , 129, 0.01, , 0.15, , , , , , , , 5]);
     this.health -= amount;
     state.overlays.push(new DamageOverlay(this, String(amount), elapsed));
     if (this.health <= 0) {

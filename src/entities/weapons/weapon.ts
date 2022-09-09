@@ -1,6 +1,6 @@
+import { Canvas2DGraphics, circleCircleCollision, Vector2 } from '../../crco';
 import { state } from '../../globals/game';
 import { player } from '../../globals/player';
-import { Canvas2DGraphics, circleCircleCollision, Vector2 } from '../../crco';
 import { CachedEntity } from '../entity';
 import { EntityType } from '../entityType';
 

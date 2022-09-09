@@ -3,6 +3,7 @@ import { drawExperience } from '../../drawing/drawExperience';
 import { state } from '../../globals/game';
 import { palette } from '../../globals/palette';
 import { Trigger, triggerEvent } from '../../util/eventRegister';
+import { zzfx } from '../../zzfx';
 import { Behaviors } from '../behaviors/behaviors';
 import { EntityType } from '../entityType';
 import { spriteCoordinateSystem } from '../sprites';
@@ -33,6 +34,7 @@ export class Star extends Item<Pick<Behaviors, 'collectible'>> {
         distance: 2,
         initialPosition: position.clone(),
         onCollected: (index: number) => {
+          zzfx(...[0.4, 0, 900, , 0.06, 0.24, 1, 1.82, , , 400, 0.06]);
           state.experience.current += experience;
           if (state.experience.current > state.experience.next) {
             triggerEvent(Trigger.LevelUp);

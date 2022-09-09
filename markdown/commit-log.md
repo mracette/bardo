@@ -1,3 +1,12 @@
+Fri, 09 Sep 2022 03:34:57 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 0.39 kb | 400 | NA |
+| Compressed Build | 12.64 kb | 12943 | +3136% |
+| Compressed Build (Adv Zip) | 12.24 kb | 12532 | -3% |
+
+## wip treasure
+
 Fri, 09 Sep 2022 02:16:31 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |

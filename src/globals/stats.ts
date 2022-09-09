@@ -16,7 +16,7 @@ export const stats: Record<WeaponEntityType, Record<string, number[]>> = {
     'Firing Rate': [1, 1.5, 2, 3, 4, 6, 8]
   },
   [EntityType.MagicCircle]: {
-    Damage: [1, 2, 4, 7, 11, 16, 22],
+    Damage: [0.5, 1, 2, 3.5, 5.5, 8, 11],
     Area: [1.5, 1.7, 2, 2.4, 2.9, 3.5, 4.2]
   },
   [EntityType.Axe]: {
