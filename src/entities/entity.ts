@@ -121,11 +121,11 @@ export abstract class CachedEntity {
     }
   }
 
-  update(elapsed: number, delta: number, index?: number) {
+  update() {
     this.positionPrevious.set(this.position);
     this.centerPrevious.set(this.center);
     this.spriteIndex = Math.floor(
-      ((elapsed / state.spritePeriod) % 1) * this.spriteCount
+      ((state.time.elapsed / state.spritePeriod) % 1) * this.spriteCount
     );
   }
 

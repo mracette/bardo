@@ -27,7 +27,7 @@ export const drawUi = () => {
   });
 
   // text
-  const millis = state.time.runTime - state.time.elapsedTime;
+  const millis = state.time.runTime - state.time.elapsed;
   const seconds = millis / 1000;
   const minutes = Math.floor(seconds / 60);
   const secondsRemainder = Math.round(seconds - minutes * 60);

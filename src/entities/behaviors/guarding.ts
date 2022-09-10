@@ -7,10 +7,10 @@ export interface Guarding {
   guardPosition: Vector2;
 }
 
-export const addGuarding = (position: Vector2, delta: number, behavior: Guarding) => {
+export const addGuarding = (position: Vector2, behavior: Guarding) => {
   const vector = Vector2.from(player.position, position);
   if (vector.magnitude < behavior.distance) {
-    const positionDelta = vector.normalize().multiply(delta * behavior.attraction);
+    const positionDelta = vector.normalize().multiply(behavior.attraction);
     position.x += positionDelta.x;
     position.y += positionDelta.y;
   } else if (position.equals(behavior.guardPosition)) {
@@ -20,7 +20,7 @@ export const addGuarding = (position: Vector2, delta: number, behavior: Guarding
   } else {
     const positionDelta = Vector2.from(behavior.guardPosition, position)
       .normalize()
-      .multiply(delta * behavior.attraction);
+      .multiply(behavior.attraction);
     position.x += positionDelta.x;
     position.y += positionDelta.y;
   }

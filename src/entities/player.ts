@@ -80,15 +80,15 @@ export class Player extends CachedEntity {
     });
   };
 
-  update = (elapsed: number, delta: number) => {
-    super.update(elapsed, delta);
-    this.updatePosition(elapsed, delta);
+  update = () => {
+    super.update();
+    this.updatePosition();
     this.updateCenterFromPosition();
-    this.checkCollisions(elapsed);
+    this.checkCollisions();
   };
 
-  checkCollisions(elapsed: number) {
-    if (elapsed < this.lastDamaged + Player.damageCooldown) {
+  checkCollisions() {
+    if (state.time.elapsed < this.lastDamaged + Player.damageCooldown) {
       return;
     }
     for (let i = 0; i < state.enemies.length; i++) {
@@ -103,7 +103,7 @@ export class Player extends CachedEntity {
           enemy.radius
         )
       ) {
-        this.takeDamage(enemy.damageInflicted, elapsed);
+        this.takeDamage(enemy.damageInflicted, state.time.elapsed);
       }
     }
   }
@@ -115,7 +115,7 @@ export class Player extends CachedEntity {
     drawUi();
   }
 
-  updatePosition = (elapsed: number, delta: number) => {
+  updatePosition = () => {
     const moveAmount = this.speed;
     const diagonalAmount = SQRT_2_2 * moveAmount;
     let deltaX = 0;

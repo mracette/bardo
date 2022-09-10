@@ -18,7 +18,7 @@ export class Goat extends Enemy<Pick<Behaviors, 'guarding'>> {
       position,
       {
         guarding: {
-          attraction: 0.002,
+          attraction: 0.02,
           distance: 3,
           guardPosition: position.clone()
         }

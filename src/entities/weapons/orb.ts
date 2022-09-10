@@ -31,8 +31,8 @@ export class OrbInstance extends WeaponInstance<Orb> {
     OrbInstance.staticDraw(graphics, this.radius);
   };
 
-  updatePosition = (elapsed: number, delta: number) => {
-    const angle = this.offset + TAU * (elapsed / this.parent.period);
+  updatePosition = () => {
+    const angle = this.offset + TAU * (state.time.elapsed / this.parent.period);
     const x = player.center.x + Math.cos(angle) * this.parent.range - this.spriteSize / 2;
     const y = player.center.y + Math.sin(angle) * this.parent.range - this.spriteSize / 2;
     this.position.x = lerp(1 - this.parent.drag, this.positionPrevious.x, x);

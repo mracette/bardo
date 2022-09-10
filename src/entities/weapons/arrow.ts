@@ -47,7 +47,7 @@ export class ArrowInstance extends WeaponInstance<Arrow> {
     ArrowInstance.staticDraw(graphics);
   };
 
-  updatePosition = (elapsed: number, delta: number) => {
+  updatePosition = () => {
     this.position.x += this.targetNormalized.x * this.parent.speed;
     this.position.y += this.targetNormalized.y * this.parent.speed;
   };
@@ -76,11 +76,11 @@ export class Arrow extends Weapon<ArrowInstance> {
     return this.stats.Damage[this.level - 1];
   }
 
-  update(elapsed: number, delta: number): void {
-    super.update(elapsed, delta);
+  update(): void {
+    super.update();
 
-    if (elapsed - this.lastFired > this.frequency) {
-      this.lastFired = elapsed;
+    if (state.time.elapsed - this.lastFired > this.frequency) {
+      this.lastFired = state.time.elapsed;
       const nearestEnemy = this.findNearestEnemy();
       if (nearestEnemy) {
         this.instances.push(new ArrowInstance(this, nearestEnemy.center));
@@ -89,7 +89,7 @@ export class Arrow extends Weapon<ArrowInstance> {
 
     for (let i = 0; i < this.instances.length; i++) {
       const arrow = this.instances[i];
-      arrow.update(elapsed, delta, i);
+      arrow.update();
       if (arrow.center.distanceTo(player.center) > this.range) {
         arrow.shouldDestroy = true;
       }

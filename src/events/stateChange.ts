@@ -20,6 +20,9 @@ export const handleStateChange = (next: GameState) => {
       drawTiles();
       drawUi();
     }
+    case GameState.Lottery: {
+      state.timestamp.lotteryStart = state.time.elapsed;
+    }
   }
   if (next !== GameState.Upgrade) {
     unregisterEvent(uiResizeEvent);

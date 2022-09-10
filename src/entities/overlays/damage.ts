@@ -60,9 +60,9 @@ export class DamageOverlay extends CachedEntity {
     });
   };
 
-  update(elapsed: number, index: number) {
-    super.update(elapsed, 0, index);
-    const amount = sine((elapsed - this.start) / this.duration);
+  update() {
+    super.update();
+    const amount = sine((state.time.elapsed - this.start) / this.duration);
     // @ts-ignore
     this.scaleOptions.styles.scale.origin = this.center;
     // @ts-ignore
@@ -70,7 +70,7 @@ export class DamageOverlay extends CachedEntity {
     // @ts-ignore
     this.scaleOptions.styles.scale.scale.y = amount;
     DamageOverlay.setPositionFromTarget(this.position, this.target);
-    if (elapsed - this.start >= this.duration) {
+    if (state.time.elapsed - this.start >= this.duration) {
       this.shouldDestroy = true;
     }
   }

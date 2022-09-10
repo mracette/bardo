@@ -10,12 +10,14 @@ import { registerEvent, Trigger, triggerEvent } from '../util/eventRegister';
 import { handleKeyDown, handleKeyUp } from './keyboard';
 import { handleLevelUp } from './levelUp';
 import { handleResize } from './resize';
+import { spawn } from './spawn';
 import { handleStateChange } from './stateChange';
 import { handleWindowResize } from './windowResize';
 
 export const handleInitialize = () => {
   document.body.style.backgroundColor = palette.background;
   canvasElements.map.style.zIndex = '-1';
+  registerEvent(Trigger.Tick, spawn);
   handleLevelUp(false);
   // new Orb();
   new Arrow();

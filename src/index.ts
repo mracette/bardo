@@ -1,13 +1,14 @@
 import Stats from 'stats.js';
-import { aspectRatioResize } from './crco';
+import { aspectRatioResize, Vector2 } from './crco';
 import './dom/styles.css';
+import { drawLottery, LOTTERY_DURATION } from './drawing/drawLottery';
+import { drawThirdEye } from './drawing/drawThirdEye';
 import { drawUi } from './drawing/drawUi';
 import { Player } from './entities/player';
 import { handleInitialize } from './events/initialize';
 import { handleKeyDown, handleKeyUp } from './events/keyboard';
 import { handleLevelUp } from './events/levelUp';
 import { handleResize } from './events/resize';
-import { spawn } from './events/spawn';
 import { handleStateChange } from './events/stateChange';
 import { handleWindowResize } from './events/windowResize';
 import { canvasElements } from './globals/dom';
@@ -41,10 +42,7 @@ const main = (clockTime = 0) => {
   state.time.slowdown =
     player.lastDamaged === 0
       ? 1
-      : Math.min(
-          1,
-          (state.time.elapsedTime - player.lastDamaged) / Player.damageCooldown
-        );
+      : Math.min(1, (state.time.elapsed - player.lastDamaged) / Player.damageCooldown);
 
   // clamp for extra long frames
   state.time.accumulator += Math.min(deltaTimeClock, 50) * state.time.slowdown;
@@ -52,7 +50,7 @@ const main = (clockTime = 0) => {
   while (state.time.accumulator >= deltaTimeFixed) {
     update();
     state.time.accumulator -= deltaTimeFixed;
-    state.time.elapsedTime += deltaTimeFixed;
+    state.time.elapsed += deltaTimeFixed;
   }
 
   render(state.time.accumulator / deltaTimeFixed);
@@ -64,36 +62,50 @@ const update = () => {
   updateStats.update(deltaTimeFixed ? 1000 / deltaTimeFixed : 0, 200);
 
   if (state.gameState === GameState.Intro) {
-    thirdEye.update(state.time.elapsedTime, deltaTimeFixed);
+    thirdEye.update();
   }
 
   if (state.gameState === GameState.Gameplay) {
-    player.update(state.time.elapsedTime, deltaTimeFixed);
+    player.update();
     for (let i = state.weapons.length - 1; i >= 0; i--) {
-      state.weapons[i].update(state.time.elapsedTime, deltaTimeFixed);
+      state.weapons[i].update();
     }
     for (let i = state.enemies.length - 1; i >= 0; i--) {
       if (state.enemies[i].shouldDestroy) {
         state.enemies.splice(i, 1);
       } else {
-        state.enemies[i].update(state.time.elapsedTime, deltaTimeFixed);
+        state.enemies[i].update();
       }
     }
     for (let i = state.items.length - 1; i >= 0; i--) {
       if (state.items[i].shouldDestroy) {
         state.items.splice(i, 1);
       } else {
-        state.items[i].update(state.time.elapsedTime, deltaTimeFixed, i);
+        state.items[i].update();
       }
     }
     for (let i = state.overlays.length - 1; i >= 0; i--) {
       if (state.overlays[i].shouldDestroy) {
         state.overlays.splice(i, 1);
       } else {
-        state.overlays[i].update(state.time.elapsedTime, i);
+        state.overlays[i].update();
       }
     }
-    spawn(state.time.elapsedTime);
+    for (let i = state.hints.length - 1; i >= 0; i--) {
+      if (state.hints[i].shouldDestroy) {
+        triggerEvent(Trigger.Spawn, state.hints[i]);
+        state.hints.splice(i, 1);
+      } else {
+        state.hints[i].update();
+      }
+    }
+    triggerEvent(Trigger.Tick);
+  }
+
+  if (state.gameState === GameState.Lottery) {
+    if (state.time.elapsed - state.timestamp.lotteryStart > LOTTERY_DURATION) {
+      triggerEvent(Trigger.StateChange, GameState.Gameplay);
+    }
   }
 };
 
@@ -117,6 +129,9 @@ const render = (alpha: number) => {
     for (let i = 0; i < state.overlays.length; i++) {
       state.overlays[i].draw(alpha);
     }
+    for (let i = 0; i < state.hints.length; i++) {
+      state.hints[i].draw(alpha);
+    }
 
     player.draw(alpha);
 
@@ -133,6 +148,10 @@ const render = (alpha: number) => {
 
     // this could be drawn a fraction of the time
     drawUi();
+  }
+
+  if (state.gameState === GameState.Lottery) {
+    drawLottery(alpha);
   }
 };
 
@@ -153,6 +172,7 @@ registerEvent(Trigger.Initialize, handleInitialize);
 
 triggerEvent(Trigger.Initialize);
 // triggerEvent(Trigger.StateChange, GameState.Gameplay);
-triggerEvent(Trigger.StateChange, GameState.Intro);
+// triggerEvent(Trigger.StateChange, GameState.Intro);
+triggerEvent(Trigger.StateChange, GameState.Lottery);
 
 window.requestAnimationFrame(main);

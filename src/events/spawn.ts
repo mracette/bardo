@@ -2,17 +2,18 @@ import { random, TAU, Vector2 } from '../crco';
 import { EnemyEntityType, enemyTypeToClass } from '../entities/enemies/enemyTypes';
 import { Goat } from '../entities/enemies/goat';
 import { EntityType } from '../entities/entityType';
+import { Treasure } from '../entities/items/treasure';
 import { EnemyHint } from '../entities/overlays/enemyHint';
 import { state } from '../globals/game';
 import { mapDimensions } from '../globals/map';
 import { player } from '../globals/player';
+import { registerEvent, Trigger, triggerEvent } from '../util/eventRegister';
 
 const MAX_SPAWN = Infinity;
 let SPAWNED = 0;
 
-const enum SpawnType {
-  Flood,
-  Appear
+export const enum SpawnType {
+  GuardedTreasure
 }
 
 const TARGET_ENEMY_COUNT = 30;
@@ -30,18 +31,22 @@ const getEnemyHealth = (type: EnemyEntityType) => {
   return Entity.baseHealth * state.experience.level * 0.5;
 };
 
-export const spawn = (elapsed: number) => {
+export const spawn = () => {
   // const seconds = Math.max(0, elapsed) / 100;
   const target = TARGET_ENEMY_COUNT + state.experience.level * 7;
   const completeRandom = Math.random();
   const weightedRandom = Math.random() * (1 - state.enemies.length / target);
 
   if (weightedRandom > 0.33 || completeRandom > 0.98) {
-    if (elapsed - state.timestamp.lastEnemySpawned < MIN_SPAWN_TIME) {
+    if (state.time.elapsed - state.timestamp.lastEnemySpawned < MIN_SPAWN_TIME) {
       return;
     }
 
-    state.timestamp.lastEnemySpawned = elapsed;
+    if (Math.random() > 0.5) {
+      triggerEvent(Trigger.PreSpawn, SpawnType.GuardedTreasure, state.time.elapsed);
+    }
+
+    state.timestamp.lastEnemySpawned = state.time.elapsed;
     const type = random(ENEMY_TYPES_SPAWN);
 
     let position = random(SPAWN_POSITIONS);
@@ -83,25 +88,34 @@ export const spawn = (elapsed: number) => {
   // }
 };
 
-export const spawnTreasure = (elapsed: number) => {
-  const batchElapsed =
-    (elapsed - state.timestamp.lastBatchSpawned - TREASURE_TIME) / EnemyHint.duration;
-  if (batchElapsed < 1 && !state.batchInProgress) {
-    // batch leadup
-    const x = random(mapDimensions.x * 0.8, 0.1);
-    const y = random(mapDimensions.y * 0.8, 0.1);
-    const hint = new EnemyHint(new Vector2(x, y), elapsed);
-    state.batchInProgress = hint;
-    state.overlays.push(hint);
-  } else if (batchElapsed > 1 && state.batchInProgress) {
-    // batch
-    const count = 12;
-    for (let i = 0; i < count; i++) {
-      const x = state.batchInProgress.center.x + Math.cos((TAU * i) / count) * 1.5;
-      const y = state.batchInProgress.center.y + Math.sin((TAU * i) / count) * 1.5;
-      state.enemies.push(new Goat(new Vector2(x, y), 5));
+const spawnFunctions = {
+  [SpawnType.GuardedTreasure]: {
+    preSpawn: () => {
+      const x = random(mapDimensions.x * 0.8, 0.1);
+      const y = random(mapDimensions.y * 0.8, 0.1);
+      const hint = new EnemyHint(new Vector2(x, y), state.time.elapsed);
+      state.hints.push(hint);
+    },
+    spawn: (hint: EnemyHint) => {
+      const count = 12;
+      state.items.push(
+        // hardcoded sprite size
+        new Treasure(hint.center.clone().add(-0.5, -0.5))
+      );
+      for (let i = 0; i < count; i++) {
+        // hardcoded sprite size
+        const x = hint.center.x - 0.5 + Math.cos((TAU * i) / count) * 1.5;
+        const y = hint.center.y - 0.5 + Math.sin((TAU * i) / count) * 1.5;
+        state.enemies.push(new Goat(new Vector2(x, y), 5));
+      }
     }
-    state.timestamp.lastBatchSpawned = elapsed;
-    state.batchInProgress = false;
   }
 };
+
+registerEvent(Trigger.PreSpawn, (type: SpawnType) => {
+  spawnFunctions[type].preSpawn();
+});
+
+registerEvent(Trigger.Spawn, (hint: EnemyHint) => {
+  spawnFunctions[hint.spawnType].spawn(hint);
+});

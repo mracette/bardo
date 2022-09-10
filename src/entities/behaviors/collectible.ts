@@ -1,4 +1,5 @@
 import { clamp, Vector2 } from '../../crco';
+import { state } from '../../globals/game';
 import { player } from '../../globals/player';
 
 const ACCELERATION = 0.0015;
@@ -9,29 +10,24 @@ export interface Collectible {
   start?: number;
   distance: number;
   initialPosition: Vector2;
-  onCollected: (index: number) => void;
+  onCollected: () => void;
 }
 
-export const addCollectible = (
-  position: Vector2,
-  elapsed: number,
-  behavior: Collectible,
-  index: number
-) => {
+export const addCollectible = (position: Vector2, behavior: Collectible) => {
   const vector = Vector2.from(player.position, position);
   // kick off the sequence
   if (!behavior.start && vector.magnitude < behavior.distance) {
-    behavior.start = elapsed;
+    behavior.start = state.time.elapsed;
     return;
   }
   // end the sequence
   if (behavior.start && vector.magnitude < 1) {
-    behavior.onCollected(index);
+    behavior.onCollected();
     return;
   }
   if (behavior.start) {
     // progress the sequence
-    const delta = elapsed - behavior.start;
+    const delta = state.time.elapsed - behavior.start;
     vector.normalize();
     const velocity = vector
       .clone()

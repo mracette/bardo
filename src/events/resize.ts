@@ -21,10 +21,16 @@ export const handleResize = () => {
   canvasElements.ui.width = canvasElements.ui.clientWidth * DPR;
   canvasElements.ui.height = canvasElements.ui.clientHeight * DPR;
 
-  // if (state.gameState === GameState.Gameplay) {
-  drawTiles();
-  drawUi();
-  // }
+  // style the lottery canvas
+  canvasElements.lottery.width = canvasElements.gameplay.height;
+  canvasElements.lottery.height = canvasElements.gameplay.height;
+  canvasElements.lottery.style.width = canvasElements.gameplay.clientHeight + 'px';
+  canvasElements.lottery.style.height = canvasElements.gameplay.clientHeight + 'px';
+
+  if (state.gameState !== GameState.Intro) {
+    drawTiles();
+    drawUi();
+  }
   if (state.gameState === GameState.Upgrade) {
     drawUpgradeUi();
   }

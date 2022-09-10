@@ -9,7 +9,9 @@ export const enum Trigger {
   KeyDown,
   KeyUp,
   StateChange,
-  LevelUp
+  LevelUp,
+  PreSpawn,
+  Spawn
 }
 
 type EventCallback = (...args: any[]) => void;
@@ -27,7 +29,9 @@ const EVENTS: Record<Trigger, Event[]> = {
   [Trigger.KeyDown]: [],
   [Trigger.KeyUp]: [],
   [Trigger.StateChange]: [],
-  [Trigger.LevelUp]: []
+  [Trigger.LevelUp]: [],
+  [Trigger.PreSpawn]: [],
+  [Trigger.Spawn]: []
 };
 
 let id = 0;

@@ -16,19 +16,15 @@ export abstract class Item<
     this.behaviors = behaviors;
   }
 
-  destroy = (index: number) => {
-    this.shouldDestroy = true;
-  };
-
-  update(elapsed: number, delta: number, index: number) {
-    super.update(elapsed, delta);
-    this.updatePosition(elapsed, delta, index);
+  update() {
+    super.update();
+    this.updatePosition();
     this.updateCenterFromPosition();
   }
 
-  updatePosition(elapsed: number, delta: number, index: number) {
+  updatePosition() {
     if (this.behaviors.collectible) {
-      addCollectible(this.position, elapsed, this.behaviors.collectible, index);
+      addCollectible(this.position, this.behaviors.collectible);
     }
   }
 }

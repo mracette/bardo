@@ -1,7 +1,7 @@
 import { Canvas2DGraphics, Canvas2DGraphicsOptions, Canvas2DStyles } from '../crco';
 import { CanvasCoordinates } from '../crco';
 import { canvasContexts, canvasElements } from './dom';
-import { mapDimensions } from './map';
+import { mapDimensions, tileWidth } from './map';
 
 const fontFamily = 'Comic Sans MS, Chalkboard SE, sans-serif';
 
@@ -65,5 +65,10 @@ export const graphics = {
       textBaseline: 'top',
       fontSize: (coords) => coords.height(0.3)
     }
+  }),
+  lottery: new Canvas2DGraphics(canvasContexts.lottery, {
+    ...sharedOptions,
+    styles: { ...sharedStyles },
+    roughness: 0.4
   })
 };

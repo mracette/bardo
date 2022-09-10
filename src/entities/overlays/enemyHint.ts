@@ -1,4 +1,5 @@
 import { Canvas2DGraphics, PI, star, Vector2 } from '../../crco';
+import { SpawnType } from '../../events/spawn';
 import { state } from '../../globals/game';
 import { origin } from '../../globals/map';
 import { palette } from '../../globals/palette';
@@ -8,9 +9,9 @@ import { spriteCoordinateSystem } from '../sprites';
 
 export class EnemyHint extends CachedEntity {
   start: number;
-
-  shouldDestroy = false;
+  spawnType = SpawnType.GuardedTreasure;
   spriteKey = EntityType.EnemyHint;
+  shouldDestroy = false;
   radius = 1.5;
   spriteSize = 3;
   duration = 2500;
@@ -39,9 +40,9 @@ export class EnemyHint extends CachedEntity {
     });
   };
 
-  update(elapsed: number, index: number) {
-    super.update(elapsed, 0, index);
-    if (elapsed - this.start > EnemyHint.duration) {
+  update() {
+    super.update();
+    if (state.time.elapsed - this.start > EnemyHint.duration) {
       this.shouldDestroy = true;
     }
   }

@@ -7,7 +7,7 @@ import { EntityType } from '../entityType';
 export abstract class WeaponInstance<T extends Weapon<any>> extends CachedEntity {
   destroyOnCollide = false;
 
-  abstract updatePosition: (elapsed: number, delta: number, index: number) => void;
+  abstract updatePosition: () => void;
 
   parent: T;
 
@@ -16,7 +16,7 @@ export abstract class WeaponInstance<T extends Weapon<any>> extends CachedEntity
     this.parent = parent;
   }
 
-  handleCollisions = (damage: number, index: number, elapsed: number) => {
+  handleCollisions = (damage: number) => {
     for (let i = 0; i < state.enemies.length; i++) {
       const enemy = state.enemies[i];
       if (
@@ -29,7 +29,7 @@ export abstract class WeaponInstance<T extends Weapon<any>> extends CachedEntity
           enemy.radius
         )
       ) {
-        enemy.damage(damage, index, elapsed, this.spriteKey as EntityType);
+        enemy.damage(damage, this.spriteKey as EntityType);
         if (this.destroyOnCollide) {
           this.shouldDestroy = true;
         }
@@ -37,11 +37,11 @@ export abstract class WeaponInstance<T extends Weapon<any>> extends CachedEntity
     }
   };
 
-  update(elapsed: number, delta: number, index: number) {
-    super.update(elapsed, delta);
-    this.updatePosition(elapsed, delta, index);
+  update() {
+    super.update();
+    this.updatePosition();
     this.updateCenterFromPosition();
-    this.handleCollisions(this.parent.damage, index, elapsed);
+    this.handleCollisions(this.parent.damage);
   }
 }
 
@@ -69,12 +69,12 @@ export abstract class Weapon<T extends WeaponInstance<any>> {
     }
   }
 
-  update(elapsed: number, delta: number) {
+  update() {
     for (let i = 0; i < this.instances.length; i++) {
       if (this.instances[i].shouldDestroy) {
         this.instances.splice(i, 1);
       } else {
-        this.instances[i].update(elapsed, delta, i);
+        this.instances[i].update();
       }
     }
   }

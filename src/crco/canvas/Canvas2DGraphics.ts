@@ -323,6 +323,25 @@ export class Canvas2DGraphics {
     this.postDrawOps(options);
   }
 
+  public arc(
+    cx: number,
+    cy: number,
+    r: number,
+    startAngle: number,
+    endAngle: number,
+    options: DrawingOptions = {}
+  ) {
+    this.preDrawOps(options);
+    this.context.arc(
+      this.resolveX(cx),
+      this.resolveY(cy),
+      this.resolveScalar(r),
+      startAngle,
+      endAngle
+    );
+    this.postDrawOps(options);
+  }
+
   public circle(cx: number, cy: number, r: number, options: DrawingOptions = {}) {
     const roughness = this.resolveOptions('roughness', options);
     if (roughness) {

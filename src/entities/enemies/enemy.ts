@@ -9,7 +9,7 @@ import { Behaviors } from '../behaviors/behaviors';
 import { addGuarding } from '../behaviors/guarding';
 import { CachedEntity } from '../entity';
 import { EntityType } from '../entityType';
-import { Star } from '../items/stars';
+import { Star } from '../items/star';
 import { DamageOverlay } from '../overlays/damage';
 import { Goat } from './goat';
 import { Prisoner } from './prisoner';
@@ -52,18 +52,18 @@ export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
     );
   }
 
-  damage(amount: number, index: number, elapsed: number, type: EntityType) {
+  damage(amount: number, type: EntityType) {
     const cooldown = this.cooldowns[type];
     // @ts-ignore
     const cooldownPeriod = type in this.cooldownPeriod ? this.cooldownPeriod[type] : 1000;
-    if (cooldown && elapsed - cooldown < cooldownPeriod) return;
+    if (cooldown && state.time.elapsed - cooldown < cooldownPeriod) return;
     zzfx(...[, , 129, 0.01, , 0.15, , , , , , , , 5]);
     this.health -= amount;
-    state.overlays.push(new DamageOverlay(this, String(amount), elapsed));
+    state.overlays.push(new DamageOverlay(this, String(amount), state.time.elapsed));
     if (this.health <= 0) {
       this.destroy();
     }
-    this.cooldowns[type] = elapsed;
+    this.cooldowns[type] = state.time.elapsed;
   }
 
   destroy() {
@@ -73,18 +73,18 @@ export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
     this.shouldDestroy = true;
   }
 
-  update(elapsed: number, delta: number) {
-    super.update(elapsed, delta);
-    this.updatePosition(elapsed, delta);
+  update() {
+    super.update();
+    this.updatePosition();
     this.updateCenterFromPosition();
   }
 
-  updatePosition(elapsed: number, delta: number) {
+  updatePosition() {
     if (this.behaviors.attraction) {
       addAttraction(this.position, this.speed);
     }
     if (this.behaviors.guarding) {
-      addGuarding(this.position, delta, this.behaviors.guarding);
+      addGuarding(this.position, this.behaviors.guarding);
     }
   }
 }

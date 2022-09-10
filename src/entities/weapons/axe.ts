@@ -1,9 +1,5 @@
 import {
   Canvas2DGraphics,
-  circleCircleCollision,
-  lerp,
-  TAU,
-  distance,
   Vector2,
   Canvas2DGraphicsOptions,
   PI,
@@ -51,20 +47,32 @@ export class AxeInstance extends WeaponInstance<Axe> {
   static staticDraw(graphics: Canvas2DGraphics) {
     const startX = -1 / 3;
     const startY = 0;
-    graphics.lineSegments([
-      [startX, startY],
-      [startX, startY - AXE_SEGMENT_HEIGHTS[0] / 2],
-      [startX + AXE_SEGMENT_LENGTHS[1], startY - AXE_SEGMENT_HEIGHTS[1] / 2],
-      [startX + AXE_SEGMENT_LENGTHS[2], startY - AXE_SEGMENT_HEIGHTS[2] / 2],
-      [startX + AXE_SEGMENT_LENGTHS[2], startY + AXE_SEGMENT_HEIGHTS[2] / 2],
-      [startX + AXE_SEGMENT_LENGTHS[1], startY + AXE_SEGMENT_HEIGHTS[1] / 2],
-      [startX, startY + AXE_SEGMENT_HEIGHTS[0] / 2],
-      [startX, startY]
-    ]);
-    graphics.lineSegments([
-      [startX + AXE_SEGMENT_LENGTHS[1], 0.8],
-      [startX + AXE_SEGMENT_LENGTHS[1], startY + startY + AXE_SEGMENT_HEIGHTS[0] / 2]
-    ]);
+    const options = {
+      fill: true,
+      styles: {
+        fillStyle: palette.white
+      }
+    };
+    graphics.lineSegments(
+      [
+        [startX, startY],
+        [startX, startY - AXE_SEGMENT_HEIGHTS[0] / 2],
+        [startX + AXE_SEGMENT_LENGTHS[1], startY - AXE_SEGMENT_HEIGHTS[1] / 2],
+        [startX + AXE_SEGMENT_LENGTHS[2], startY - AXE_SEGMENT_HEIGHTS[2] / 2],
+        [startX + AXE_SEGMENT_LENGTHS[2], startY + AXE_SEGMENT_HEIGHTS[2] / 2],
+        [startX + AXE_SEGMENT_LENGTHS[1], startY + AXE_SEGMENT_HEIGHTS[1] / 2],
+        [startX, startY + AXE_SEGMENT_HEIGHTS[0] / 2],
+        [startX, startY]
+      ],
+      options
+    );
+    graphics.lineSegments(
+      [
+        [startX + AXE_SEGMENT_LENGTHS[1], 0.8],
+        [startX + AXE_SEGMENT_LENGTHS[1], startY + startY + AXE_SEGMENT_HEIGHTS[0] / 2]
+      ],
+      options
+    );
   }
 
   draw(alpha: number) {
@@ -75,8 +83,12 @@ export class AxeInstance extends WeaponInstance<Axe> {
     AxeInstance.staticDraw(graphics);
   };
 
-  updatePosition = (elapsed: number, delta: number) => {
-    const n = normalize(elapsed, this.start, this.start + this.parent.duration);
+  updatePosition = () => {
+    const n = normalize(
+      state.time.elapsed,
+      this.start,
+      this.start + this.parent.duration
+    );
     const angle = -PI / 2 - n * PI;
     this.parent.setPositionFromAngle(this.position, angle, this.initialDirection);
     this.position.add(-this.spriteSize / 2, -this.spriteSize / 2);
@@ -112,21 +124,21 @@ export class Axe extends Weapon<AxeInstance> {
     return this.stats.Damage[this.level - 1];
   }
 
-  update(elapsed: number, delta: number): void {
-    super.update(elapsed, delta);
-    if (elapsed - this.lastFired > this.frequency) {
-      this.lastFired = elapsed;
+  update(): void {
+    super.update();
+    if (state.time.elapsed - this.lastFired > this.frequency) {
+      this.lastFired = state.time.elapsed;
       const position = player.position.clone();
       this.setPositionFromAngle(position, -PI / 2, 1);
       // hardcoded sprite size
       position.add(-1 / 2, -1 / 2);
-      this.instances.push(new AxeInstance(this, position, elapsed));
+      this.instances.push(new AxeInstance(this, position, state.time.elapsed));
     }
 
     for (let i = 0; i < this.instances.length; i++) {
       const instance = this.instances[i];
-      instance.update(elapsed, delta, i);
-      if (elapsed - instance.start > this.duration) {
+      instance.update();
+      if (state.time.elapsed - instance.start > this.duration) {
         instance.shouldDestroy = true;
       }
     }

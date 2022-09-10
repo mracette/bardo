@@ -1,3 +1,5 @@
+- [ ] music
+- [ ] do not count into time in reincarnation timer
 - [ ] remove keyboard shortcuts
 - [ ] investigate music libs / use of midi
 - [ ] bosses are outlined in blue
@@ -7,10 +9,7 @@
 - [ ] add weighted random mechanism for spawning
 - [ ] more weapons
 - [ ] more enemies
-- [ ] improve hitboxes
-  - [ ] arrow hit box shouldn't really be at center
-  - [ ] tragedy hit box should be 2 circles
-- [ ] make circles actually sketchy
+- [ ] polish roughness param
 - [ ] experiment with different enemy sizes
 - [ ] robust cross device testing
 - [x] find a good seed
@@ -24,9 +23,12 @@
 - [x] add road roller
 - [x] tear out crco
 - [x] stuttering when player moves left on some screens
+- [x] seconds until reincarnation timer
+- [x] star bug
 - [ ] remove unused delta and graphics params
-- [ ] seconds until reincarnation timer
-- [ ] star bug
+- [ ] improve hitboxes
+  - [ ] arrow hit box shouldn't really be at center
+  - [ ] tragedy hit box should be 2 circles
 - [ ] increase debounce interval for resizing
 - [ ] set max DPR
 

@@ -14,7 +14,8 @@ export enum GameState {
   Gameplay = 'gameplay',
   Intro = 'intro',
   Paused = 'paused',
-  Upgrade = 'upgrade'
+  Upgrade = 'upgrade',
+  Lottery = 'lottery'
 }
 
 export const state = {
@@ -26,7 +27,8 @@ export const state = {
   },
   timestamp: {
     lastEnemySpawned: 0,
-    lastBatchSpawned: -1000 * 58
+    lastBatchSpawned: -1000 * 58,
+    lotteryStart: 0
   },
   isPaused: false,
   health: 100,
@@ -39,7 +41,7 @@ export const state = {
   },
   time: {
     runTime: 1000 * 60 * 10, // 10 minutes
-    elapsedTime: 0,
+    elapsed: 0,
     clockTimePrevious: 0,
     accumulator: 0,
     slowdown: 0
@@ -48,7 +50,8 @@ export const state = {
   enemies: [] as Enemy<any>[],
   weapons: [] as Weapon<any>[],
   items: [] as Item<any>[],
-  overlays: [] as (DamageOverlay | EnemyHint)[],
+  overlays: [] as DamageOverlay[],
+  hints: [] as EnemyHint[],
   gameState: GameState.Intro,
   upgradeOptionCount: 3,
   upgradeOptions: [] as UpgradeOption[],

@@ -69,7 +69,7 @@ export class MagicCircleInstance extends WeaponInstance<MagicCircle> {
     MagicCircleInstance.staticDraw(graphics);
   };
 
-  updatePosition = (elapsed: number, delta: number) => {
+  updatePosition = () => {
     void 0;
   };
 }
@@ -99,18 +99,18 @@ export class MagicCircle extends Weapon<MagicCircleInstance> {
     return this.stats.Damage[this.level - 1];
   }
 
-  update(elapsed: number, delta: number): void {
-    super.update(elapsed, delta);
+  update(): void {
+    super.update();
 
-    if (elapsed - this.lastFired > this.frequency) {
-      this.lastFired = elapsed;
-      this.instances.push(new MagicCircleInstance(this, elapsed));
+    if (state.time.elapsed - this.lastFired > this.frequency) {
+      this.lastFired = state.time.elapsed;
+      this.instances.push(new MagicCircleInstance(this, state.time.elapsed));
     }
 
     for (let i = 0; i < this.instances.length; i++) {
       const instance = this.instances[i];
-      instance.update(elapsed, delta, i);
-      if (elapsed - instance.start > this.duration) {
+      instance.update();
+      if (state.time.elapsed - instance.start > this.duration) {
         instance.shouldDestroy = true;
       }
     }

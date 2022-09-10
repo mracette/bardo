@@ -2,7 +2,14 @@ body {
   padding: 5%;
 }
 
-canvas#player,canvas#map, canvas#upgrades {
+canvas#player,canvas#map,canvas#upgrades {
+  border: 1px solid white;
+  position: absolute;
+  top: auto;
+  left: auto;
+}
+
+canvas#lottery {
   border: 1px solid white;
   position: absolute;
   top: auto;
