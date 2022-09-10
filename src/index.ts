@@ -104,6 +104,7 @@ const update = () => {
 
   if (state.gameState === GameState.Lottery) {
     if (state.time.elapsed - state.timestamp.lotteryStart > LOTTERY_DURATION) {
+      graphics.lottery.clear();
       triggerEvent(Trigger.StateChange, GameState.Gameplay);
     }
   }
