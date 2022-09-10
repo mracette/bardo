@@ -1,3 +1,12 @@
+Sat, 10 Sep 2022 20:36:00 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 0.42 kb | 430 | NA |
+| Compressed Build | 12.12 kb | 12407 | +2785% |
+| Compressed Build (Adv Zip) | 11.72 kb | 12002 | -3% |
+
+## lottery
+
 Sat, 10 Sep 2022 18:51:38 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |

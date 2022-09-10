@@ -1,4 +1,3 @@
-import { polygon } from '../geometry/polygon';
 import { star } from '../geometry/star';
 import { DPR } from '../js/constants';
 import { isUndefined } from '../js/isUndefined';
@@ -438,46 +437,12 @@ export class Canvas2DGraphics {
     );
   }
 
-  public polygon(
-    cx: number,
-    cy: number,
-    size: number,
-    numPoints?: number,
-    options: DrawingOptions = {}
-  ) {
-    const roughness = this.resolveOptions('roughness', options);
-    this.lineSegments(
-      polygon(
-        this.resolveX(cx, options),
-        this.resolveY(cy, options),
-        this.resolveScalar(size, options),
-        numPoints
-      ),
-      {
-        ...options,
-        useNormalCoordinates: false, // signal that normalization is complete
-        saveAndRestore: true,
-        closeLoop: Boolean(roughness)
-      }
-    );
-  }
-
   public applyStyles(styles?: Canvas2DStyles): void {
-    // not sure about this...
-    // this.assignStylesToContext(this.options.styles!);
-    // if (styles) {
-    //   this.assignStylesToContext(styles);
-    // }
     this.assignStylesToContext({ ...this.options.styles, ...styles });
   }
 
   public text(text: string, cx: number, cy: number, options: DrawingOptions = {}) {
-    const roughness = this.resolveOptions('roughness', options);
-    if (roughness) {
-      this.textRough(text, cx, cy, options);
-    } else {
-      this.textSmooth(text, cx, cy, options);
-    }
+    this.textSmooth(text, cx, cy, options);
   }
 
   private textSmooth(
@@ -495,98 +460,6 @@ export class Canvas2DGraphics {
       maxWidth > 0 ? maxWidth : undefined
     );
     this.postDrawOps(options);
-  }
-
-  private textRough(text: string, cx: number, cy: number, options: DrawingOptions = {}) {
-    const roughness = this.resolveOptions('roughness', options);
-    const resolvedRandom = this.resolveOptions('random', options);
-
-    const {
-      actualBoundingBoxAscent: top,
-      actualBoundingBoxDescent: bottom,
-      width
-    } = this.measureTextInContext(text, options.styles);
-
-    const wordWidthNormal = this.coords.nWidth(width);
-    const wordHeight = top - bottom;
-    const wordHeightNormal = this.coords.nHeight(wordHeight);
-    const letters = text.split('');
-
-    const resolvedTextAlign = this.resolveStyles('textAlign');
-    const resolvedTextBaseline = this.resolveStyles('textBaseline');
-
-    let accumulatedWidth = 0;
-
-    letters.forEach((letter, i) => {
-      let letterX;
-      let letterCx;
-      const metrics = this.measureTextInContext(letter, {
-        ...options.styles
-      });
-      const letterWidthNormal = this.coords.nWidth(metrics.width);
-      if (resolvedTextAlign === 'left') {
-        letterX = cx + accumulatedWidth;
-        letterCx = letterX + letterWidthNormal / 2;
-      } else if (resolvedTextAlign === 'right') {
-        letterX = -wordWidthNormal + cx + accumulatedWidth;
-        letterCx = letterX - letterWidthNormal / 2;
-      } else if (resolvedTextAlign === 'center') {
-        letterX = -wordWidthNormal / 2 + cx + accumulatedWidth;
-        letterCx = letterX;
-      } else {
-        throw new Error(
-          "textAlign must be 'left', 'right', or 'center' to use rough text"
-        );
-      }
-
-      accumulatedWidth += letterWidthNormal * 1.1;
-
-      const letterY = cy;
-      let letterCy;
-      if (resolvedTextBaseline === 'top') {
-        letterCy = letterY - wordHeightNormal / 2;
-      } else if (resolvedTextBaseline === 'bottom') {
-        letterCy = letterY - wordHeightNormal / 2;
-      } else if (resolvedTextBaseline === 'middle') {
-        letterCy = letterY;
-      } else {
-        throw new Error(
-          "textBaseline must be 'top', 'bottom', or 'middle' to use rough text"
-        );
-      }
-
-      const rx = [
-        random(Math.min(0.4, roughness / 20), 0, resolvedRandom),
-        random(Math.min(0.4, roughness / 20), 0, resolvedRandom)
-      ];
-      const ry = [
-        random(Math.min(0.4, roughness / 20), 0, resolvedRandom),
-        random(Math.min(0.4, roughness / 20), 0, resolvedRandom)
-      ];
-
-      this.textSmooth(letter, letterX + rx[0], letterY + ry[0], {
-        ...options,
-        styles: {
-          ...options.styles,
-          rotation: {
-            origin: new Vector2(letterCx, letterCy),
-            rotation: (roughness! * Math.PI) / 16
-          }
-        },
-        saveAndRestore: true
-      });
-      this.textSmooth(letter, letterX + rx[1], letterY + ry[1], {
-        ...options,
-        styles: {
-          ...options.styles,
-          rotation: {
-            origin: new Vector2(letterCx, letterCy),
-            rotation: (-roughness! * Math.PI) / 16
-          }
-        },
-        saveAndRestore: true
-      });
-    });
   }
 
   public clear(): void {
@@ -651,11 +524,6 @@ export class Canvas2DGraphics {
     options: DrawingOptions
   ): NonNullable<DrawingOptions[T]> {
     const resolved = options && param in options ? options[param] : this.options[param];
-    // eslint-disable-next-line no-console
-    console.assert(
-      resolved != undefined,
-      `A value for ${resolved} could not be resolved.`
-    );
     if (param === 'roughness') {
       return clamp(resolved as number, 0, 1) as NonNullable<DrawingOptions[T]>;
     }

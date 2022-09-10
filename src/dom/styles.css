@@ -2,7 +2,7 @@ body {
   padding: 5%;
 }
 
-canvas#player,canvas#map,canvas#upgrades {
+canvas#player,canvas#map,canvas#upgrades,canvas#lottery {
   border: 1px solid white;
   position: absolute;
   top: auto;
@@ -10,10 +10,7 @@ canvas#player,canvas#map,canvas#upgrades {
 }
 
 canvas#lottery {
-  border: 1px solid white;
-  position: absolute;
-  top: auto;
-  left: auto;
+  border: unset;
 }
 
 canvas#ui {

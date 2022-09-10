@@ -28,12 +28,6 @@ type CanvasCoordinatesOptions = Partial<CanvasCoordinates>;
 
 export class CanvasCoordinates {
   constructor(opts: CanvasCoordinatesOptions = {}) {
-    if (isUndefined(opts.canvas) && isSomeUndefined(opts.baseWidth, opts.baseHeight)) {
-      throw new Error(
-        'Invalid options. A canvas element must be supplied if baseHeight or baseWidth are not defined.'
-      );
-    }
-
     const defaults = {
       nxRange: [-1, 1],
       nyRange: [-1, 1],
