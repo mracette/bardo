@@ -21,10 +21,6 @@ export class Prisoner extends Enemy<Pick<Behaviors, 'attraction'>> {
       },
       health
     );
-    this.options = {
-      ...this.options,
-      styles: { ...this.options.styles, lineWidth: (coords) => coords.width(0.025) }
-    };
   }
 
   drawSprite = (graphics: Canvas2DGraphics) => {

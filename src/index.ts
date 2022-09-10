@@ -171,8 +171,8 @@ registerEvent(Trigger.LevelUp, handleLevelUp);
 registerEvent(Trigger.Initialize, handleInitialize);
 
 triggerEvent(Trigger.Initialize);
-triggerEvent(Trigger.StateChange, GameState.Gameplay);
+// triggerEvent(Trigger.StateChange, GameState.Gameplay);
 // triggerEvent(Trigger.StateChange, GameState.Intro);
-// triggerEvent(Trigger.StateChange, GameState.Lottery);
+triggerEvent(Trigger.StateChange, GameState.Lottery);
 
 window.requestAnimationFrame(main);

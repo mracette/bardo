@@ -9,7 +9,7 @@ import { EntityType } from '../entityType';
 import { spriteCoordinateSystem } from '../sprites';
 import { Item } from './item';
 
-const enum StarSize {
+export const enum StarSize {
   Small,
   Medium,
   Large

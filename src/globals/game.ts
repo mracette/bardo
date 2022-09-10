@@ -1,4 +1,4 @@
-import { Vector2 } from '../crco';
+import { Canvas2DGraphics, Vector2 } from '../crco';
 import { Enemy } from '../entities/enemies/enemy';
 import { Goat } from '../entities/enemies/goat';
 import { Tragedy } from '../entities/enemies/tragedy';
@@ -16,6 +16,11 @@ export enum GameState {
   Paused = 'paused',
   Upgrade = 'upgrade',
   Lottery = 'lottery'
+}
+
+export interface LotteryOption {
+  draw: () => void;
+  collect: () => void;
 }
 
 export const state = {
@@ -45,6 +50,9 @@ export const state = {
     clockTimePrevious: 0,
     accumulator: 0,
     slowdown: 0
+  },
+  lottery: {
+    collect: (() => void 0) as LotteryOption['collect']
   },
   batchInProgress: false as EnemyHint | false,
   enemies: [] as Enemy<any>[],

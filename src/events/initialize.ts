@@ -19,7 +19,6 @@ export const handleInitialize = () => {
   canvasElements.map.style.zIndex = '-1';
   registerEvent(Trigger.Tick, spawn);
   handleLevelUp(false);
-  // new Orb();
   new Arrow();
   // new MagicCircle();
   // new Axe();

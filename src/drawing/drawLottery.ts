@@ -1,12 +1,58 @@
-import { Canvas2DGraphics, Canvas2DGraphicsOptions, PI, TAU, Vector2 } from '../crco';
+import {
+  Canvas2DGraphics,
+  Canvas2DGraphicsOptions,
+  CanvasCoordinates,
+  PI,
+  TAU,
+  Vector2
+} from '../crco';
 import { CachedEntity } from '../entities/entity';
+import { Star, StarSize } from '../entities/items/star';
 import { spriteCoordinateSystem } from '../entities/sprites';
-import { state } from '../globals/game';
-import { graphics } from '../globals/graphics';
+import { canvasContexts, canvasElements } from '../globals/dom';
+import { LotteryOption, state } from '../globals/game';
+import { coordinates, graphics } from '../globals/graphics';
 import { mapDimensions } from '../globals/map';
 import { palette } from '../globals/palette';
+import { registerEvent, Trigger } from '../util/eventRegister';
 
-const OPTIONS = new Array(6).fill(null);
+// const OPTIONS: LotteryOption[] = [
+const styles: Canvas2DGraphicsOptions['styles'] = {
+  fontSize: (coords) => coords.width(0.05)
+};
+
+const OPTIONS = [
+  {
+    draw: (x: number, y: number) => {
+      graphics.lottery.star(x, y - 0.08, 0.05, 5, 0.4, {
+        styles: Star.styles[StarSize.Small]
+      });
+      graphics.lottery.text('x20', x, y + 0.08, {
+        styles
+      });
+    },
+    collect: () => null
+  },
+  {
+    draw: (x: number, y: number) => {
+      graphics.lottery.text('Level UP', x, y, {
+        styles: { ...styles, fillStyle: palette.seafoam }
+      });
+    },
+    collect: () => null
+  },
+  {
+    draw: (x: number, y: number) =>
+      graphics.lottery.star(x, y, 0.1, 5, 0.4, { styles: Star.styles[StarSize.Small] }),
+    collect: () => null
+  },
+  {
+    draw: (x: number, y: number) =>
+      graphics.lottery.star(x, y, 0.1, 5, 0.4, { styles: Star.styles[StarSize.Small] }),
+    collect: () => null
+  }
+];
+
 const COLORS = [palette.blue, palette.pink, palette.yellow, palette.teal];
 const RADIUS = 0.4;
 const ANGLE = TAU / OPTIONS.length;
@@ -38,37 +84,6 @@ class LotteryBackground extends CachedEntity {
           roughness: 0.1
         }
       );
-      //   graphics.lineSegments(
-      //     [
-      //       [0, 0],
-      //       [Math.cos(angle1) * radius * 2, Math.sin(angle1) * radius * 2]
-      //     ],
-      //     {
-      //       roughness: 0,
-      //       fill: false,
-      //       stroke: false,
-      //       beginPath: true
-      //     }
-      //   );
-      //   graphics.arc(0, 0, radius, angle1, angle2, {
-      //     roughness: 0,
-      //     fill: false,
-      //     stroke: false,
-      //     beginPath: false
-      //   });
-      //   graphics.lineSegments(
-      //     [
-      //       [0, 0],
-      //       [Math.cos(angle2) * radius * 2, Math.sin(angle2) * radius * 2]
-      //     ],
-      //     {
-      //       roughness: 0,
-      //       fill: true,
-      //       stroke: false,
-      //       beginPath: false,
-      //       styles: { fillStyle: COLORS[i] }
-      //     }
-      //   );
     });
   };
 }
@@ -179,18 +194,27 @@ export const drawLottery = (alpha: number) => {
   lotteryBackground.draw(alpha);
   lotteryHighlight.draw(alpha, lotteryHighlightRotationOptions);
   lotteryArrow.draw(alpha, lotteryArrowRotationOptions);
-  OPTIONS.forEach((_, i) => {
-    graphics.lottery.text(
-      String(i),
-      Math.cos((i + 0.5) * ANGLE) * 0.5,
-      Math.sin((i + 0.5) * ANGLE) * 0.5,
-      {
-        roughness: 0,
-        styles: {
-          textAlign: 'center',
-          textBaseline: 'middle'
-        }
-      }
-    );
-  });
+
+  const itemIndex =
+    (lotteryHighlightRotationOptions.styles.rotation.rotation / ANGLE) % OPTIONS.length;
+
+  for (let i = 0; i < OPTIONS.length; i++) {
+    const x = Math.cos((i + 0.5) * ANGLE) * 0.5;
+    const y = Math.sin((i + 0.5) * ANGLE) * 0.5;
+    OPTIONS[i].draw(x, y);
+    // OPTIONS.forEach((_, i) => {
+    //   graphics.lottery.text(
+    //     String(i),
+    //     Math.cos((i + 0.5) * ANGLE) * 0.5,
+    //     Math.sin((i + 0.5) * ANGLE) * 0.5,
+    //     {
+    //       roughness: 0,
+    //       styles: {
+    //         textAlign: 'center',
+    //         textBaseline: 'middle'
+    //       }
+    //     }
+    //   );
+    // });
+  }
 };

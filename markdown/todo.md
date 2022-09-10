@@ -1,3 +1,4 @@
+- [ ] lottery disappears when resizing
 - [ ] try clearCanvasAndState() instead of clear()
 - [ ] music
 - [ ] do not count into time in reincarnation timer
