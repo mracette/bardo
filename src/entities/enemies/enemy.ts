@@ -57,7 +57,7 @@ export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
     // @ts-ignore
     const cooldownPeriod = type in this.cooldownPeriod ? this.cooldownPeriod[type] : 1000;
     if (cooldown && state.time.elapsed - cooldown < cooldownPeriod) return;
-    zzfx(...[, , 129, 0.01, , 0.15, , , , , , , , 5]);
+    zzfx(...[, , 129, 0.01, , , , , , , , , , 5, , , , 0.4]);
     this.health -= amount;
     state.overlays.push(new DamageOverlay(this, String(amount), state.time.elapsed));
     if (this.health <= 0) {

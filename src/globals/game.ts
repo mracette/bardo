@@ -1,14 +1,11 @@
-import { Canvas2DGraphics, Vector2 } from '../crco';
 import { Enemy } from '../entities/enemies/enemy';
-import { Goat } from '../entities/enemies/goat';
-import { Tragedy } from '../entities/enemies/tragedy';
-import { Wrestler } from '../entities/enemies/wrestler';
 import { Item } from '../entities/items/item';
 import { DamageOverlay } from '../entities/overlays/damage';
 import { EnemyHint } from '../entities/overlays/enemyHint';
+import { ItemHint } from '../entities/overlays/itemHint';
 import { Weapon } from '../entities/weapons/weapon';
+import { SpawnType } from '../events/spawn';
 import { UpgradeOption } from '../util/getRandomUpgrade';
-import { mapCenter } from './map';
 
 export enum GameState {
   Gameplay = 'gameplay',
@@ -32,11 +29,18 @@ export const state = {
   },
   timestamp: {
     lastEnemySpawned: 0,
-    lastBatchSpawned: -1000 * 58,
+    spawn: {
+      [SpawnType.GuardedTreasure]: -1000 * 90,
+      [SpawnType.Heart]: 0,
+      // [SpawnType.Mushroom]: -1000 * 30
+      // [SpawnType.Heart]: -1000 * 60,
+      [SpawnType.Mushroom]: -1000 * 120
+    },
     lotteryStart: 0
   },
   isPaused: false,
-  health: 100,
+  isShroomed: false,
+  health: 50,
   maxHealth: 100,
   experience: {
     current: 0,
@@ -59,7 +63,7 @@ export const state = {
   weapons: [] as Weapon<any>[],
   items: [] as Item<any>[],
   overlays: [] as DamageOverlay[],
-  hints: [] as EnemyHint[],
+  hints: [] as (EnemyHint | ItemHint)[],
   gameState: GameState.Intro,
   upgradeOptionCount: 3,
   upgradeOptions: [] as UpgradeOption[],

@@ -15,6 +15,7 @@ import { coordinates, graphics } from '../globals/graphics';
 import { mapDimensions } from '../globals/map';
 import { palette } from '../globals/palette';
 import { registerEvent, Trigger } from '../util/eventRegister';
+import { zzfx } from '../zzfx';
 
 // const OPTIONS: LotteryOption[] = [
 const styles: Canvas2DGraphicsOptions['styles'] = {
@@ -182,6 +183,8 @@ const lotteryHighlight = new LotteryHighlight(
 
 export const LOTTERY_DURATION = 15000;
 
+let previousItemIndex: number;
+
 export const drawLottery = (alpha: number) => {
   const elapsed = state.time.elapsed - state.timestamp.lotteryStart;
   // @ts-ignore
@@ -197,6 +200,11 @@ export const drawLottery = (alpha: number) => {
 
   const itemIndex =
     (lotteryHighlightRotationOptions.styles.rotation.rotation / ANGLE) % OPTIONS.length;
+
+  if (itemIndex !== previousItemIndex) {
+    previousItemIndex = itemIndex;
+    zzfx(...[, , 320]);
+  }
 
   for (let i = 0; i < OPTIONS.length; i++) {
     const x = Math.cos((i + 0.5) * ANGLE) * 0.5;

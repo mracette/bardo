@@ -27,12 +27,6 @@ import { registerEvent, Trigger, triggerEvent } from './util/eventRegister';
 const fps = 60;
 const deltaTimeFixed = 1000 / fps;
 
-// export const runTime = 1000 * 60 * 10; // 10 minutes
-// export let elapsedTime = 0;
-// let clockTimePrevious = 0;
-// let accumulator = 0;
-// let slowdown = 0;
-
 const main = (clockTime = 0) => {
   // stats.begin();
   const isPaused = state.gameState === GameState.Paused;
@@ -172,8 +166,8 @@ registerEvent(Trigger.LevelUp, handleLevelUp);
 registerEvent(Trigger.Initialize, handleInitialize);
 
 triggerEvent(Trigger.Initialize);
-// triggerEvent(Trigger.StateChange, GameState.Gameplay);
+triggerEvent(Trigger.StateChange, GameState.Gameplay);
 // triggerEvent(Trigger.StateChange, GameState.Intro);
-triggerEvent(Trigger.StateChange, GameState.Lottery);
+// triggerEvent(Trigger.StateChange, GameState.Lottery);
 
 window.requestAnimationFrame(main);

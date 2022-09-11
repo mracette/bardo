@@ -15,6 +15,9 @@ export const enum EntityType {
   // items
   Star,
   Treasure,
+  Mushroom,
+  Heart,
   // overlays
-  EnemyHint
+  EnemyHint,
+  HeartHint
 }

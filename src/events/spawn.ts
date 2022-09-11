@@ -2,8 +2,11 @@ import { random, TAU, Vector2 } from '../crco';
 import { EnemyEntityType, enemyTypeToClass } from '../entities/enemies/enemyTypes';
 import { Goat } from '../entities/enemies/goat';
 import { EntityType } from '../entities/entityType';
+import { Heart } from '../entities/items/heart';
+import { Mushroom } from '../entities/items/mushroom';
 import { Treasure } from '../entities/items/treasure';
 import { EnemyHint } from '../entities/overlays/enemyHint';
+import { ItemHint } from '../entities/overlays/itemHint';
 import { state } from '../globals/game';
 import { mapDimensions } from '../globals/map';
 import { player } from '../globals/player';
@@ -13,12 +16,13 @@ const MAX_SPAWN = Infinity;
 let SPAWNED = 0;
 
 export const enum SpawnType {
-  GuardedTreasure
+  GuardedTreasure,
+  Mushroom,
+  Heart
 }
 
 const TARGET_ENEMY_COUNT = 30;
 const MIN_SPAWN_TIME = 250;
-const TREASURE_TIME = 1000 * 60 * 1; // 1 minute
 const SPAWN_POSITIONS = [0, 1, 2, 3];
 const ENEMY_TYPES_SPAWN = Object.keys(enemyTypeToClass).filter(
   (key) => Number(key) !== EntityType.Goat
@@ -40,10 +44,6 @@ export const spawn = () => {
   if (weightedRandom > 0.33 || completeRandom > 0.98) {
     if (state.time.elapsed - state.timestamp.lastEnemySpawned < MIN_SPAWN_TIME) {
       return;
-    }
-
-    if (Math.random() > 0.5) {
-      triggerEvent(Trigger.PreSpawn, SpawnType.GuardedTreasure, state.time.elapsed);
     }
 
     state.timestamp.lastEnemySpawned = state.time.elapsed;
@@ -83,14 +83,63 @@ export const spawn = () => {
     const Enemy = enemyTypeToClass[type];
     state.enemies.push(new Enemy(new Vector2(x!, y!), getEnemyHealth(type)));
   }
-  // if (elapsed - state.timestamp.lastBatchSpawned >= TREASURE_TIME) {
-  //   spawnTreasure(elapsed);
-  // }
+  if (
+    state.time.elapsed - state.timestamp.spawn[SpawnType.GuardedTreasure] >=
+    spawnFunctions[SpawnType.GuardedTreasure].frequency
+  ) {
+    triggerEvent(Trigger.PreSpawn, SpawnType.GuardedTreasure, state.time.elapsed);
+  }
+  if (
+    state.time.elapsed - state.timestamp.spawn[SpawnType.Heart] >=
+    spawnFunctions[SpawnType.Heart].frequency
+  ) {
+    triggerEvent(Trigger.PreSpawn, SpawnType.Heart, state.time.elapsed);
+  }
+  if (
+    state.time.elapsed - state.timestamp.spawn[SpawnType.Mushroom] >=
+    spawnFunctions[SpawnType.Mushroom].frequency
+  ) {
+    triggerEvent(Trigger.PreSpawn, SpawnType.Mushroom, state.time.elapsed);
+  }
 };
 
 const spawnFunctions = {
-  [SpawnType.GuardedTreasure]: {
+  [SpawnType.Heart]: {
+    frequency: 1000 * 60 * 1,
     preSpawn: () => {
+      state.timestamp.spawn[SpawnType.Heart] = state.time.elapsed;
+      const x = random(mapDimensions.x * 0.8, 0.1);
+      const y = random(mapDimensions.y * 0.8, 0.1);
+      const hint = new ItemHint(new Vector2(x, y), state.time.elapsed, SpawnType.Heart);
+      state.hints.push(hint);
+    },
+    spawn: (hint: ItemHint) => {
+      // hardcoded sprite size
+      state.items.push(new Heart(hint.center.clone().add(-0.5, -0.5)));
+    }
+  },
+  [SpawnType.Mushroom]: {
+    frequency: 1000 * 60 * 2,
+    preSpawn: () => {
+      state.timestamp.spawn[SpawnType.Mushroom] = state.time.elapsed;
+      const x = random(mapDimensions.x * 0.8, 0.1);
+      const y = random(mapDimensions.y * 0.8, 0.1);
+      const hint = new ItemHint(
+        new Vector2(x, y),
+        state.time.elapsed,
+        SpawnType.Mushroom
+      );
+      state.hints.push(hint);
+    },
+    spawn: (hint: ItemHint) => {
+      console.log('spawn mushro');
+      state.items.push(new Mushroom(hint.center.clone().add(-0.5, -0.5)));
+    }
+  },
+  [SpawnType.GuardedTreasure]: {
+    frequency: 1000 * 60 * 2,
+    preSpawn: () => {
+      state.timestamp.spawn[SpawnType.GuardedTreasure] = state.time.elapsed;
       const x = random(mapDimensions.x * 0.8, 0.1);
       const y = random(mapDimensions.y * 0.8, 0.1);
       const hint = new EnemyHint(new Vector2(x, y), state.time.elapsed);

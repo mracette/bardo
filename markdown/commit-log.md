@@ -1,3 +1,12 @@
+Sun, 11 Sep 2022 22:59:29 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 0.42 kb | 430 | NA |
+| Compressed Build | 12.44 kb | 12740 | +2863% |
+| Compressed Build (Adv Zip) | 12.04 kb | 12325 | -3% |
+
+## clear lottery graphics when finished
+
 Sat, 10 Sep 2022 22:03:22 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |
