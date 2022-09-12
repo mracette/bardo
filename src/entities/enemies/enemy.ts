@@ -26,7 +26,7 @@ export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
   cooldownPeriod = {
     [EntityType.Axe]: 1000,
     [EntityType.MagicCircle]: 250,
-    [EntityType.Orb]: 1000,
+    [EntityType.Orb]: 500,
     [EntityType.Arrow]: 1
   };
   cooldowns: Partial<Record<EntityType, number>> = {};

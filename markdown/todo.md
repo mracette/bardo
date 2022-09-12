@@ -1,4 +1,3 @@
-- [ ] lottery disappears when resizing
 - [ ] try clearCanvasAndState() instead of clear()
 - [ ] music
 - [ ] do not count into time in reincarnation timer
@@ -6,14 +5,15 @@
 - [ ] investigate music libs / use of midi
 - [ ] bosses are outlined in blue
 - [ ] info on pause screen
-- [ ] treasure animation
-- [ ] powerups (mushroom)
-- [ ] add weighted random mechanism for spawning
 - [ ] more weapons
 - [ ] more enemies
 - [ ] polish roughness param
 - [ ] experiment with different enemy sizes
 - [ ] robust cross device testing
+- [x] lottery disappears when resizing
+- [x] treasure animation
+- [x] powerups (mushroom)
+- [x] add weighted random mechanism for spawning
 - [x] find a good seed
 - [x] use escape for pause
 - [x] event / subscribe framework (e.g. onresize, ontick, onmousemove, etc)

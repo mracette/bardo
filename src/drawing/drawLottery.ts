@@ -25,7 +25,8 @@ import { zzfx } from '../zzfx';
 
 const cacheKeys = {
   [EntityType.Mushroom]: EntityType.Mushroom + 'lotto',
-  [EntityType.Heart]: EntityType.Heart + 'lotto'
+  [EntityType.Heart]: EntityType.Heart + 'lotto',
+  [EntityType.Star]: EntityType.Star + 'lotto'
 };
 
 export const cacheLotteryGraphics = () => {
@@ -43,6 +44,17 @@ export const cacheLotteryGraphics = () => {
     1,
     spriteCoordinateSystem.external
   );
+  cache.sprites[cacheKeys[EntityType.Star]] = makeSprites(
+    graphics.lottery,
+    (graphics: Canvas2DGraphics) =>
+      graphics.star(0, 0, 0.4, 5, 0.4, {
+        fill: true,
+        styles: Star.styles[StarSize.Small]
+      }),
+    graphics.lottery.coords.width(3 * tileWidth),
+    1,
+    spriteCoordinateSystem.internal
+  );
 };
 
 const styles: Canvas2DGraphicsOptions['styles'] = {
@@ -52,12 +64,18 @@ const styles: Canvas2DGraphicsOptions['styles'] = {
 export const LOTTERY_OPTIONS = [
   {
     draw: (x: number, y: number) => {
-      graphics.lottery.star(x, y - 0.08, 0.05, 5, 0.4, {
-        styles: Star.styles[StarSize.Small]
-      });
-      graphics.lottery.text(`x20`, x, y + 0.08, {
-        styles
-      });
+      try {
+        graphics.lottery.drawImage(
+          cache.sprites[cacheKeys[EntityType.Star]][0]!,
+          x - 0.1,
+          y - 0.15
+        );
+        graphics.lottery.text(`x20`, x, y + 0.08, {
+          styles
+        });
+      } catch {
+        cacheLotteryGraphics();
+      }
     },
     collect: () => {
       state.lottery.starsToCollect = 20;

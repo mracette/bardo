@@ -16,8 +16,6 @@ export const handleResize = () => {
     cache.sprites[key].length = 0;
   }
 
-  // cacheLotteryGraphics();
-
   // style the ui canvas
   const rect = canvasElements.map.getBoundingClientRect();
   canvasElements.ui.style.height = String(rect.height * 0.1);

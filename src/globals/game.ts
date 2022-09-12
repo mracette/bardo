@@ -44,7 +44,7 @@ export const state = {
     start: 0,
     duration: 10 * 1000
   },
-  health: 50,
+  health: 100,
   maxHealth: 100,
   experience: {
     current: 0,
