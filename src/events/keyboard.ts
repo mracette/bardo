@@ -19,7 +19,7 @@ export const handleKeyDown = (key: string) => {
       triggerEvent(Trigger.StateChange, GameState.Gameplay);
     }
   }
-  if (key === 'Shift') {
+  if (key === 'i') {
     state.experience.current = state.experience.next;
     triggerEvent(Trigger.LevelUp);
   }
