@@ -1,3 +1,12 @@
+Mon, 12 Sep 2022 22:38:15 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 0.42 kb | 430 | NA |
+| Compressed Build | 13.27 kb | 13584 | +3059% |
+| Compressed Build (Adv Zip) | 12.85 kb | 13160 | -3% |
+
+## stats and endgame
+
 Mon, 12 Sep 2022 20:42:18 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |
@@ -228,7 +237,7 @@ Thu, 01 Sep 2022 03:37:39 GMT
 | Compressed Build | 12.78 kb | 13084 | -65% |
 | Compressed Build (Adv Zip) | 12.25 kb | 12542 | -4% |
 
-## lots...
+## lots
 
 Wed, 31 Aug 2022 03:08:12 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
@@ -423,7 +432,6 @@ Sun, 14 Aug 2022 21:59:12 GMT
 | Build | 52.88 kb | 54146 | NA |
 | Compressed Build | 10.48 kb | 10735 | -80% |
 | Compressed Build (Adv Zip) | 9.60 kb | 9830 | -8% |
-
 
 ## importing svg data to measure impact
 
