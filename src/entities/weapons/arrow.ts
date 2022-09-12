@@ -69,7 +69,8 @@ export class Arrow extends Weapon<ArrowInstance> {
   }
 
   get frequency() {
-    return 1000 / this.stats['Firing Rate'][this.level - 1];
+    const multiplier = state.shroomed.active ? 1 / 10 : 1;
+    return (multiplier * 1000) / this.stats['Firing Rate'][this.level - 1];
   }
 
   get damage() {

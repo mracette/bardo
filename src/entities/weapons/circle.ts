@@ -79,12 +79,16 @@ export class MagicCircle extends Weapon<MagicCircleInstance> {
   range = 5;
   speed = 0.1;
   lastFired = 0;
-  frequency = 1500;
   duration = 1500;
   type = EntityType.MagicCircle;
 
   constructor(equipped?: boolean) {
     super(equipped);
+  }
+
+  get frequency() {
+    const multiplier = state.shroomed.active ? 1 / 10 : 1;
+    return 1500 * multiplier;
   }
 
   get stats() {

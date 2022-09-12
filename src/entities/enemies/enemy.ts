@@ -23,7 +23,6 @@ export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
   damageInflicted = 5;
   maxHealth: number;
   health: number;
-  speed = 0.0185;
   cooldownPeriod = {
     [EntityType.Axe]: 1000,
     [EntityType.MagicCircle]: 250,
@@ -39,6 +38,11 @@ export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
     this.behaviors = behaviors;
     this.health = health;
     this.maxHealth = health;
+  }
+
+  get speed() {
+    const multiplier = state.shroomed.active ? 0.1 : 1;
+    return multiplier * 0.0185;
   }
 
   drawDamage(amount: number) {

@@ -23,7 +23,6 @@ export class Player extends CachedEntity {
   radius = 0.4;
   spriteSize = 1.5;
   spriteKey = EntityType.Player;
-  speed = 0.065;
   coordinateSystem = spriteCoordinateSystem.external;
   forwardDirection: 'left' | 'right' = 'right';
   mirrorImageOptions: Canvas2DGraphicsOptions = {
@@ -41,6 +40,11 @@ export class Player extends CachedEntity {
   }
 
   static damageCooldown = 400;
+
+  get speed() {
+    const multiplier = state.shroomed.active ? 2 : 1;
+    return 0.065 * multiplier;
+  }
 
   get quadrant() {
     const percent = 0.1;

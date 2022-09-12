@@ -4,6 +4,7 @@ import './dom/styles.css';
 import { drawLottery, LOTTERY_DURATION } from './drawing/drawLottery';
 import { drawThirdEye } from './drawing/drawThirdEye';
 import { drawUi } from './drawing/drawUi';
+import { sineFunctions } from './entities/items/mushroom';
 import { Player } from './entities/player';
 import { handleInitialize } from './events/initialize';
 import { handleKeyDown, handleKeyUp } from './events/keyboard';
@@ -129,6 +130,23 @@ const render = (alpha: number) => {
     }
 
     player.draw(alpha);
+
+    if (state.shroomed.active) {
+      graphics.gameplay.rect(0, 0, mapDimensions.x, mapDimensions.y, {
+        roughness: 0,
+        fill: true,
+        styles: {
+          fillStyle: `rgba(${sineFunctions.r(state.time.elapsed)},${sineFunctions.g(
+            state.time.elapsed
+          )},${sineFunctions.b(state.time.elapsed)})`,
+          alpha: 0.25
+        }
+      });
+      const elapsed = state.time.elapsed - state.shroomed.start;
+      if (elapsed > state.shroomed.duration) {
+        state.shroomed.active = false;
+      }
+    }
 
     if (state.time.slowdown < 1) {
       graphics.gameplay.rect(0, 0, mapDimensions.x, mapDimensions.y, {

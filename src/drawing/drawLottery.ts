@@ -1,3 +1,4 @@
+import { mushroom } from '../../svg/mushroom';
 import {
   Canvas2DGraphics,
   Canvas2DGraphicsOptions,
@@ -44,7 +45,9 @@ const OPTIONS = [
   },
   {
     draw: (x: number, y: number) =>
-      graphics.lottery.star(x, y, 0.1, 5, 0.4, { styles: Star.styles[StarSize.Small] }),
+      mushroom.forEach((lines) => {
+        graphics.lottery.lineSegments(lines);
+      }),
     collect: () => null
   },
   {

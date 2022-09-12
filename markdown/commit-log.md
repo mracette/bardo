@@ -1,3 +1,12 @@
+Mon, 12 Sep 2022 00:08:22 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 0.42 kb | 430 | NA |
+| Compressed Build | 12.58 kb | 12877 | +2895% |
+| Compressed Build (Adv Zip) | 12.16 kb | 12454 | -3% |
+
+## more items
+
 Sun, 11 Sep 2022 22:59:29 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |

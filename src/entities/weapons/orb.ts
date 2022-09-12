@@ -43,7 +43,6 @@ export class OrbInstance extends WeaponInstance<Orb> {
 export class Orb extends Weapon<OrbInstance> {
   level = 1;
   drag = 0.33;
-  period = 2000;
   type = EntityType.Orb;
 
   constructor(equipped?: boolean) {
@@ -53,6 +52,11 @@ export class Orb extends Weapon<OrbInstance> {
 
   get stats() {
     return stats[EntityType.Orb];
+  }
+
+  get period() {
+    const multiplier = state.shroomed.active ? 1 / 10 : 1;
+    return multiplier * 2000;
   }
 
   get orbs() {

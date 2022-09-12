@@ -112,7 +112,8 @@ export class Axe extends Weapon<AxeInstance> {
   }
 
   get frequency() {
-    return 1000 / this.stats['Firing Rate'][this.level - 1];
+    const multiplier = state.shroomed.active ? 1 / 10 : 1;
+    return (multiplier * 1000) / this.stats['Firing Rate'][this.level - 1];
   }
 
   setPositionFromAngle(position: Vector2, angle: number, direction: number) {

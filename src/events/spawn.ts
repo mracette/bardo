@@ -119,7 +119,7 @@ const spawnFunctions = {
     }
   },
   [SpawnType.Mushroom]: {
-    frequency: 1000 * 60 * 2,
+    frequency: 1000 * 60 * 3,
     preSpawn: () => {
       state.timestamp.spawn[SpawnType.Mushroom] = state.time.elapsed;
       const x = random(mapDimensions.x * 0.8, 0.1);
@@ -132,7 +132,6 @@ const spawnFunctions = {
       state.hints.push(hint);
     },
     spawn: (hint: ItemHint) => {
-      console.log('spawn mushro');
       state.items.push(new Mushroom(hint.center.clone().add(-0.5, -0.5)));
     }
   },

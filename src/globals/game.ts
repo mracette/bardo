@@ -34,12 +34,16 @@ export const state = {
       [SpawnType.Heart]: 0,
       // [SpawnType.Mushroom]: -1000 * 30
       // [SpawnType.Heart]: -1000 * 60,
-      [SpawnType.Mushroom]: -1000 * 120
+      [SpawnType.Mushroom]: -1000 * 180
     },
     lotteryStart: 0
   },
   isPaused: false,
-  isShroomed: false,
+  shroomed: {
+    active: false,
+    start: 0,
+    duration: 10 * 1000
+  },
   health: 50,
   maxHealth: 100,
   experience: {
