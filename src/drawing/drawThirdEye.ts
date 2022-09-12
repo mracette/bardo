@@ -6,7 +6,7 @@ import { Canvas2DGraphics, PI, Vector2 } from '../crco';
 import { palette } from '../globals/palette';
 
 const roughness = 0.2;
-const startText = 'Press any key to start';
+const startText = 'Press enter to start';
 const translation = new Vector2(0, 10);
 
 export const drawThirdEye = (graphics: Canvas2DGraphics) => {
@@ -83,39 +83,8 @@ export const drawThirdEye = (graphics: Canvas2DGraphics) => {
     roughness: 0,
     styles: { translation }
   });
-  // graphics.text('The journey between', 50, 30, {
-  //   roughness: 0,
-  //   styles: { fontSize: (coords) => coords.width(0.035), translation }
-  // });
-  // graphics.text('lives on Earth', 50, 35, {
-  //   roughness: 0,
-  //   styles: { fontSize: (coords) => coords.width(0.035), translation }
-  // });
   graphics.text(startText, 50, 92, {
     roughness: 0,
     styles: { fontSize: (coords) => coords.width(0.04) }
   });
-  // graphics.lineSegments(
-  //   [
-  //     [50, 79],
-  //     [50, 87]
-  //   ],
-  //   {
-  //     roughness
-  //   }
-  // );
-  // graphics.lineSegments(
-  //   [
-  //     [47, 85],
-  //     [50, 87],
-  //     [53, 85]
-  //   ],
-  //   {
-  //     roughness
-  //   }
-  // );
-
-  // graphics.text(subtitle, 50, 95, {
-  //   styles: { fontSize: (coords) => coords.width(0.04) }
-  // });
 };

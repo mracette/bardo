@@ -1,3 +1,12 @@
+Mon, 12 Sep 2022 22:54:59 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 0.42 kb | 430 | NA |
+| Compressed Build | 13.24 kb | 13561 | +3054% |
+| Compressed Build (Adv Zip) | 12.83 kb | 13139 | -3% |
+
+## update deploy branch
+
 Mon, 12 Sep 2022 22:39:14 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |

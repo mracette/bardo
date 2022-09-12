@@ -9,13 +9,13 @@ import { SpawnType } from '../events/spawn';
 import { UpgradeOption } from '../util/getRandomUpgrade';
 
 export enum GameState {
-  Reincarnation = 'reincarnation',
-  Gameover = 'gameover',
-  Gameplay = 'gameplay',
-  Intro = 'intro',
-  Paused = 'paused',
-  Upgrade = 'upgrade',
-  Lottery = 'lottery'
+  Reincarnation,
+  Gameover,
+  Gameplay,
+  Intro,
+  Paused,
+  Upgrade,
+  Lottery
 }
 
 export interface LotteryOption {
@@ -36,8 +36,6 @@ export const state = {
       [SpawnType.GuardedTreasure]: -1000 * 90,
       [SpawnType.Heart]: 0,
       [SpawnType.Mushroom]: -1000 * 30
-      // [SpawnType.Heart]: -1000 * 60,
-      // [SpawnType.Mushroom]: -1000 * 180
     },
     lotteryStart: 0
   },
@@ -56,7 +54,7 @@ export const state = {
     last: 0
   },
   time: {
-    runTime: 1000 * 60 * 0.05, // 10 minutes
+    runTime: 1000 * 60 * 10,
     elapsedInGame: 0,
     elapsed: 0,
     clockTimePrevious: 0,

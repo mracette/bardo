@@ -1,17 +1,16 @@
-import { isUndefined, mod } from '../crco';
+import { mod } from '../crco';
 import { drawUpgradeUi } from '../drawing/drawUpgradeUi';
-import { debug } from '../globals/debug';
 import { GameState, state } from '../globals/game';
 import { graphics } from '../globals/graphics';
 import { player } from '../globals/player';
 import { Trigger, triggerEvent } from '../util/eventRegister';
 
 export const handleKeyDown = (key: string) => {
-  if (state.gameState === GameState.Intro) {
-    triggerEvent(Trigger.StateChange, GameState.Gameplay);
-    return;
-  }
   if (key === 'Enter') {
+    if (state.gameState === GameState.Intro) {
+      triggerEvent(Trigger.StateChange, GameState.Gameplay);
+      return;
+    }
     if (state.gameState === GameState.Upgrade) {
       const selected = state.upgradeOptions[state.upgradeSelected];
       selected.onChooseUpgrade();
