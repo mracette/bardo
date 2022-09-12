@@ -20,7 +20,7 @@ export const handleResize = () => {
   const rect = canvasElements.map.getBoundingClientRect();
   canvasElements.ui.style.height = String(rect.height * 0.1);
   canvasElements.ui.style.left = String(rect.left);
-  canvasElements.ui.style.top = String(rect.top - canvasElements.ui.clientHeight);
+  canvasElements.ui.style.top = String(rect.top - canvasElements.ui.clientHeight * 0.99);
   canvasElements.ui.style.width = String(rect.width);
   canvasElements.ui.width = canvasElements.ui.clientWidth * DPR;
   canvasElements.ui.height = canvasElements.ui.clientHeight * DPR;
@@ -31,7 +31,10 @@ export const handleResize = () => {
   canvasElements.lottery.style.width = canvasElements.gameplay.clientHeight + 'px';
   canvasElements.lottery.style.height = canvasElements.gameplay.clientHeight + 'px';
 
-  if (state.gameState !== GameState.Intro) {
+  if (
+    state.gameState !== GameState.Intro &&
+    state.gameState !== GameState.Reincarnation
+  ) {
     drawTiles();
     drawUi();
   }

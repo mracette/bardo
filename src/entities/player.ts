@@ -8,11 +8,12 @@ import {
   lerp
 } from '../crco';
 import { drawUi } from '../drawing/drawUi';
-import { state } from '../globals/game';
+import { GameState, state } from '../globals/game';
 import { graphics } from '../globals/graphics';
 import { mapDimensions, tileWidth } from '../globals/map';
 import { SQRT_2_2 } from '../globals/math';
 import { palette } from '../globals/palette';
+import { Trigger, triggerEvent } from '../util/eventRegister';
 import { zzfx } from '../zzfx';
 import { CachedEntity } from './entity';
 import { EntityType } from './entityType';
@@ -117,6 +118,10 @@ export class Player extends CachedEntity {
     zzfx(...[, , 528, 0.01, , 0.48, , 0.6, -11.6, , , , 0.32, 4.2]);
     this.lastDamaged = elapsed;
     state.health -= amount;
+    state.stats.damageTaken += amount;
+    if (state.health <= 0) {
+      triggerEvent(Trigger.StateChange, GameState.Gameover);
+    }
     drawUi();
   }
 

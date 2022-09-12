@@ -6,14 +6,11 @@ import {
   CanvasCoordinates,
   Vector2
 } from '../src/crco';
-import { drawThirdEye } from '../src/drawing/drawThirdEye';
-import { drawTiles } from '../src/drawing/drawTiles';
 import { canvasContexts, canvasElements } from '../src/globals/dom';
-import { graphics, sharedOptions, sharedStyles } from '../src/globals/graphics';
+import { sharedOptions, sharedStyles } from '../src/globals/graphics';
 import { mapDimensions } from '../src/globals/map';
 import { palette } from '../src/globals/palette';
 import { registerEvent, Trigger } from '../src/util/eventRegister';
-import { pointsOnPath } from '../src/util/pointsOnPath';
 import { goat } from '../svg/goat';
 import { heart } from '../svg/heart';
 import { mask } from '../svg/mask';

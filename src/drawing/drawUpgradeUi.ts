@@ -58,7 +58,10 @@ const drawUpgradeOption = (option: UpgradeOption, selected: boolean, index: numb
 
   option.subText.forEach((content, i) => {
     panelGraphics.text(content, 0, 0.3 + 0.2 * i, {
-      roughness: 0
+      roughness: 0,
+      styles: {
+        fontSize: (coords) => coords.width(0.08)
+      }
     });
   });
 

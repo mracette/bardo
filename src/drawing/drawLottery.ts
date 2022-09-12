@@ -19,6 +19,7 @@ import { coordinates, graphics } from '../globals/graphics';
 import { mapDimensions, tileWidth } from '../globals/map';
 import { palette } from '../globals/palette';
 import { player } from '../globals/player';
+import { stats } from '../globals/stats';
 import { registerEvent, Trigger, triggerEvent } from '../util/eventRegister';
 import { makeSprites } from '../util/makeSprites';
 import { zzfx } from '../zzfx';
@@ -123,6 +124,7 @@ export const LOTTERY_OPTIONS = [
       }
     },
     collect: () => {
+      state.stats.mushroomsEaten++;
       state.shroomed.active = true;
       state.shroomed.start = state.time.elapsed;
     }

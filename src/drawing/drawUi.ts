@@ -27,10 +27,10 @@ export const drawUi = () => {
   });
 
   // text
-  const millis = state.time.runTime - state.time.elapsed;
+  const millis = state.time.runTime - state.time.elapsedInGame;
   const seconds = millis / 1000;
   const minutes = Math.floor(seconds / 60);
-  const secondsRemainder = Math.round(seconds - minutes * 60);
+  const secondsRemainder = Math.floor(seconds - minutes * 60);
   graphics.ui.text(
     `${String(minutes).padStart(2, '0')}:${String(secondsRemainder).padStart(
       2,

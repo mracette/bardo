@@ -3,7 +3,6 @@ body {
 }
 
 canvas#player,canvas#map,canvas#upgrades,canvas#lottery {
-  border: 1px solid white;
   position: absolute;
   top: auto;
   left: auto;

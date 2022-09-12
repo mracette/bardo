@@ -2,7 +2,7 @@
 import { aspectRatioResize, Vector2 } from './crco';
 import './dom/styles.css';
 import { drawLottery, LOTTERY_DURATION } from './drawing/drawLottery';
-import { drawThirdEye } from './drawing/drawThirdEye';
+import { drawStats } from './drawing/drawStats';
 import { drawUi } from './drawing/drawUi';
 import { Heart } from './entities/items/heart';
 import { sineFunctions } from './entities/items/mushroom';
@@ -48,6 +48,9 @@ const main = (clockTime = 0) => {
     update();
     state.time.accumulator -= deltaTimeFixed;
     state.time.elapsed += deltaTimeFixed;
+    if (state.gameState === GameState.Gameplay) {
+      state.time.elapsedInGame += deltaTimeFixed;
+    }
   }
 
   render(state.time.accumulator / deltaTimeFixed);
@@ -57,6 +60,10 @@ const main = (clockTime = 0) => {
 
 const update = () => {
   // updateStats.update(deltaTimeFixed ? 1000 / deltaTimeFixed : 0, 200);
+
+  if (state.time.elapsedInGame > state.time.runTime) {
+    triggerEvent(Trigger.StateChange, GameState.Reincarnation);
+  }
 
   if (state.gameState === GameState.Intro) {
     thirdEye.update();
@@ -186,6 +193,14 @@ const render = (alpha: number) => {
     drawUi();
   }
 
+  if (
+    state.gameState === GameState.Paused ||
+    state.gameState === GameState.Gameover ||
+    state.gameState === GameState.Reincarnation
+  ) {
+    drawStats();
+  }
+
   if (state.gameState === GameState.Lottery) {
     drawLottery(alpha);
   }
@@ -207,8 +222,9 @@ registerEvent(Trigger.LevelUp, handleLevelUp);
 registerEvent(Trigger.Initialize, handleInitialize);
 
 triggerEvent(Trigger.Initialize);
-triggerEvent(Trigger.StateChange, GameState.Gameplay);
+// triggerEvent(Trigger.StateChange, GameState.Gameplay);
 // triggerEvent(Trigger.StateChange, GameState.Intro);
 // triggerEvent(Trigger.StateChange, GameState.Lottery);
+// triggerEvent(Trigger.StateChange, GameState.Paused);
 
 window.requestAnimationFrame(main);

@@ -1,4 +1,5 @@
 import { Enemy } from '../entities/enemies/enemy';
+import { EntityType } from '../entities/entityType';
 import { Item } from '../entities/items/item';
 import { DamageOverlay } from '../entities/overlays/damage';
 import { EnemyHint } from '../entities/overlays/enemyHint';
@@ -8,6 +9,8 @@ import { SpawnType } from '../events/spawn';
 import { UpgradeOption } from '../util/getRandomUpgrade';
 
 export enum GameState {
+  Reincarnation = 'reincarnation',
+  Gameover = 'gameover',
   Gameplay = 'gameplay',
   Intro = 'intro',
   Paused = 'paused',
@@ -53,11 +56,25 @@ export const state = {
     last: 0
   },
   time: {
-    runTime: 1000 * 60 * 10, // 10 minutes
+    runTime: 1000 * 60 * 0.05, // 10 minutes
+    elapsedInGame: 0,
     elapsed: 0,
     clockTimePrevious: 0,
     accumulator: 0,
     slowdown: 0
+  },
+  stats: {
+    total: 0,
+    weapons: {
+      [EntityType.Arrow]: 0,
+      [EntityType.Axe]: 0,
+      [EntityType.MagicCircle]: 0,
+      [EntityType.Orb]: 0
+    },
+    hallucinationsBanished: 0,
+    damageTaken: 0,
+    mushroomsEaten: 0,
+    chestsUnlocked: 0
   },
   lottery: {
     starsToCollect: 0,
