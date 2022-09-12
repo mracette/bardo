@@ -32,9 +32,9 @@ export const state = {
     spawn: {
       [SpawnType.GuardedTreasure]: -1000 * 90,
       [SpawnType.Heart]: 0,
-      // [SpawnType.Mushroom]: -1000 * 30
+      [SpawnType.Mushroom]: -1000 * 30
       // [SpawnType.Heart]: -1000 * 60,
-      [SpawnType.Mushroom]: -1000 * 180
+      // [SpawnType.Mushroom]: -1000 * 180
     },
     lotteryStart: 0
   },
@@ -60,7 +60,12 @@ export const state = {
     slowdown: 0
   },
   lottery: {
-    collect: (() => void 0) as LotteryOption['collect']
+    starsToCollect: 0,
+    heartsToCollect: 0,
+    lastCollected: 0,
+    interval: 100,
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    collect: () => {}
   },
   batchInProgress: false as EnemyHint | false,
   enemies: [] as Enemy<any>[],

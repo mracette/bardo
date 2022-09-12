@@ -1,16 +1,22 @@
-import { DPR, mulberry32 } from '../crco';
+import { mushroom } from '../../svg/mushroom';
+import { Canvas2DGraphics, DPR, mulberry32 } from '../crco';
+import { cacheLotteryGraphics } from '../drawing/drawLottery';
 import { drawTiles } from '../drawing/drawTiles';
 import { drawUi } from '../drawing/drawUi';
 import { drawUpgradeUi } from '../drawing/drawUpgradeUi';
-import { cache } from '../entities/sprites';
+import { cache, spriteCoordinateSystem } from '../entities/sprites';
 import { canvasElements } from '../globals/dom';
 import { GameState, state } from '../globals/game';
+import { graphics } from '../globals/graphics';
+import { makeSprites } from '../util/makeSprites';
 
 export const handleResize = () => {
   // setting length = 0 will trigger garbage collection
   for (const key in cache.sprites) {
     cache.sprites[key].length = 0;
   }
+
+  // cacheLotteryGraphics();
 
   // style the ui canvas
   const rect = canvasElements.map.getBoundingClientRect();

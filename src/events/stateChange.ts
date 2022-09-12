@@ -1,3 +1,4 @@
+import { cacheLotteryGraphics, LOTTERY_OPTIONS } from '../drawing/drawLottery';
 import { drawTiles } from '../drawing/drawTiles';
 import { drawUi } from '../drawing/drawUi';
 import { drawUpgradeUi } from '../drawing/drawUpgradeUi';

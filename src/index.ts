@@ -4,7 +4,9 @@ import './dom/styles.css';
 import { drawLottery, LOTTERY_DURATION } from './drawing/drawLottery';
 import { drawThirdEye } from './drawing/drawThirdEye';
 import { drawUi } from './drawing/drawUi';
+import { Heart } from './entities/items/heart';
 import { sineFunctions } from './entities/items/mushroom';
+import { Star } from './entities/items/star';
 import { Player } from './entities/player';
 import { handleInitialize } from './events/initialize';
 import { handleKeyDown, handleKeyUp } from './events/keyboard';
@@ -101,6 +103,7 @@ const update = () => {
     if (state.time.elapsed - state.timestamp.lotteryStart > LOTTERY_DURATION) {
       graphics.lottery.clear();
       triggerEvent(Trigger.StateChange, GameState.Gameplay);
+      state.lottery.collect();
     }
   }
 };
@@ -130,6 +133,26 @@ const render = (alpha: number) => {
     }
 
     player.draw(alpha);
+
+    if (
+      state.lottery.starsToCollect > 0 &&
+      state.time.elapsed - state.lottery.lastCollected > state.lottery.interval
+    ) {
+      state.items.push(
+        new Star(player.center.clone().add(-0.75, -2), state.experience.level)
+      );
+      state.lottery.starsToCollect--;
+      state.lottery.lastCollected = state.time.elapsed;
+    }
+
+    if (
+      state.lottery.heartsToCollect > 0 &&
+      state.time.elapsed - state.lottery.lastCollected > state.lottery.interval
+    ) {
+      state.items.push(new Heart(player.center.clone().add(-0.75, -1)));
+      state.lottery.heartsToCollect--;
+      state.lottery.lastCollected = state.time.elapsed;
+    }
 
     if (state.shroomed.active) {
       graphics.gameplay.rect(0, 0, mapDimensions.x, mapDimensions.y, {
@@ -186,6 +209,6 @@ registerEvent(Trigger.Initialize, handleInitialize);
 triggerEvent(Trigger.Initialize);
 triggerEvent(Trigger.StateChange, GameState.Gameplay);
 // triggerEvent(Trigger.StateChange, GameState.Intro);
-// triggerEvent(Trigger.StateChange, GameState.Lottery);
+triggerEvent(Trigger.StateChange, GameState.Lottery);
 
 window.requestAnimationFrame(main);

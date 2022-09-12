@@ -26,11 +26,12 @@ export abstract class CachedEntity {
   spriteCount = 4;
   spriteIndex = 0;
 
+  options?: Canvas2DGraphicsOptions;
+
   abstract spriteSize: number;
   abstract radius: number;
 
   abstract coordinateSystem: typeof spriteCoordinateSystem[keyof typeof spriteCoordinateSystem];
-  abstract options?: Canvas2DGraphicsOptions;
   abstract drawSprite: (graphics: Canvas2DGraphics) => void;
 
   constructor(position: Vector2, drawGraphics: Canvas2DGraphics = graphics.gameplay) {
@@ -64,7 +65,7 @@ export abstract class CachedEntity {
     const key = [
       String(this.spriteKey),
       String(this.radius),
-      JSON.stringify(this.options)
+      JSON.stringify(this.options ?? {})
     ].join('~');
     this.cache.key = key;
     return key;

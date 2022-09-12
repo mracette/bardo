@@ -8,58 +8,112 @@ import {
   Vector2
 } from '../crco';
 import { CachedEntity } from '../entities/entity';
+import { EntityType } from '../entities/entityType';
+import { Heart } from '../entities/items/heart';
+import { Mushroom } from '../entities/items/mushroom';
 import { Star, StarSize } from '../entities/items/star';
-import { spriteCoordinateSystem } from '../entities/sprites';
+import { cache, spriteCoordinateSystem } from '../entities/sprites';
 import { canvasContexts, canvasElements } from '../globals/dom';
 import { LotteryOption, state } from '../globals/game';
 import { coordinates, graphics } from '../globals/graphics';
-import { mapDimensions } from '../globals/map';
+import { mapDimensions, tileWidth } from '../globals/map';
 import { palette } from '../globals/palette';
-import { registerEvent, Trigger } from '../util/eventRegister';
+import { player } from '../globals/player';
+import { registerEvent, Trigger, triggerEvent } from '../util/eventRegister';
+import { makeSprites } from '../util/makeSprites';
 import { zzfx } from '../zzfx';
 
-// const OPTIONS: LotteryOption[] = [
+const cacheKeys = {
+  [EntityType.Mushroom]: EntityType.Mushroom + 'lotto',
+  [EntityType.Heart]: EntityType.Heart + 'lotto'
+};
+
+export const cacheLotteryGraphics = () => {
+  cache.sprites[cacheKeys[EntityType.Mushroom]] = makeSprites(
+    graphics.lottery,
+    Mushroom.staticDraw,
+    graphics.lottery.coords.width(4 * tileWidth),
+    1,
+    spriteCoordinateSystem.external
+  );
+  cache.sprites[cacheKeys[EntityType.Heart]] = makeSprites(
+    graphics.lottery,
+    Heart.staticDraw,
+    graphics.lottery.coords.width(3 * tileWidth),
+    1,
+    spriteCoordinateSystem.external
+  );
+};
+
 const styles: Canvas2DGraphicsOptions['styles'] = {
   fontSize: (coords) => coords.width(0.05)
 };
 
-const OPTIONS = [
+export const LOTTERY_OPTIONS = [
   {
     draw: (x: number, y: number) => {
       graphics.lottery.star(x, y - 0.08, 0.05, 5, 0.4, {
         styles: Star.styles[StarSize.Small]
       });
-      graphics.lottery.text('x20', x, y + 0.08, {
+      graphics.lottery.text(`x20`, x, y + 0.08, {
         styles
       });
     },
-    collect: () => null
+    collect: () => {
+      state.lottery.starsToCollect = 20;
+    }
   },
   {
     draw: (x: number, y: number) => {
-      graphics.lottery.text('Level UP', x, y, {
+      graphics.lottery.text('+1 Level', x, y, {
         styles: { ...styles, fillStyle: palette.seafoam }
       });
     },
-    collect: () => null
+    collect: () => {
+      triggerEvent(Trigger.LevelUp);
+    }
   },
   {
-    draw: (x: number, y: number) =>
-      mushroom.forEach((lines) => {
-        graphics.lottery.lineSegments(lines);
-      }),
-    collect: () => null
+    draw: (x: number, y: number) => {
+      try {
+        graphics.lottery.drawImage(
+          cache.sprites[cacheKeys[EntityType.Heart]][0]!,
+          x - 0.1,
+          y - 0.1
+        );
+        graphics.lottery.text(`x3`, x, y + 0.13, {
+          styles
+        });
+      } catch {
+        cacheLotteryGraphics();
+      }
+    },
+    collect: () => {
+      state.lottery.heartsToCollect = 3;
+    }
   },
   {
-    draw: (x: number, y: number) =>
-      graphics.lottery.star(x, y, 0.1, 5, 0.4, { styles: Star.styles[StarSize.Small] }),
-    collect: () => null
+    draw: (x: number, y: number) => {
+      try {
+        graphics.lottery.drawImage(
+          cache.sprites[cacheKeys[EntityType.Mushroom]][0]!,
+          x - 0.1,
+          y - 0.1
+        );
+      } catch {
+        cacheLotteryGraphics();
+      }
+    },
+    collect: () => {
+      state.shroomed.active = true;
+      state.shroomed.start = state.time.elapsed;
+    }
   }
 ];
 
 const COLORS = [palette.blue, palette.pink, palette.yellow, palette.teal];
 const RADIUS = 0.4;
-const ANGLE = TAU / OPTIONS.length;
+const ANGLE = TAU / LOTTERY_OPTIONS.length;
 
 class LotteryBackground extends CachedEntity {
   coordinateSystem = spriteCoordinateSystem.internal;
@@ -69,13 +123,13 @@ class LotteryBackground extends CachedEntity {
   spriteKey = 'lb';
   drawSprite = (graphics: Canvas2DGraphics) => {
     // outline
-    const angle = TAU / OPTIONS.length;
+    const angle = TAU / LOTTERY_OPTIONS.length;
     graphics.circle(0, 0, RADIUS, {
       roughness: 0.05,
       fill: true,
       styles: { fillStyle: palette.background }
     });
-    OPTIONS.forEach((option, i) => {
+    LOTTERY_OPTIONS.forEach((option, i) => {
       const angle1 = i * angle;
       const angle2 = (i + 1) * angle;
       const color = COLORS[i];
@@ -189,6 +243,7 @@ export const LOTTERY_DURATION = 15000;
 let previousItemIndex: number;
 
 export const drawLottery = (alpha: number) => {
+  graphics.lottery.clear();
   const elapsed = state.time.elapsed - state.timestamp.lotteryStart;
   // @ts-ignore
   lotteryArrowRotationOptions.styles.rotation.rotation +=
@@ -202,30 +257,18 @@ export const drawLottery = (alpha: number) => {
   lotteryArrow.draw(alpha, lotteryArrowRotationOptions);
 
   const itemIndex =
-    (lotteryHighlightRotationOptions.styles.rotation.rotation / ANGLE) % OPTIONS.length;
+    Math.round(lotteryHighlightRotationOptions.styles.rotation.rotation / ANGLE) %
+    LOTTERY_OPTIONS.length;
 
   if (itemIndex !== previousItemIndex) {
     previousItemIndex = itemIndex;
+    state.lottery.collect = LOTTERY_OPTIONS[itemIndex].collect;
     zzfx(...[, , 320]);
   }
 
-  for (let i = 0; i < OPTIONS.length; i++) {
+  for (let i = 0; i < LOTTERY_OPTIONS.length; i++) {
     const x = Math.cos((i + 0.5) * ANGLE) * 0.5;
     const y = Math.sin((i + 0.5) * ANGLE) * 0.5;
-    OPTIONS[i].draw(x, y);
-    // OPTIONS.forEach((_, i) => {
-    //   graphics.lottery.text(
-    //     String(i),
-    //     Math.cos((i + 0.5) * ANGLE) * 0.5,
-    //     Math.sin((i + 0.5) * ANGLE) * 0.5,
-    //     {
-    //       roughness: 0,
-    //       styles: {
-    //         textAlign: 'center',
-    //         textBaseline: 'middle'
-    //       }
-    //     }
-    //   );
-    // });
+    LOTTERY_OPTIONS[i].draw(x, y);
   }
 };

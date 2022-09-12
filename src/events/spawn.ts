@@ -136,7 +136,7 @@ const spawnFunctions = {
     }
   },
   [SpawnType.GuardedTreasure]: {
-    frequency: 1000 * 60 * 2,
+    frequency: 1000 * 60 * 3,
     preSpawn: () => {
       state.timestamp.spawn[SpawnType.GuardedTreasure] = state.time.elapsed;
       const x = random(mapDimensions.x * 0.8, 0.1);

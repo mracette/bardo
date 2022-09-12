@@ -4,6 +4,7 @@ import { treasure } from '../../../svg/treasure';
 import { Canvas2DGraphicsOptions, Canvas2DGraphics, Vector2 } from '../../crco';
 import { drawUi } from '../../drawing/drawUi';
 import { GameState, state } from '../../globals/game';
+import { graphics } from '../../globals/graphics';
 import { palette } from '../../globals/palette';
 import { Trigger, triggerEvent } from '../../util/eventRegister';
 import { zzfx } from '../../zzfx';
@@ -13,6 +14,7 @@ import { spriteCoordinateSystem } from '../sprites';
 import { Item } from './item';
 
 const period = 2500;
+const duration = 10 * 1000;
 
 export const sineFunctions = {
   r: boundedSine({ yMin: 0, yMax: 255, period }),
@@ -25,11 +27,18 @@ export class Mushroom extends Item<Pick<Behaviors, 'collectible'>> {
   spriteSize = 1;
   radius = 0.25;
   spriteKey = EntityType.Mushroom;
-  options: Canvas2DGraphicsOptions = {
+
+  static options: Canvas2DGraphicsOptions = {
     fill: true,
     styles: {
       fillStyle: palette.blue
     }
+  };
+
+  static staticDraw = (graphics: Canvas2DGraphics) => {
+    mushroom.forEach((lines) => {
+      graphics.lineSegments(lines, this.options);
+    });
   };
 
   constructor(position: Vector2) {
@@ -48,8 +57,6 @@ export class Mushroom extends Item<Pick<Behaviors, 'collectible'>> {
   }
 
   drawSprite = (graphics: Canvas2DGraphics) => {
-    mushroom.forEach((lines) => {
-      graphics.lineSegments(lines, this.options);
-    });
+    Mushroom.staticDraw(graphics);
   };
 }

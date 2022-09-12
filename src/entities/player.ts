@@ -105,7 +105,8 @@ export class Player extends CachedEntity {
           enemy.center.x,
           enemy.center.y,
           enemy.radius
-        )
+        ) &&
+        !state.shroomed.active
       ) {
         this.takeDamage(enemy.damageInflicted, state.time.elapsed);
       }

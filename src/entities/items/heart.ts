@@ -4,6 +4,7 @@ import { treasure } from '../../../svg/treasure';
 import { Canvas2DGraphicsOptions, Canvas2DGraphics, Vector2 } from '../../crco';
 import { drawUi } from '../../drawing/drawUi';
 import { GameState, state } from '../../globals/game';
+import { graphics } from '../../globals/graphics';
 import { palette } from '../../globals/palette';
 import { player } from '../../globals/player';
 import { Trigger, triggerEvent } from '../../util/eventRegister';
@@ -18,11 +19,18 @@ export class Heart extends Item<Pick<Behaviors, 'collectible'>> {
   spriteSize = 1;
   radius = 0.25;
   spriteKey = EntityType.Heart;
-  options: Canvas2DGraphicsOptions = {
+
+  static options: Canvas2DGraphicsOptions = {
     fill: true,
     styles: {
       fillStyle: palette.red
     }
+  };
+
+  static staticDraw = (graphics: Canvas2DGraphics) => {
+    heart.forEach((lines) => {
+      graphics.lineSegments(lines, Heart.options);
+    });
   };
 
   constructor(position: Vector2) {
@@ -40,8 +48,6 @@ export class Heart extends Item<Pick<Behaviors, 'collectible'>> {
   }
 
   drawSprite = (graphics: Canvas2DGraphics) => {
-    heart.forEach((lines) => {
-      graphics.lineSegments(lines, this.options);
-    });
+    Heart.staticDraw(graphics);
   };
 }
