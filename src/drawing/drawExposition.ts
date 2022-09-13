@@ -66,7 +66,7 @@ export const drawExposition = (graphics: Canvas2DGraphics) => {
   y += intervalSmall;
   graphics.text(`hallucinations that arise from previous actions.`, x, y, options);
   y += interval;
-  graphics.text(`For prepared and appropriately trained individuals,`, x, y, options);
+  graphics.text(`For prepared individuals,`, x, y, options);
   y += intervalSmall;
   graphics.text(`Bardo offers a great opportunity for liberation.`, x, y, options);
   y += interval;
