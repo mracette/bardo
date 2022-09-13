@@ -57,7 +57,7 @@ export const state = {
   },
   time: {
     clockTime: 0,
-    runTime: 1000 * 60 * 0.5,
+    runTime: 1000 * 60 * 10,
     elapsedInGame: 0,
     elapsed: 0,
     clockTimePrevious: 0,
