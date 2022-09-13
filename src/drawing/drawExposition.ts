@@ -62,9 +62,9 @@ export const drawExposition = (graphics: Canvas2DGraphics) => {
   y += intervalSmall;
   graphics.text(`between two lives on Earth.`, x, y, options);
   y += interval;
-  graphics.text(`In this state, one may experience terrifying`, x, y, options);
+  graphics.text(`In this state, one may experience`, x, y, options);
   y += intervalSmall;
-  graphics.text(`hallucinations that arise from previous actions.`, x, y, options);
+  graphics.text(`terrifying hallucinations`, x, y, options);
   y += interval;
   graphics.text(`For prepared individuals,`, x, y, options);
   y += intervalSmall;

@@ -67,11 +67,11 @@ new ResizeObserver(() => {
 }).observe(canvasElements.map);
 
 window.addEventListener('keydown', (event) => {
-  triggerEvent(Trigger.KeyDown, event.keyCode);
+  triggerEvent(Trigger.KeyDown, event.key);
 });
 
 window.addEventListener('keyup', (event) => {
-  triggerEvent(Trigger.KeyUp, event.keyCode);
+  triggerEvent(Trigger.KeyUp, event.key);
 });
 
 window.addEventListener('resize', () => {

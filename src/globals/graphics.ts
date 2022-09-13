@@ -1,9 +1,9 @@
 import { Canvas2DGraphics, Canvas2DGraphicsOptions, Canvas2DStyles } from '../crco';
 import { CanvasCoordinates } from '../crco';
 import { canvasContexts, canvasElements } from './dom';
-import { mapDimensions, tileWidth } from './map';
+import { mapDimensions } from './map';
 
-const fontFamily = 'Comic Sans MS, Chalkboard SE, sans-serif';
+const fontFamily = 'Comic Sans MS, sans-serif';
 
 export const sharedStyles: Canvas2DStyles = {
   strokeStyle: 'white',
