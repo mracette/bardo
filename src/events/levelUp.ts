@@ -1,4 +1,5 @@
 import { GameState, state } from '../globals/game';
+import { playSound, Sounds } from '../globals/sounds';
 import { Trigger, triggerEvent } from '../util/eventRegister';
 import { getRandomUpgrade } from '../util/getRandomUpgrade';
 import { zzfx } from '../zzfx';
@@ -10,9 +11,7 @@ export const handleLevelUp = (sound = true, upgrade = true) => {
   state.upgradeOptions.length = 0;
   state.upgradeOptions = getRandomUpgrade();
   if (sound) {
-    zzfx(
-      ...[0.2, 0, 80, 0.3, 0.5, 1.25, 2, 0.1, -0.73, 3.42, -430, 0.09, 0.17, , , , 0.19]
-    );
+    playSound(Sounds.LevelUp);
   }
   if (upgrade && state.upgradeOptions.length > 0) {
     triggerEvent(Trigger.StateChange, GameState.Upgrade);

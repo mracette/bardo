@@ -13,6 +13,7 @@ import { graphics } from '../globals/graphics';
 import { mapDimensions, tileWidth } from '../globals/map';
 import { SQRT_2_2 } from '../globals/math';
 import { palette } from '../globals/palette';
+import { playSound, Sounds } from '../globals/sounds';
 import { Trigger, triggerEvent } from '../util/eventRegister';
 import { zzfx } from '../zzfx';
 import { CachedEntity } from './entity';
@@ -117,7 +118,7 @@ export class Player extends CachedEntity {
   }
 
   takeDamage(amount: number, elapsed: number) {
-    zzfx(...[, , 528, 0.01, , 0.48, , 0.6, -11.6, , , , 0.32, 4.2]);
+    playSound(Sounds.Damage);
     this.lastDamaged = elapsed;
     state.health -= amount;
     state.stats.damageTaken += amount;

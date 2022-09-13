@@ -7,6 +7,7 @@ import { GameState, state } from '../../globals/game';
 import { graphics } from '../../globals/graphics';
 import { palette } from '../../globals/palette';
 import { player } from '../../globals/player';
+import { playSound, Sounds } from '../../globals/sounds';
 import { Trigger, triggerEvent } from '../../util/eventRegister';
 import { zzfx } from '../../zzfx';
 import { Behaviors } from '../behaviors/behaviors';
@@ -39,7 +40,7 @@ export class Heart extends Item<Pick<Behaviors, 'collectible'>> {
         distance: 1,
         initialPosition: position.clone(),
         onCollected: () => {
-          zzfx(...[, , 20, 0.04, , 0.6, , 1.31, , , -990, 0.06, 0.17, , , 0.04, 0.07]);
+          playSound(Sounds.Heart);
           state.health = Math.min(state.maxHealth, state.health + 20);
           this.shouldDestroy = true;
         }

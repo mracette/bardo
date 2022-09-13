@@ -78,4 +78,18 @@ export abstract class Weapon<T extends WeaponInstance<any>> {
       }
     }
   }
+
+  // TODO: inefficient. improve this?
+  findNearestEnemy() {
+    let shortestDistance = Infinity;
+    let enemy;
+    for (let i = 0; i < state.enemies.length; i++) {
+      const enemyDistance = player.center.distanceTo(state.enemies[i].center);
+      if (enemyDistance < shortestDistance) {
+        shortestDistance = enemyDistance;
+        enemy = state.enemies[i];
+      }
+    }
+    return enemy;
+  }
 }

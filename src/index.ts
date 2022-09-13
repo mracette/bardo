@@ -1,3 +1,9 @@
+declare global {
+  interface Window {
+    zzfx: (...args: any[]) => void;
+  }
+}
+
 import { aspectRatioResize } from './crco';
 import './dom/styles.css';
 import { drawExposition } from './drawing/drawExposition';
@@ -107,7 +113,7 @@ const update = () => {
   }
 
   if (state.gameState === GameState.Lottery) {
-    if (state.time.elapsedInGame - state.timestamp.lotteryStart > LOTTERY_DURATION) {
+    if (state.time.clockTime - state.timestamp.lotteryStart > LOTTERY_DURATION) {
       graphics.lottery.clear();
       triggerEvent(Trigger.StateChange, GameState.Gameplay);
       state.lottery.collect();

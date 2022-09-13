@@ -2,6 +2,7 @@ import { Canvas2DGraphicsOptions, random, Vector2 } from '../../crco';
 import { state } from '../../globals/game';
 import { graphics } from '../../globals/graphics';
 import { palette } from '../../globals/palette';
+import { playSound, Sounds } from '../../globals/sounds';
 import { zzfx } from '../../zzfx';
 import { addAttraction } from '../behaviors/attraction';
 import { Behaviors } from '../behaviors/behaviors';
@@ -56,7 +57,7 @@ export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
     const cooldownPeriod = type in this.cooldownPeriod ? this.cooldownPeriod[type] : 1000;
     if (cooldown && state.time.elapsedInGame - cooldown < cooldownPeriod) return;
     if (state.time.elapsedInGame - state.timestamp.lastDamageSoundPlayed > 50) {
-      zzfx(...[, , 129, 0.01, , , , , , , , , , 5, , , , 0.4]);
+      playSound(Sounds.Enemy);
       state.timestamp.lastDamageSoundPlayed = state.time.elapsedInGame;
     }
     this.health -= amount;

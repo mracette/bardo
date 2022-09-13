@@ -35,7 +35,7 @@ export const state = {
     lastDamageSoundPlayed: 0,
     lastEnemySpawned: 0,
     spawn: {
-      [SpawnType.GuardedTreasure]: -1000 * 90,
+      [SpawnType.GuardedTreasure]: -1000 * 100,
       [SpawnType.Heart]: 0,
       [SpawnType.Mushroom]: -1000 * 30
     },
@@ -57,7 +57,7 @@ export const state = {
   },
   time: {
     clockTime: 0,
-    runTime: 1000 * 60 * 10,
+    runTime: 1000 * 60 * 0.5,
     elapsedInGame: 0,
     elapsed: 0,
     clockTimePrevious: 0,

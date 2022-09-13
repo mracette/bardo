@@ -16,8 +16,8 @@ export const stats: Record<WeaponEntityType, Record<string, number[]>> = {
     Area: [1.5, 1.7, 2, 2.4, 2.9, 3.5, 4.2]
   },
   [EntityType.Axe]: {
-    Damage: [16, 18, 21, 25, 30, 36, 43],
-    'Firing Rate': [0.5, 0.6, 0.7, 0.9, 1.1, 1.4, 1.7]
+    Damage: [14, 15, 17, 20, 24, 29, 35],
+    'Firing Rate': [0.4, 0.5, 0.6, 0.8, 1, 1.3, 1.6]
   }
 };
 

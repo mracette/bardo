@@ -26,10 +26,15 @@ export class AxeInstance extends WeaponInstance<Axe> {
   initialDirection: number;
   rotationOptions: Canvas2DGraphicsOptions;
 
-  constructor(parent: Axe, position: Vector2, start: number) {
+  constructor(
+    parent: Axe,
+    position: Vector2,
+    direction: 'left' | 'right',
+    start: number
+  ) {
     super(parent, position);
     this.start = start;
-    this.initialDirection = player.forwardDirection === 'left' ? 1 : -1;
+    this.initialDirection = direction === 'left' ? 1 : -1;
     this.rotationOptions = {
       styles: {
         rotation: {
@@ -128,12 +133,17 @@ export class Axe extends Weapon<AxeInstance> {
   update(): void {
     super.update();
     if (state.time.elapsedInGame - this.lastFired > this.frequency) {
+      const nearestEnemy = this.findNearestEnemy();
+      const enemyDirection =
+        nearestEnemy && nearestEnemy.position.x < player.position.x ? 'left' : 'right';
       this.lastFired = state.time.elapsedInGame;
       const position = player.position.clone();
       this.setPositionFromAngle(position, -PI / 2, 1);
       // hardcoded sprite size
       position.add(-1 / 2, -1 / 2);
-      this.instances.push(new AxeInstance(this, position, state.time.elapsedInGame));
+      this.instances.push(
+        new AxeInstance(this, position, enemyDirection, state.time.elapsedInGame)
+      );
     }
 
     for (let i = 0; i < this.instances.length; i++) {

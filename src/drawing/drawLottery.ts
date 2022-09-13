@@ -9,6 +9,7 @@ import { state } from '../globals/game';
 import { graphics } from '../globals/graphics';
 import { mapDimensions, tileWidth } from '../globals/map';
 import { palette } from '../globals/palette';
+import { playSound, Sounds } from '../globals/sounds';
 import { Trigger, triggerEvent } from '../util/eventRegister';
 import { makeSprites } from '../util/makeSprites';
 import { zzfx } from '../zzfx';
@@ -250,7 +251,7 @@ let previousItemIndex: number;
 
 export const drawLottery = (alpha: number) => {
   graphics.lottery.clear();
-  const elapsed = state.time.elapsedInGame - state.timestamp.lotteryStart;
+  const elapsed = state.time.clockTime - state.timestamp.lotteryStart;
   // @ts-ignore
   lotteryArrowRotationOptions.styles.rotation.rotation +=
     0.00001 * Math.max(0, 0.8 * LOTTERY_DURATION - elapsed);
@@ -269,7 +270,7 @@ export const drawLottery = (alpha: number) => {
   if (itemIndex !== previousItemIndex) {
     previousItemIndex = itemIndex;
     state.lottery.collect = LOTTERY_OPTIONS[itemIndex].collect;
-    zzfx(...[, , 320]);
+    playSound(Sounds.Spinner);
   }
 
   for (let i = 0; i < LOTTERY_OPTIONS.length; i++) {

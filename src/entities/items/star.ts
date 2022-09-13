@@ -2,6 +2,7 @@ import { Canvas2DGraphicsOptions, Canvas2DGraphics, Vector2 } from '../../crco';
 import { drawUi } from '../../drawing/drawUi';
 import { state } from '../../globals/game';
 import { palette } from '../../globals/palette';
+import { playSound, Sounds } from '../../globals/sounds';
 import { Trigger, triggerEvent } from '../../util/eventRegister';
 import { zzfx } from '../../zzfx';
 import { Behaviors } from '../behaviors/behaviors';
@@ -34,7 +35,7 @@ export class Star extends Item<Pick<Behaviors, 'collectible'>> {
         distance: 2,
         initialPosition: position.clone(),
         onCollected: () => {
-          zzfx(...[0.4, 0, 900, , 0.06, 0.24, 1, 1.82, , , 400, 0.06]);
+          playSound(Sounds.Star);
           state.experience.current += experience;
           if (state.experience.current > state.experience.next) {
             triggerEvent(Trigger.LevelUp);

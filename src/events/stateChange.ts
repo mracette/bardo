@@ -4,8 +4,8 @@ import { drawUpgradeUi } from '../drawing/drawUpgradeUi';
 import { canvasElements } from '../globals/dom';
 import { GameState, state } from '../globals/game';
 import { graphics } from '../globals/graphics';
+import { playSound, Sounds } from '../globals/sounds';
 import { registerEvent, Trigger, unregisterEvent } from '../util/eventRegister';
-import { zzfx, zzfxX } from '../zzfx';
 
 let uiResizeEvent: number;
 
@@ -18,7 +18,6 @@ export const handleStateChange = (next: GameState) => {
       break;
     }
     case GameState.Gameplay: {
-      zzfxX.resume();
       canvasElements.map.style.border = '2px solid white';
       graphics.map.clear();
       graphics.ui.clear();
@@ -28,18 +27,15 @@ export const handleStateChange = (next: GameState) => {
       break;
     }
     case GameState.Lottery: {
-      state.timestamp.lotteryStart = state.time.elapsedInGame;
+      state.timestamp.lotteryStart = state.time.clockTime;
       break;
     }
     case GameState.Reincarnation: {
       graphics.ui.clear();
-      zzfx(
-        ...[0.2, 0, 80, 0.3, 0.5, 1.25, 2, 0.1, -0.73, 3.42, -430, 0.09, 0.17, , , , 0.19]
-      );
       break;
     }
     case GameState.Gameover: {
-      zzfx(...[, , 333, 0.01, 0, 0.9, 4, 1.9, , , , , , 0.5, , 0.6]);
+      playSound(Sounds.GameOver);
     }
   }
   if (next !== GameState.Upgrade) {
