@@ -64,13 +64,13 @@ export const drawExposition = (graphics: Canvas2DGraphics) => {
   y += interval;
   graphics.text(`In this state, one may experience`, x, y, options);
   y += intervalSmall;
-  graphics.text(`terrifying hallucinations`, x, y, options);
+  graphics.text(`terrifying hallucinations.`, x, y, options);
   y += interval;
-  graphics.text(`For prepared individuals,`, x, y, options);
+  graphics.text(`For prepared individuals, Bardo offers a`, x, y, options);
   y += intervalSmall;
-  graphics.text(`Bardo offers a great opportunity for liberation.`, x, y, options);
+  graphics.text(`great opportunity for liberation.`, x, y, options);
   y += interval;
-  graphics.text(`While for others, it can be a place of great danger...`, x, y, options);
+  graphics.text(`For others, it can be a place of great danger...`, x, y, options);
   graphics.text(startText, x, 92, {
     roughness: 0,
     styles: { fontSize: (coords) => coords.width(0.04) }

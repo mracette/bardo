@@ -114,30 +114,30 @@ export const drawStats = () => {
     y + interval,
     { styles }
   );
-  y = y + interval * 2;
-  graphics.upgrade.lineSegments(
-    [
-      [-1, y],
-      [1, y]
-    ],
-    { styles, roughness: 0 }
-  );
-  graphics.upgrade.text(
-    `Mushrooms Eaten: ${formatStat(state.stats.mushroomsEaten)}`,
-    -0.9,
-    y + interval,
-    {
-      styles
-    }
-  );
-  graphics.upgrade.text(
-    `Chests Unlocked: ${formatStat(state.stats.chestsUnlocked)}`,
-    -0.9,
-    y + 2 * interval,
-    {
-      styles
-    }
-  );
+  // y = y + interval * 2;
+  // graphics.upgrade.lineSegments(
+  //   [
+  //     [-1, y],
+  //     [1, y]
+  //   ],
+  //   { styles, roughness: 0 }
+  // );
+  // graphics.upgrade.text(
+  //   `Mushrooms Eaten: ${formatStat(state.stats.mushroomsEaten)}`,
+  //   -0.9,
+  //   y + interval,
+  //   {
+  //     styles
+  //   }
+  // );
+  // graphics.upgrade.text(
+  //   `Chests Unlocked: ${formatStat(state.stats.chestsUnlocked)}`,
+  //   -0.9,
+  //   y + 2 * interval,
+  //   {
+  //     styles
+  //   }
+  // );
   if (state.gameState === GameState.Paused) {
     graphics.upgrade.text('Paused', 0, -0.8, {
       styles: { ...styles, textAlign: 'center', fontSize: (coords) => coords.width(0.05) }

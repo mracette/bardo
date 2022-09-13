@@ -1,3 +1,12 @@
+Tue, 13 Sep 2022 05:54:38 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 0.42 kb | 430 | NA |
+| Compressed Build | 13.39 kb | 13708 | +3088% |
+| Compressed Build (Adv Zip) | 12.97 kb | 13284 | -3% |
+
+## moar optimize
+
 Tue, 13 Sep 2022 05:47:40 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |
