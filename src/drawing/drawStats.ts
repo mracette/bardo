@@ -4,8 +4,6 @@ import { GameState, state } from '../globals/game';
 import { graphics } from '../globals/graphics';
 import { palette } from '../globals/palette';
 
-const barHeight = 0.15;
-
 const formatStat = (value: number) => Math.round(value).toLocaleString();
 
 export const drawStats = () => {
@@ -33,7 +31,6 @@ export const drawStats = () => {
     ],
     { styles, roughness: 0 }
   );
-  // graphics.upgrade.text('Damage dealt: ', -0.9, y, { styles });
   graphics.upgrade.text(`Score: ${state.experience.current}`, -0.9, y + interval, {
     styles
   });
