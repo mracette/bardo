@@ -4,11 +4,15 @@ import { GameState, state } from '../globals/game';
 import { graphics } from '../globals/graphics';
 import { player } from '../globals/player';
 import { Trigger, triggerEvent } from '../util/eventRegister';
+import { zzfx } from '../zzfx';
 
 export const handleKeyDown = (key: string) => {
   if (key === 'Enter') {
     if (state.gameState === GameState.Intro) {
       triggerEvent(Trigger.StateChange, GameState.Gameplay);
+      zzfx(
+        ...[0.2, 0, 80, 0.3, 0.5, 1.25, 2, 0.1, -0.73, 3.42, -430, 0.09, 0.17, , , , 0.19]
+      );
       return;
     }
     if (state.gameState === GameState.Upgrade) {

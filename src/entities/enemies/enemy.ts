@@ -1,5 +1,4 @@
 import { Canvas2DGraphicsOptions, random, Vector2 } from '../../crco';
-import { drawUi } from '../../drawing/drawUi';
 import { state } from '../../globals/game';
 import { graphics } from '../../globals/graphics';
 import { palette } from '../../globals/palette';
@@ -11,11 +10,6 @@ import { CachedEntity } from '../entity';
 import { EntityType } from '../entityType';
 import { Star } from '../items/star';
 import { DamageOverlay } from '../overlays/damage';
-import { Goat } from './goat';
-import { Prisoner } from './prisoner';
-import { Reaper } from './reaper';
-import { Tragedy } from './tragedy';
-import { Wrestler } from './wrestler';
 
 export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
   abstract radius: number;
@@ -61,7 +55,10 @@ export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
     // @ts-ignore
     const cooldownPeriod = type in this.cooldownPeriod ? this.cooldownPeriod[type] : 1000;
     if (cooldown && state.time.elapsed - cooldown < cooldownPeriod) return;
-    zzfx(...[, , 129, 0.01, , , , , , , , , , 5, , , , 0.4]);
+    if (state.time.elapsed - state.timestamp.lastDamageSoundPlayed > 50) {
+      zzfx(...[, , 129, 0.01, , , , , , , , , , 5, , , , 0.4]);
+      state.timestamp.lastDamageSoundPlayed = state.time.elapsed;
+    }
     this.health -= amount;
     // @ts-ignore
     state.stats.weapons[type] += amount;

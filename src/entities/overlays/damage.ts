@@ -1,7 +1,6 @@
 import { boundedSine } from 'bounded-sine';
-import { Canvas2DGraphicsOptions, Canvas2DGraphics, star, Vector2 } from '../../crco';
+import { Canvas2DGraphicsOptions, Canvas2DGraphics, Vector2 } from '../../crco';
 import { state } from '../../globals/game';
-import { coordinates } from '../../globals/graphics';
 import { origin } from '../../globals/map';
 import { palette } from '../../globals/palette';
 import { Enemy } from '../enemies/enemy';
@@ -50,11 +49,15 @@ export class DamageOverlay extends CachedEntity {
   };
 
   drawSprite = (graphics: Canvas2DGraphics) => {
+    graphics.circle(0, 0, 0.4, {
+      fill: true,
+      styles: { fillStyle: palette.red }
+    });
     graphics.text(this.text, 0, 0, {
       fill: true,
       styles: {
         fontSize: (coords) => coords.width(0.35),
-        textBaseline: 'top'
+        textBaseline: 'middle'
       },
       roughness: 0
     });

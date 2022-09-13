@@ -31,6 +31,7 @@ export const state = {
     right: false
   },
   timestamp: {
+    lastDamageSoundPlayed: 0,
     lastEnemySpawned: 0,
     spawn: {
       [SpawnType.GuardedTreasure]: -1000 * 90,
@@ -54,6 +55,7 @@ export const state = {
     last: 0
   },
   time: {
+    clockTime: 0,
     runTime: 1000 * 60 * 10,
     elapsedInGame: 0,
     elapsed: 0,

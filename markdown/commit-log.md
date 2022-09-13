@@ -1,3 +1,12 @@
+Tue, 13 Sep 2022 01:30:37 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 0.42 kb | 430 | NA |
+| Compressed Build | 13.35 kb | 13673 | +3080% |
+| Compressed Build (Adv Zip) | 12.94 kb | 13251 | -3% |
+
+## how big is audio?
+
 Tue, 13 Sep 2022 00:23:49 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |

@@ -31,6 +31,7 @@ const fps = 60;
 const deltaTimeFixed = 1000 / fps;
 
 const main = (clockTime = 0) => {
+  state.time.clockTime = clockTime;
   // stats.begin();
   const isPaused = state.gameState === GameState.Paused;
   const deltaTimeClock = isPaused ? 0 : clockTime - state.time.clockTimePrevious;

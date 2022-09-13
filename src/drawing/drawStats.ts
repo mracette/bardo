@@ -31,9 +31,14 @@ export const drawStats = () => {
     ],
     { styles, roughness: 0 }
   );
-  graphics.upgrade.text(`Score: ${state.experience.current}`, -0.9, y + interval, {
-    styles
-  });
+  graphics.upgrade.text(
+    `Score: ${formatStat(state.experience.current)}`,
+    -0.9,
+    y + interval,
+    {
+      styles
+    }
+  );
   graphics.upgrade.text(`Level: ${state.experience.level}`, -0.9, y + 2 * interval, {
     styles
   });
