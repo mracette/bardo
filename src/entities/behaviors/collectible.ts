@@ -17,7 +17,7 @@ export const addCollectible = (position: Vector2, behavior: Collectible) => {
   const vector = Vector2.from(player.position, position);
   // kick off the sequence
   if (!behavior.start && vector.magnitude < behavior.distance) {
-    behavior.start = state.time.elapsed;
+    behavior.start = state.time.elapsedInGame;
     return;
   }
   // end the sequence
@@ -27,7 +27,7 @@ export const addCollectible = (position: Vector2, behavior: Collectible) => {
   }
   if (behavior.start) {
     // progress the sequence
-    const delta = state.time.elapsed - behavior.start;
+    const delta = state.time.elapsedInGame - behavior.start;
     vector.normalize();
     const velocity = vector
       .clone()

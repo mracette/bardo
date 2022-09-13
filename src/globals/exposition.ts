@@ -1,7 +1,7 @@
 import { Vector2 } from '../crco';
-import { ThirdEye } from '../entities/thirdEye';
+import { Exposition } from '../entities/exposition';
 import { mapDimensions } from './map';
 
-export const thirdEye = new ThirdEye(
+export const exposition = new Exposition(
   new Vector2((mapDimensions.x - mapDimensions.y) / 2, 0)
 );

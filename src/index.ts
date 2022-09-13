@@ -1,6 +1,6 @@
-// import Stats from 'stats.js';
-import { aspectRatioResize, Vector2 } from './crco';
+import { aspectRatioResize } from './crco';
 import './dom/styles.css';
+import { drawExposition } from './drawing/drawExposition';
 import { drawLottery, LOTTERY_DURATION } from './drawing/drawLottery';
 import { drawStats } from './drawing/drawStats';
 import { drawUi } from './drawing/drawUi';
@@ -15,6 +15,7 @@ import { handleResize } from './events/resize';
 import { handleStateChange } from './events/stateChange';
 import { handleWindowResize } from './events/windowResize';
 import { canvasElements } from './globals/dom';
+import { exposition } from './globals/exposition';
 import { GameState, state } from './globals/game';
 import { graphics } from './globals/graphics';
 import { mapDimensions } from './globals/map';
@@ -22,17 +23,11 @@ import { player } from './globals/player';
 import { thirdEye } from './globals/thirdEye';
 import { registerEvent, Trigger, triggerEvent } from './util/eventRegister';
 
-// const stats = new Stats();
-// const updateStats = stats.addPanel(new Stats.Panel('phys', '#0ff', '#002'));
-// stats.dom.id = 'stats';
-// document.body.appendChild(stats.dom);
-
 const fps = 60;
 const deltaTimeFixed = 1000 / fps;
 
 const main = (clockTime = 0) => {
   state.time.clockTime = clockTime;
-  // stats.begin();
   const isPaused = state.gameState === GameState.Paused;
   const deltaTimeClock = isPaused ? 0 : clockTime - state.time.clockTimePrevious;
   state.time.clockTimePrevious = clockTime;
@@ -40,7 +35,10 @@ const main = (clockTime = 0) => {
   state.time.slowdown =
     player.lastDamaged === 0
       ? 1
-      : Math.min(1, (state.time.elapsed - player.lastDamaged) / Player.damageCooldown);
+      : Math.min(
+          1,
+          (state.time.elapsedInGame - player.lastDamaged) / Player.damageCooldown
+        );
 
   // clamp for extra long frames
   state.time.accumulator += Math.min(deltaTimeClock, 50) * state.time.slowdown;
@@ -55,19 +53,20 @@ const main = (clockTime = 0) => {
   }
 
   render(state.time.accumulator / deltaTimeFixed);
-  // stats.end();
   window.requestAnimationFrame(main);
 };
 
 const update = () => {
-  // updateStats.update(deltaTimeFixed ? 1000 / deltaTimeFixed : 0, 200);
-
   if (state.time.elapsedInGame > state.time.runTime) {
     triggerEvent(Trigger.StateChange, GameState.Reincarnation);
   }
 
   if (state.gameState === GameState.Intro) {
     thirdEye.update();
+  }
+
+  if (state.gameState === GameState.Exposition) {
+    exposition.update();
   }
 
   if (state.gameState === GameState.Gameplay) {
@@ -108,7 +107,7 @@ const update = () => {
   }
 
   if (state.gameState === GameState.Lottery) {
-    if (state.time.elapsed - state.timestamp.lotteryStart > LOTTERY_DURATION) {
+    if (state.time.elapsedInGame - state.timestamp.lotteryStart > LOTTERY_DURATION) {
       graphics.lottery.clear();
       triggerEvent(Trigger.StateChange, GameState.Gameplay);
       state.lottery.collect();
@@ -121,6 +120,10 @@ const render = (alpha: number) => {
 
   if (state.gameState === GameState.Intro) {
     thirdEye.draw(alpha);
+  }
+
+  if (state.gameState === GameState.Exposition) {
+    exposition.draw(alpha);
   }
 
   if (state.gameState === GameState.Gameplay || state.gameState === GameState.Paused) {
@@ -144,22 +147,22 @@ const render = (alpha: number) => {
 
     if (
       state.lottery.starsToCollect > 0 &&
-      state.time.elapsed - state.lottery.lastCollected > state.lottery.interval
+      state.time.elapsedInGame - state.lottery.lastCollected > state.lottery.interval
     ) {
       state.items.push(
         new Star(player.center.clone().add(-0.75, -2), state.experience.level)
       );
       state.lottery.starsToCollect--;
-      state.lottery.lastCollected = state.time.elapsed;
+      state.lottery.lastCollected = state.time.elapsedInGame;
     }
 
     if (
       state.lottery.heartsToCollect > 0 &&
-      state.time.elapsed - state.lottery.lastCollected > state.lottery.interval
+      state.time.elapsedInGame - state.lottery.lastCollected > state.lottery.interval
     ) {
       state.items.push(new Heart(player.center.clone().add(-0.75, -1)));
       state.lottery.heartsToCollect--;
-      state.lottery.lastCollected = state.time.elapsed;
+      state.lottery.lastCollected = state.time.elapsedInGame;
     }
 
     if (state.shroomed.active) {
@@ -167,13 +170,13 @@ const render = (alpha: number) => {
         roughness: 0,
         fill: true,
         styles: {
-          fillStyle: `rgba(${sineFunctions.r(state.time.elapsed)},${sineFunctions.g(
-            state.time.elapsed
-          )},${sineFunctions.b(state.time.elapsed)})`,
+          fillStyle: `rgba(${sineFunctions.r(state.time.elapsedInGame)},${sineFunctions.g(
+            state.time.elapsedInGame
+          )},${sineFunctions.b(state.time.elapsedInGame)})`,
           alpha: 0.25
         }
       });
-      const elapsed = state.time.elapsed - state.shroomed.start;
+      const elapsed = state.time.elapsedInGame - state.shroomed.start;
       if (elapsed > state.shroomed.duration) {
         state.shroomed.active = false;
       }
@@ -211,7 +214,6 @@ aspectRatioResize(canvasElements.map, mapDimensions);
 aspectRatioResize(canvasElements.gameplay, mapDimensions);
 aspectRatioResize(canvasElements.upgrades, mapDimensions);
 
-// handlers
 registerEvent(Trigger.KeyDown, handleKeyDown);
 registerEvent(Trigger.KeyUp, handleKeyUp);
 registerEvent(Trigger.CanvasResize, handleResize);
@@ -219,10 +221,9 @@ registerEvent(Trigger.WindowResize, handleWindowResize);
 registerEvent(Trigger.StateChange, handleStateChange);
 registerEvent(Trigger.LevelUp, handleLevelUp);
 
-// initialize
 registerEvent(Trigger.Initialize, handleInitialize);
-
 triggerEvent(Trigger.Initialize);
+
 // triggerEvent(Trigger.StateChange, GameState.Gameplay);
 // triggerEvent(Trigger.StateChange, GameState.Intro);
 // triggerEvent(Trigger.StateChange, GameState.Lottery);

@@ -50,7 +50,7 @@ export class Mushroom extends Item<Pick<Behaviors, 'collectible'>> {
           // zzfx(...[, , 20, 0.04, , 0.6, , 1.31, , , -990, 0.06, 0.17, , , 0.04, 0.07]);
           state.stats.mushroomsEaten++;
           state.shroomed.active = true;
-          state.shroomed.start = state.time.elapsed;
+          state.shroomed.start = state.time.elapsedInGame;
           this.shouldDestroy = true;
         }
       }

@@ -85,7 +85,7 @@ export class AxeInstance extends WeaponInstance<Axe> {
 
   updatePosition = () => {
     const n = normalize(
-      state.time.elapsed,
+      state.time.elapsedInGame,
       this.start,
       this.start + this.parent.duration
     );
@@ -127,19 +127,19 @@ export class Axe extends Weapon<AxeInstance> {
 
   update(): void {
     super.update();
-    if (state.time.elapsed - this.lastFired > this.frequency) {
-      this.lastFired = state.time.elapsed;
+    if (state.time.elapsedInGame - this.lastFired > this.frequency) {
+      this.lastFired = state.time.elapsedInGame;
       const position = player.position.clone();
       this.setPositionFromAngle(position, -PI / 2, 1);
       // hardcoded sprite size
       position.add(-1 / 2, -1 / 2);
-      this.instances.push(new AxeInstance(this, position, state.time.elapsed));
+      this.instances.push(new AxeInstance(this, position, state.time.elapsedInGame));
     }
 
     for (let i = 0; i < this.instances.length; i++) {
       const instance = this.instances[i];
       instance.update();
-      if (state.time.elapsed - instance.start > this.duration) {
+      if (state.time.elapsedInGame - instance.start > this.duration) {
         instance.shouldDestroy = true;
       }
     }

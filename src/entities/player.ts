@@ -93,7 +93,7 @@ export class Player extends CachedEntity {
   };
 
   checkCollisions() {
-    if (state.time.elapsed < this.lastDamaged + Player.damageCooldown) {
+    if (state.time.elapsedInGame < this.lastDamaged + Player.damageCooldown) {
       return;
     }
     for (let i = 0; i < state.enemies.length; i++) {
@@ -109,7 +109,9 @@ export class Player extends CachedEntity {
         ) &&
         !state.shroomed.active
       ) {
-        this.takeDamage(enemy.damageInflicted, state.time.elapsed);
+        this.takeDamage(enemy.damageInflicted, state.time.elapsedInGame);
+        // one damage per frame
+        break;
       }
     }
   }

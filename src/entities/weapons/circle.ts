@@ -106,15 +106,15 @@ export class MagicCircle extends Weapon<MagicCircleInstance> {
   update(): void {
     super.update();
 
-    if (state.time.elapsed - this.lastFired > this.frequency) {
-      this.lastFired = state.time.elapsed;
-      this.instances.push(new MagicCircleInstance(this, state.time.elapsed));
+    if (state.time.elapsedInGame - this.lastFired > this.frequency) {
+      this.lastFired = state.time.elapsedInGame;
+      this.instances.push(new MagicCircleInstance(this, state.time.elapsedInGame));
     }
 
     for (let i = 0; i < this.instances.length; i++) {
       const instance = this.instances[i];
       instance.update();
-      if (state.time.elapsed - instance.start > this.duration) {
+      if (state.time.elapsedInGame - instance.start > this.duration) {
         instance.shouldDestroy = true;
       }
     }

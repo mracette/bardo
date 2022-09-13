@@ -9,6 +9,7 @@ import { SpawnType } from '../events/spawn';
 import { UpgradeOption } from '../util/getRandomUpgrade';
 
 export enum GameState {
+  Exposition,
   Reincarnation,
   Gameover,
   Gameplay,
@@ -90,7 +91,7 @@ export const state = {
   items: [] as Item<any>[],
   overlays: [] as DamageOverlay[],
   hints: [] as (EnemyHint | ItemHint)[],
-  gameState: GameState.Intro,
+  gameState: GameState.Exposition,
   upgradeOptions: [] as UpgradeOption[],
   upgradeSelected: 0,
   spritePeriod: 1550

@@ -80,8 +80,8 @@ export class Arrow extends Weapon<ArrowInstance> {
   update(): void {
     super.update();
 
-    if (state.time.elapsed - this.lastFired > this.frequency) {
-      this.lastFired = state.time.elapsed;
+    if (state.time.elapsedInGame - this.lastFired > this.frequency) {
+      this.lastFired = state.time.elapsedInGame;
       const nearestEnemy = this.findNearestEnemy();
       if (nearestEnemy) {
         this.instances.push(new ArrowInstance(this, nearestEnemy.center));

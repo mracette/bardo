@@ -1,26 +1,15 @@
-import { mushroom } from '../../svg/mushroom';
-import {
-  Canvas2DGraphics,
-  Canvas2DGraphicsOptions,
-  CanvasCoordinates,
-  PI,
-  TAU,
-  Vector2
-} from '../crco';
+import { Canvas2DGraphics, Canvas2DGraphicsOptions, TAU, Vector2 } from '../crco';
 import { CachedEntity } from '../entities/entity';
 import { EntityType } from '../entities/entityType';
 import { Heart } from '../entities/items/heart';
 import { Mushroom } from '../entities/items/mushroom';
 import { Star, StarSize } from '../entities/items/star';
 import { cache, spriteCoordinateSystem } from '../entities/sprites';
-import { canvasContexts, canvasElements } from '../globals/dom';
-import { LotteryOption, state } from '../globals/game';
-import { coordinates, graphics } from '../globals/graphics';
+import { state } from '../globals/game';
+import { graphics } from '../globals/graphics';
 import { mapDimensions, tileWidth } from '../globals/map';
 import { palette } from '../globals/palette';
-import { player } from '../globals/player';
-import { stats } from '../globals/stats';
-import { registerEvent, Trigger, triggerEvent } from '../util/eventRegister';
+import { Trigger, triggerEvent } from '../util/eventRegister';
 import { makeSprites } from '../util/makeSprites';
 import { zzfx } from '../zzfx';
 
@@ -126,12 +115,11 @@ export const LOTTERY_OPTIONS = [
     collect: () => {
       state.stats.mushroomsEaten++;
       state.shroomed.active = true;
-      state.shroomed.start = state.time.elapsed;
+      state.shroomed.start = state.time.elapsedInGame;
     }
   }
 ];
 
-const COLORS = [palette.blue, palette.pink, palette.yellow, palette.teal];
 const RADIUS = 0.4;
 const ANGLE = TAU / LOTTERY_OPTIONS.length;
 
@@ -149,10 +137,8 @@ class LotteryBackground extends CachedEntity {
       fill: true,
       styles: { fillStyle: palette.background }
     });
-    LOTTERY_OPTIONS.forEach((option, i) => {
+    LOTTERY_OPTIONS.forEach((_, i) => {
       const angle1 = i * angle;
-      const angle2 = (i + 1) * angle;
-      const color = COLORS[i];
       graphics.lineSegments(
         [
           [0, 0],
@@ -264,7 +250,7 @@ let previousItemIndex: number;
 
 export const drawLottery = (alpha: number) => {
   graphics.lottery.clear();
-  const elapsed = state.time.elapsed - state.timestamp.lotteryStart;
+  const elapsed = state.time.elapsedInGame - state.timestamp.lotteryStart;
   // @ts-ignore
   lotteryArrowRotationOptions.styles.rotation.rotation +=
     0.00001 * Math.max(0, 0.8 * LOTTERY_DURATION - elapsed);

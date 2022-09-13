@@ -1,14 +1,10 @@
-import { mushroom } from '../../svg/mushroom';
-import { Canvas2DGraphics, DPR, mulberry32 } from '../crco';
-import { cacheLotteryGraphics } from '../drawing/drawLottery';
+import { DPR } from '../crco';
 import { drawTiles } from '../drawing/drawTiles';
 import { drawUi } from '../drawing/drawUi';
 import { drawUpgradeUi } from '../drawing/drawUpgradeUi';
-import { cache, spriteCoordinateSystem } from '../entities/sprites';
+import { cache } from '../entities/sprites';
 import { canvasElements } from '../globals/dom';
 import { GameState, state } from '../globals/game';
-import { graphics } from '../globals/graphics';
-import { makeSprites } from '../util/makeSprites';
 
 export const handleResize = () => {
   // setting length = 0 will trigger garbage collection
@@ -33,11 +29,13 @@ export const handleResize = () => {
 
   if (
     state.gameState !== GameState.Intro &&
-    state.gameState !== GameState.Reincarnation
+    state.gameState !== GameState.Reincarnation &&
+    state.gameState !== GameState.Exposition
   ) {
     drawTiles();
     drawUi();
   }
+
   if (state.gameState === GameState.Upgrade) {
     drawUpgradeUi();
   }

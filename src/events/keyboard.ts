@@ -22,6 +22,13 @@ export const handleKeyDown = (key: string) => {
       graphics.upgrade.clear();
       triggerEvent(Trigger.StateChange, GameState.Gameplay);
     }
+    if (state.gameState === GameState.Exposition) {
+      graphics.map.clear();
+      graphics.lottery.clear();
+      graphics.ui.clear();
+      graphics.upgrade.clear();
+      triggerEvent(Trigger.StateChange, GameState.Intro);
+    }
   }
   if (key === 'i') {
     state.experience.current = state.experience.next;

@@ -58,7 +58,7 @@ export class ItemHint extends CachedEntity {
 
   update() {
     super.update();
-    if (state.time.elapsed - this.start > ItemHint.duration) {
+    if (state.time.elapsedInGame - this.start > ItemHint.duration) {
       this.shouldDestroy = true;
     }
   }

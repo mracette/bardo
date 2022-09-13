@@ -54,21 +54,23 @@ export abstract class Enemy<T extends Partial<Behaviors>> extends CachedEntity {
     const cooldown = this.cooldowns[type];
     // @ts-ignore
     const cooldownPeriod = type in this.cooldownPeriod ? this.cooldownPeriod[type] : 1000;
-    if (cooldown && state.time.elapsed - cooldown < cooldownPeriod) return;
-    if (state.time.elapsed - state.timestamp.lastDamageSoundPlayed > 50) {
+    if (cooldown && state.time.elapsedInGame - cooldown < cooldownPeriod) return;
+    if (state.time.elapsedInGame - state.timestamp.lastDamageSoundPlayed > 50) {
       zzfx(...[, , 129, 0.01, , , , , , , , , , 5, , , , 0.4]);
-      state.timestamp.lastDamageSoundPlayed = state.time.elapsed;
+      state.timestamp.lastDamageSoundPlayed = state.time.elapsedInGame;
     }
     this.health -= amount;
     // @ts-ignore
     state.stats.weapons[type] += amount;
     state.stats.total += amount;
-    state.overlays.push(new DamageOverlay(this, String(amount), state.time.elapsed));
+    state.overlays.push(
+      new DamageOverlay(this, String(amount), state.time.elapsedInGame)
+    );
     if (this.health <= 0) {
       state.stats.hallucinationsBanished++;
       this.destroy();
     }
-    this.cooldowns[type] = state.time.elapsed;
+    this.cooldowns[type] = state.time.elapsedInGame;
   }
 
   destroy() {

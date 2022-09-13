@@ -65,7 +65,7 @@ export class DamageOverlay extends CachedEntity {
 
   update() {
     super.update();
-    const amount = sine((state.time.elapsed - this.start) / this.duration);
+    const amount = sine((state.time.elapsedInGame - this.start) / this.duration);
     // @ts-ignore
     this.scaleOptions.styles.scale.origin = this.center;
     // @ts-ignore
@@ -73,7 +73,7 @@ export class DamageOverlay extends CachedEntity {
     // @ts-ignore
     this.scaleOptions.styles.scale.scale.y = amount;
     DamageOverlay.setPositionFromTarget(this.position, this.target);
-    if (state.time.elapsed - this.start >= this.duration) {
+    if (state.time.elapsedInGame - this.start >= this.duration) {
       this.shouldDestroy = true;
     }
   }

@@ -42,7 +42,7 @@ export class EnemyHint extends CachedEntity {
 
   update() {
     super.update();
-    if (state.time.elapsed - this.start > EnemyHint.duration) {
+    if (state.time.elapsedInGame - this.start > EnemyHint.duration) {
       this.shouldDestroy = true;
     }
   }

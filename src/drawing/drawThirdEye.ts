@@ -5,9 +5,9 @@ import { thirdEyeLight } from '../../svg/thirdEyeLight';
 import { Canvas2DGraphics, PI, Vector2 } from '../crco';
 import { palette } from '../globals/palette';
 
-const roughness = 0.2;
-const startText = 'Press enter to start';
-const translation = new Vector2(0, 10);
+export const roughness = 0.2;
+export const startText = 'Press enter to start';
+export const translation = new Vector2(0, 10);
 
 export const drawThirdEye = (graphics: Canvas2DGraphics) => {
   thirdEyeDark.forEach((points) => {
