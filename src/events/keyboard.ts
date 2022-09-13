@@ -6,8 +6,21 @@ import { player } from '../globals/player';
 import { playSound, Sounds } from '../globals/sounds';
 import { Trigger, triggerEvent } from '../util/eventRegister';
 
-export const handleKeyDown = (key: string) => {
-  if (key === 'Enter') {
+const keys = {
+  w: 87,
+  a: 64,
+  s: 83,
+  d: 68,
+  left: 37,
+  down: 40,
+  up: 38,
+  right: 39,
+  esc: 27,
+  enter: 13
+};
+
+export const handleKeyDown = (key: number) => {
+  if (key === keys.enter) {
     if (state.gameState === GameState.Intro) {
       triggerEvent(Trigger.StateChange, GameState.Gameplay);
       playSound(Sounds.LevelUp);
@@ -28,16 +41,12 @@ export const handleKeyDown = (key: string) => {
       triggerEvent(Trigger.StateChange, GameState.Intro);
     }
   }
-  if (key === 'i') {
-    state.experience.current = state.experience.next;
-    triggerEvent(Trigger.LevelUp);
-  }
-  if (key === 'Escape') {
+  if (key === keys.esc) {
     if (state.gameState === GameState.Gameplay) {
       triggerEvent(Trigger.StateChange, GameState.Paused);
     }
   }
-  if (key === 'ArrowLeft' || key === 'a') {
+  if (key === keys.left || key === keys.a) {
     if (state.gameState === GameState.Gameplay) {
       state.move.left = true;
       player.forwardDirection = 'left';
@@ -47,7 +56,7 @@ export const handleKeyDown = (key: string) => {
       drawUpgradeUi();
     }
   }
-  if (key === 'ArrowRight' || key === 'd') {
+  if (key === keys.right || key === keys.d) {
     if (state.gameState === GameState.Gameplay) {
       state.move.right = true;
       player.forwardDirection = 'right';
@@ -57,28 +66,28 @@ export const handleKeyDown = (key: string) => {
       drawUpgradeUi();
     }
   }
-  if (key === 'ArrowUp' || key === 'w') {
+  if (key === keys.up || key === keys.w) {
     state.move.up = true;
   }
-  if (key === 'ArrowDown' || key === 's') {
+  if (key === keys.down || key === keys.s) {
     state.move.down = true;
   }
 };
 
-export const handleKeyUp = (key: string) => {
-  if (key === 'ArrowLeft' || key === 'a') {
+export const handleKeyUp = (key: number) => {
+  if (key === keys.left || key === keys.a) {
     state.move.left = false;
   }
-  if (key === 'ArrowRight' || key === 'd') {
+  if (key === keys.right || key === keys.d) {
     state.move.right = false;
   }
-  if (key === 'ArrowUp' || key === 'w') {
+  if (key === keys.up || key === keys.w) {
     state.move.up = false;
   }
-  if (key === 'ArrowDown' || key === 's') {
+  if (key === keys.down || key === keys.s) {
     state.move.down = false;
   }
-  if (key === 'Enter') {
+  if (key === keys.enter) {
     if (state.gameState === GameState.Paused) {
       triggerEvent(Trigger.StateChange, GameState.Gameplay);
     }

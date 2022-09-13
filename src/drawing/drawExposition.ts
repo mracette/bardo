@@ -1,7 +1,7 @@
 import { thirdEye } from '../../svg/thirdEye';
 import { thirdEyeDark } from '../../svg/thirdEyeDark';
 import { thirdEyeLight } from '../../svg/thirdEyeLight';
-import { Canvas2DGraphics, Canvas2DGraphicsOptions, mulberry32, Vector2 } from '../crco';
+import { Canvas2DGraphics, Canvas2DGraphicsOptions, mulberry32 } from '../crco';
 import { SEEDS } from '../globals/math';
 import { palette } from '../globals/palette';
 import { roughness, startText, translation } from './drawThirdEye';
