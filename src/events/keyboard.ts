@@ -34,7 +34,7 @@ export const handleKeyDown = (key: string) => {
       player.forwardDirection = 'left';
     }
     if (state.gameState === GameState.Upgrade) {
-      state.upgradeSelected = mod(state.upgradeSelected - 1, state.upgradeOptionCount);
+      state.upgradeSelected = mod(state.upgradeSelected - 1, state.upgradeOptions.length);
       drawUpgradeUi();
     }
   }
@@ -44,7 +44,7 @@ export const handleKeyDown = (key: string) => {
       player.forwardDirection = 'right';
     }
     if (state.gameState === GameState.Upgrade) {
-      state.upgradeSelected = mod(state.upgradeSelected + 1, state.upgradeOptionCount);
+      state.upgradeSelected = mod(state.upgradeSelected + 1, state.upgradeOptions.length);
       drawUpgradeUi();
     }
   }

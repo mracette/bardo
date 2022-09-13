@@ -1,3 +1,17 @@
+Tue, 13 Sep 2022 00:01:38 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 0.42 kb | 430 | NA |
+| Compressed Build | 13.29 kb | 13610 | +3065% |
+| Compressed Build (Adv Zip) | 12.88 kb | 13193 | -3% |
+
+Mon, 12 Sep 2022 23:35:17 GMT
+| Measure | Size (kb) | Size (bytes) | Reduction |
+| --- | --- | --- | --- |
+| Build | 0.42 kb | 430 | NA |
+| Compressed Build | 13.32 kb | 13644 | +3073% |
+| Compressed Build (Adv Zip) | 12.91 kb | 13222 | -3% |
+
 Mon, 12 Sep 2022 23:34:06 GMT
 | Measure | Size (kb) | Size (bytes) | Reduction |
 | --- | --- | --- | --- |

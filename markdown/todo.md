@@ -1,15 +1,16 @@
+- [ ] what happens when no weapons
 - [ ] try clearCanvasAndState() instead of clear()
 - [ ] music
-- [ ] do not count into time in reincarnation timer
 - [ ] remove keyboard shortcuts
 - [ ] investigate music libs / use of midi
 - [ ] bosses are outlined in blue
-- [ ] info on pause screen
+- [x] info on pause screen
 - [ ] more weapons
 - [ ] more enemies
 - [ ] polish roughness param
 - [ ] experiment with different enemy sizes
 - [ ] robust cross device testing
+- [x] do not count into time in reincarnation timer
 - [x] lottery disappears when resizing
 - [x] treasure animation
 - [x] powerups (mushroom)

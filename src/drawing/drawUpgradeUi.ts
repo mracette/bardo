@@ -10,16 +10,14 @@ const drawUpgradeOption = (option: UpgradeOption, selected: boolean, index: numb
   const color = selected ? palette.seafoam : palette.white;
   const scale = selected ? 1.1 : 1;
   const offsetX = selected
-    ? graphics.upgrade.coords.width(scale - 1) / state.upgradeOptionCount / 2
+    ? graphics.upgrade.coords.width(scale - 1) / state.upgradeOptions.length / 2
     : 0;
   const offsetY = selected ? graphics.upgrade.coords.height(scale - 1) / 2 : 0;
   const panelCoords = new CanvasCoordinates({
     offsetX:
-      graphics.upgrade.coords.nx(-1) -
-      offsetX +
-      graphics.upgrade.coords.width(index / state.upgradeOptionCount),
+      graphics.upgrade.coords.nx(-1) - offsetX + graphics.upgrade.coords.width(index / 3),
     offsetY: graphics.upgrade.coords.ny(-1) - offsetY,
-    baseWidth: graphics.upgrade.coords.width(scale) / state.upgradeOptionCount,
+    baseWidth: graphics.upgrade.coords.width(scale) / 3,
     baseHeight: graphics.upgrade.coords.height(scale),
     padding: 0
   });
@@ -95,13 +93,15 @@ const drawUpgradeOption = (option: UpgradeOption, selected: boolean, index: numb
 export const drawUpgradeUi = () => {
   graphics.upgrade.options.random = getSeededRandom(0);
   graphics.upgrade.clear();
-  for (let i = 0; i < state.upgradeOptionCount; i++) {
+  for (let i = 0; i < state.upgradeOptions.length; i++) {
     const option = state.upgradeOptions[i];
     drawUpgradeOption(option, state.upgradeSelected === i, i);
   }
-  drawUpgradeOption(
-    state.upgradeOptions[state.upgradeSelected],
-    true,
-    state.upgradeSelected
-  );
+  if (state.upgradeOptions.length > 0) {
+    drawUpgradeOption(
+      state.upgradeOptions[state.upgradeSelected],
+      true,
+      state.upgradeSelected
+    );
+  }
 };

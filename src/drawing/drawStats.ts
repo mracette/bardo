@@ -3,9 +3,10 @@ import { EntityType } from '../entities/entityType';
 import { GameState, state } from '../globals/game';
 import { graphics } from '../globals/graphics';
 import { palette } from '../globals/palette';
-import { player } from '../globals/player';
 
 const barHeight = 0.15;
+
+const formatStat = (value: number) => Math.round(value).toLocaleString();
 
 export const drawStats = () => {
   graphics.upgrade.clear();
@@ -48,70 +49,8 @@ export const drawStats = () => {
     { styles, roughness: 0 }
   );
 
-  graphics.upgrade.text(`Damage Dealt: ${state.stats.total}`, -0.9, y + interval, {
-    styles
-  });
   graphics.upgrade.text(
-    `Arrow: ${state.stats.weapons[EntityType.Arrow]}`,
-    -0.9,
-    y + 2 * interval,
-    { styles }
-  );
-  graphics.upgrade.text(
-    `Summoning Circle: ${state.stats.weapons[EntityType.MagicCircle]}`,
-    -0.9,
-    y + 3 * interval,
-    { styles }
-  );
-  graphics.upgrade.text(
-    `Axe: ${state.stats.weapons[EntityType.Axe]}`,
-    -0.9,
-    y + 4 * interval,
-    { styles }
-  );
-  graphics.upgrade.text(
-    `Orb: ${state.stats.weapons[EntityType.Orb]}`,
-    -0.9,
-    y + 5 * interval,
-    { styles }
-  );
-
-  y = y + interval * 6;
-  // graphics.upgrade.lineSegments([[-1, y + 5 * interval, 1, y + 5 * interval]]);
-  graphics.upgrade.lineSegments(
-    [
-      [-1, y],
-      [1, y]
-    ],
-    { styles, roughness: 0 }
-  );
-  graphics.upgrade.text(`Damage Taken: ${state.stats.damageTaken}`, -0.9, y + interval, {
-    styles
-  });
-  y = y + interval * 2;
-  graphics.upgrade.lineSegments(
-    [
-      [-1, y],
-      [1, y]
-    ],
-    { styles, roughness: 0 }
-  );
-  graphics.upgrade.text(
-    `Hallucinations Banished: ${state.stats.hallucinationsBanished}`,
-    -0.9,
-    y + interval,
-    { styles }
-  );
-  y = y + interval * 2;
-  graphics.upgrade.lineSegments(
-    [
-      [-1, y],
-      [1, y]
-    ],
-    { styles, roughness: 0 }
-  );
-  graphics.upgrade.text(
-    `Mushrooms Eaten: ${state.stats.mushroomsEaten}`,
+    `Damage Dealt: ${formatStat(state.stats.total)}`,
     -0.9,
     y + interval,
     {
@@ -119,7 +58,78 @@ export const drawStats = () => {
     }
   );
   graphics.upgrade.text(
-    `Chests Unlocked: ${state.stats.chestsUnlocked}`,
+    `Arrow: ${formatStat(state.stats.weapons[EntityType.Arrow])}`,
+    -0.9,
+    y + 2 * interval,
+    { styles }
+  );
+  graphics.upgrade.text(
+    `Summoning Circle: ${formatStat(state.stats.weapons[EntityType.MagicCircle])}`,
+    -0.9,
+    y + 3 * interval,
+    { styles }
+  );
+  graphics.upgrade.text(
+    `Axe: ${formatStat(state.stats.weapons[EntityType.Axe])}`,
+    -0.9,
+    y + 4 * interval,
+    { styles }
+  );
+  graphics.upgrade.text(
+    `Orb: ${formatStat(state.stats.weapons[EntityType.Orb])}`,
+    -0.9,
+    y + 5 * interval,
+    { styles }
+  );
+
+  y = y + interval * 6;
+  graphics.upgrade.lineSegments(
+    [
+      [-1, y],
+      [1, y]
+    ],
+    { styles, roughness: 0 }
+  );
+  graphics.upgrade.text(
+    `Damage Taken: ${formatStat(state.stats.damageTaken)}`,
+    -0.9,
+    y + interval,
+    {
+      styles
+    }
+  );
+  y = y + interval * 2;
+  graphics.upgrade.lineSegments(
+    [
+      [-1, y],
+      [1, y]
+    ],
+    { styles, roughness: 0 }
+  );
+  graphics.upgrade.text(
+    `Hallucinations Banished: ${formatStat(state.stats.hallucinationsBanished)}`,
+    -0.9,
+    y + interval,
+    { styles }
+  );
+  y = y + interval * 2;
+  graphics.upgrade.lineSegments(
+    [
+      [-1, y],
+      [1, y]
+    ],
+    { styles, roughness: 0 }
+  );
+  graphics.upgrade.text(
+    `Mushrooms Eaten: ${formatStat(state.stats.mushroomsEaten)}`,
+    -0.9,
+    y + interval,
+    {
+      styles
+    }
+  );
+  graphics.upgrade.text(
+    `Chests Unlocked: ${formatStat(state.stats.chestsUnlocked)}`,
     -0.9,
     y + 2 * interval,
     {

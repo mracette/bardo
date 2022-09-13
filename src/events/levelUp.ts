@@ -8,13 +8,13 @@ export const handleLevelUp = (sound = true, upgrade = true) => {
   state.experience.level++;
   state.experience.next = Math.pow(state.experience.level, 2.5) * 75;
   state.upgradeOptions.length = 0;
-  state.upgradeOptions = getRandomUpgrade(state.upgradeOptionCount);
+  state.upgradeOptions = getRandomUpgrade();
   if (sound) {
     zzfx(
       ...[0.2, 0, 80, 0.3, 0.5, 1.25, 2, 0.1, -0.73, 3.42, -430, 0.09, 0.17, , , , 0.19]
     );
   }
-  if (upgrade) {
+  if (upgrade && state.upgradeOptions.length > 0) {
     triggerEvent(Trigger.StateChange, GameState.Upgrade);
   }
 };

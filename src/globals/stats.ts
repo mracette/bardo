@@ -7,10 +7,6 @@ export const stats: Record<WeaponEntityType, Record<string, number[]>> = {
     Range: [1.5, 1.55, 1.65, 1.8, 2, 2.25, 2.55],
     Orbs: [1, 2, 3, 4, 5, 6, 7]
   },
-  // [EntityType.Hesitation]: {
-  //   'Slowdown Effect': [0.07, 0.09, 0.11, 0.15, 0.2, 0.25, 0.34],
-  //   Area: [1.5, 1.55, 1.65, 1.85, 2.15, 2.65, 3.15]
-  // },
   [EntityType.Arrow]: {
     Damage: [6, 6.5, 7.5, 9, 11, 13.5, 17],
     'Firing Rate': [1, 1.5, 2, 3, 4, 6, 8]
@@ -34,7 +30,6 @@ export const getSubtextForStats = (type: WeaponEntityType, level: number) => {
       return `${key}: ${attributeForLevel}`;
     }
     const attributeForPrevious = attribute[level - 2];
-    const percentChange = (attributeForLevel - attributeForPrevious) / attributeForLevel;
     return `${key}: ${attributeForPrevious} -> ${attributeForLevel}`;
   });
 };

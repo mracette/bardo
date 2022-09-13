@@ -1,17 +1,12 @@
-import { Canvas2DGraphics, random, Vector2 } from '../crco';
+import { Canvas2DGraphics } from '../crco';
 import { EntityType } from '../entities/entityType';
 import { Arrow, ArrowInstance } from '../entities/weapons/arrow';
 import { Axe, AxeInstance } from '../entities/weapons/axe';
 import { MagicCircle, MagicCircleInstance } from '../entities/weapons/circle';
 import { Orb, OrbInstance } from '../entities/weapons/orb';
-import { Weapon, WeaponInstance } from '../entities/weapons/weapon';
-import {
-  WeaponClassType,
-  WeaponEntityType,
-  weaponTypeToClass
-} from '../entities/weapons/weaponTypes';
+import { Weapon } from '../entities/weapons/weapon';
+import { WeaponEntityType, weaponTypeToClass } from '../entities/weapons/weaponTypes';
 import { state } from '../globals/game';
-import { origin } from '../globals/map';
 import { getSubtextForStats, stats } from '../globals/stats';
 
 type StaticDraw =
@@ -21,13 +16,14 @@ export interface UpgradeOption {
   level: number;
   type: WeaponEntityType;
   text: string;
+  canUpgrade: boolean;
   subText: string[];
   onChooseUpgrade: () => void;
   draw: StaticDraw;
 }
 
-export const getRandomUpgrade = (count: number): UpgradeOption[] => {
-  const allChoices = (
+export const getRandomUpgrade = (count = 3): UpgradeOption[] => {
+  const allChoices: UpgradeOption[] = (
     Object.keys(weaponTypeToClass) as unknown as WeaponEntityType[]
   ).map((type) => {
     const existing = state.weapons.find((weapon) => weapon.type === Number(type));
@@ -36,7 +32,17 @@ export const getRandomUpgrade = (count: number): UpgradeOption[] => {
     let onChooseUpgrade: () => void;
     let text: string;
     let subText: string[] = [];
+    let canUpgrade: boolean;
     let draw: StaticDraw;
+
+    const handleIsExisting = (existing: Weapon<any>) => {
+      if (existing.canUpgrade()) {
+        onChooseUpgrade = () => existing.upgrade();
+        canUpgrade = true;
+      } else {
+        canUpgrade = false;
+      }
+    };
 
     switch (Number(type)) {
       case EntityType.Arrow: {
@@ -48,8 +54,9 @@ export const getRandomUpgrade = (count: number): UpgradeOption[] => {
             `Firing Rate: ${weaponStats['Firing Rate'][level - 1]}`
           ];
           onChooseUpgrade = () => new Arrow();
+          canUpgrade = true;
         } else if (existing) {
-          onChooseUpgrade = () => existing.upgrade();
+          handleIsExisting(existing);
         }
         text = `Arrow`;
         subText = getSubtextForStats(type, level);
@@ -59,8 +66,9 @@ export const getRandomUpgrade = (count: number): UpgradeOption[] => {
         draw = AxeInstance.staticDraw;
         if (level === 1) {
           onChooseUpgrade = () => new Axe();
+          canUpgrade = true;
         } else if (existing) {
-          onChooseUpgrade = () => existing.upgrade();
+          handleIsExisting(existing);
         }
         text = `Axe`;
         subText = getSubtextForStats(type, level);
@@ -70,8 +78,9 @@ export const getRandomUpgrade = (count: number): UpgradeOption[] => {
         draw = OrbInstance.staticDraw;
         if (level === 1) {
           onChooseUpgrade = () => new Orb();
+          canUpgrade = true;
         } else if (existing) {
-          onChooseUpgrade = () => existing.upgrade();
+          handleIsExisting(existing);
         }
         text = `Orb`;
         subText = getSubtextForStats(type, level);
@@ -81,8 +90,9 @@ export const getRandomUpgrade = (count: number): UpgradeOption[] => {
         draw = MagicCircleInstance.staticDraw;
         if (level === 1) {
           onChooseUpgrade = () => new MagicCircle();
+          canUpgrade = true;
         } else if (existing) {
-          onChooseUpgrade = () => existing.upgrade();
+          handleIsExisting(existing);
         }
         text = `Summoning Circle`;
         subText = getSubtextForStats(type, level);
@@ -91,6 +101,7 @@ export const getRandomUpgrade = (count: number): UpgradeOption[] => {
       default:
         throw new Error();
     }
+
     return {
       type,
       level,
@@ -98,16 +109,20 @@ export const getRandomUpgrade = (count: number): UpgradeOption[] => {
       subText,
       draw,
       // @ts-ignore
+      canUpgrade,
+      // @ts-ignore
       onChooseUpgrade
     };
   });
 
+  const filteredChoices = allChoices.filter((choice) => choice.canUpgrade);
+  const numChoices = Math.min(count, filteredChoices.length);
   const choices = [];
 
-  for (let i = 0; i < count; i++) {
-    const randomIndex = Math.floor(Math.random() * allChoices.length);
-    choices.push(allChoices[randomIndex]);
-    allChoices.splice(randomIndex, 1);
+  for (let i = 0; i < numChoices; i++) {
+    const randomIndex = Math.floor(Math.random() * filteredChoices.length);
+    choices.push(filteredChoices[randomIndex]);
+    filteredChoices.splice(randomIndex, 1);
   }
 
   return choices;

@@ -89,7 +89,6 @@ export const state = {
   overlays: [] as DamageOverlay[],
   hints: [] as (EnemyHint | ItemHint)[],
   gameState: GameState.Intro,
-  upgradeOptionCount: 3,
   upgradeOptions: [] as UpgradeOption[],
   upgradeSelected: 0,
   spritePeriod: 1550
