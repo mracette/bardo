@@ -40,8 +40,9 @@ export const playSound = (type: Sounds) => {
     }
     // @ts-ignore
     soundBank[type] = z;
+  } else {
+    const buffer = new AudioBufferSourceNode(zzfxX, { buffer: soundBank[type]!.buffer! });
+    buffer.connect(zzfxX.destination);
+    buffer.start(0);
   }
-  const buffer = new AudioBufferSourceNode(zzfxX, { buffer: soundBank[type]!.buffer! });
-  buffer.connect(zzfxX.destination);
-  buffer.start(0);
 };
