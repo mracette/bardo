@@ -219,7 +219,7 @@ const lotteryArrow = new LotteryArrow(
   new Vector2((mapDimensions.x - mapDimensions.y) / 2, 0)
 );
 
-const lotteryArrowRotationOptions: Canvas2DGraphicsOptions = {
+export const lotteryArrowRotationOptions: Canvas2DGraphicsOptions = {
   styles: {
     rotation: {
       origin: lotteryArrow.center.clone(),

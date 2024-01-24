@@ -1,3 +1,5 @@
+import { TAU } from '../crco';
+import { lotteryArrowRotationOptions } from '../drawing/drawLottery';
 import { drawTiles } from '../drawing/drawTiles';
 import { drawUi } from '../drawing/drawUi';
 import { drawUpgradeUi } from '../drawing/drawUpgradeUi';
@@ -27,6 +29,8 @@ export const handleStateChange = (next: GameState) => {
       break;
     }
     case GameState.Lottery: {
+      // @ts-ignore
+      lotteryArrowRotationOptions.styles.rotation.rotation = Math.random() * TAU;
       state.timestamp.lotteryStart = state.time.clockTime;
       break;
     }
